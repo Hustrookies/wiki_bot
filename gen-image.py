@@ -144,6 +144,21 @@ def to_webp(src, kind):
     return dest
 
 
+def log_url(date, kind, url):
+    """把原图 URL 记到本地 img_urls.jsonl（gitignored，绝不上传）。
+
+    URL 约 24 小时过期，此文件的用途是事后排查与短期补下载，不是长期存档。
+    只在真正调了 API 时写一行；缓存命中没有新 URL，不写。"""
+    p = os.path.join(lib.ROOT, "img_urls.jsonl")
+    try:
+        with open(p, "a", encoding="utf-8") as f:
+            f.write(json.dumps({"date": date, "kind": kind, "url": url,
+                                "ts": time.strftime("%F %T")},
+                               ensure_ascii=False) + "\n")
+    except OSError:
+        pass                                    # 记录失败不影响出图
+
+
 def fetch(url):
     """下载并按 magic bytes 判定真实格式。返回 (bytes, ext) 或 (None, 状态)。"""
     try:
@@ -184,6 +199,7 @@ def one(kind, subject, slug, date, force):
     url, st = call_model(prompt, RATIO.get(kind, "1:1"))
     if not url:
         return "", st
+    log_url(date, kind, url)                   # 先记录，下载失败也留档
     data, ext = fetch(url)
     if data is None:
         return "", ext                       # 此时 ext 是状态串

@@ -6,6 +6,7 @@ state/
 logs/
 pick.json
 content.json
+img_urls.jsonl
 
 # openclaw agent 工作区引导文件与运行产物
 AGENTS.md
