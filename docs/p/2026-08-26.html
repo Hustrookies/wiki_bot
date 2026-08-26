@@ -222,6 +222,20 @@ footer{
 footer a{color:var(--muted)}
 footer .r{display:flex;justify-content:space-between;gap:12px}
 
+/* ---- 配图。7 套皮肤共用版式，颜色全部走已有变量 ---- */
+.hero-img,.sub-img{margin:0 0 18px;padding:0}
+.sub-img{margin:22px 0 18px}
+.hero-img img,.sub-img img{
+  display:block;width:100%;height:auto;border-radius:10px;
+  background:var(--card);border:1px solid var(--line)}
+.hero-img figcaption,.sub-img figcaption{
+  margin-top:7px;font-size:12.5px;line-height:1.6;color:var(--muted)}
+/* 图片是 AI 生成的示意画面，不是史料。这行标注是必须的，不是装饰。 */
+.hero-img figcaption::after,.sub-img figcaption::after{
+  content:" · AI 生成示意图";opacity:.75}
+@media (prefers-reduced-motion:no-preference){
+  .hero-img img,.sub-img img{transition:opacity .2s}}
+
 /* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
 .t-geo{
   --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
@@ -253,7 +267,7 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
 <meta name="theme-color" content="#33564a">
-<meta name="x-build" content="2026-08-26-3127b6a1">
+<meta name="x-build" content="2026-08-26-1f1c0be3">
 <meta name="description" content="丹麦海峡溢流是发生在冰岛与格陵兰之间海底的密度流现象。北冰洋低温高盐海水越过约600米深的海底山脊后，沿大陆坡坠落约3500米至深海盆地，构成北大西洋深层水的主要来源之一，驱动全球温盐环流。">
 <title>一条看不见的瀑布 · 自然地理</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
@@ -473,6 +487,20 @@ footer{
 footer a{color:var(--muted)}
 footer .r{display:flex;justify-content:space-between;gap:12px}
 
+/* ---- 配图。7 套皮肤共用版式，颜色全部走已有变量 ---- */
+.hero-img,.sub-img{margin:0 0 18px;padding:0}
+.sub-img{margin:22px 0 18px}
+.hero-img img,.sub-img img{
+  display:block;width:100%;height:auto;border-radius:10px;
+  background:var(--card);border:1px solid var(--line)}
+.hero-img figcaption,.sub-img figcaption{
+  margin-top:7px;font-size:12.5px;line-height:1.6;color:var(--muted)}
+/* 图片是 AI 生成的示意画面，不是史料。这行标注是必须的，不是装饰。 */
+.hero-img figcaption::after,.sub-img figcaption::after{
+  content:" · AI 生成示意图";opacity:.75}
+@media (prefers-reduced-motion:no-preference){
+  .hero-img img,.sub-img img{transition:opacity .2s}}
+
 /* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
 .t-geo{
   --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
@@ -500,6 +528,13 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
     <h1>一条看不见的瀑布</h1>
     <p class="hook">落差三千五百米，却从未有人亲眼见过</p>
   </header>
+
+  
+  <figure class="hero-img">
+    <img src="../img/2026-08-26-main.png" alt="丹麦海峡海底地形，可见山脊与大陆坡" width="1280" height="720" loading="eager">
+    <figcaption>丹麦海峡海底地形，可见山脊与大陆坡</figcaption>
+  </figure>
+  
 
   <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
 
@@ -529,17 +564,24 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">在冰岛与格陵兰之间的丹麦海峡海底，有一道约600米深的海槛。越过这道门槛，冰冷的海水沿着大陆坡一路坠落近3500米——这条海底&#x27;瀑布&#x27;的落差是安赫尔瀑布的三倍多，却从未被任何人亲眼看见过。</p>
+  <p class="lead">在冰岛与格陵兰之间，有一道宽约290公里的海峡。海底有一道约600米深的山脊，冰冷的海水越过这道门槛后，沿着大陆坡坠落近3500米——这条“海底瀑布”的落差是地球上任何陆地瀑布的三倍以上，却从未被任何人亲眼看见过。</p>
 
   <div class="body">
     
-    <section><h2>海底的落差</h2><p>北冰洋和北欧海域的表层海水在冬季被剧烈冷却，同时海水结冰时盐分被排出，使剩余水体变得更冷更咸。这股高密度水向南流动，抵达丹麦海峡时被一道约600米深的海底山脊拦住。水位在山脊北侧逐渐壅高，一旦越过海槛，水流便沿着格陵兰东南侧的大陆坡一路下坠至三千米深处的深海盆地，形成地球上规模最大的海底密度流。</p></section>
+    <section><h2>海底的落差</h2><p>北冰洋和北欧海域的表层海水在冬季被剧烈冷却，同时海水结冰时盐分被排出，使剩余水体变得更冷更咸。这股高密度水向南流动，抵达丹麦海峡时被一道约600米深的海底山脊拦住。水位在山脊北侧逐渐壅高，一旦越过海槛，水流便沿着格陵兰东南侧的大陆坡一路下坠至三千米深处的深海盆地。</p></section>
     
-    <section><h2>密度驱动</h2><p>与陆地瀑布靠重力从高处倾泻不同，丹麦海峡溢流的核心驱动力是密度差而非地形落差。冷水在降温增盐后密度远大于下方暖水，无法上浮，只能贴着海底缓慢&#x27;爬行&#x27;。这股下沉水流与来自拉布拉多海的深层冷水汇合，共同构成北大西洋深层水，是全球温盐环流的关键源头之一。整个过程中，水流的温度仅比冰点高出两三度。</p></section>
+    <section><h2>密度驱动</h2><p>与陆地瀑布靠重力从高处倾泻不同，丹麦海峡溢流的核心驱动力是密度差而非地形落差。冷水在降温增盐后密度远大于下方暖水，无法上浮，只能贴着海底缓慢“爬行”。这股下沉水流与来自拉布拉多海的深层冷水汇合，共同构成北大西洋深层水，是全球温盐环流的关键源头之一。</p></section>
     
-    <section><h2>暖欧洲的引擎</h2><p>溢流产生的深层水沿大西洋中脊向南扩散，绕过非洲南端汇入全球温盐环流。它持续抽吸表层暖水北上补偿，使西欧和北欧海岸冬季气温比同纬度内陆高出十至十五摄氏度。仅丹麦海峡一处，每秒就有约两百万立方米冷水涌入深海，相当于亚马逊河流量的十倍。近年观测显示深层水生成速率有所减缓，科学家仍在争论这究竟是自然波动还是气候信号。</p></section>
+    <section><h2>暖欧洲的引擎</h2><p>溢流产生的深层水沿大西洋中脊向南扩散，绕过非洲南端汇入全球温盐环流。它持续抽吸表层暖水北上补偿，使西欧和北欧海岸冬季气温比同纬度内陆高出十至十五摄氏度。仅丹麦海峡一处，每秒就有约两百万立方米冷水涌入深海。近年观测显示深层水生成速率有所减缓，科学家仍在争论这究竟是自然波动还是气候信号。</p></section>
     
   </div>
+
+  
+  <figure class="sub-img">
+    <img src="../img/2026-08-26-sub.png" alt="海水密度分层示意，冷水沿坡下坠" width="1024" height="768" loading="lazy">
+    <figcaption>海水密度分层示意，冷水沿坡下坠</figcaption>
+  </figure>
+  
 
   
   <div class="bars">
@@ -565,13 +607,13 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
+    <div class="f"><span class="k">海峡长度</span><span class="v">480公里</span></div>
+    
     <div class="f"><span class="k">海峡宽度</span><span class="v">最窄处约290公里</span></div>
     
     <div class="f"><span class="k">海槛深度</span><span class="v">约600米</span></div>
     
     <div class="f"><span class="k">溢流落差</span><span class="v">约3500米</span></div>
-    
-    <div class="f"><span class="k">溢流流量</span><span class="v">约200万立方米/秒</span></div>
     
   </div>
   
@@ -580,14 +622,14 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>这条&#x27;瀑布&#x27;的驱动力不是水位高低，而是海水密度差——冷水比暖水重，所以贴着海底坠落</li>
+    <li>驱动力不是水位高低，而是密度差——冷水比暖水重，贴着海底坠落</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>海槛深度约600米为估计值，不同来源有差异</li><li>溢流落差约3500米为近似值</li><li>溢流流量约200万立方米/秒为粗略估计，实际在180至350万立方米/秒之间</li><li>欧洲气温偏高10-15°C的归因涉及多个因素，溢流贡献难以单独量化</li></ul>
+    <ul><li>海槛深度约600米为估计值，不同来源有差异</li><li>溢流落差约3500米为近似值</li><li>溢流流量约两百万立方米每秒为粗略估计</li></ul>
   </div>
   
 
