@@ -17,7 +17,7 @@
   ./gen-image.py --dry-run        只打印将要发送的 prompt，不联网、不花钱
   ./gen-image.py --force          忽略已存在的文件，强制重新生成（会计费）
 """
-import argparse, json, os, sys, time, urllib.error, urllib.request
+import argparse, json, os, shutil, subprocess, sys, time, urllib.error, urllib.request
 import lib
 
 TIMEOUT   = int(os.environ.get("IMG_TIMEOUT", "120"))
@@ -41,6 +41,12 @@ STYLE = {
 NEGATIVE = ("文字, 汉字, 字母, 铭文, 题字, 印章, 水印, 签名, 现代物品, 手表, 眼镜, "
             "拉链, 塑料, 畸变的手, 多余手指, 面部扭曲, 过饱和, HDR, 廉价CG感, 低分辨率")
 RATIO = {"main": "16:9", "sub": "4:3"}
+
+# 本地后处理：原图恒定 2048×2048 PNG（8–10MB），直接进 git 会让 Pages 加载以十秒计。
+# 用 cwebp 转 WebP 并缩到显示尺寸后单图约 100–300KB。cwebp 缺失或转换失败时
+# 退回原图 —— 配图是增益不是依赖，压缩环节不能成为当天的故障点。
+WEBP_Q   = int(os.environ.get("IMG_WEBP_Q", "82"))
+WEBP_MAXW = {"main": 1280, "sub": 1024}
 
 # magic bytes → 扩展名。不靠 Content-Type，也不假定 .jpg：
 # 接口返回一段 JSON 错误体时，若盲信扩展名就会得到一个「打不开的 .jpg」，
@@ -114,6 +120,30 @@ def call_model(prompt, ratio):
 # ╚═══════════════════════════════════════════════════════════════════╝
 
 
+def to_webp(src, kind):
+    """原图转 WebP 并缩到显示宽度。成功返回新路径，否则 None（调用方保留原图）。
+
+    cwebp 的 -resize W 0 按宽等比缩放。输出也是原子落盘（.part → replace），
+    与下载一致，防半截文件被提交。"""
+    if shutil.which("cwebp") is None:
+        return None
+    dest = os.path.splitext(src)[0] + ".webp"
+    tmp = dest + ".part"
+    try:
+        r = subprocess.run(
+            ["cwebp", "-quiet", "-q", str(WEBP_Q),
+             "-resize", str(WEBP_MAXW.get(kind, 1280)), "0", src, "-o", tmp],
+            capture_output=True, timeout=180)
+    except Exception:
+        return None
+    if r.returncode != 0 or not os.path.exists(tmp) or os.path.getsize(tmp) < 1024:
+        if os.path.exists(tmp):
+            os.remove(tmp)
+        return None
+    os.replace(tmp, dest)
+    return dest
+
+
 def fetch(url):
     """下载并按 magic bytes 判定真实格式。返回 (bytes, ext) 或 (None, 状态)。"""
     try:
@@ -139,9 +169,15 @@ def one(kind, subject, slug, date, force):
     outdir = os.path.join(lib.ROOT, "docs", "img")
     os.makedirs(outdir, exist_ok=True)
     if not force:
-        for ext in ("jpg", "png", "webp", "gif"):
+        for ext in ("webp", "jpg", "png", "gif"):
             p = os.path.join(outdir, f"{date}-{kind}.{ext}")
             if os.path.exists(p) and os.path.getsize(p) > 1024:
+                if ext != "webp":
+                    # 存量原图免费补转：不花钱就能把已入库的大图换掉
+                    wp = to_webp(p, kind)
+                    if wp:
+                        os.remove(p)
+                        return f"../img/{date}-{kind}.webp", "cached_webp"
                 return f"../img/{date}-{kind}.{ext}", "cached"
 
     prompt = build_prompt(subject, slug)
@@ -156,7 +192,14 @@ def one(kind, subject, slug, date, force):
     with open(tmp, "wb") as f:
         f.write(data)
     os.replace(tmp, dest)                    # 原子落盘，防半截文件被 git 提交
-    return f"../img/{date}-{kind}.{ext}", f"ok_{len(data)//1024}kb"
+    orig_kb = len(data) // 1024
+    if ext != "webp":
+        wp = to_webp(dest, kind)
+        if wp:
+            os.remove(dest)
+            return (f"../img/{date}-{kind}.webp",
+                    f"ok_{orig_kb}kb_webp_{os.path.getsize(wp)//1024}kb")
+    return f"../img/{date}-{kind}.{ext}", f"ok_{orig_kb}kb"
 
 
 def main():
