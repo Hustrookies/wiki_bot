@@ -1,0 +1,30 @@
+/* 周六 · 生物与自然 —— 田野笔记：浅底细框（无满幅色块），大行高，facts 走标签云 */
+.t-bio{
+  --paper:#f2f5ef; --brand:#f2f5ef; --accent:#6d5f18; --track:#e0e5d6;
+  --title-font:var(--sans); --hero-fg:#141414;
+  --hero-pad:20px 18px 18px;
+}
+.t-bio body,.t-bio{line-height:1.85}
+.t-bio .hero{
+  background:var(--card);border:1px solid #cfd8c4;border-radius:var(--radius);
+  margin:16px 0 20px;
+}
+.t-bio .kicker{color:#2c5530;opacity:1;letter-spacing:.16em}
+.t-bio .hero h1{font-size:23px;font-weight:650}
+.t-bio .hero .hook{color:var(--dim);opacity:1}
+.t-bio .lead{line-height:1.85}
+.t-bio .body p{line-height:1.85}
+/* 标签云式 facts */
+.t-bio .facts{background:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.t-bio .facts .f{
+  display:flex;gap:7px;align-items:baseline;border-top:0;padding:7px 12px;
+  background:var(--card);border-radius:8px;border:1px solid var(--line);
+}
+.t-bio .facts .v{text-align:left}
+
+@media (prefers-color-scheme:dark){
+  .t-bio{ --paper:#0e120d; --brand:#0e120d; --accent:#c4b84a; --track:#272c1e;
+          --hero-fg:#e8eaed; }
+  .t-bio .hero{border-color:#2c3a2a}
+  .t-bio .kicker{color:#8fc194}
+}

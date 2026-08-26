@@ -1,0 +1,27 @@
+/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
+.t-china{
+  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:28px 20px 22px;
+}
+.t-china .hero{background:var(--paper)}
+/* 朱印方章式类目标签 */
+.t-china .kicker{opacity:1}
+.t-china .kicker b{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
+}
+.t-china .hero h1{
+  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
+}
+.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
+/* 古籍感：键右对齐贴向值 */
+.t-china .facts .f{gap:20px}
+.t-china .facts .k{flex:1;text-align:right;min-width:4em}
+.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
+
+@media (prefers-color-scheme:dark){
+  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
+            --track:#332622; --hero-fg:#e8eaed; }
+  .t-china .kicker b{background:#8c2b20;color:#fff}
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--
+  每日百科推送 · 单骨架模板
+  由 render.py 渲染。7 个类目共用这一份结构，观感差异全部来自 <body class="t-*"> + themes/t-*.css。
+
+  模板语法（沿用 football-bot/render.py 的正则引擎）：
+    {{key}}                                  标量替换，自动 HTML 转义
+    {{__css}}                                不转义白名单键（仅 CSS 注入用）
+    <!-- each:list --> … <!-- /each:list -->  遍历，块内直接用该项字段
+    <!-- if:key --> … <!-- /if:key -->        值为 null/""/[]/{}/0/false 时整块删除
+
+  签名图形与类目的对应（由哪个 motif 字段非空自动决定，不需要判类目）：
+    timeline  世界历史   span     历史人物/中国历史   layers+bars 自然地理
+    contrast  科学史     artifact 文明与文化         tradeoff    生物
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="{{theme_color}}">
+<meta name="x-build" content="{{buildid}}">
+<meta name="description" content="{{summary}}">
+<title>{{title}} · {{cat_label}}</title>
+<style>{{__css}}</style>
+</head>
+<body class="t-{{cat_slug}}">
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker"><b>{{cat_label}}</b> · {{date_label}}</div>
+    <h1>{{title}}</h1>
+    <!-- if:hook --><p class="hook">{{hook}}</p><!-- /if:hook -->
+  </header>
+
+  <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
+
+  <!-- if:layers -->
+  <div class="layers">
+    <!-- each:layers -->
+    <div class="ly"><span class="n">{{name}}</span><span class="note">{{note}}</span></div>
+    <!-- /each:layers -->
+  </div>
+  <!-- /if:layers -->
+
+  <!-- if:timeline -->
+  <div class="tl">
+    <!-- each:timeline -->
+    <div class="nd"><div class="dot"></div><span class="y">{{y}}</span><span class="lb">{{label}}</span></div>
+    <!-- /each:timeline -->
+  </div>
+  <!-- /if:timeline -->
+
+  <!-- if:span_from -->
+  <div class="ruler">
+    <div class="bar">
+      <span class="cap l"></span><span class="cap r"></span>
+      <span class="pin" style="left:{{span_pct}}%"></span>
+    </div>
+    <div class="ends"><span>{{span_from}}</span><span>{{span_to}}</span></div>
+    <!-- if:span_mark_label -->
+    <div class="mk"><i></i><b>{{span_mark}}</b>{{span_mark_label}}</div>
+    <!-- /if:span_mark_label -->
+  </div>
+  <!-- /if:span_from -->
+
+  <!-- if:contrast_then -->
+  <div class="cmp">
+    <div class="then"><span class="lbl">当时认为</span><p>{{contrast_then}}</p></div>
+    <div class="now"><span class="lbl">实际是</span><p>{{contrast_now}}</p></div>
+  </div>
+  <!-- /if:contrast_then -->
+
+  <!-- if:tradeoff_gain -->
+  <div class="tro">
+    <div class="r gain"><span class="k">得</span><p>{{tradeoff_gain}}</p></div>
+    <div class="r cost"><span class="k">失</span><p>{{tradeoff_cost}}</p></div>
+  </div>
+  <!-- /if:tradeoff_gain -->
+
+  <!-- if:artifact_name -->
+  <div class="artifact">
+    <span class="n">{{artifact_name}}</span><p>{{artifact_note}}</p>
+  </div>
+  <!-- /if:artifact_name -->
+
+  <!-- ===== 正文 ===== -->
+
+  <p class="lead">{{lead}}</p>
+
+  <div class="body">
+    <!-- each:sections -->
+    <section><h2>{{h}}</h2><p>{{p}}</p></section>
+    <!-- /each:sections -->
+  </div>
+
+  <!-- if:bars -->
+  <div class="bars">
+    <!-- each:bars -->
+    <div class="b">
+      <div class="hd"><span class="k">{{k}}</span><span class="v">{{v}}</span></div>
+      <div class="track"><div class="fill" style="width:{{pct}}%"></div></div>
+    </div>
+    <!-- /each:bars -->
+  </div>
+  <!-- /if:bars -->
+
+  <!-- if:facts -->
+  <div class="facts">
+    <!-- each:facts -->
+    <div class="f"><span class="k">{{k}}</span><span class="v">{{v}}</span></div>
+    <!-- /each:facts -->
+  </div>
+  <!-- /if:facts -->
+
+  <!-- if:quote_text -->
+  <blockquote class="quote">
+    <p>{{quote_text}}<span class="from">—— {{quote_from}}</span></p>
+  </blockquote>
+  <!-- /if:quote_text -->
+
+  <!-- if:trivia -->
+  <ul class="trivia">
+    <!-- each:trivia --><li>{{v}}</li><!-- /each:trivia -->
+  </ul>
+  <!-- /if:trivia -->
+
+  <!-- if:uncertain -->
+  <div class="uncertain">
+    <span class="lbl">存疑 · 以下说法未经确证</span>
+    <ul><!-- each:uncertain --><li>{{v}}</li><!-- /each:uncertain --></ul>
+  </div>
+  <!-- /if:uncertain -->
+
+  <!-- if:tags -->
+  <div class="tags"><!-- each:tags --><span>{{v}}</span><!-- /each:tags --></div>
+  <!-- /if:tags -->
+
+  <footer>
+    <div class="r"><span>{{cat_label}}</span><span>{{date_label}}</span></div>
+    <div class="r"><span>往期</span><span><a href="{{archive_rel}}">归档索引</a></span></div>
+    <!-- if:source --><div class="r"><span>事实校对</span><span>{{source}}</span></div><!-- /if:source -->
+  </footer>
+
+</div>
+</body>
+</html>

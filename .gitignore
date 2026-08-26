@@ -1,0 +1,13 @@
+# 密钥与凭据
+.env
+
+# 运行时状态与临时产物（可随时重建）
+state/
+logs/
+pick.json
+content.json
+
+# openclaw agent 工作区引导文件
+AGENTS.md
+BOOTSTRAP.md
+.openclaw/
