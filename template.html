@@ -33,6 +33,13 @@
     <!-- if:hook --><p class="hook">{{hook}}</p><!-- /if:hook -->
   </header>
 
+  <!-- if:img_main -->
+  <figure class="hero-img">
+    <img src="{{img_main}}" alt="{{img_main_alt}}" width="1280" height="720" loading="eager">
+    <!-- if:img_main_alt --><figcaption>{{img_main_alt}}</figcaption><!-- /if:img_main_alt -->
+  </figure>
+  <!-- /if:img_main -->
+
   <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
 
   <!-- if:layers -->
@@ -93,6 +100,13 @@
     <section><h2>{{h}}</h2><p>{{p}}</p></section>
     <!-- /each:sections -->
   </div>
+
+  <!-- if:img_sub -->
+  <figure class="sub-img">
+    <img src="{{img_sub}}" alt="{{img_sub_alt}}" width="1024" height="768" loading="lazy">
+    <!-- if:img_sub_alt --><figcaption>{{img_sub_alt}}</figcaption><!-- /if:img_sub_alt -->
+  </figure>
+  <!-- /if:img_sub -->
 
   <!-- if:bars -->
   <div class="bars">

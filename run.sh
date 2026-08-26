@@ -65,7 +65,7 @@ fi
 if [ "$MODE" = notify ]; then
   case "$(stage)" in
     notified) log "今日已通知，跳过"; exit 0 ;;
-    none|content) log "今日尚未发布（stage=$(stage)），无可通知内容"; exit 0 ;;
+    none|content|imaged) log "今日尚未发布（stage=$(stage)），无可通知内容"; exit 0 ;;
   esac
   BID=$(cat "state/$TODAY.buildid" 2>/dev/null || echo "")
   [ -n "$BID" ] || { log "缺少 buildid"; exit 1; }
@@ -89,7 +89,7 @@ fi
 case "$(stage)" in
   notified)          log "今日已完成，跳过"; exit 0 ;;
   pushed)            SKIP_AGENT=1 ;;
-  content|rendered)  SKIP_AGENT=1 ;;
+  content|imaged|rendered)  SKIP_AGENT=1 ;;
   *)                 SKIP_AGENT=0 ;;
 esac
 
@@ -117,6 +117,12 @@ $PICK"
 fi
 
 if [ "$(stage)" = content ]; then
+  # 失败不致命：配图是增益不是依赖。gen-image.py 自己保证 exit 0 与幂等。
+  python3 gen-image.py || log "gen-image 异常退出（已忽略，无图继续）"
+  set_stage imaged
+fi
+
+if [ "$(stage)" = imaged ]; then
   python3 render.py || { alert render "渲染失败"; exit 1; }
   set_stage rendered
 fi
@@ -141,6 +147,12 @@ fi
 if [ -f pick.json ] && python3 -c "import json,sys;sys.exit(0 if json.load(open('pick.json')).get('queue_low') else 1)" 2>/dev/null; then
   log "队列低水位，追加一次 refill"
   "$ROOT/run.sh" refill || true
+fi
+
+if [ -d docs/img ]; then
+  IMGMB=$(du -sm docs/img 2>/dev/null | cut -f1)
+  log "docs/img 累计 ${IMGMB}MB"
+  [ "${IMGMB:-0}" -gt 700 ] && alert size "docs/img 已 ${IMGMB}MB，接近 GitHub 仓库软限制，需处理"
 fi
 
 find logs -name '*.log' -mtime +14 -delete 2>/dev/null

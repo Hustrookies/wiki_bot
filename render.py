@@ -62,6 +62,13 @@ def build_scope(meta, content):
         "tags":     strlist(content.get("tags")),
     }
 
+    # ---- 配图。file 由 gen-image.py 写回；无图时这些键为空，模板整块消失 ----
+    art = content.get("art") or {}
+    for k in ("main", "sub"):
+        n = art.get(k) or {}
+        sc[f"img_{k}"] = (n.get("file") or "").strip()
+        sc[f"img_{k}_alt"] = (n.get("alt") or "").strip()
+
     # quote：只有 text 非空才整块出现
     q = content.get("quote") or {}
     sc["quote_text"] = (q.get("text") or "").strip()
@@ -139,7 +146,8 @@ def selfcheck_html(page, where):
     marks = sorted(set(re.findall(r"<!--\s*(?:each|if|/each|/if):\w+\s*-->", page)))
     if marks:
         bad.append(f"残留模板标记 {marks}")
-    for a, b in (("<section", "</section"), ("<div", "</div"), ("<ul", "</ul")):
+    for a, b in (("<section", "</section"), ("<div", "</div"),
+                 ("<ul", "</ul"), ("<figure", "</figure")):
         if page.count(a) != page.count(b):
             bad.append(f"标签不配对 {a} {page.count(a)}≠{page.count(b)}")
     if bad:
@@ -228,7 +236,8 @@ def main():
 
     # index.html 是最新一期的稳定入口。相对路径要改，否则归档链接指错
     open(os.path.join(docs, "index.html"), "w", encoding="utf-8").write(
-        page.replace('href="../archive.html"', 'href="archive.html"'))
+        page.replace('href="../archive.html"', 'href="archive.html"')
+            .replace('src="../img/', 'src="img/'))
 
     # 把 buildid 落盘给 wait_live.sh 用
     os.makedirs(os.path.join(ROOT, "state"), exist_ok=True)

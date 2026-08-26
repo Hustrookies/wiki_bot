@@ -120,11 +120,55 @@ def main():
     if bool(t) != bool(fr):
         err.append("quote 的 text 与 from 必须同时有或同时为空")
 
+    # ---- art：配图描述 ----
+    # 缺失只是 WARN 不是 FAIL —— 配图是增益不是依赖，模型漏写不该让当天停更。
+    # 但一旦写了就必须合格，半成品会让 gen-image.py 拿着垃圾 prompt 去花钱。
+    art = c.get("art") or {}
+    if not art:
+        warn.append("art 缺失 —— 今日无配图。长期缺失说明 prompt 的配图小节没生效")
+    else:
+        BANNED = ("照片", "摄影", "镜头", "景深", "胶片", "文字", "铭文", "字迹",
+                  "招牌", "4K", "8K", "大师", "电影感", "史诗")
+        for k, lbl in (("main", "主图"), ("sub", "附图")):
+            a = art.get(k) or {}
+            s = (a.get("subject") or "").strip()
+            al = (a.get("alt") or "").strip()
+            if not s:
+                err.append(f"art.{k}.subject 缺失（{lbl}）")
+                continue
+            if not (25 <= clen(s) <= 90):
+                warn.append(f"art.{k}.subject 长度 {clen(s)} 不在 25–90（{lbl}）")
+            if not al:
+                err.append(f"art.{k}.alt 缺失（{lbl}）—— 无障碍与裂图兜底都靠它")
+            elif clen(al) > 45:
+                warn.append(f"art.{k}.alt 长度 {clen(al)} 超过 40（{lbl}）")
+            hit = [b for b in BANNED if b in s]
+            if hit:
+                err.append(f"art.{k}.subject 含禁用词 {hit}（{lbl}）—— 见 prompt 三之二禁止项")
+            if re.search(r"\d{3,4}\s*年|公元前?\s*\d+", s):
+                err.append(f"art.{k}.subject 含年份数字（{lbl}）—— 模型只会画成乱码")
+        ms = ((art.get("main") or {}).get("subject") or "").strip()
+        bs = ((art.get("sub") or {}).get("subject") or "").strip()
+        # 直接复用 100 天去重那套字符二元组：主图与附图必须是不同画面。
+        # 不做这个检查的后果是「花两张图的钱拿到一张图的信息量」，且没人会发现。
+        if ms and bs and lib.jaccard(ms, bs) >= 0.50:
+            err.append(f"主图与附图描述过于相似（{lib.jaccard(ms, bs):.2f}），附图无信息增量")
+
     # ---- 占位残留 ----
-    blob = json.dumps(c, ensure_ascii=False)
-    m = PLACEHOLDER.search(blob)
-    if m:
-        err.append(f"含占位/未完成文本：{m.group()!r}")
+    # 只扫字符串值本身，不扫序列化结果：嵌套对象收尾的 }} 是合法 JSON，
+    # 加 art 等嵌套字段后扫 dump 会必然误报。
+    def leaves(o):
+        if isinstance(o, dict):
+            for v in o.values():
+                yield from leaves(v)
+        elif isinstance(o, list):
+            for v in o:
+                yield from leaves(v)
+        else:
+            yield "" if o is None else str(o)
+    hit = next((m for s in leaves(c) if (m := PLACEHOLDER.search(s))), None)
+    if hit:
+        err.append(f"含占位/未完成文本：{hit.group()!r}")
 
     # ---- uncertain 长期为空是可疑信号，不是错误 ----
     if not (c.get("uncertain") or []):
