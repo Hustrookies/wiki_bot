@@ -7,7 +7,16 @@ logs/
 pick.json
 content.json
 
-# openclaw agent 工作区引导文件
+# openclaw agent 工作区引导文件与运行产物
 AGENTS.md
 BOOTSTRAP.md
+HEARTBEAT.md
+IDENTITY.md
+SOUL.md
+TOOLS.md
+USER.md
+openclaw-workspace-state.json
 .openclaw/
+
+# Python 缓存
+__pycache__/
