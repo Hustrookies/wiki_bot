@@ -7,6 +7,11 @@ logs/
 pick.json
 content.json
 img_urls.jsonl
+data/queue.add.tsv
+data/queue.add.tsv.ok
+
+# fetch-material.py 的 41MB 维基索引缓存（脚本注释里已声明 gitignored，但此前漏写）
+.cache/
 
 # openclaw agent 工作区引导文件与运行产物
 AGENTS.md
@@ -21,3 +26,6 @@ openclaw-workspace-state.json
 
 # Python 缓存
 __pycache__/
+
+# zhconv 装在这里（fetch-material.py 的可选依赖，见其文件头）
+vendor/

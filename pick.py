@@ -12,7 +12,8 @@
   ./pick.py --date 2026-09-01  指定日期（联调用）
   ./pick.py --skip 张骞        排除某个 subject 后重取（agent 判 DUP 后由 run.sh 调）
   ./pick.py --no-wiki         不抓维基摘要（离线联调）
-  ./pick.py --stat            输出补池所需的池状态（喂 refill-prompt.md）
+  ./pick.py --stat            各类目水位概览（人看的）
+  ./pick.py --stat --cat china  单类目补池输入（喂 refill-prompt.md）
 """
 import argparse, datetime as dt, json, os, sys, urllib.parse, urllib.request
 import lib
@@ -70,6 +71,9 @@ def main():
     ap.add_argument("--skip", action="append", default=[])
     ap.add_argument("--no-wiki", action="store_true")
     ap.add_argument("--stat", action="store_true")
+    ap.add_argument("--cat", help="类目 slug，配合 --stat 只输出该类目的补池输入")
+    ap.add_argument("--target", type=int, default=25, help="每类目目标水位")
+    ap.add_argument("--batch", type=int, default=8, help="单批最多要多少行")
     a = ap.parse_args()
 
     today = (dt.date.fromisoformat(a.date) if a.date else dt.date.today())
@@ -82,17 +86,36 @@ def main():
 
     # ---------- --stat：给 refill-prompt.md ----------
     if a.stat:
+        # have 与 queue_low 同一口径：窗口内已推过的 subject 不计入水位
+        # （100 天后回收才重新可用）。所以 have 是「现在还能取的条数」，不是行数。
         left = {}
         for lbl in (v[1] for v in lib.CATS.values()):
             left[lbl] = sum(1 for q in queue
                             if q["cat"] == lbl and q["subject"] not in recent_subjects)
-        raw = ""
-        if os.path.exists(lib.queue_path()):
-            raw = open(lib.queue_path(), encoding="utf-8").read()
+        if not a.cat:
+            print(json.dumps({"queue_left": left, "target": a.target,
+                              "recent_subjects": sorted(recent_subjects)},
+                             ensure_ascii=False))
+            return
+        if a.cat not in lib.SLUG2CAT:
+            print(f"未知类目 slug：{a.cat}", file=sys.stderr); sys.exit(2)
+        label = lib.SLUG2CAT[a.cat][1]
+        mine = [q for q in queue if q["cat"] == label]
+        rc = {r: sum(1 for q in mine if q["region"] == r) for r in lib.REGIONS}
+        need = max(0, a.target - left[label])
+        # 只给 subject/region/title，不给 queue.tsv 全文。以前塞 3.4KB 原文并要求
+        # 「原样复刻后追加」，输出量被输入撑到 175 行，必然在 timeout 里零产出。
+        # 去重判断只需要可比的 subject 列表，note/entities 全文不必进 prompt。
         print(json.dumps({
-            "queue_left": left,
+            "cat": label, "cat_slug": a.cat,
+            "target": a.target, "have": left[label], "need": need,
+            "ask": min(need, max(1, a.batch)) if need else 0,
+            "regions": lib.REGIONS,
+            "region_counts": rc,
+            "region_thin": [r for r in lib.REGIONS if rc[r] <= 1],
+            "existing": [{"subject": q["subject"], "region": q["region"],
+                          "title": q["title"]} for q in mine],
             "recent_subjects": sorted(recent_subjects),
-            "existing_rows": raw,
         }, ensure_ascii=False))
         return
 

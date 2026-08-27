@@ -7,15 +7,28 @@ dumps.wikimedia.org 可达且支持 HTTP Range。multistream 格式的索引给�
 
 产物 data/material.json 提交进 git，ECS 运行时零网络依赖。
 
+简繁候选需要 zhconv，装在项目本地（PEP 668 下不能装进系统环境）：
+    pip install --target vendor zhconv
+vendor/ 不入库；没装也能跑，只是丢掉简繁回退能力。
+
 用法：
   ./fetch-material.py --limit 5      先验 5 条，看提取质量
   ./fetch-material.py                抓 queue.tsv 里所有还没有的 subject（增量）
   ./fetch-material.py --force 张骞   强制重抓某条
+  ./fetch-material.py --retry-failed 只重试上次没拿到正文的（多候选生效后可救回）
   ./fetch-material.py --stat         看当前覆盖率
 """
 import argparse, bisect, bz2, json, os, re, sys, time, urllib.error, urllib.request
 from html import unescape as html_unescape
 import lib
+
+# zhconv 装在项目本地 vendor/（PEP 668 禁止装进系统环境）。缺了也能跑，只是失去
+# 简繁候选能力 —— 所以是 try-import 而非硬依赖。
+sys.path.insert(0, os.path.join(lib.ROOT, "vendor"))
+try:
+    from zhconv import convert as _zhconv
+except ImportError:
+    _zhconv = None
 
 BASE  = "https://dumps.wikimedia.org/zhwiki/latest/"
 INDEX = "zhwiki-latest-pages-articles-multistream-index.txt.bz2"
@@ -110,7 +123,7 @@ def load_index():
             o = int(p[0])
             offs.add(o)
             idx[p[2]] = (o, int(p[1]))
-    print(f"  索引 {len(idx)} 条，{len(offs)} 个流")
+    print(f"  索引 {len(idx)} 条，{len(offs)} 个流", flush=True)
     return idx, sorted(offs)
 
 
@@ -278,12 +291,68 @@ def resolve(idx, offs, title, depth=0):
     return txt[:MAXLEN], ("ok" if depth == 0 else "ok_via_redirect")
 
 
+# ---------------- 候选标题 ----------------
+def _conv(t, to):
+    return _zhconv(t, to) if (_zhconv and t) else None
+
+
+def variants(t):
+    """一个标题的所有可试形态：原样、繁体、简体。
+
+    zhwiki 的正文条目名简繁不统一（「加拿大太平洋鐵路」在索引里只有繁体形态），
+    而 refill 的 agent 按简体习惯填 wiki 列。两边对不上时 resolve() 直接判
+    not_in_index 返回 —— 连重定向都跟不进去，因为跟随的前提是标题先在索引里查到。
+    """
+    out = []
+    for x in (t, _conv(t, "zh-hant"), _conv(t, "zh-hans")):
+        x = (x or "").strip()
+        if x and x not in out:
+            out.append(x)
+    return out
+
+
+def candidates(subject, wiki):
+    """按可信度排序的候选：wiki 列的三种形态，然后 subject 的三种形态。
+
+    wiki 列本该是真实条目名，优先。但实测它经常被写成 subject 的同义改写
+    （subject=王恭厂大爆炸 → wiki=王恭厂故址，而前者才是真实条目），所以 subject
+    必须作为回退。候选不在索引里只是一次字典查询，零网络代价。
+    """
+    out = []
+    for t in variants(wiki) + variants(subject):
+        if t not in out:
+            out.append(t)
+    return out
+
+
+def resolve_any(idx, offs, cands):
+    """依次试候选，返回 (text, status, 命中的标题)。
+
+    全败时报「最有信息量」的原因，不是第一个：not_in_index 只说明标题没查到，
+    而 too_short / not_in_stream 说明条目找到了但内容不可用（多半是消歧义页）。
+    只报第一个的话，「阿法尔三角(简)不在索引 → 阿法爾三角(繁)是残句被 too_short 拒」
+    会显示成 not_in_index，把真实问题藏起来。
+    """
+    fallback, first = None, None
+    for t in cands:
+        txt, st = resolve(idx, offs, t)
+        if txt:
+            return txt, st, t
+        if first is None:
+            first = st
+        if st != "not_in_index" and fallback is None:
+            fallback = st
+    return None, (fallback or first or "no_candidate"), ""
+
+
 # ---------------- 入口 ----------------
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int)
     ap.add_argument("--force", action="append", default=[])
     ap.add_argument("--stat", action="store_true")
+    ap.add_argument("--retry-failed", action="store_true",
+                    help="重试 material.json 里已有记录但正文为空的条目")
     a = ap.parse_args()
 
     mat = json.load(open(MPATH, encoding="utf-8")) if os.path.exists(MPATH) else {}
@@ -306,7 +375,14 @@ def main():
                   f"{(e.get('status') if e else '未抓取'):24} {(e.get('len') if e else 0)} 字")
         return
 
-    todo = [s for s in subs if s in a.force or s not in mat]
+    def pending(s):
+        if s in a.force or s not in mat:
+            return True
+        # 已成功的不重抓（一次 Range 请求 ~300KB，限速链路上不便宜）；失败记录
+        # 则在 --retry-failed 时重试 —— 多候选生效后它们可能能救回来。
+        return a.retry_failed and not mat[s].get("text")
+
+    todo = [s for s in subs if pending(s)]
     if a.limit:
         todo = todo[:a.limit]
     if not todo:
@@ -318,21 +394,25 @@ def main():
     ok = 0
     for i, s in enumerate(todo, 1):
         wk = WIKI.get(s, "")
-        if not wk:
-            mat[s] = {"text": "", "status": "no_wiki_title", "len": 0}
-            print(f"[{i}/{len(todo)}] {s:18} {'no_wiki_title（明确无锚）':22}")
-            continue
+        # wiki 列为空不再直接判无锚 —— subject 本身常常就是规范条目名（实测
+        # 「墨西拿盐度危机」「珊瑚礁鱼类」都只差一次简繁转换）。交给 resolve_any
+        # 逐候选试，全不在索引里自然会报 not_in_index，比预先放弃更准确。
         try:
-            txt, st = resolve(idx, offs, wk)
+            txt, st, used = resolve_any(idx, offs, candidates(s, wk))
         except urllib.error.URLError as e:
-            txt, st = None, f"unreachable:{e.reason}"
+            txt, st, used = None, f"unreachable:{e.reason}", ""
         except Exception as e:
-            txt, st = None, f"error:{type(e).__name__}"
-        mat[s] = {"text": txt or "", "status": st, "len": len(txt or "")}
+            txt, st, used = None, f"error:{type(e).__name__}", ""
+        # title 记下真正命中的标题：和 wiki 列不一致就说明池子那一列填错了，
+        # 是下一轮改 refill-prompt.md 的依据。
+        mat[s] = {"text": txt or "", "status": st, "len": len(txt or ""), "title": used}
         ok += 1 if txt else 0
-        print(f"[{i}/{len(todo)}] {s:18} {st:22} {len(txt or ''):4} 字")
+        tag = st if (not used or used == wk) else f"{st}<-{used}"
+        # flush：输出重定向到文件时是块缓冲，跑 100 多条时进度全卡在缓冲区里，
+        # 看上去像卡死（实测 15 分钟一行不出）。长任务必须逐行刷。
+        print(f"[{i}/{len(todo)}] {s:18} {tag:28} {len(txt or ''):4} 字", flush=True)
         if txt:
-            print(f"          {txt[:110]}")
+            print(f"          {txt[:110]}", flush=True)
         time.sleep(0.4)          # 对公共 dump 服务器客气一点
 
     os.makedirs(os.path.dirname(MPATH), exist_ok=True)
