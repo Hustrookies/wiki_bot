@@ -13,6 +13,8 @@ PLACEHOLDER = re.compile(r"XXX|TODO|待补充|待填|占位|lorem|\{\{|\}\}", re
 MOTIF_LABEL = {"timeline": "世界历史", "span": "历史人物/中国历史",
                "layers": "自然地理", "contrast": "科学与技术史",
                "artifact": "文明与文化", "tradeoff": "生物与自然"}
+# bars 不单独决定类目（它是 layers 的伴生字段），但解包时要认它
+MOTIF_FIELDS = set(MOTIF_LABEL) | {"bars"}
 
 
 def clen(s):
@@ -36,6 +38,24 @@ def main():
 
     pick = json.load(open(ppath, encoding="utf-8")) if os.path.exists(ppath) else {}
     want_motif = pick.get("motif_field")
+
+    # ---- 结构归一：把包在 __motif__ 里的 motif 字段解包到顶层 ----
+    # prompt 的 JSON 骨架里曾有一个名叫 __motif__ 的伪键（本意是注释，但 JSON 没有
+    # 注释语法），模型会把它当成真实容器：{"__motif__": {"timeline": [...]}}。timeline
+    # 首次轮到的那天就是这样整期停更的 —— 内容全对，只错了一层位置。
+    # 必须写回文件：selfcheck 通过后 render.py 读的是磁盘上的 content.json，只在内存
+    # 里解包会让页面静默少掉签名图形。留 WARN 是为了让 prompt 那边的问题不被掩盖。
+    wrap = c.get("__motif__")
+    if isinstance(wrap, dict):
+        moved = [k for k, v in wrap.items() if k in MOTIF_FIELDS and v and not c.get(k)]
+        if moved:
+            for k in moved:
+                c[k] = wrap[k]
+            del c["__motif__"]
+            with open(cpath, "w", encoding="utf-8") as f:
+                json.dump(c, f, ensure_ascii=False, indent=2)
+            warn.append(f"motif 字段 {moved} 原本包在 __motif__ 里，已解包到顶层并写回"
+                        " —— agent 没按骨架输出顶层键，该检查 prompt.md")
 
     # ---- 必填标量 ----
     for k, lo, hi in [("title", 1, 20), ("hook", 1, 40), ("subject", 1, 30),

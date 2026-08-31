@@ -134,9 +134,15 @@ if [ "$SKIP_AGENT" = 0 ]; then
     r=$(python3 -c "import json;print(json.load(open('pick.json')).get('reason',''))" 2>/dev/null || echo 取题失败)
     alert pick "${r:0:40}"; exit 1; }
 
+  # motif 字段名单独点名一次。$PICK 里本来就带 motif_field，但它混在一堆取题元数据
+  # 里容易被忽略：timeline 首次出场那天 agent 把它包进了 __motif__，整期停更。
+  MOTIF=$(python3 -c "import json;print(json.load(open('pick.json')).get('motif_field',''))" 2>/dev/null || echo "")
   PROMPT="$(cat prompt.md)
 
 $PICK"
+  [ -n "$MOTIF" ] && PROMPT="$PROMPT
+
+【本期 motif】content.json 必须包含顶层字段 \"$MOTIF\"，与 \"art\" 平级，不要包在任何对象里。"
   # 先删旧产物，让「文件存在」本身成为「本次写了它」的证据。
   # 不要靠 openclaw 的退出码 —— headless agent 退 0 但什么都没写是常见的。
   rm -f content.json
@@ -148,7 +154,10 @@ $PICK"
     log "agent 未产出 content.json（可能判定 DUP/ABORT），今日不推送"
     set_stage none; exit 0
   fi
-  python3 selfcheck.py || { alert schema "content.json 校验不通过"; exit 1; }
+  # 留一份失败样本：下一个 cron 窗口补跑时会 rm -f content.json，不留证据就没法
+  # 事后定位 schema 失败到底错在哪个字段。
+  python3 selfcheck.py || { cp -f content.json "state/$TODAY.content.bad" 2>/dev/null || true
+                            alert schema "content.json 校验不通过"; exit 1; }
   set_stage content
 fi
 
