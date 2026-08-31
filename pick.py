@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """取题 —— 0 token。stdout 一行 JSON，就是 agent 的全部输入。
 
-排班表（确定性，可审计，可手工插队）：
+排班表（确定性，可审计）：
   ISO 星期 → 大类     1 世界历史 … 7 中国历史
   ISO 周数 → 地域倾向  week % 6，强行打散欧美偏斜
+  同类目内           最久未出场优先 + 日期种子的随机扰动，见 rank()
+插队方式：往 queue.tsv 追加一行就行 —— 从未出场的题在 LRU 下自动是最高优先级，
+  不必再靠行号。同一天重跑取题结果不变（种子只含日期与 subject）。
 去重：subject 精确 + 二元组/实体相似度，窗口 100 天。命中硬阈值自动取下一个候选，
 不中止 —— 重复检测不该以停更一天为代价。
 
@@ -15,11 +18,12 @@
   ./pick.py --stat            各类目水位概览（人看的）
   ./pick.py --stat --cat china  单类目补池输入（喂 refill-prompt.md）
 """
-import argparse, datetime as dt, json, os, sys, urllib.parse, urllib.request
+import argparse, datetime as dt, json, os, random, sys, urllib.parse, urllib.request
 import lib
 
 WINDOW = 100          # 去重窗口（天）
 NEAR_N = 3            # 交给模型的近似条目数
+JITTER = 45           # 取题扰动幅度（天），见 rank()
 WIKI_TIMEOUT = 8
 
 
@@ -28,6 +32,27 @@ def sched(date):
     iso = date.isocalendar()
     slug, label, motif = lib.CATS[iso[2]]
     return slug, label, motif, lib.REGIONS[iso[1] % len(lib.REGIONS)]
+
+
+def rank(q, today, region, last):
+    """取题排序键：当周地域优先，然后最久未出场，年龄相近的随机打散。
+
+    换掉原来的行号排序（FIFO）。行号排序有个乘积效应上的硬伤：每个「类目 x 地域」桶里
+    永远是最小行号先出场，而地域每 6 周才轮回一次，等下次轮到时上一条只过了 42 天、
+    仍在去重窗口内，于是取次小行号 —— 窗口只容得下每桶 2~3 条已用记录，桶里第 4 条
+    之后的题永远等不到。实测 157 条池子里 30 条整年不出场，且全是 refill 新补的高行号。
+
+    LRU 让每条都保证出场：一直没被选中的题只会越来越旧，迟早成为桶里最旧的那个。
+    扰动是为了不让顺序退化成固定周期（纯 LRU 跑满一轮后就是一个不变的排列，年复一年
+    同序）。幅度 45 天：足以打散年龄相近的候选，又远小于同桶的复现间隔，所以不会让
+    刚用过的题插到最久未出场的题前面。
+    """
+    s = last.get(q["subject"])
+    age = 10 ** 6 if s is None else (today - dt.date.fromisoformat(s)).days
+    # 逐候选独立取种子。agent 判 DUP 后 run.sh 会调 --skip 重取，去掉一个候选时其余
+    # 候选的扰动值必须不变 —— 按列表顺序调用同一个 Random 的话，重取会让整体重排。
+    j = random.Random(f"{today.isoformat()}|{q['subject']}").random() * JITTER
+    return (q["region"] != region, -(age + j))
 
 
 def wiki_summary(subject, reason=None):
@@ -126,8 +151,14 @@ def main():
     cands = [q for q in queue
              if q["cat"] == label and q["subject"] not in recent_subjects
              and q["subject"] not in skip]
-    # 地域优先，其余保持 queue.tsv 行序（可手工插队）
-    cands.sort(key=lambda q: (q["region"] != region, q["row"]))
+    # LRU 依据：全量历史里每个 subject 的最后出场日期，不设窗口 —— 窗口内用过的已被
+    # 上面滤掉，剩下的都是从未出场或 100 天前用过的，正好靠这个日期分先后。
+    last = {}
+    for p in posts:
+        s, dd = p.get("subject"), p.get("date")
+        if s and dd and dd > last.get(s, ""):
+            last[s] = dd
+    cands.sort(key=lambda q: rank(q, today, region, last))
 
     chosen, near, skipped = None, [], []
     for q in cands:
