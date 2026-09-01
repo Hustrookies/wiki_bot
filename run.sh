@@ -31,12 +31,22 @@ log(){ printf '%s %s\n' "$(date '+%F %T')" "$*"; }
 stage(){ cat "$ST" 2>/dev/null || echo none; }
 set_stage(){ printf '%s\n' "$1" > "$ST.tmp" && mv -f "$ST.tmp" "$ST"; }  # 原子，防 kill -9 截断
 
-# 告警限流：每天每类最多一条，否则 cron 崩溃循环会把微信刷爆
+# 告警限流：每天每类最多 ALERT_MAX 条，否则 cron 崩溃循环会把微信刷爆。
+# 上限是 2 而不是 1：只发一条会让「07:47 兜底重跑仍失败」完全静默 —— 2026-08-31 的
+# motif 缺失就是这样，两跑都失败却只有一条告警，最后靠人手在 11:03 才补上。
+# 计数存在标记文件里（一行一次），文件由 state 的 mtime+3 清理规则回收。
+ALERT_MAX="${ALERT_MAX:-2}"
 alert(){
-  local f="state/$TODAY.alert.$1"
-  [ -f "$f" ] && { log "告警[$1]今日已发过，抑制"; return 0; }
-  : > "$f"
-  ./notify.sh --kind alert --text "⚠️ 百科推送失败[$1]：$2" || true
+  local f="state/$TODAY.alert.$1" n=0
+  # awk 而不是 grep -c：grep 对空文件输出 0 却退出 1，配 `|| echo 0` 会拼成两行 0
+  [ -f "$f" ] && n=$(awk 'NF{c++} END{print c+0}' "$f" 2>/dev/null)
+  n=${n:-0}
+  if [ "$n" -ge "$ALERT_MAX" ]; then
+    log "告警[$1]今日已发 $n 条（上限 $ALERT_MAX），抑制"; return 0
+  fi
+  printf '%s %s\n' "$(date '+%F %T')" "$2" >> "$f"
+  local pre=""; [ "$n" -ge 1 ] && pre="（第 $((n+1)) 次，兜底重跑仍失败）"
+  ./notify.sh --kind alert --text "⚠️ 百科推送失败[$1]$pre：$2" || true
 }
 
 # 防并发（不是防重复，那是 stage 的事）

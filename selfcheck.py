@@ -149,6 +149,15 @@ def main():
     else:
         BANNED = ("照片", "摄影", "镜头", "景深", "胶片", "文字", "铭文", "字迹",
                   "招牌", "4K", "8K", "大师", "电影感", "史诗")
+        # 上面是纯子串匹配，会把否定式的安全写法一起判违规：2026-09-01 早间首跑就因为
+        # 「簿册字迹不可辨」被拦，而那正是 prompt 三之二禁止项 1 当时教的措辞，整期停更。
+        # 扫描前先抹掉否定搭配，只对文字类词开这个口子 —— 照片/风格词没有安全的否定式。
+        NEG_OK = (
+            r"(?:字迹|文字|铭文|字样|题字)[^，。；、]{0,4}?"
+            r"(?:不可辨|不可辨认|无法辨|难以辨|难辨|不可读|看不清|不可见|不入画)",
+            r"(?:没有|不含|不出现|不见|未见|避开|无)(?:任何)?"
+            r"(?:字迹|文字|铭文|字样|题字|招牌)",
+        )
         for k, lbl in (("main", "主图"), ("sub", "附图")):
             a = art.get(k) or {}
             s = (a.get("subject") or "").strip()
@@ -162,9 +171,15 @@ def main():
                 err.append(f"art.{k}.alt 缺失（{lbl}）—— 无障碍与裂图兜底都靠它")
             elif clen(al) > 45:
                 warn.append(f"art.{k}.alt 长度 {clen(al)} 超过 40（{lbl}）")
-            hit = [b for b in BANNED if b in s]
+            scan = s
+            for p in NEG_OK:
+                scan = re.sub(p, "", scan)
+            hit = [b for b in BANNED if b in scan]
             if hit:
                 err.append(f"art.{k}.subject 含禁用词 {hit}（{lbl}）—— 见 prompt 三之二禁止项")
+            elif scan != s:
+                warn.append(f"art.{k}.subject 用否定句提到文字（{lbl}）—— 已放行，"
+                            f"但更稳的写法是「合拢的」「远景里看不出内容」")
             if re.search(r"\d{3,4}\s*年|公元前?\s*\d+", s):
                 err.append(f"art.{k}.subject 含年份数字（{lbl}）—— 模型只会画成乱码")
         ms = ((art.get("main") or {}).get("subject") or "").strip()
