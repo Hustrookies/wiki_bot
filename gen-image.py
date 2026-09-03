@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """生成当日配图 —— 0 token，但按张计费。
 
-读 content.json 的 art.main/art.sub，拼 prompt → 调 IMG_MODEL 指定的模型（当前 wan2.7-image-pro）→ 下载到 docs/img/。
+读 content.json 的 art.main/art.sub，拼 prompt → 按图位调不同模型（主图 IMG_MODEL_MAIN，
+附图 IMG_MODEL_SUB）→ 下载到 docs/img/。
 把解析出的文件名写回 content.json 的 art.*.file，好让 render.py 与
 「data/content/<date>.json 可 0 token 重渲全站」都能拿到路径。
 
@@ -22,7 +23,16 @@ import lib
 
 TIMEOUT   = int(os.environ.get("IMG_TIMEOUT", "120"))
 MAX_BYTES = int(os.environ.get("IMG_MAX_BYTES", str(8 * 1024 * 1024)))
-MODEL     = os.environ.get("IMG_MODEL", "wan2.7-image-pro")
+# 按图位分别指定模型（2026-09-03）：主图是页面门面，用贵的 -pro；附图在页面上只占
+# 一小块，用基础版省钱。**回退默认值必须与 .env 写成同一个值** —— 否则"现在跑的到底是
+# 哪个模型"就取决于 .env 有没有被读到。
+MODEL     = {"main": os.environ.get("IMG_MODEL_MAIN", "wan2.7-image-pro"),
+             "sub":  os.environ.get("IMG_MODEL_SUB",  "wan2.7-image")}
+# 旧的单一 IMG_MODEL 已废弃。它若还留在 .env 里会被**静默忽略** —— 那正是"改了配置却
+# 没生效"最难查的一种，所以这里必须吵出来。
+if os.environ.get("IMG_MODEL"):
+    print(f"WARN: IMG_MODEL={os.environ['IMG_MODEL']} 已废弃且被忽略，"
+          "请改用 IMG_MODEL_MAIN / IMG_MODEL_SUB", file=sys.stderr)
 APIKEY    = os.environ.get("IMG_API_KEY", "")
 ENABLED   = os.environ.get("IMG_ON", "1") not in ("0", "", "false", "off")
 
@@ -67,7 +77,7 @@ def build_prompt(subject, slug):
 
 
 # ╔═════════════════ 需要按 I1 文档实现，只改这个函数 ═════════════════╗
-def call_model(prompt, ratio):
+def call_model(prompt, ratio, model):
     """提交一次生成请求，返回 (图片URL 或 None, 状态串)。
 
     契约（务必遵守，框外代码依赖它）：
@@ -86,7 +96,7 @@ def call_model(prompt, ratio):
         "IMG_ENDPOINT",
         "https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1/chat/completions")
     text = f"{prompt}。避免以下元素：{NEGATIVE}"
-    body = {"model": MODEL,
+    body = {"model": model,
             "messages": [{"role": "user", "content": [{"type": "text", "text": text}]}]}
     req = urllib.request.Request(
         endpoint, data=json.dumps(body).encode("utf-8"),
@@ -144,15 +154,18 @@ def to_webp(src, kind):
     return dest
 
 
-def log_url(date, kind, url):
-    """把原图 URL 记到本地 img_urls.jsonl（gitignored，绝不上传）。
+def log_url(date, kind, url, model):
+    """把原图 URL 与实际使用的模型记到本地 img_urls.jsonl（gitignored，绝不上传）。
 
     URL 约 24 小时过期，此文件的用途是事后排查与短期补下载，不是长期存档。
+    `model` 从 2026-09-03 起记：主图与附图跑的是不同模型，不记就只能靠 kind 反推当时的
+    映射，而映射一改历史记录就再也说不清了。
     只在真正调了 API 时写一行；缓存命中没有新 URL，不写。"""
     p = os.path.join(lib.ROOT, "img_urls.jsonl")
     try:
         with open(p, "a", encoding="utf-8") as f:
             f.write(json.dumps({"date": date, "kind": kind, "url": url,
+                                "model": model,
                                 "ts": time.strftime("%F %T")},
                                ensure_ascii=False) + "\n")
     except OSError:
@@ -196,10 +209,12 @@ def one(kind, subject, slug, date, force):
                 return f"../img/{date}-{kind}.{ext}", "cached"
 
     prompt = build_prompt(subject, slug)
-    url, st = call_model(prompt, RATIO.get(kind, "1:1"))
+    # kind 未知时退到基础版：那种情况本身是 bug，让它别顺手花贵的钱
+    model = MODEL.get(kind, MODEL["sub"])
+    url, st = call_model(prompt, RATIO.get(kind, "1:1"), model)
     if not url:
         return "", st
-    log_url(date, kind, url)                   # 先记录，下载失败也留档
+    log_url(date, kind, url, model)            # 先记录，下载失败也留档
     data, ext = fetch(url)
     if data is None:
         return "", ext                       # 此时 ext 是状态串
@@ -244,7 +259,7 @@ def main():
         if not isinstance(node, dict) or not (node.get("subject") or "").strip():
             report.append(f"{kind}=no_subject"); continue
         if a.dry_run:
-            print(f"--- {kind} ({RATIO.get(kind)}) ---")
+            print(f"--- {kind} (模型 {MODEL.get(kind, MODEL['sub'])}, {RATIO.get(kind)}) ---")
             print(build_prompt(node['subject'].strip(), slug))
             print(f"negative: {NEGATIVE}\n")
             continue
