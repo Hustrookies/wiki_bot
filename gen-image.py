@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """生成当日配图 —— 0 token，但按张计费。
 
-读 content.json 的 art.main/art.sub，拼 prompt → 调 wan2.7-image → 下载到 docs/img/。
+读 content.json 的 art.main/art.sub，拼 prompt → 调 IMG_MODEL 指定的模型（当前 wan2.7-image-pro）→ 下载到 docs/img/。
 把解析出的文件名写回 content.json 的 art.*.file，好让 render.py 与
 「data/content/<date>.json 可 0 token 重渲全站」都能拿到路径。
 
@@ -22,7 +22,7 @@ import lib
 
 TIMEOUT   = int(os.environ.get("IMG_TIMEOUT", "120"))
 MAX_BYTES = int(os.environ.get("IMG_MAX_BYTES", str(8 * 1024 * 1024)))
-MODEL     = os.environ.get("IMG_MODEL", "wan2.7-image")
+MODEL     = os.environ.get("IMG_MODEL", "wan2.7-image-pro")
 APIKEY    = os.environ.get("IMG_API_KEY", "")
 ENABLED   = os.environ.get("IMG_ON", "1") not in ("0", "", "false", "off")
 
