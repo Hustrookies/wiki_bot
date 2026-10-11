@@ -236,32 +236,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
-.t-china{
-  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:28px 20px 22px;
+/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
+.t-event{
+  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
+  --title-font:var(--sans);
 }
-.t-china .hero{background:var(--paper)}
-/* 朱印方章式类目标签 */
-.t-china .kicker{opacity:1}
-.t-china .kicker b{
-  display:inline-block;background:var(--accent);color:#fff;
-  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
+.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
+.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
+.t-event .hero{
+  background:
+    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
+    var(--brand);
 }
-.t-china .hero h1{
-  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
-}
-.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
-/* 古籍感：键右对齐贴向值 */
-.t-china .facts .f{gap:20px}
-.t-china .facts .k{flex:1;text-align:right;min-width:4em}
-.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
+/* 表格式 facts：键左值右、细分隔线、等宽数字 */
+.t-event .facts .k{min-width:5.5em}
 
 @media (prefers-color-scheme:dark){
-  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
-            --track:#332622; --hero-fg:#e8eaed; }
-  .t-china .kicker b{background:#8c2b20;color:#fff}
+  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -276,10 +267,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#faf7f0">
-<meta name="x-build" content="2026-10-11-0f6ebb55">
-<meta name="description" content="明朝郑和船队七下西洋，1409年在斯里兰卡立锡兰山寺碑，以汉文、泰米尔文、波斯文分别礼敬佛陀、毗湿奴与伊斯兰真主，用布施对接多语并存的印度洋贸易圈。">
-<title>一块碑写给三个神 · 中国历史</title>
+<meta name="theme-color" content="#1f3352">
+<meta name="x-build" content="2026-10-12-8b515e62">
+<meta name="description" content="1648年10月，欧洲交战各方在明斯特和奥斯纳布吕克签订两份和约，结束三十年战争。教皇的谴责诏书没有一个国家执行，主权共存、互不干涉的原则由此成为现代国际体系的基础。">
+<title>教皇骂了没人听的和约 · 世界历史</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -511,48 +502,39 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
-.t-china{
-  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:28px 20px 22px;
+/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
+.t-event{
+  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
+  --title-font:var(--sans);
 }
-.t-china .hero{background:var(--paper)}
-/* 朱印方章式类目标签 */
-.t-china .kicker{opacity:1}
-.t-china .kicker b{
-  display:inline-block;background:var(--accent);color:#fff;
-  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
+.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
+.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
+.t-event .hero{
+  background:
+    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
+    var(--brand);
 }
-.t-china .hero h1{
-  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
-}
-.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
-/* 古籍感：键右对齐贴向值 */
-.t-china .facts .f{gap:20px}
-.t-china .facts .k{flex:1;text-align:right;min-width:4em}
-.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
+/* 表格式 facts：键左值右、细分隔线、等宽数字 */
+.t-event .facts .k{min-width:5.5em}
 
 @media (prefers-color-scheme:dark){
-  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
-            --track:#332622; --hero-fg:#e8eaed; }
-  .t-china .kicker b{background:#8c2b20;color:#fff}
+  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
 }
 </style>
 </head>
-<body class="t-china">
+<body class="t-event">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>中国历史</b> · 10月11日</div>
-    <h1>一块碑写给三个神</h1>
-    <p class="hook">一块石碑，三种文字，礼敬三位不同的神</p>
+    <div class="kicker"><b>世界历史</b> · 10月12日</div>
+    <h1>教皇骂了没人听的和约</h1>
+    <p class="hook">1648年两份条约在两座小城签完，罗马的谴责一字未被执行</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-10-11-main.webp" alt="佛寺前众人围立新碑，午后树影斜光，视角略低" width="1280" height="1280" loading="eager">
-    <figcaption>佛寺前众人围立新碑，午后树影斜光，视角略低</figcaption>
+    <img src="img/2026-10-12-main.webp" alt="市政厅长桌旁围着披斗篷的使节，高窗冷光" width="1280" height="1280" loading="eager">
+    <figcaption>市政厅长桌旁围着披斗篷的使节，高窗冷光</figcaption>
   </figure>
   
 
@@ -561,18 +543,21 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-
-  
-  <div class="ruler">
-    <div class="bar">
-      <span class="cap l"></span><span class="cap r"></span>
-      <span class="pin" style="left:15%"></span>
-    </div>
-    <div class="ends"><span>1368</span><span>1644</span></div>
+  <div class="tl">
     
-    <div class="mk"><i></i><b>1409</b>锡兰立三语碑</div>
+    <div class="nd"><div class="dot"></div><span class="y">1618</span><span class="lb">三十年战争爆发</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1641</span><span class="lb">法与帝国在科隆初谈</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1646</span><span class="lb">荷兰使节进入明斯特</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1648</span><span class="lb">两座城分别签约</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1648</span><span class="lb">教皇谴责无人执行</span></div>
     
   </div>
+  
+
   
 
   
@@ -583,22 +568,22 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">1409年，一块石碑在斯里兰卡立起，碑上并排刻着三种互不相通的文字：汉文礼敬佛陀，泰米尔文赞颂毗湿奴，波斯文致意伊斯兰的真主。三位神共受一石之敬，背后是一个现实判断——印度洋不是一国一语的市场，敬意要送达，就得写成对方读得懂的样子。</p>
+  <p class="lead">1648年10月，各国代表分赴明斯特和奥斯纳布吕克，在两城的市政厅里先后落笔签约。同样的日子里，罗马发布了谴责这份条约的诏书，宣布它无效。诏书送出去之后，没有一个国家去执行，签约照常完成。</p>
 
   <div class="body">
     
-    <section><h2>一石敬三神</h2><p>1405到1433年间，明朝船队七次远航，从东南亚穿过印度洋，抵达阿拉伯半岛与东非各地，随行海船二百四十余艘、船员两万七千余。1409年船队在斯里兰卡停留，于当地佛寺前立起这块碑：汉文宣告对佛陀的布施，泰米尔文赞颂毗湿奴，波斯文向真主致意。同一块石头，把印度洋上最有分量的三种信仰各礼敬了一遍。</p></section>
+    <section><h2>两份条约</h2><p>和约不是一份文件，而是两份：在明斯特签的和在奥斯纳布吕克签的条约。这两座相邻的小城都在威斯特伐利亚，谈判拆成两处，是因为双方都坚持在自己势力范围内的城市里谈，好掌控议程。先后有110名交战国代表出席，却很少同时到场。1648年10月，两份条约相继签署，终结了哈布斯堡与瑞典、丹麦-挪威、荷兰和神圣罗马帝国各邦之间的三十年战争。</p></section>
     
-    <section><h2>为什么是三语</h2><p>因为印度洋不是一个统一的市场：泰米尔商人遍布斯里兰卡东西两岸，波斯语和阿拉伯语沿海岸通行，穆斯林商人主导着波斯湾到马拉巴尔海岸的航路，而船队还要向明朝朝廷复命存证。一块碑因此必须说三种话——对谁说话，就用谁的语言。受布施的一方是寺庙，而寺庙正是港口信用与仓储的枢纽；刻在石头上的赞美，同时是对三组商人亮出的凭据。</p></section>
+    <section><h2>为什么没人听</h2><p>教皇的谴责并非没有分量，而是它的前提已经失效。以往欧洲的重大安排，人们习惯等一个更高权威来背书，教皇或皇帝；但战争打到后期，信仰天主教的法国自黎塞留主政起就与瑞典、荷兰并肩对付哈布斯堡，谁有权批准条约，没人再当真。各方默认的新规则只剩一条：签字即生效。当时没有人意识到，真正改写规则的，就是这个动作本身。</p></section>
     
-    <section><h2>碑的后来</h2><p>这份周到没能延续。最后一次远航结束于1433年，此后明朝再未派出同等规模的船队；约七十年后，葡萄牙人绕过好望角进入印度洋，靠炮舰而不是布施接管港口，石碑那套多语并敬的接口失传。那块碑在原地消失了四百多年，1911年在加勒被重新发现，如今保存在科伦坡的博物馆里，三种语言仍同在一块石头上，只是再没有哪条商路需要它担保。</p></section>
+    <section><h2>后来的规则</h2><p>这是第一次各方通过外交会议共同订立和约。此后，主权国家共存、反对干预别国内政的准则开始得到认可，国家间的侵略战争因权力平衡而有所遏制；随着欧洲影响遍布全球，主权国家成了国际法和世界秩序的中心概念，学者普遍视之为现代国际体系的起点。这场会议本身并不气派：从1641年在科隆开局算起，它走了整整七年。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-10-11-sub.webp" alt="展厅中一块风化石碑，侧光下只见轮廓与磨痕" width="1024" height="1024" loading="lazy">
-    <figcaption>展厅中一块风化石碑，侧光下只见轮廓与磨痕</figcaption>
+    <img src="img/2026-10-12-sub.webp" alt="桌上一卷系缎带的卷轴，旁置熄灭的烛台" width="1024" height="1024" loading="lazy">
+    <figcaption>桌上一卷系缎带的卷轴，旁置熄灭的烛台</figcaption>
   </figure>
   
 
@@ -607,13 +592,15 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">立碑</span><span class="v">1409年，斯里兰卡</span></div>
+    <div class="f"><span class="k">签约时间</span><span class="v">1648年10月</span></div>
     
-    <div class="f"><span class="k">三种文字</span><span class="v">汉文、泰米尔文、波斯文</span></div>
+    <div class="f"><span class="k">签约地点</span><span class="v">明斯特与奥斯纳布吕克，两份条约</span></div>
     
-    <div class="f"><span class="k">礼敬对象</span><span class="v">佛陀、毗湿奴、伊斯兰真主</span></div>
+    <div class="f"><span class="k">出席代表</span><span class="v">共110名交战国代表，很少同时到场</span></div>
     
-    <div class="f"><span class="k">船队规模</span><span class="v">海船二百四十余艘、船员两万七千余</span></div>
+    <div class="f"><span class="k">战争代价</span><span class="v">这场动荡造成约450万至800万人丧生</span></div>
+    
+    <div class="f"><span class="k">缔约阵营</span><span class="v">哈布斯堡及天主教盟友 对 瑞典、丹麦-挪威、荷兰、帝国各邦及法国</span></div>
     
   </div>
   
@@ -622,23 +609,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>这块碑在原地消失了四百多年，直到1911年才在加勒被重新发现。</li>
+    <li>带头与新教国家并肩打仗的，正是天主教法国，主持者是红衣主教黎塞留。</li><li>谈判代表前后有110人，却很少同时到场，签约更像一场接力。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>泰米尔文部分所礼敬神祇的通行读法为毗湿奴，细节学界仍有分歧</li><li>碑在加勒重见天日的年份多记为1911年前后，发现经过记载不一</li><li>碑原立寺庙的具体位置与布施去向，各家著述说法不完全一致</li></ul>
+    <ul><li>“现代国际体系的起点”“威斯特伐利亚主权概念”是后世学者的追认，缔约者本人未必有此自觉。</li><li>谴责和约的诏书发布的具体日期与措辞，各书记载有出入，本文只按“和约签订前后罗马公开谴责且无人执行”表述。</li><li>死亡450万至800万人为区间估算，统计口径不一。</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>郑和</span><span>印度洋</span><span>明朝</span><span>碑刻</span><span>朝贡</span></div>
+  <div class="tags"><span>国际法</span><span>欧洲</span><span>三十年战争</span><span>主权</span><span>近代早期</span></div>
   
 
   <footer>
-    <div class="r"><span>中国历史</span><span>10月11日</span></div>
+    <div class="r"><span>世界历史</span><span>10月12日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
   </footer>
