@@ -236,23 +236,31 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
-.t-event{
-  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
-  --title-font:var(--sans);
+/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
+.t-person{
+  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:30px 20px 24px;
 }
-.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
-.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
-.t-event .hero{
-  background:
-    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
-    var(--brand);
+.t-person .hero{
+  border-left:3px solid #6b4a2f; padding-left:18px;
+  margin-left:-16px; margin-right:-16px;
 }
-/* 表格式 facts：键左值右、细分隔线、等宽数字 */
-.t-event .facts .k{min-width:5.5em}
+.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
+.t-person .hero h1{
+  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
+}
+.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
+/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
+.t-person .facts .f{display:block;text-align:left}
+.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
+.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
+  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
+             --hero-fg:#e8eaed; }
+  .t-person .hero{border-left-color:#8a6640}
+  .t-person .kicker{color:#c39a63}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -267,10 +275,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#1f3352">
-<meta name="x-build" content="2026-10-12-8b515e62">
-<meta name="description" content="1648年10月，欧洲交战各方在明斯特和奥斯纳布吕克签订两份和约，结束三十年战争。教皇的谴责诏书没有一个国家执行，主权共存、互不干涉的原则由此成为现代国际体系的基础。">
-<title>教皇骂了没人听的和约 · 世界历史</title>
+<meta name="theme-color" content="#f7f4ef">
+<meta name="x-build" content="2026-10-13-8cf3842d">
+<meta name="description" content="瑞士医生帕拉塞尔苏斯1527年在巴塞尔开讲时当众焚毁盖伦与阿维森纳的医典，改用以方言授课并引入矿物药，开创医疗化学；他一生被医界驱逐，47岁死于萨尔茨堡，死因存争议。">
+<title>烧掉医典的人 · 历史人物</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -502,39 +510,47 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
-.t-event{
-  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
-  --title-font:var(--sans);
+/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
+.t-person{
+  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:30px 20px 24px;
 }
-.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
-.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
-.t-event .hero{
-  background:
-    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
-    var(--brand);
+.t-person .hero{
+  border-left:3px solid #6b4a2f; padding-left:18px;
+  margin-left:-16px; margin-right:-16px;
 }
-/* 表格式 facts：键左值右、细分隔线、等宽数字 */
-.t-event .facts .k{min-width:5.5em}
+.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
+.t-person .hero h1{
+  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
+}
+.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
+/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
+.t-person .facts .f{display:block;text-align:left}
+.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
+.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
+  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
+             --hero-fg:#e8eaed; }
+  .t-person .hero{border-left-color:#8a6640}
+  .t-person .kicker{color:#c39a63}
 }
 </style>
 </head>
-<body class="t-event">
+<body class="t-person">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>世界历史</b> · 10月12日</div>
-    <h1>教皇骂了没人听的和约</h1>
-    <p class="hook">1648年两份条约在两座小城签完，罗马的谴责一字未被执行</p>
+    <div class="kicker"><b>历史人物</b> · 10月13日</div>
+    <h1>烧掉医典的人</h1>
+    <p class="hook">他在讲台上烧掉医学权威的书，也烧掉自己的退路</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-10-12-main.webp" alt="市政厅长桌旁围着披斗篷的使节，高窗冷光" width="1280" height="1280" loading="eager">
-    <figcaption>市政厅长桌旁围着披斗篷的使节，高窗冷光</figcaption>
+    <img src="img/2026-10-13-main.webp" alt="石地火堆中压着几册厚书，学者与药剂师侧身围观" width="1280" height="1280" loading="eager">
+    <figcaption>石地火堆中压着几册厚书，学者与药剂师侧身围观</figcaption>
   </figure>
   
 
@@ -543,21 +559,18 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-  <div class="tl">
+
+  
+  <div class="ruler">
+    <div class="bar">
+      <span class="cap l"></span><span class="cap r"></span>
+      <span class="pin" style="left:71%"></span>
+    </div>
+    <div class="ends"><span>1493</span><span>1541</span></div>
     
-    <div class="nd"><div class="dot"></div><span class="y">1618</span><span class="lb">三十年战争爆发</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">1641</span><span class="lb">法与帝国在科隆初谈</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">1646</span><span class="lb">荷兰使节进入明斯特</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">1648</span><span class="lb">两座城分别签约</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">1648</span><span class="lb">教皇谴责无人执行</span></div>
+    <div class="mk"><i></i><b>1527</b>巴塞尔焚书开讲</div>
     
   </div>
-  
-
   
 
   
@@ -568,22 +581,22 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">1648年10月，各国代表分赴明斯特和奥斯纳布吕克，在两城的市政厅里先后落笔签约。同样的日子里，罗马发布了谴责这份条约的诏书，宣布它无效。诏书送出去之后，没有一个国家去执行，签约照常完成。</p>
+  <p class="lead">1527年，巴塞尔，新到任的医学教授把盖伦和阿维森纳的医典扔进火里——那两人是当时公认的医学权威。他宣称医生该看病人，不该翻书。这话他也践行了：用方言讲课，把药剂师和理发师兼外科医师请进课堂，把硫黄这类矿物当成药开。</p>
 
   <div class="body">
     
-    <section><h2>两份条约</h2><p>和约不是一份文件，而是两份：在明斯特签的和在奥斯纳布吕克签的条约。这两座相邻的小城都在威斯特伐利亚，谈判拆成两处，是因为双方都坚持在自己势力范围内的城市里谈，好掌控议程。先后有110名交战国代表出席，却很少同时到场。1648年10月，两份条约相继签署，终结了哈布斯堡与瑞典、丹麦-挪威、荷兰和神圣罗马帝国各邦之间的三十年战争。</p></section>
+    <section><h2>火上的医典</h2><p>烧掉的这两套书，不是普通教材，而是当时公认的医学权威：古罗马的盖伦，和阿拉伯的《医典》作者阿维森纳。帕拉塞尔苏斯把它当作开讲的仪式，意思很直白：医生该看病人，不该翻书。他还打破拉丁语授课的传统，用德语方言讲课，是第一个在大学里这样讲课的人；又把药剂师和理发师兼外科医师请进课堂，让工匠和学者坐在同一条板凳上。</p></section>
     
-    <section><h2>为什么没人听</h2><p>教皇的谴责并非没有分量，而是它的前提已经失效。以往欧洲的重大安排，人们习惯等一个更高权威来背书，教皇或皇帝；但战争打到后期，信仰天主教的法国自黎塞留主政起就与瑞典、荷兰并肩对付哈布斯堡，谁有权批准条约，没人再当真。各方默认的新规则只剩一条：签字即生效。当时没有人意识到，真正改写规则的，就是这个动作本身。</p></section>
+    <section><h2>底气在矿洞</h2><p>他的底气不在课堂，在矿洞。他生于瑞士艾恩西德尔恩，从小随当医生的父亲学炼金术，又游历欧洲各地搜集民间炼金秘密；1514年前后，在日耳曼南部富格尔的矿地和冶金工场做工。矿工身上的病不听盖伦的话：他看到的是中毒与尘肺，能用上的是矿物。于是他把医学与炼金术结合，首创化学药理，反对自古盖伦、亚里士多德传承的四体液说，奠定了医疗化学的基础。</p></section>
     
-    <section><h2>后来的规则</h2><p>这是第一次各方通过外交会议共同订立和约。此后，主权国家共存、反对干预别国内政的准则开始得到认可，国家间的侵略战争因权力平衡而有所遏制；随着欧洲影响遍布全球，主权国家成了国际法和世界秩序的中心概念，学者普遍视之为现代国际体系的起点。这场会议本身并不气派：从1641年在科隆开局算起，它走了整整七年。</p></section>
+    <section><h2>驱逐与封神</h2><p>代价来得很快。他在巴塞尔只教了约两年书，此后一生被各地医界驱逐；1541年，四十七岁的他死在萨尔茨堡，死因至今众说不一。但他趟出来的路后来成了主流，他被追认为药理学的先驱。他的另一面也一并留了下来：他否认一切书本权威，却自称帕拉塞尔苏斯——字面意思是超越凯尔苏斯，即比古罗马名医更大。身后的传说更给他配上贤者之石、人造人何蒙库鲁兹，乃至塔罗牌魔术师的原型。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-10-12-sub.webp" alt="桌上一卷系缎带的卷轴，旁置熄灭的烛台" width="1024" height="1024" loading="lazy">
-    <figcaption>桌上一卷系缎带的卷轴，旁置熄灭的烛台</figcaption>
+    <img src="img/2026-10-13-sub.webp" alt="木案上的铜研钵、黄色矿石与一小瓶灰黑粉末" width="1024" height="1024" loading="lazy">
+    <figcaption>木案上的铜研钵、黄色矿石与一小瓶灰黑粉末</figcaption>
   </figure>
   
 
@@ -592,15 +605,13 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">签约时间</span><span class="v">1648年10月</span></div>
+    <div class="f"><span class="k">本名</span><span class="v">德奥弗拉斯特·冯·霍恩海姆</span></div>
     
-    <div class="f"><span class="k">签约地点</span><span class="v">明斯特与奥斯纳布吕克，两份条约</span></div>
+    <div class="f"><span class="k">生卒</span><span class="v">约1493—1541，死于萨尔茨堡</span></div>
     
-    <div class="f"><span class="k">出席代表</span><span class="v">共110名交战国代表，很少同时到场</span></div>
+    <div class="f"><span class="k">焚书</span><span class="v">1527年，巴塞尔开讲仪式</span></div>
     
-    <div class="f"><span class="k">战争代价</span><span class="v">这场动荡造成约450万至800万人丧生</span></div>
-    
-    <div class="f"><span class="k">缔约阵营</span><span class="v">哈布斯堡及天主教盟友 对 瑞典、丹麦-挪威、荷兰、帝国各邦及法国</span></div>
+    <div class="f"><span class="k">名字含义</span><span class="v">超越凯尔苏斯</span></div>
     
   </div>
   
@@ -609,23 +620,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>带头与新教国家并肩打仗的，正是天主教法国，主持者是红衣主教黎塞留。</li><li>谈判代表前后有110人，却很少同时到场，签约更像一场接力。</li>
+    <li>他当众烧掉权威医书，自己的名字却是比一位古罗马名医更大的意思</li><li>传说中这位药理学前驱炼出了人造人何蒙库鲁兹与贤者之石</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>“现代国际体系的起点”“威斯特伐利亚主权概念”是后世学者的追认，缔约者本人未必有此自觉。</li><li>谴责和约的诏书发布的具体日期与措辞，各书记载有出入，本文只按“和约签订前后罗马公开谴责且无人执行”表述。</li><li>死亡450万至800万人为区间估算，统计口径不一。</li></ul>
+    <ul><li>生年有1493、1494两说</li><li>死因众说不一，无从确证</li><li>矿工职业病主要记在他后来的著作名下</li><li>首位用方言授课之说主要依据本材料</li><li>塔罗牌魔术师以其为原型的说法不可靠，塔罗早于其出生就已存在</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>国际法</span><span>欧洲</span><span>三十年战争</span><span>主权</span><span>近代早期</span></div>
+  <div class="tags"><span>医学史</span><span>炼金术</span><span>药理学</span><span>巴塞尔</span><span>文艺复兴</span></div>
   
 
   <footer>
-    <div class="r"><span>世界历史</span><span>10月12日</span></div>
+    <div class="r"><span>历史人物</span><span>10月13日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
   </footer>
