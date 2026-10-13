@@ -236,31 +236,22 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
-.t-person{
-  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:30px 20px 24px;
+/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
+.t-geo{
+  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+  --title-font:var(--sans);
 }
-.t-person .hero{
-  border-left:3px solid #6b4a2f; padding-left:18px;
-  margin-left:-16px; margin-right:-16px;
+.t-geo .kicker{letter-spacing:.2em}
+.t-geo .hero h1{letter-spacing:.01em}
+.t-geo .hero{
+  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
 }
-.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
-.t-person .hero h1{
-  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
-}
-.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
-/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
-.t-person .facts .f{display:block;text-align:left}
-.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
-.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
+/* 分带紧贴 hero 下沿，读作同一个剖面 */
+.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
 
 @media (prefers-color-scheme:dark){
-  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
-             --hero-fg:#e8eaed; }
-  .t-person .hero{border-left-color:#8a6640}
-  .t-person .kicker{color:#c39a63}
+  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
+  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -275,10 +266,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#f7f4ef">
-<meta name="x-build" content="2026-10-13-8cf3842d">
-<meta name="description" content="瑞士医生帕拉塞尔苏斯1527年在巴塞尔开讲时当众焚毁盖伦与阿维森纳的医典，改用以方言授课并引入矿物药，开创医疗化学；他一生被医界驱逐，47岁死于萨尔茨堡，死因存争议。">
-<title>烧掉医典的人 · 历史人物</title>
+<meta name="theme-color" content="#33564a">
+<meta name="x-build" content="2026-10-14-5bef9275">
+<meta name="description" content="冰岛瓦特纳冰川下压着格里姆火山等活火山，冰下融水聚成冰下湖；溃口时洪峰在数小时内冲过南部无人区砂原入海。1996年冰下喷发引发大溃洪，冲断环岛公路桥，毁路的是水而非岩浆。">
+<title>冰盖下的火与水 · 自然地理</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -510,67 +501,59 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
-.t-person{
-  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:30px 20px 24px;
+/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
+.t-geo{
+  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+  --title-font:var(--sans);
 }
-.t-person .hero{
-  border-left:3px solid #6b4a2f; padding-left:18px;
-  margin-left:-16px; margin-right:-16px;
+.t-geo .kicker{letter-spacing:.2em}
+.t-geo .hero h1{letter-spacing:.01em}
+.t-geo .hero{
+  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
 }
-.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
-.t-person .hero h1{
-  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
-}
-.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
-/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
-.t-person .facts .f{display:block;text-align:left}
-.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
-.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
+/* 分带紧贴 hero 下沿，读作同一个剖面 */
+.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
 
 @media (prefers-color-scheme:dark){
-  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
-             --hero-fg:#e8eaed; }
-  .t-person .hero{border-left-color:#8a6640}
-  .t-person .kicker{color:#c39a63}
+  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
+  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
 }
 </style>
 </head>
-<body class="t-person">
+<body class="t-geo">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>历史人物</b> · 10月13日</div>
-    <h1>烧掉医典的人</h1>
-    <p class="hook">他在讲台上烧掉医学权威的书，也烧掉自己的退路</p>
+    <div class="kicker"><b>自然地理</b> · 10月14日</div>
+    <h1>冰盖下的火与水</h1>
+    <p class="hook">冲断冰岛公路桥的不是岩浆，是冰盖下攒起来的融水</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-10-13-main.webp" alt="石地火堆中压着几册厚书，学者与药剂师侧身围观" width="1280" height="1280" loading="eager">
-    <figcaption>石地火堆中压着几册厚书，学者与药剂师侧身围观</figcaption>
+    <img src="img/2026-10-14-main.webp" alt="冰盖尽头涌出浑黄洪水，在黑色砂原上散成辫状水流" width="1280" height="1280" loading="eager">
+    <figcaption>冰盖尽头涌出浑黄洪水，在黑色砂原上散成辫状水流</figcaption>
   </figure>
   
 
   <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
 
   
-
-  
-
-  
-  <div class="ruler">
-    <div class="bar">
-      <span class="cap l"></span><span class="cap r"></span>
-      <span class="pin" style="left:71%"></span>
-    </div>
-    <div class="ends"><span>1493</span><span>1541</span></div>
+  <div class="layers">
     
-    <div class="mk"><i></i><b>1527</b>巴塞尔焚书开讲</div>
+    <div class="ly"><span class="n">冰盖</span><span class="note">数百米厚冰体，压住下方一切</span></div>
+    
+    <div class="ly"><span class="n">冰下湖</span><span class="note">融水排不出去，在冰底越积越多</span></div>
+    
+    <div class="ly"><span class="n">活火山</span><span class="note">格里姆等火山提供持续热源</span></div>
+    
+    <div class="ly"><span class="n">基岩裂隙</span><span class="note">热水沿裂隙上涌，冰从底部融化</span></div>
     
   </div>
+  
+
+  
+
   
 
   
@@ -581,37 +564,56 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">1527年，巴塞尔，新到任的医学教授把盖伦和阿维森纳的医典扔进火里——那两人是当时公认的医学权威。他宣称医生该看病人，不该翻书。这话他也践行了：用方言讲课，把药剂师和理发师兼外科医师请进课堂，把硫黄这类矿物当成药开。</p>
+  <p class="lead">1996年秋，冰岛南部无人荒原上的一座公路桥被一股浑黄洪水冲断。水来自几十公里外、压在数百米厚冰层下的冰下湖。那次喷发发生在瓦特纳冰川内部，岩浆没有涌出地表，真正造成破坏的是被火山热量融化、积蓄已久的冰融水。</p>
 
   <div class="body">
     
-    <section><h2>火上的医典</h2><p>烧掉的这两套书，不是普通教材，而是当时公认的医学权威：古罗马的盖伦，和阿拉伯的《医典》作者阿维森纳。帕拉塞尔苏斯把它当作开讲的仪式，意思很直白：医生该看病人，不该翻书。他还打破拉丁语授课的传统，用德语方言讲课，是第一个在大学里这样讲课的人；又把药剂师和理发师兼外科医师请进课堂，让工匠和学者坐在同一条板凳上。</p></section>
+    <section><h2>冰盖下蓄水</h2><p>瓦特纳冰川是欧洲最大的冰盖，约8,000平方公里的冰体压在多座活火山之上，其中格里姆火山活动最频繁。地热与岩浆从底部把冰烤化，融水却无处可去——上方是几百米厚的冰，四周也是冰。水在冰盖底部的洼地里越积越多，形成一个被冰封死的临时水库，甚至把头顶的冰面顶出一圈鼓包。</p></section>
     
-    <section><h2>底气在矿洞</h2><p>他的底气不在课堂，在矿洞。他生于瑞士艾恩西德尔恩，从小随当医生的父亲学炼金术，又游历欧洲各地搜集民间炼金秘密；1514年前后，在日耳曼南部富格尔的矿地和冶金工场做工。矿工身上的病不听盖伦的话：他看到的是中毒与尘肺，能用上的是矿物。于是他把医学与炼金术结合，首创化学药理，反对自古盖伦、亚里士多德传承的四体液说，奠定了医疗化学的基础。</p></section>
+    <section><h2>为什么会溃</h2><p>水越多，湖水的压力越大。一旦压力足以把冰抬起一条缝，水便沿冰与基岩之间的通道往外逃。流动的水一边摩擦一边传热，通道越冲越宽，越宽水流越急，越急熔蚀越快，三者互相放大。一个攒了几年的冰下湖，往往一两天内就见了底，洪峰几小时后就冲出冰舌，扑到外面的砂原上。</p></section>
     
-    <section><h2>驱逐与封神</h2><p>代价来得很快。他在巴塞尔只教了约两年书，此后一生被各地医界驱逐；1541年，四十七岁的他死在萨尔茨堡，死因至今众说不一。但他趟出来的路后来成了主流，他被追认为药理学的先驱。他的另一面也一并留了下来：他否认一切书本权威，却自称帕拉塞尔苏斯——字面意思是超越凯尔苏斯，即比古罗马名医更大。身后的传说更给他配上贤者之石、人造人何蒙库鲁兹，乃至塔罗牌魔术师的原型。</p></section>
+    <section><h2>洪水之后</h2><p>1996年秋的这次洪水冲垮了Skeiðarársandur砂原上的环岛公路桥，公路断了好几天；因为砂原上没有人住，没有人员伤亡。此后冰岛在冰盖上长期布设GPS和地震台网，盯住冰面高度的变化，在溃洪前几小时到几天发出预警。格里姆火山2011年再次喷发，溃洪却比1996年小得多。而喷发放空之后的那个冰下湖，几年内又被地热重新注满。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-10-13-sub.webp" alt="木案上的铜研钵、黄色矿石与一小瓶灰黑粉末" width="1024" height="1024" loading="lazy">
-    <figcaption>木案上的铜研钵、黄色矿石与一小瓶灰黑粉末</figcaption>
+    <img src="img/2026-10-14-sub.webp" alt="冰下的融水通道口，急流裹砂冲刷砾石滩" width="1024" height="1024" loading="lazy">
+    <figcaption>冰下的融水通道口，急流裹砂冲刷砾石滩</figcaption>
   </figure>
   
 
+  
+  <div class="bars">
+    
+    <div class="b">
+      <div class="hd"><span class="k">冰下湖蓄水</span><span class="v">数月至数年</span></div>
+      <div class="track"><div class="fill" style="width:100%"></div></div>
+    </div>
+    
+    <div class="b">
+      <div class="hd"><span class="k">溃口扩张</span><span class="v">数小时至1天</span></div>
+      <div class="track"><div class="fill" style="width:15%"></div></div>
+    </div>
+    
+    <div class="b">
+      <div class="hd"><span class="k">洪峰抵海</span><span class="v">约1至2天</span></div>
+      <div class="track"><div class="fill" style="width:8%"></div></div>
+    </div>
+    
+  </div>
   
 
   
   <div class="facts">
     
-    <div class="f"><span class="k">本名</span><span class="v">德奥弗拉斯特·冯·霍恩海姆</span></div>
+    <div class="f"><span class="k">冰盖规模</span><span class="v">瓦特纳冰川面积约8,000平方公里，为欧洲最大冰盖</span></div>
     
-    <div class="f"><span class="k">生卒</span><span class="v">约1493—1541，死于萨尔茨堡</span></div>
+    <div class="f"><span class="k">术语</span><span class="v">jökulhlaup，源自冰岛语，已被国际地理学作为通用术语</span></div>
     
-    <div class="f"><span class="k">焚书</span><span class="v">1527年，巴塞尔开讲仪式</span></div>
+    <div class="f"><span class="k">1996年事件</span><span class="v">冰下喷发引发格里姆冰下湖溃洪，环岛公路桥被冲断，无人员伤亡</span></div>
     
-    <div class="f"><span class="k">名字含义</span><span class="v">超越凯尔苏斯</span></div>
+    <div class="f"><span class="k">洪峰量级</span><span class="v">估计达每秒数千立方米，相当于把一个大湖在一两天内排空</span></div>
     
   </div>
   
@@ -620,25 +622,25 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>他当众烧掉权威医书，自己的名字却是比一位古罗马名医更大的意思</li><li>传说中这位药理学前驱炼出了人造人何蒙库鲁兹与贤者之石</li>
+    <li>大溃洪可以提前几天预警：冰下湖排水时，几百米厚的冰盖表面会明显下沉</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>生年有1493、1494两说</li><li>死因众说不一，无从确证</li><li>矿工职业病主要记在他后来的著作名下</li><li>首位用方言授课之说主要依据本材料</li><li>塔罗牌魔术师以其为原型的说法不可靠，塔罗早于其出生就已存在</li></ul>
+    <ul><li>冰盖最厚度常见说法在约950米至1千米之间，各来源有出入</li><li>1996年溃洪洪峰流量各家估计不一，本文只作每秒数千立方米的量级描述</li><li>瓦特纳冰川下冰下火山/火山系统的数量约数，随划分方式不同</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>医学史</span><span>炼金术</span><span>药理学</span><span>巴塞尔</span><span>文艺复兴</span></div>
+  <div class="tags"><span>冰湖溃洪</span><span>瓦特纳冰川</span><span>格里姆火山</span><span>冰岛</span><span>灾害地理</span></div>
   
 
   <footer>
-    <div class="r"><span>历史人物</span><span>10月13日</span></div>
+    <div class="r"><span>自然地理</span><span>10月14日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
-    <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
+    
   </footer>
 
 </div>
