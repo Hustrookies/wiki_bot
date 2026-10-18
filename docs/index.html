@@ -236,32 +236,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
-.t-china{
-  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:28px 20px 22px;
+/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
+.t-event{
+  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
+  --title-font:var(--sans);
 }
-.t-china .hero{background:var(--paper)}
-/* 朱印方章式类目标签 */
-.t-china .kicker{opacity:1}
-.t-china .kicker b{
-  display:inline-block;background:var(--accent);color:#fff;
-  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
+.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
+.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
+.t-event .hero{
+  background:
+    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
+    var(--brand);
 }
-.t-china .hero h1{
-  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
-}
-.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
-/* 古籍感：键右对齐贴向值 */
-.t-china .facts .f{gap:20px}
-.t-china .facts .k{flex:1;text-align:right;min-width:4em}
-.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
+/* 表格式 facts：键左值右、细分隔线、等宽数字 */
+.t-event .facts .k{min-width:5.5em}
 
 @media (prefers-color-scheme:dark){
-  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
-            --track:#332622; --hero-fg:#e8eaed; }
-  .t-china .kicker b{background:#8c2b20;color:#fff}
+  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -276,10 +267,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#faf7f0">
-<meta name="x-build" content="2026-10-18-aa62d077">
-<meta name="description" content="一战期间约14万华工被英法招往西线，其中约10万隶英军，挖战壕、运货；北洋政府1917年对德宣战后统筹，停战后这批华工在巴黎和会上没有位置。">
-<title>西线上的十四万华工 · 中国历史</title>
+<meta name="theme-color" content="#1f3352">
+<meta name="x-build" content="2026-10-19-8a54161b">
+<meta name="description" content="1871年琉球船民在台湾南部遇害，清朝一面称琉球为属国、一面称台番化外无主；日本外务省据此推出该地不属中国，1874年出兵台湾，是其明治维新后首次海外用兵，1879年吞并琉球。">
+<title>一句&quot;化外&quot;送出两个岛 · 世界历史</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -511,48 +502,39 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
-.t-china{
-  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:28px 20px 22px;
+/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
+.t-event{
+  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
+  --title-font:var(--sans);
 }
-.t-china .hero{background:var(--paper)}
-/* 朱印方章式类目标签 */
-.t-china .kicker{opacity:1}
-.t-china .kicker b{
-  display:inline-block;background:var(--accent);color:#fff;
-  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
+.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
+.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
+.t-event .hero{
+  background:
+    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
+    var(--brand);
 }
-.t-china .hero h1{
-  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
-}
-.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
-/* 古籍感：键右对齐贴向值 */
-.t-china .facts .f{gap:20px}
-.t-china .facts .k{flex:1;text-align:right;min-width:4em}
-.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
+/* 表格式 facts：键左值右、细分隔线、等宽数字 */
+.t-event .facts .k{min-width:5.5em}
 
 @media (prefers-color-scheme:dark){
-  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
-            --track:#332622; --hero-fg:#e8eaed; }
-  .t-china .kicker b{background:#8c2b20;color:#fff}
+  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
 }
 </style>
 </head>
-<body class="t-china">
+<body class="t-event">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>中国历史</b> · 10月18日</div>
-    <h1>西线上的十四万华工</h1>
-    <p class="hook">他们挖出了战胜国的战壕，却没有代表能坐进战胜国的会议桌。</p>
+    <div class="kicker"><b>世界历史</b> · 10月19日</div>
+    <h1>一句&quot;化外&quot;送出两个岛</h1>
+    <p class="hook">清朝说台湾生番&quot;化外无主&quot;，日本把这句话当成了出兵许可</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-10-18-main.webp" alt="泥泞土路上一队扛锹劳工背影，旁有帐篷木箱" width="1280" height="1280" loading="eager">
-    <figcaption>泥泞土路上一队扛锹劳工背影，旁有帐篷木箱</figcaption>
+    <img src="img/2026-10-19-main.webp" alt="海滩上几人涉水登岸，礁石间搁着一艘破损木船" width="1280" height="1280" loading="eager">
+    <figcaption>海滩上几人涉水登岸，礁石间搁着一艘破损木船</figcaption>
   </figure>
   
 
@@ -561,18 +543,21 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-
-  
-  <div class="ruler">
-    <div class="bar">
-      <span class="cap l"></span><span class="cap r"></span>
-      <span class="pin" style="left:31%"></span>
-    </div>
-    <div class="ends"><span>1912</span><span>1928</span></div>
+  <div class="tl">
     
-    <div class="mk"><i></i><b>1917</b>民国对德宣战</div>
+    <div class="nd"><div class="dot"></div><span class="y">1609</span><span class="lb">萨摩攻入琉球首里城</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1871</span><span class="lb">八瑶湾事件</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1872</span><span class="lb">井上馨上书请并琉球</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1874</span><span class="lb">日本出兵台湾</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1879</span><span class="lb">日本吞并琉球</span></div>
     
   </div>
+  
+
   
 
   
@@ -583,22 +568,22 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">1916年起，第一批华工经香港登船，踏上法国西线后方。他们的活计是挖战壕、修路、卸货，穿的是自带的棉帽厚褂。到战争结束，协约国手里有约14万到15万名这样的中国工人；停战后遣返拖了近两年，而死去的那些，被留在了欧洲的土里。</p>
+  <p class="lead">1871年，一艘琉球船遇风漂到台湾东南海岸触礁，上岸的生还者被台湾南部原住民杀害。清朝和日本随后各自表态，谁也没料到其中一句话会在三年后被东京接住，变成一份开战的凭据。</p>
 
   <div class="body">
     
-    <section><h2>英国关了门</h2><p>1915年6月，袁世凯的心腹梁士诒向英国提议输送华工，英国没有接受。他转而接洽法国——法国当时正缺人力，同年11月法国陆军部正式决定实施招募。1916年起，劳工开始跨海而来，经英属香港中转。到战争结束，协约国所雇华工共约14万至15万人，其中约10万隶属英军中国劳工旅，4万归法军指挥，另有数百名学生担任翻译。英军劳工多数来自其租借地威海卫。</p></section>
+    <section><h2>一句话两头用</h2><p>清朝承认琉球是自己的属国，但对台湾南部的原住民，说的是「化外无主」——生番不纳赋役，朝廷管不到那么细。日本外务省从这半句里推出的是另一头：你既说此地无主，那它就不属清朝辖境，住在无主之地的杀人者，文明之国可以代罪讨伐。1874年，日军在台湾南部登陆，这是明治维新以来日本第一次对海外用兵。</p></section>
     
-    <section><h2>以工换地位</h2><p>英法都缺兵员。西线消耗太快，两国需要把尽量多的士兵腾往前线，把搬运、修路、挖壕这类低技术体力活交给雇来的劳工——除中国外，还从印度、埃及、南非和各殖民地招了约44万劳工。中国这边也愿意提供：非战斗人员的伤亡风险和开销远比正规军队低，派劳工还能在战后谈判中赢得一定国际地位。1917年8月14日，北洋政府通过《对德宣战后案》，此后华工改由中华民国劳工部统筹。</p></section>
+    <section><h2>双重效忠</h2><p>那句话并非没来由。琉球王国自明朝起就是清朝的从属国，受册封、朝贡，次数在藩属国中居首；可1609年萨摩藩因财政困难发兵近三千攻入首里城，占了奄美群岛，幕府却下令保留琉球王室，好让它继续做「大清丝绸、日本白银」的转口生意。琉球这样两头站了一个多两百年。旧的朝贡体系容得下这种模糊，日本西化后的外交要求边界清楚，1872年7月井上馨上书并入琉球，终结这套「不合逻辑」的双重身份。</p></section>
     
-    <section><h2>然后呢</h2><p>这笔买卖没有按计划兑现。巴黎和会上，中华民国以协约国身份入座，却没有这十四万华工的位置。遣送工作1918年12月开始，直到1920年9月才彻底完成，比停战几乎晚了两年。病死、死于服务中的华工没能回国，被葬在西线战场沿线，如今在法国仍能看到他们的墓葬，长草有人修剪，读碑的人早已不在。</p></section>
+    <section><h2>说的人没料到的</h2><p>说话的人不知道自己那句话会被怎么用。清朝官员讲「化外」时仍在旧框架里办事，分清与不分清；可换成同时代的国际法语言，同样的字面意思成了「无主之地」。日本从1874年的出兵和随后的折冲里拿到了实惠与承认，1879年干脆废琉球并吞。八瑶湾那批船民死后，两国才各自认领：清朝当他们是自己藩属的人，日本则当他们为本国之人，说必须替他们雪冤。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-10-18-sub.webp" alt="敞开行李袋里的瓷碗筷子和布褂，旁边一只锡杯" width="1024" height="1024" loading="lazy">
-    <figcaption>敞开行李袋里的瓷碗筷子和布褂，旁边一只锡杯</figcaption>
+    <img src="img/2026-10-19-sub.webp" alt="茅屋旁砾地上的断木桨、竹篓和麻绳" width="1024" height="1024" loading="lazy">
+    <figcaption>茅屋旁砾地上的断木桨、竹篓和麻绳</figcaption>
   </figure>
   
 
@@ -607,15 +592,15 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">招募时间</span><span class="v">始于1916年</span></div>
+    <div class="f"><span class="k">事件时间</span><span class="v">1874年（清同治十三年，日本明治七年）</span></div>
     
-    <div class="f"><span class="k">总人数</span><span class="v">约14万至15万</span></div>
+    <div class="f"><span class="k">出兵借口</span><span class="v">1871年八瑶湾事件琉球船民遇害</span></div>
     
-    <div class="f"><span class="k">隶属英军</span><span class="v">约10万</span></div>
+    <div class="f"><span class="k">日方称呼</span><span class="v">台湾出兵、征台之役、台湾事件</span></div>
     
-    <div class="f"><span class="k">隶属法军</span><span class="v">约4万</span></div>
+    <div class="f"><span class="k">历史地位</span><span class="v">明治维新后日本首次对海外用兵</span></div>
     
-    <div class="f"><span class="k">遣送完成</span><span class="v">1920年9月</span></div>
+    <div class="f"><span class="k">琉球地位</span><span class="v">自明朝为清朝从属国，1609年起国政受萨摩藩控制</span></div>
     
   </div>
   
@@ -624,23 +609,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>华</li><li>工</li><li>计</li><li>划</li><li>1</li><li>9</li><li>1</li><li>5</li><li>年</li><li>先</li><li>向</li><li>英</li><li>国</li><li>提</li><li>出</li><li>，</li><li>被</li><li>拒</li><li>后</li><li>转</li><li>说</li><li>法</li><li>国</li><li>，</li><li>才</li><li>成</li><li>了</li><li>气</li><li>候</li><li>。</li>
+    <li>萨摩占领琉球后，德川幕府反而下令保留琉球王室，好让它继续对清朝做转口贸易</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>英军华工多募自威海卫，为通行说法，本材料未载</li><li>华工死亡与失踪的具体人数、墓葬的准确分布，材料未载</li><li>华工与巴黎和会的具体交涉情形（如有无请愿），细节存争议</li><li>《对德宣战案》原文作此名，正文引用时以材料为准</li></ul>
+    <ul><li>「化外无主」的具体措辞、说话人和场合，资料未载，依选题大纲表述</li><li>1874年外交折冲的具体条款资料未提供，正文只写日本获得实际承认这一大方向</li><li>八瑶湾遇害者被两国各自认领归属，属合理推断，未核对双方文书原文</li><li>1879年吞并琉球依选题大纲；所附资料截止于1872年井上馨上书</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>华工</span><span>第一次世界大战</span><span>中华民国</span><span>西线</span><span>社会史</span></div>
+  <div class="tags"><span>牡丹社事件</span><span>琉球</span><span>台湾</span><span>明治日本</span><span>晚清外交</span></div>
   
 
   <footer>
-    <div class="r"><span>中国历史</span><span>10月18日</span></div>
+    <div class="r"><span>世界历史</span><span>10月19日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
   </footer>
