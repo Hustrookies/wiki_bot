@@ -236,23 +236,31 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
-.t-event{
-  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
-  --title-font:var(--sans);
+/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
+.t-person{
+  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:30px 20px 24px;
 }
-.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
-.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
-.t-event .hero{
-  background:
-    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
-    var(--brand);
+.t-person .hero{
+  border-left:3px solid #6b4a2f; padding-left:18px;
+  margin-left:-16px; margin-right:-16px;
 }
-/* 表格式 facts：键左值右、细分隔线、等宽数字 */
-.t-event .facts .k{min-width:5.5em}
+.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
+.t-person .hero h1{
+  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
+}
+.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
+/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
+.t-person .facts .f{display:block;text-align:left}
+.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
+.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
+  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
+             --hero-fg:#e8eaed; }
+  .t-person .hero{border-left-color:#8a6640}
+  .t-person .kicker{color:#c39a63}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -267,10 +275,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#1f3352">
-<meta name="x-build" content="2026-10-19-8a54161b">
-<meta name="description" content="1871年琉球船民在台湾南部遇害，清朝一面称琉球为属国、一面称台番化外无主；日本外务省据此推出该地不属中国，1874年出兵台湾，是其明治维新后首次海外用兵，1879年吞并琉球。">
-<title>一句&quot;化外&quot;送出两个岛 · 世界历史</title>
+<meta name="theme-color" content="#f7f4ef">
+<meta name="x-build" content="2026-10-20-0673eff7">
+<meta name="description" content="南宋末泉州市舶司提举蒲寿庚，1276年拒纳南宋皇族、献泉州降元并杀害城中宋宗室；蒲氏子孙在元朝掌海贸近百年，明初被明太祖以叛逆罪编入贱籍，世代不得科举。">
+<title>一次降元，三百年贱籍 · 历史人物</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -502,39 +510,47 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
-.t-event{
-  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
-  --title-font:var(--sans);
+/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
+.t-person{
+  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:30px 20px 24px;
 }
-.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
-.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
-.t-event .hero{
-  background:
-    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
-    var(--brand);
+.t-person .hero{
+  border-left:3px solid #6b4a2f; padding-left:18px;
+  margin-left:-16px; margin-right:-16px;
 }
-/* 表格式 facts：键左值右、细分隔线、等宽数字 */
-.t-event .facts .k{min-width:5.5em}
+.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
+.t-person .hero h1{
+  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
+}
+.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
+/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
+.t-person .facts .f{display:block;text-align:left}
+.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
+.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
+  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
+             --hero-fg:#e8eaed; }
+  .t-person .hero{border-left-color:#8a6640}
+  .t-person .kicker{color:#c39a63}
 }
 </style>
 </head>
-<body class="t-event">
+<body class="t-person">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>世界历史</b> · 10月19日</div>
-    <h1>一句&quot;化外&quot;送出两个岛</h1>
-    <p class="hook">清朝说台湾生番&quot;化外无主&quot;，日本把这句话当成了出兵许可</p>
+    <div class="kicker"><b>历史人物</b> · 10月20日</div>
+    <h1>一次降元，三百年贱籍</h1>
+    <p class="hook">他开泉州城门降元，家族富贵近百年，明初一道追论把后人锁进贱籍</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-10-19-main.webp" alt="海滩上几人涉水登岸，礁石间搁着一艘破损木船" width="1280" height="1280" loading="eager">
-    <figcaption>海滩上几人涉水登岸，礁石间搁着一艘破损木船</figcaption>
+    <img src="img/2026-10-20-main.webp" alt="城门外骑兵迫近，港内桅杆成排，挑担人停在门口" width="1280" height="1280" loading="eager">
+    <figcaption>城门外骑兵迫近，港内桅杆成排，挑担人停在门口</figcaption>
   </figure>
   
 
@@ -543,21 +559,18 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-  <div class="tl">
+
+  
+  <div class="ruler">
+    <div class="bar">
+      <span class="cap l"></span><span class="cap r"></span>
+      <span class="pin" style="left:22%"></span>
+    </div>
+    <div class="ends"><span>1250</span><span>1368</span></div>
     
-    <div class="nd"><div class="dot"></div><span class="y">1609</span><span class="lb">萨摩攻入琉球首里城</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">1871</span><span class="lb">八瑶湾事件</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">1872</span><span class="lb">井上馨上书请并琉球</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">1874</span><span class="lb">日本出兵台湾</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">1879</span><span class="lb">日本吞并琉球</span></div>
+    <div class="mk"><i></i><b>1276</b>降元杀宋宗室</div>
     
   </div>
-  
-
   
 
   
@@ -568,22 +581,22 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">1871年，一艘琉球船遇风漂到台湾东南海岸触礁，上岸的生还者被台湾南部原住民杀害。清朝和日本随后各自表态，谁也没料到其中一句话会在三年后被东京接住，变成一份开战的凭据。</p>
+  <p class="lead">1276年十一月，南宋皇族逃到泉州城南郊的法石村，打算在这一带定都，还加封掌泉州市舶的蒲寿庚为闽广招抚使兼主市舶。蒲寿庚没有接纳这个小朝廷。不久，元军进入泉州，留在城中的宋宗室成员被杀。</p>
 
   <div class="body">
     
-    <section><h2>一句话两头用</h2><p>清朝承认琉球是自己的属国，但对台湾南部的原住民，说的是「化外无主」——生番不纳赋役，朝廷管不到那么细。日本外务省从这半句里推出的是另一头：你既说此地无主，那它就不属清朝辖境，住在无主之地的杀人者，文明之国可以代罪讨伐。1874年，日军在台湾南部登陆，这是明治维新以来日本第一次对海外用兵。</p></section>
+    <section><h2>他开了城门</h2><p>1276年初，元军已占临安，五岁的恭帝被俘；陈宜中、张世杰、陆秀夫、文天祥等人在福州拥立端宗，凑起一个小朝廷。蒲寿庚此时并非寻常商人：1274年海寇袭泉州，官兵无力抵御，他与兄蒲寿晟凭家族海上力量击退海寇，因功授福建安抚使兼沿海都置制使。泉州城里最硬的海上力量在他手里，城门开给谁，他说了算。他选择了元军。</p></section>
     
-    <section><h2>双重效忠</h2><p>那句话并非没来由。琉球王国自明朝起就是清朝的从属国，受册封、朝贡，次数在藩属国中居首；可1609年萨摩藩因财政困难发兵近三千攻入首里城，占了奄美群岛，幕府却下令保留琉球王室，好让它继续做「大清丝绸、日本白银」的转口生意。琉球这样两头站了一个多两百年。旧的朝贡体系容得下这种模糊，日本西化后的外交要求边界清楚，1872年7月井上馨上书并入琉球，终结这套「不合逻辑」的双重身份。</p></section>
+    <section><h2>海商的家底</h2><p>蒲氏远祖来自阿拉伯地区，在占城（今越南中南部）经营数代；祖父蒲多芬经商至广州，父亲蒲开宗举家徙居泉州后渚港旁的法石乡云麓村，运贩大宗香料。1204年蒲开宗任安溪县主簿，1233年朝廷为鼓励外贸授他承节郎。蒲家一度中落，到蒲寿庚接手才重新鼎盛。这个家族的家底不在田亩，在船队、航路和蕃商网络：不管谁入主中原，泉州的海上买卖都得跟着谁做。</p></section>
     
-    <section><h2>说的人没料到的</h2><p>说话的人不知道自己那句话会被怎么用。清朝官员讲「化外」时仍在旧框架里办事，分清与不分清；可换成同时代的国际法语言，同样的字面意思成了「无主之地」。日本从1874年的出兵和随后的折冲里拿到了实惠与承认，1879年干脆废琉球并吞。八瑶湾那批船民死后，两国才各自认领：清朝当他们是自己藩属的人，日本则当他们为本国之人，说必须替他们雪冤。</p></section>
+    <section><h2>九十年后</h2><p>开门换来的是近百年富贵：蒲氏子孙在元朝继续掌管海上贸易，显赫泉州。明初，朱元璋追论蒲寿庚叛逆之罪，将蒲氏后人编入贱籍，子孙世代不许参加科举。此时距1276年已九十多年，蒲寿庚本人早已不在，这笔账记在了儿孙头上。贱籍是世袭的低等身份，不入正册，应试也不行。到清雍正年间朝廷下诏削除贱籍，蒲家后人才有可能重新走进考场。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-10-19-sub.webp" alt="茅屋旁砾地上的断木桨、竹篓和麻绳" width="1024" height="1024" loading="lazy">
-    <figcaption>茅屋旁砾地上的断木桨、竹篓和麻绳</figcaption>
+    <img src="img/2026-10-20-sub.webp" alt="栈道麻包与散落香料，旁有缆绳长杆" width="1024" height="1024" loading="lazy">
+    <figcaption>栈道麻包与散落香料，旁有缆绳长杆</figcaption>
   </figure>
   
 
@@ -592,15 +605,13 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">事件时间</span><span class="v">1874年（清同治十三年，日本明治七年）</span></div>
+    <div class="f"><span class="k">身份</span><span class="v">南宋末泉州提举市舶</span></div>
     
-    <div class="f"><span class="k">出兵借口</span><span class="v">1871年八瑶湾事件琉球船民遇害</span></div>
+    <div class="f"><span class="k">关键抉择</span><span class="v">1276年献泉州降元，杀留城宋宗室</span></div>
     
-    <div class="f"><span class="k">日方称呼</span><span class="v">台湾出兵、征台之役、台湾事件</span></div>
+    <div class="f"><span class="k">回报</span><span class="v">子孙在元朝掌海贸，家族显赫近百年</span></div>
     
-    <div class="f"><span class="k">历史地位</span><span class="v">明治维新后日本首次对海外用兵</span></div>
-    
-    <div class="f"><span class="k">琉球地位</span><span class="v">自明朝为清朝从属国，1609年起国政受萨摩藩控制</span></div>
+    <div class="f"><span class="k">惩罚</span><span class="v">明初被编入贱籍，世代不得科举</span></div>
     
   </div>
   
@@ -609,23 +620,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>萨摩占领琉球后，德川幕府反而下令保留琉球王室，好让它继续对清朝做转口贸易</li>
+    <li>明初追论其罪时，距泉州降元已九十多年，受罚的是子孙，不是蒲寿庚本人</li><li>蒲家并非坐享祖荫的巨富：一度中落，靠蒲寿庚经营才重新鼎盛</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>「化外无主」的具体措辞、说话人和场合，资料未载，依选题大纲表述</li><li>1874年外交折冲的具体条款资料未提供，正文只写日本获得实际承认这一大方向</li><li>八瑶湾遇害者被两国各自认领归属，属合理推断，未核对双方文书原文</li><li>1879年吞并琉球依选题大纲；所附资料截止于1872年井上馨上书</li></ul>
+    <ul><li>蒲寿庚卒年及降元后的确切下场，史料记载不一</li><li>蒲氏编入贱籍的具体年份仅能定为明初洪武年间</li><li>贱籍之禁在明清两代对蒲家的实际执行程度无法确考</li><li>蒲氏汉姓来源于阿拉伯语一称，仅为一家之说，学界无定论</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>牡丹社事件</span><span>琉球</span><span>台湾</span><span>明治日本</span><span>晚清外交</span></div>
+  <div class="tags"><span>蒲寿庚</span><span>泉州</span><span>市舶司</span><span>宋元之际</span><span>贱籍</span></div>
   
 
   <footer>
-    <div class="r"><span>世界历史</span><span>10月19日</span></div>
+    <div class="r"><span>历史人物</span><span>10月20日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
   </footer>
