@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<!--
+  每日百科推送 · 单骨架模板
+  由 render.py 渲染。7 个类目共用这一份结构，观感差异全部来自 <body class="t-*"> + themes/t-*.css。
+
+  模板语法（沿用 football-bot/render.py 的正则引擎）：
+                                      标量替换，自动 HTML 转义
+    /* base.css —— 骨架样式，7 套皮肤共用。
+   皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
+   render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
+
+:root{
+  --card:#ffffff; --fg:#141414; --dim:#5b5a57; --muted:#8a8884; --line:#e4e3de;
+  --radius:14px;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+         "Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  /* 中文衬线：安卓微信大概率没有思源宋体，兜到系统 serif 会退化但不会崩 */
+  --serif:"Songti SC","Source Han Serif SC","Noto Serif CJK SC","Songti TC","SimSun",serif;
+  --title-font:var(--sans);
+  --hero-fg:#ffffff;
+  --hero-pad:26px 20px 22px;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --card:#181b20; --fg:#e8eaed; --dim:#9aa0a8; --muted:#7d838b; --line:#282c33; }
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--fg);
+  font:16px/1.75 var(--sans); -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px 40px}
+
+/* ---------- hero ---------- */
+.hero{
+  margin:0 -16px 20px; padding:var(--hero-pad);
+  background:var(--brand); color:var(--hero-fg);
+}
+.kicker{
+  font:600 11.5px/1 var(--sans); letter-spacing:.16em;
+  opacity:.75; margin-bottom:11px;
+}
+.hero h1{
+  margin:0; font:700 25px/1.34 var(--title-font);
+  letter-spacing:-.01em; text-wrap:balance;
+}
+.hero .hook{
+  margin:9px 0 0; font-size:14.5px; line-height:1.6; opacity:.8;
+}
+
+/* ---------- 导语 / 正文 ---------- */
+.lead{
+  margin:0 0 22px; font-size:17px; line-height:1.8; font-weight:500;
+  color:var(--fg);
+}
+.body section{margin:0 0 22px}
+.body h2{
+  margin:0 0 8px; font:600 13px/1 var(--sans);
+  letter-spacing:.1em; color:var(--accent);
+}
+.body p{margin:0; color:var(--fg)}
+
+/* ---------- 签名图形 1 · 时间轴（世界历史） ---------- */
+.tl{display:flex;position:relative;margin:0 0 24px;padding-top:3px}
+.tl::before{
+  content:"";position:absolute;top:7px;left:9%;right:9%;
+  height:2px;background:var(--line);
+}
+.tl .nd{flex:1;min-width:0;text-align:center;position:relative}
+.tl .dot{
+  width:10px;height:10px;border-radius:50%;background:var(--accent);
+  margin:0 auto 10px;box-shadow:0 0 0 2px var(--paper);  /* 2px 纸色环 */
+}
+.tl .y{
+  display:block;font:600 12.5px/1.3 var(--sans);
+  font-variant-numeric:tabular-nums;color:var(--fg);
+}
+.tl .lb{display:block;font-size:11.5px;color:var(--dim);margin-top:3px;line-height:1.45}
+
+/* ---------- 签名图形 2 · 跨度尺（历史人物 / 中国历史） ---------- */
+.ruler{margin:0 0 24px}
+.ruler .bar{position:relative;height:2px;background:var(--line);border-radius:1px;margin:0 1px}
+.ruler .cap{position:absolute;top:-5px;width:2px;height:12px;background:var(--line)}
+.ruler .cap.l{left:0}.ruler .cap.r{right:0}
+.ruler .pin{
+  position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 2px var(--paper);transform:translateX(-50%);
+}
+.ruler .ends{
+  display:flex;justify-content:space-between;margin-top:11px;
+  font:600 12.5px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--dim);
+}
+/* mark 标签走正常流，不绝对定位 —— 长标签或贴边时都不会溢出 */
+.ruler .mk{
+  display:flex;align-items:center;gap:7px;margin-top:9px;
+  font-size:12.5px;color:var(--dim);
+}
+.ruler .mk i{
+  width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;font-style:normal;
+}
+.ruler .mk b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---------- 签名图形 3 · 垂直分带（自然地理） ---------- */
+.layers{margin:0 0 20px;border-radius:var(--radius);overflow:hidden}
+.layers .ly{padding:13px 16px;color:#fff}
+.layers .ly+.ly{margin-top:2px}          /* 2px 纸色缝隙分隔，不描边 */
+.layers .ly .n{display:block;font:600 14.5px/1.4 var(--sans)}
+.layers .ly .note{display:block;font-size:12.5px;opacity:.82;margin-top:2px;line-height:1.5}
+/* 单色顺序型 4 步，白字全部 ≥4.2:1（见手册 §6 色值核算） */
+.layers .ly:nth-child(1){background:#1e3b31}
+.layers .ly:nth-child(2){background:#2c5446}
+.layers .ly:nth-child(3){background:#3b6d5b}
+.layers .ly:nth-child(4){background:#4b8571}
+@media (prefers-color-scheme:dark){
+  .layers .ly:nth-child(1){background:#16302a}
+  .layers .ly:nth-child(2){background:#22453b}
+  .layers .ly:nth-child(3){background:#2f5a4c}
+  .layers .ly:nth-child(4){background:#3d6f5e}
+}
+
+/* ---------- 签名图形 4 · 对照双栏（科学史） ---------- */
+.cmp{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  margin:0 0 22px;border-radius:var(--radius);overflow:hidden;
+}
+.cmp>div{background:var(--card);padding:15px 16px}
+.cmp .lbl{
+  display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;
+  margin-bottom:8px;color:var(--muted);
+}
+.cmp .now .lbl{color:var(--accent)}
+.cmp p{margin:0;font-size:14px;line-height:1.7}
+.cmp .then p{color:var(--dim)}
+
+/* ---------- 签名图形 5 · 得失权衡（生物） ---------- */
+.tro{margin:0 0 22px;background:var(--card);border-radius:var(--radius);overflow:hidden}
+.tro .r{display:flex;gap:13px;padding:14px 16px}
+.tro .r+.r{border-top:1px solid var(--line)}
+/* 文字标签本身就是识别通道，不靠颜色单独承载 */
+.tro .k{
+  flex:none;width:2.1em;font:600 13px/1.7 var(--sans);text-align:center;
+  border-radius:5px;height:1.7em;
+}
+.tro .gain .k{background:#e4efe4;color:#2c5530}
+.tro .cost .k{background:#f0edda;color:#5c5216}
+.tro p{margin:0;font-size:14.5px;line-height:1.7}
+@media (prefers-color-scheme:dark){
+  .tro .gain .k{background:#1e2c1f;color:#8fc194}
+  .tro .cost .k{background:#2b2818;color:#c4b84a}
+}
+
+/* ---------- 签名图形 6 · 具体物件（文明与文化） ---------- */
+.artifact{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);border-left:3px solid var(--accent);
+}
+.artifact .n{display:block;font:600 16px/1.5 var(--title-font);margin-bottom:4px}
+.artifact p{margin:0;font-size:14px;line-height:1.7;color:var(--dim)}
+
+/* ---------- 数据条（自然地理 meter） ---------- */
+.bars{margin:0 0 22px;background:var(--card);border-radius:var(--radius);padding:6px 16px 14px}
+.bars .b{padding:10px 0 0}
+.bars .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+.bars .k{font-size:13px;color:var(--dim)}
+.bars .v{font:600 14px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--fg)}
+.bars .track{height:6px;border-radius:3px;background:var(--track);overflow:hidden}
+.bars .fill{height:100%;border-radius:3px;background:var(--accent)}
+
+/* ---------- facts —— 同一份标记，7 套皮肤各自重写 ---------- */
+.facts{
+  margin:0 0 22px;background:var(--card);border-radius:var(--radius);
+  padding:4px 16px 14px;
+}
+.facts .f{
+  display:flex;justify-content:space-between;gap:16px;
+  padding:11px 0;border-top:1px solid var(--line);
+}
+.facts .f:first-child{border-top:0}
+.facts .k{flex:none;font-size:13px;color:var(--dim)}
+.facts .v{
+  text-align:right;font-size:14px;font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- 冷知识 / 引文 / 存疑 / 标签 ---------- */
+.trivia{margin:0 0 22px;padding:0;list-style:none}
+.trivia li{
+  position:relative;padding:0 0 0 22px;margin:0 0 9px;
+  font-size:14.5px;line-height:1.7;color:var(--fg);
+}
+.trivia li::before{
+  content:"";position:absolute;left:6px;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+.quote{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);
+}
+.quote p{margin:0;font:italic 15.5px/1.75 var(--serif)}
+.quote .from{display:block;margin-top:8px;font-size:12.5px;color:var(--muted);font-style:normal}
+.uncertain{
+  margin:0 0 22px;padding:13px 16px;border-radius:var(--radius);
+  background:var(--card);border:1px dashed var(--line);
+}
+.uncertain .lbl{
+  display:flex;align-items:center;gap:6px;
+  font:600 11.5px/1 var(--sans);letter-spacing:.1em;color:var(--muted);margin-bottom:8px;
+}
+.uncertain ul{margin:0;padding-left:18px}
+.uncertain li{font-size:13.5px;line-height:1.7;color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 22px}
+.tags span{
+  font-size:12px;padding:3px 10px;border-radius:20px;
+  background:var(--card);color:var(--dim);border:1px solid var(--line);
+}
+
+footer{
+  margin-top:26px;padding-top:15px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--muted);line-height:1.9;
+}
+footer a{color:var(--muted)}
+footer .r{display:flex;justify-content:space-between;gap:12px}
+
+/* ---- 配图。7 套皮肤共用版式，颜色全部走已有变量 ---- */
+.hero-img,.sub-img{margin:0 0 18px;padding:0}
+.sub-img{margin:22px 0 18px}
+.hero-img img,.sub-img img{
+  display:block;width:100%;height:auto;border-radius:10px;
+  background:var(--card);border:1px solid var(--line)}
+.hero-img figcaption,.sub-img figcaption{
+  margin-top:7px;font-size:12.5px;line-height:1.6;color:var(--muted)}
+/* 图片是 AI 生成的示意画面，不是史料。这行标注是必须的，不是装饰。 */
+.hero-img figcaption::after,.sub-img figcaption::after{
+  content:" · AI 生成示意图";opacity:.75}
+@media (prefers-reduced-motion:no-preference){
+  .hero-img img,.sub-img img{transition:opacity .2s}}
+
+/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
+.t-geo{
+  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+  --title-font:var(--sans);
+}
+.t-geo .kicker{letter-spacing:.2em}
+.t-geo .hero h1{letter-spacing:.01em}
+.t-geo .hero{
+  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
+}
+/* 分带紧贴 hero 下沿，读作同一个剖面 */
+.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
+
+@media (prefers-color-scheme:dark){
+  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
+  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
+}
+                                不转义白名单键（仅 CSS 注入用）
+      遍历，块内直接用该项字段
+            值为 null/""/[]/{}/0/false 时整块删除
+
+  签名图形与类目的对应（由哪个 motif 字段非空自动决定，不需要判类目）：
+    timeline  世界历史   span     历史人物/中国历史   layers+bars 自然地理
+    contrast  科学史     artifact 文明与文化         tradeoff    生物
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#33564a">
+<meta name="x-build" content="2026-10-21-a7a321a1">
+<meta name="description" content="中国黄土高原上厚50至200米的黄土层，是风从西北旱地搬运堆积的粉尘，颗粒西北粗、东南细，黄土与古土壤层层互叠，记录季风变化；疏松堆积一经流水侵蚀，成为黄河的重要沙源。">
+<title>黄土高原是吹来的 · 自然地理</title>
+<style>/* base.css —— 骨架样式，7 套皮肤共用。
+   皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
+   render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
+
+:root{
+  --card:#ffffff; --fg:#141414; --dim:#5b5a57; --muted:#8a8884; --line:#e4e3de;
+  --radius:14px;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+         "Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  /* 中文衬线：安卓微信大概率没有思源宋体，兜到系统 serif 会退化但不会崩 */
+  --serif:"Songti SC","Source Han Serif SC","Noto Serif CJK SC","Songti TC","SimSun",serif;
+  --title-font:var(--sans);
+  --hero-fg:#ffffff;
+  --hero-pad:26px 20px 22px;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --card:#181b20; --fg:#e8eaed; --dim:#9aa0a8; --muted:#7d838b; --line:#282c33; }
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--fg);
+  font:16px/1.75 var(--sans); -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px 40px}
+
+/* ---------- hero ---------- */
+.hero{
+  margin:0 -16px 20px; padding:var(--hero-pad);
+  background:var(--brand); color:var(--hero-fg);
+}
+.kicker{
+  font:600 11.5px/1 var(--sans); letter-spacing:.16em;
+  opacity:.75; margin-bottom:11px;
+}
+.hero h1{
+  margin:0; font:700 25px/1.34 var(--title-font);
+  letter-spacing:-.01em; text-wrap:balance;
+}
+.hero .hook{
+  margin:9px 0 0; font-size:14.5px; line-height:1.6; opacity:.8;
+}
+
+/* ---------- 导语 / 正文 ---------- */
+.lead{
+  margin:0 0 22px; font-size:17px; line-height:1.8; font-weight:500;
+  color:var(--fg);
+}
+.body section{margin:0 0 22px}
+.body h2{
+  margin:0 0 8px; font:600 13px/1 var(--sans);
+  letter-spacing:.1em; color:var(--accent);
+}
+.body p{margin:0; color:var(--fg)}
+
+/* ---------- 签名图形 1 · 时间轴（世界历史） ---------- */
+.tl{display:flex;position:relative;margin:0 0 24px;padding-top:3px}
+.tl::before{
+  content:"";position:absolute;top:7px;left:9%;right:9%;
+  height:2px;background:var(--line);
+}
+.tl .nd{flex:1;min-width:0;text-align:center;position:relative}
+.tl .dot{
+  width:10px;height:10px;border-radius:50%;background:var(--accent);
+  margin:0 auto 10px;box-shadow:0 0 0 2px var(--paper);  /* 2px 纸色环 */
+}
+.tl .y{
+  display:block;font:600 12.5px/1.3 var(--sans);
+  font-variant-numeric:tabular-nums;color:var(--fg);
+}
+.tl .lb{display:block;font-size:11.5px;color:var(--dim);margin-top:3px;line-height:1.45}
+
+/* ---------- 签名图形 2 · 跨度尺（历史人物 / 中国历史） ---------- */
+.ruler{margin:0 0 24px}
+.ruler .bar{position:relative;height:2px;background:var(--line);border-radius:1px;margin:0 1px}
+.ruler .cap{position:absolute;top:-5px;width:2px;height:12px;background:var(--line)}
+.ruler .cap.l{left:0}.ruler .cap.r{right:0}
+.ruler .pin{
+  position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 2px var(--paper);transform:translateX(-50%);
+}
+.ruler .ends{
+  display:flex;justify-content:space-between;margin-top:11px;
+  font:600 12.5px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--dim);
+}
+/* mark 标签走正常流，不绝对定位 —— 长标签或贴边时都不会溢出 */
+.ruler .mk{
+  display:flex;align-items:center;gap:7px;margin-top:9px;
+  font-size:12.5px;color:var(--dim);
+}
+.ruler .mk i{
+  width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;font-style:normal;
+}
+.ruler .mk b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---------- 签名图形 3 · 垂直分带（自然地理） ---------- */
+.layers{margin:0 0 20px;border-radius:var(--radius);overflow:hidden}
+.layers .ly{padding:13px 16px;color:#fff}
+.layers .ly+.ly{margin-top:2px}          /* 2px 纸色缝隙分隔，不描边 */
+.layers .ly .n{display:block;font:600 14.5px/1.4 var(--sans)}
+.layers .ly .note{display:block;font-size:12.5px;opacity:.82;margin-top:2px;line-height:1.5}
+/* 单色顺序型 4 步，白字全部 ≥4.2:1（见手册 §6 色值核算） */
+.layers .ly:nth-child(1){background:#1e3b31}
+.layers .ly:nth-child(2){background:#2c5446}
+.layers .ly:nth-child(3){background:#3b6d5b}
+.layers .ly:nth-child(4){background:#4b8571}
+@media (prefers-color-scheme:dark){
+  .layers .ly:nth-child(1){background:#16302a}
+  .layers .ly:nth-child(2){background:#22453b}
+  .layers .ly:nth-child(3){background:#2f5a4c}
+  .layers .ly:nth-child(4){background:#3d6f5e}
+}
+
+/* ---------- 签名图形 4 · 对照双栏（科学史） ---------- */
+.cmp{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  margin:0 0 22px;border-radius:var(--radius);overflow:hidden;
+}
+.cmp>div{background:var(--card);padding:15px 16px}
+.cmp .lbl{
+  display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;
+  margin-bottom:8px;color:var(--muted);
+}
+.cmp .now .lbl{color:var(--accent)}
+.cmp p{margin:0;font-size:14px;line-height:1.7}
+.cmp .then p{color:var(--dim)}
+
+/* ---------- 签名图形 5 · 得失权衡（生物） ---------- */
+.tro{margin:0 0 22px;background:var(--card);border-radius:var(--radius);overflow:hidden}
+.tro .r{display:flex;gap:13px;padding:14px 16px}
+.tro .r+.r{border-top:1px solid var(--line)}
+/* 文字标签本身就是识别通道，不靠颜色单独承载 */
+.tro .k{
+  flex:none;width:2.1em;font:600 13px/1.7 var(--sans);text-align:center;
+  border-radius:5px;height:1.7em;
+}
+.tro .gain .k{background:#e4efe4;color:#2c5530}
+.tro .cost .k{background:#f0edda;color:#5c5216}
+.tro p{margin:0;font-size:14.5px;line-height:1.7}
+@media (prefers-color-scheme:dark){
+  .tro .gain .k{background:#1e2c1f;color:#8fc194}
+  .tro .cost .k{background:#2b2818;color:#c4b84a}
+}
+
+/* ---------- 签名图形 6 · 具体物件（文明与文化） ---------- */
+.artifact{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);border-left:3px solid var(--accent);
+}
+.artifact .n{display:block;font:600 16px/1.5 var(--title-font);margin-bottom:4px}
+.artifact p{margin:0;font-size:14px;line-height:1.7;color:var(--dim)}
+
+/* ---------- 数据条（自然地理 meter） ---------- */
+.bars{margin:0 0 22px;background:var(--card);border-radius:var(--radius);padding:6px 16px 14px}
+.bars .b{padding:10px 0 0}
+.bars .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+.bars .k{font-size:13px;color:var(--dim)}
+.bars .v{font:600 14px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--fg)}
+.bars .track{height:6px;border-radius:3px;background:var(--track);overflow:hidden}
+.bars .fill{height:100%;border-radius:3px;background:var(--accent)}
+
+/* ---------- facts —— 同一份标记，7 套皮肤各自重写 ---------- */
+.facts{
+  margin:0 0 22px;background:var(--card);border-radius:var(--radius);
+  padding:4px 16px 14px;
+}
+.facts .f{
+  display:flex;justify-content:space-between;gap:16px;
+  padding:11px 0;border-top:1px solid var(--line);
+}
+.facts .f:first-child{border-top:0}
+.facts .k{flex:none;font-size:13px;color:var(--dim)}
+.facts .v{
+  text-align:right;font-size:14px;font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- 冷知识 / 引文 / 存疑 / 标签 ---------- */
+.trivia{margin:0 0 22px;padding:0;list-style:none}
+.trivia li{
+  position:relative;padding:0 0 0 22px;margin:0 0 9px;
+  font-size:14.5px;line-height:1.7;color:var(--fg);
+}
+.trivia li::before{
+  content:"";position:absolute;left:6px;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+.quote{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);
+}
+.quote p{margin:0;font:italic 15.5px/1.75 var(--serif)}
+.quote .from{display:block;margin-top:8px;font-size:12.5px;color:var(--muted);font-style:normal}
+.uncertain{
+  margin:0 0 22px;padding:13px 16px;border-radius:var(--radius);
+  background:var(--card);border:1px dashed var(--line);
+}
+.uncertain .lbl{
+  display:flex;align-items:center;gap:6px;
+  font:600 11.5px/1 var(--sans);letter-spacing:.1em;color:var(--muted);margin-bottom:8px;
+}
+.uncertain ul{margin:0;padding-left:18px}
+.uncertain li{font-size:13.5px;line-height:1.7;color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 22px}
+.tags span{
+  font-size:12px;padding:3px 10px;border-radius:20px;
+  background:var(--card);color:var(--dim);border:1px solid var(--line);
+}
+
+footer{
+  margin-top:26px;padding-top:15px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--muted);line-height:1.9;
+}
+footer a{color:var(--muted)}
+footer .r{display:flex;justify-content:space-between;gap:12px}
+
+/* ---- 配图。7 套皮肤共用版式，颜色全部走已有变量 ---- */
+.hero-img,.sub-img{margin:0 0 18px;padding:0}
+.sub-img{margin:22px 0 18px}
+.hero-img img,.sub-img img{
+  display:block;width:100%;height:auto;border-radius:10px;
+  background:var(--card);border:1px solid var(--line)}
+.hero-img figcaption,.sub-img figcaption{
+  margin-top:7px;font-size:12.5px;line-height:1.6;color:var(--muted)}
+/* 图片是 AI 生成的示意画面，不是史料。这行标注是必须的，不是装饰。 */
+.hero-img figcaption::after,.sub-img figcaption::after{
+  content:" · AI 生成示意图";opacity:.75}
+@media (prefers-reduced-motion:no-preference){
+  .hero-img img,.sub-img img{transition:opacity .2s}}
+
+/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
+.t-geo{
+  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+  --title-font:var(--sans);
+}
+.t-geo .kicker{letter-spacing:.2em}
+.t-geo .hero h1{letter-spacing:.01em}
+.t-geo .hero{
+  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
+}
+/* 分带紧贴 hero 下沿，读作同一个剖面 */
+.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
+
+@media (prefers-color-scheme:dark){
+  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
+  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
+}
+</style>
+</head>
+<body class="t-geo">
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker"><b>自然地理</b> · 10月21日</div>
+    <h1>黄土高原是吹来的</h1>
+    <p class="hook">厚几十米的黄土不是地里长出来的土，是风一粒粒吹来的粉尘</p>
+  </header>
+
+  
+  <figure class="hero-img">
+    <img src="../img/2026-10-21-main.webp" alt="沟壁露出垂直厚层黄土，远处沟壑伸向东南山脊" width="1280" height="1280" loading="eager">
+    <figcaption>沟壁露出垂直厚层黄土，远处沟壑伸向东南山脊</figcaption>
+  </figure>
+  
+
+  <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
+
+  
+  <div class="layers">
+    
+    <div class="ly"><span class="n">表层土</span><span class="note">最近一次暖期以来堆积，颜色偏暗</span></div>
+    
+    <div class="ly"><span class="n">黄土层</span><span class="note">冰期落尘，灰黄、疏松、多孔</span></div>
+    
+    <div class="ly"><span class="n">古土壤层</span><span class="note">暖期植被发育成壤，颜色更深</span></div>
+    
+    <div class="ly"><span class="n">底部红土</span><span class="note">比黄土更老的红黏土，成因有争议</span></div>
+    
+  </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- ===== 正文 ===== -->
+
+  <p class="lead">黄土高原上的黄土，一般厚50至80米，陇东、陕北能到150米，最厚处接近200米。它不是基岩上长出来的土，而是冬季风从西北旱地一粒一粒吹来的粉尘，积了上百万年。木头里能看出年轮，黄土里能看出风向。</p>
+
+  <div class="body">
+    
+    <section><h2>颗粒会指路</h2><p>地表上有一条可以走着量出的规律：从西北的甘肃中部、宁夏到东南的晋陕平原，同一层黄土的颗粒由粗变细，西北缘还能见到细砂混在里面。逆着风追，见到的是粗砂；顺着风走，见到的是细粉。这个粒径梯度直接指向搬运来的方向，也是判定黄土是风成而非水冲的关键证据。更早的时候，另一种解释占上风：黄土是湖相沉积，被水从周围山里冲出来、原地沉淀。</p></section>
+    
+    <section><h2>山把沙拦下</h2><p>它偏偏堆在这片边缘，是地形和季风刚好撞在一起。冰期时冬季风强，西北旱地裸露、提供物质；粉尘随风向东南行进，到高原南缘被秦岭和六盘山挡滞，风速一慢，颗粒纷纷落下。暖期时季风推进，雨水变多，刚堆好的松散黄土上长出植被，风化成一层颜色更深、质地更密的古土壤。冷期来沙，暖期长土，几十次这样的反复，叠成一块层状的蛋糕。</p></section>
+    
+    <section><h2>沙归黄河</h2><p>沙源是松的，黄土的克星是水。一旦地表植被被开垦和樵采破坏，雨水很快把堆积切成千沟万壑，黄土高原成了中国水土流失最严重的地区，黄河的泥沙里相当一部分就是从这些沟里撕下来的。同一套层位又是好档案，量一量黄土与古土壤的粒径和互叠，就能反推各时代季风的强弱与来向。掰开一块新鲜黄土在指间捻，砂粒有棱角、扎手。它们一路被风吹着走，从没被水流翻滚打磨过。</p></section>
+    
+  </div>
+
+  
+  <figure class="sub-img">
+    <img src="../img/2026-10-21-sub.webp" alt="土壁断面浅黄与棕褐层带水平相间，脚边有崩落土块" width="1024" height="1024" loading="lazy">
+    <figcaption>土壁断面浅黄与棕褐层带水平相间，脚边有崩落土块</figcaption>
+  </figure>
+  
+
+  
+  <div class="bars">
+    
+    <div class="b">
+      <div class="hd"><span class="k">普遍厚度</span><span class="v">50至80米</span></div>
+      <div class="track"><div class="fill" style="width:35%"></div></div>
+    </div>
+    
+    <div class="b">
+      <div class="hd"><span class="k">陇东陕北</span><span class="v">约150米</span></div>
+      <div class="track"><div class="fill" style="width:75%"></div></div>
+    </div>
+    
+    <div class="b">
+      <div class="hd"><span class="k">最厚处</span><span class="v">近200米</span></div>
+      <div class="track"><div class="fill" style="width:100%"></div></div>
+    </div>
+    
+  </div>
+  
+
+  
+  <div class="facts">
+    
+    <div class="f"><span class="k">范围</span><span class="v">太行山以西、乌鞘岭以东、秦岭以北、长城以南</span></div>
+    
+    <div class="f"><span class="k">面积</span><span class="v">约65万平方公里，约占中国面积7%</span></div>
+    
+    <div class="f"><span class="k">黄土厚度</span><span class="v">一般50至80米，陇东陕北约150米，最厚约200米</span></div>
+    
+    <div class="f"><span class="k">地势</span><span class="v">由西北向东南倾斜，海拔多在1000至2000米</span></div>
+    
+  </div>
+  
+
+  
+
+  
+  <ul class="trivia">
+    <li>黄</li><li>土</li><li>颗</li><li>粒</li><li>西</li><li>北</li><li>粗</li><li>、</li><li>东</li><li>南</li><li>细</li><li>，</li><li>像</li><li>冬</li><li>季</li><li>风</li><li>留</li><li>下</li><li>的</li><li>一</li><li>把</li><li>筛</li><li>子</li><li>，</li><li>量</li><li>量</li><li>粗</li><li>细</li><li>就</li><li>知</li><li>道</li><li>风</li><li>从</li><li>哪</li><li>吹</li><li>来</li><li>。</li>
+  </ul>
+  
+
+  
+  <div class="uncertain">
+    <span class="lbl">存疑 · 以下说法未经确证</span>
+    <ul><li>「黄土是湖相沉积」的旧说何时占主流、代表人物是谁，文中未具名</li><li>黄土沉积起点只写「上百万年」，具体年代学界意见不一</li><li>粉尘沙源涉及哪些荒漠与戈壁存在多源之争，文中只写「西北旱地」</li><li>「几十次」冷暖反复的次数是概数，具体期数各方案不同</li></ul>
+  </div>
+  
+
+  
+  <div class="tags"><span>风成地貌</span><span>古气候</span><span>季风</span><span>地层</span><span>黄河</span></div>
+  
+
+  <footer>
+    <div class="r"><span>自然地理</span><span>10月21日</span></div>
+    <div class="r"><span>往期</span><span><a href="../archive.html">归档索引</a></span></div>
+    <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
+  </footer>
+
+</div>
+</body>
+</html>
