@@ -236,28 +236,44 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
-.t-science{
-  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
-  --title-font:var(--sans);
+/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
+.t-culture{
+  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:0 0 0 0;
 }
-.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
-/* 网格必须在 brand 之前声明才叠在上层 */
-.t-science .hero{
+.t-culture .hero{text-align:center;background:var(--paper)}
+/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
+.t-culture .hero::before,
+.t-culture .hero::after{
+  content:"";display:block;height:13px;
   background:
-    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    var(--brand);
+    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
+    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
+  opacity:.55;
 }
-.t-science .facts .k{min-width:5.5em}
-.t-science .facts .v,
-.t-science .tl .y{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:13px;
+.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
+.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
+.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
+/* 2×2 卡片网格 */
+.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.t-culture .facts .f{
+  display:block;background:var(--card);border-radius:10px;
+  padding:13px 14px;border-top:0;
 }
+.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
+.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
+  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
+              --hero-fg:#e8eaed; }
+  .t-culture .hero::before,.t-culture .hero::after{
+    background:
+      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
+      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
+    opacity:.4;
+  }
+  .t-culture .hero .kicker{color:#9aa4e8}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -272,10 +288,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#1b4a7a">
-<meta name="x-build" content="2026-10-22-1f5f5aca">
-<meta name="description" content="1281年元朝颁行郭守敬、王恂等创制的授时历，经全国实测取回归年365.2425日，与1582年格里高利历相同且早三百年；它还废除上元积年，以颁历年为历元，数据全凭实测。">
-<title>早三百年定出的年长 · 科学与技术史</title>
+<meta name="theme-color" content="#f5f4f9">
+<meta name="x-build" content="2026-10-23-5dfcda9c">
+<meta name="description" content="秦汉公文以绳束简牍，绳结处敷一团泥、按上官印，收信人验泥之完缺即知是否被拆，泥上印文呈凹陷的白文。纸与绳废弃后，这种为防伪而生的凹文被后世篆刻家当作古朴样式刻意仿作。">
+<title>封泥：一团泥的防伪术 · 文明与文化</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -507,44 +523,60 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
-.t-science{
-  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
-  --title-font:var(--sans);
+/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
+.t-culture{
+  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:0 0 0 0;
 }
-.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
-/* 网格必须在 brand 之前声明才叠在上层 */
-.t-science .hero{
+.t-culture .hero{text-align:center;background:var(--paper)}
+/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
+.t-culture .hero::before,
+.t-culture .hero::after{
+  content:"";display:block;height:13px;
   background:
-    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    var(--brand);
+    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
+    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
+  opacity:.55;
 }
-.t-science .facts .k{min-width:5.5em}
-.t-science .facts .v,
-.t-science .tl .y{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:13px;
+.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
+.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
+.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
+/* 2×2 卡片网格 */
+.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.t-culture .facts .f{
+  display:block;background:var(--card);border-radius:10px;
+  padding:13px 14px;border-top:0;
 }
+.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
+.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
+  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
+              --hero-fg:#e8eaed; }
+  .t-culture .hero::before,.t-culture .hero::after{
+    background:
+      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
+      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
+    opacity:.4;
+  }
+  .t-culture .hero .kicker{color:#9aa4e8}
 }
 </style>
 </head>
-<body class="t-science">
+<body class="t-culture">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>科学与技术史</b> · 10月22日</div>
-    <h1>早三百年定出的年长</h1>
-    <p class="hook">元代定出与格里高利历相同的年长，早了三百年</p>
+    <div class="kicker"><b>文明与文化</b> · 10月23日</div>
+    <h1>封泥：一团泥的防伪术</h1>
+    <p class="hook">纸和绳淘汰后，它凹进去的字反倒成了篆刻摹古的样式</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-10-22-main.webp" alt="高台上砖石台观，横梁影落入石面，黄昏里两个小人影" width="1280" height="1280" loading="eager">
-    <figcaption>高台上砖石台观，横梁影落入石面，黄昏里两个小人影</figcaption>
+    <img src="img/2026-10-23-main.webp" alt="案边背身文吏，手指把湿泥按上竹简绳结，旁置铜印与检木" width="1280" height="1280" loading="eager">
+    <figcaption>案边背身文吏，手指把湿泥按上竹简绳结，旁置铜印与检木</figcaption>
   </figure>
   
 
@@ -557,34 +589,33 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-  <div class="cmp">
-    <div class="then"><span class="lbl">当时认为</span><p>长久以来，人们相信回归年的长度一经定下便万年不变，历元的起点该回推到天地开辟之时；只要数字不动，天就不会动。</p></div>
-    <div class="now"><span class="lbl">实际是</span><p>实测表明回归年古长今短。授时历干脆抛弃神话历元，以颁行当年为起点，所有数据全凭当时的实际观测来确定。</p></div>
+
+  
+
+  
+  <div class="artifact">
+    <span class="n">封泥</span><p>秦汉公文捆绳后，在绳结处敷泥钤印，泥破即知私拆，是纸本信封出现前的验封手段。</p>
   </div>
-  
-
-  
-
   
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">从今西伯利亚的叶尼塞河流域到海南岛，27个观测点纵贯元朝南北。这不是一次科考，而是一项国家行动：为历法重写数字。1281年颁行的《授时历》取回归年365.2425日，与1582年欧洲推行的格里高利历取值相同。</p>
+  <p class="lead">一份公文从官署发往属地，竹简捆紧、绳结系死，书佐在结上敷一团湿泥，趁湿用官印按出几个下陷的字。收件人不必拆封，先看这团泥——裂了、缺了、被掰开又合过，都算拆过。这是秦汉公文的标准手续。</p>
 
   <div class="body">
     
-    <section><h2>先造仪器</h2><p>改历之前，郭守敬先造仪器。他对旧历的批评是：历法之数沿用古法数百年，从未拿眼前的天象核对过。他改进并新制了一批天文仪器，把测影的表做得更高，让影长的读数细到不能再细。朝廷随后派14名官员到27个测点观测记录，历时两年收齐从北到南的数据，《授时历》在1281年颁行。</p></section>
+    <section><h2>一团泥的手续</h2><p>从战国到魏晋，公私文书写在竹木简上：捆成一束，绳系紧，再在绳结上附一团胶泥，趁湿按下印章。泥干后与绳结成一体，要读简必须解绳，解绳必须破泥。收信人验两样东西——泥是否完整，印痕是否同发件人的印对得上，两样都过了才开封。这套手续材料极贱，一团泥即弃之物，却撑起了秦汉400余年的文书行政。</p></section>
     
-    <section><h2>为什么重来</h2><p>数字为什么要重测？古人并不觉得要。长久以来，官方历法认为回归年的长度一成不变，历元还要回溯到开辟天地的“上元”——有这样渺远的起点，历法才配得上王朝的正统叙事。郭守敬、王恂们绕开了这条路：承认回归年古长今短，索性直取颁历之年做历元，数据全凭实测；计算上再用弧矢割圆术换算黄道与赤道坐标，用招差术推算日月的不均匀运行。</p></section>
+    <section><h2>字为什么凹</h2><p>难点在印面。要让软泥留下利落的痕，印面得是凸字；一按到底，泥上的字反倒凹下去，行话叫白文。当时的验封不靠油墨对照，靠的是立体压痕——现按的泥，字口深浅、边廓崩裂都可辨，整枚伪造难度高。大束文书还会覆一块刻槽的检木，封泥横跨木槽与绳结，动哪一处都躲不过留痕。所以凹文不是审美选择，是软泥加凸印的工艺副产品。</p></section>
     
-    <section><h2>行用402年</h2><p>《授时历》从1281年颁行，寿命远超元朝本身：明朝的《大统历》整套沿用它的天文数据和推步方法，只删去了斗分差的计算，终明之世未改，合起来算，这套数字行了约402年。1582年颁行的格里高利历取了同样的365.2425日，比它晚了301年。按现代天文尺度，这个年长与地球真正的公转周期只差26秒。</p></section>
+    <section><h2>凹文成时髦</h2><p>纸普及后，简牍与绳捆一起退场，封泥失去用处。有意思的是，泥胎不怕火烧：官署失火，木简成灰，封泥反倒像陶块一样硬存了下来，后世从灰坑里一铲铲挖出来。清代篆刻风气大盛，刻印的人从这些凹字、崩边、干裂的泥痕里看出「古朴」，刻意把印文刻成下陷的白文，还追求残缺感。一门防伪技术的副产品，两千年后成了审美标准。今天篆刻课上仍会让初学者摹写封泥的崩裂字口。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-10-22-sub.webp" alt="铜制测影仪器与水器并置案上，基座一角覆布" width="1024" height="1024" loading="lazy">
-    <figcaption>铜制测影仪器与水器并置案上，基座一角覆布</figcaption>
+    <img src="img/2026-10-23-sub.webp" alt="开裂泥团上凹出方形印痕，边缘留着绳子压纹" width="1024" height="1024" loading="lazy">
+    <figcaption>开裂泥团上凹出方形印痕，边缘留着绳子压纹</figcaption>
   </figure>
   
 
@@ -593,17 +624,13 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">颁行</span><span class="v">1281年（元至元十八年）</span></div>
+    <div class="f"><span class="k">功能</span><span class="v">封缄简牍绳结，泥破即知被拆</span></div>
     
-    <div class="f"><span class="k">回归年</span><span class="v">365.2425日，与现代值差26秒</span></div>
+    <div class="f"><span class="k">流行时代</span><span class="v">战国至魏晋通行，秦汉为盛</span></div>
     
-    <div class="f"><span class="k">朔望月</span><span class="v">29.530593日</span></div>
+    <div class="f"><span class="k">形制</span><span class="v">绳结处敷泥按印，印文凹成白文</span></div>
     
-    <div class="f"><span class="k">观测网络</span><span class="v">27个测点，北至叶尼塞河流域，南至海南岛</span></div>
-    
-    <div class="f"><span class="k">创制人</span><span class="v">郭守敬、王恂、许衡等</span></div>
-    
-    <div class="f"><span class="k">行用时长</span><span class="v">含明代大统历，约402年</span></div>
+    <div class="f"><span class="k">后世影响</span><span class="v">凹文崩边成篆刻追摹的古朴样式</span></div>
     
   </div>
   
@@ -612,25 +639,25 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>365.2425日这个年长，南宋《统天历》已经采用；授时历的功劳是拿全国实测把它坐实。</li><li>授时历的历元不是神话里的开天辟地之年，而是颁行当年——至元十八年本身。</li><li>明代大统历照抄了授时历的数据，却删掉回归年变短的修正，误差在三百年里悄悄累积。</li>
+    <li>很多封泥是靠失火保存下来的——木简烧成灰，泥团被烤硬反而留存至今。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>“北至叶尼塞河流域”等测点是否实际派人测候，学界有争议，锚文如此表述。</li><li>回归年“古长今短”是授时历一系的说法，其与现代天文解释的对应未在此展开。</li><li>郭守敬具体改制的仪器清单锚文未载，正文只做了粗粒度表述。</li><li>登封告成现存观星台台体是否全为当时原构，另有不同看法。</li></ul>
+    <ul><li>「封泥多因官署失火被烧硬而保存」是通行推测，出土堆积情况复杂，并无定论。</li><li>秦汉官印印面以凸字为主、故封泥呈凹文，是印学界通说，实物亦有例外。</li><li>封泥退出日常文书随纸张普及渐次发生，具体淘汰年代学界无统一说法。</li><li>「清代篆刻刻意仿封泥白文」主要出自流派自述与风格比对，实际摹仿程度难以量化。</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>元朝</span><span>历法</span><span>天文学</span><span>观星台</span><span>格里高利历</span></div>
+  <div class="tags"><span>文书制度</span><span>秦汉</span><span>印章</span><span>防伪</span><span>篆刻</span></div>
   
 
   <footer>
-    <div class="r"><span>科学与技术史</span><span>10月22日</span></div>
+    <div class="r"><span>文明与文化</span><span>10月23日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
-    <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
+    
   </footer>
 
 </div>
