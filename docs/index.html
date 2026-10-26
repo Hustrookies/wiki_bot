@@ -236,23 +236,31 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
-.t-event{
-  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
-  --title-font:var(--sans);
+/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
+.t-person{
+  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:30px 20px 24px;
 }
-.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
-.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
-.t-event .hero{
-  background:
-    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
-    var(--brand);
+.t-person .hero{
+  border-left:3px solid #6b4a2f; padding-left:18px;
+  margin-left:-16px; margin-right:-16px;
 }
-/* 表格式 facts：键左值右、细分隔线、等宽数字 */
-.t-event .facts .k{min-width:5.5em}
+.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
+.t-person .hero h1{
+  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
+}
+.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
+/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
+.t-person .facts .f{display:block;text-align:left}
+.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
+.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
+  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
+             --hero-fg:#e8eaed; }
+  .t-person .hero{border-left-color:#8a6640}
+  .t-person .kicker{color:#c39a63}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -267,10 +275,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#1f3352">
-<meta name="x-build" content="2026-10-26-c0903dc9">
-<meta name="description" content="智慧宫是阿巴斯时期巴格达的翻译机构，马蒙治下系统把希腊、波斯、印度典籍译成阿拉伯语；不少希腊原本后来失传，今天靠阿拉伯文回译才知其内容。">
-<title>智慧宫：巴格达的翻译工程 · 世界历史</title>
+<meta name="theme-color" content="#f7f4ef">
+<meta name="x-build" content="2026-10-27-2379d279">
+<meta name="description" content="印度-希腊国王米南德一世约前160至前130年在位，建都撒加拉；佛教典籍称他弥兰陀王，与那先比丘的问答成《弥兰陀王问经》，而其王国疆域全凭出土钱币倒推。">
+<title>问佛的希腊国王 · 历史人物</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -502,39 +510,47 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
-.t-event{
-  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
-  --title-font:var(--sans);
+/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
+.t-person{
+  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:30px 20px 24px;
 }
-.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
-.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
-.t-event .hero{
-  background:
-    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
-    var(--brand);
+.t-person .hero{
+  border-left:3px solid #6b4a2f; padding-left:18px;
+  margin-left:-16px; margin-right:-16px;
 }
-/* 表格式 facts：键左值右、细分隔线、等宽数字 */
-.t-event .facts .k{min-width:5.5em}
+.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
+.t-person .hero h1{
+  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
+}
+.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
+/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
+.t-person .facts .f{display:block;text-align:left}
+.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
+.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
+  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
+             --hero-fg:#e8eaed; }
+  .t-person .hero{border-left-color:#8a6640}
+  .t-person .kicker{color:#c39a63}
 }
 </style>
 </head>
-<body class="t-event">
+<body class="t-person">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>世界历史</b> · 10月26日</div>
-    <h1>智慧宫：巴格达的翻译工程</h1>
-    <p class="hook">不少希腊原本已失传，后世靠阿拉伯文回译找回内容</p>
+    <div class="kicker"><b>历史人物</b> · 10月27日</div>
+    <h1>问佛的希腊国王</h1>
+    <p class="hook">希腊史书只给了他几行，佛家却为他写了一整部经</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-10-26-main.webp" alt="穹顶大厅里席地而坐的学者与成堆书卷" width="1280" height="1280" loading="eager">
-    <figcaption>穹顶大厅里席地而坐的学者与成堆书卷</figcaption>
+    <img src="img/2026-10-27-main.webp" alt="殿堂中披斗篷者与僧人围坐，侍卫侧立灯下" width="1280" height="1280" loading="eager">
+    <figcaption>殿堂中披斗篷者与僧人围坐，侍卫侧立灯下</figcaption>
   </figure>
   
 
@@ -543,19 +559,18 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-  <div class="tl">
+
+  
+  <div class="ruler">
+    <div class="bar">
+      <span class="cap l"></span><span class="cap r"></span>
+      <span class="pin" style="left:67%"></span>
+    </div>
+    <div class="ends"><span>约前160</span><span>约前130</span></div>
     
-    <div class="nd"><div class="dot"></div><span class="y">750</span><span class="lb">阿巴斯取代倭马亚</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">约800</span><span class="lb">哈伦·拉希德创立</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">813</span><span class="lb">马蒙即位，鼎盛</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">1258</span><span class="lb">蒙古军破巴格达</span></div>
+    <div class="mk"><i></i><b>约前140</b>撒加拉问法</div>
     
   </div>
-  
-
   
 
   
@@ -566,22 +581,22 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">9世纪时的巴格达人口超过百万，是当时世上最富庶、规模最大的城市。城中的智慧宫由哈里发哈伦·拉希德创立，又被其子马蒙扩建成图书馆与翻译机构，学者在这里把希腊典籍成系统地译成阿拉伯语。</p>
+  <p class="lead">「那先，你说的『那先』，是头发？是齿？还是皮肉筋骨之外的哪一样？」这样设问的国王，是公元前2世纪旁遮普的希腊王米南德一世。希腊化世界的史书只给了他零星几笔，佛教却为他写下整整一部经。</p>
 
   <div class="body">
     
-    <section><h2>译什么</h2><p>他们译的是希腊与印度的典籍：毕达哥拉斯、柏拉图、亚里士多德、欧几里得、希波克拉底、盖伦，还有印度医家苏胥如塔、沙落迦，天文学家阿耶波多、婆罗摩笈多。研究涵盖数学、天文学、医学、化学、动物学与地理。马蒙在813至833年在位期间，还设立了一所天文台；被尊为「代数学之父」的花拉子米也在此工作。</p></section>
+    <section><h2>钱币上的王国</h2><p>亚历山大东征之后，留在兴都库什山以南的希腊人陆续建起『印度-希腊』诸小邦。前2世纪中后期，米南德一世在旁遮普坐大，建都撒加拉；斯特拉波称他降服的部族比其余希腊诸王都多，普鲁塔克也说他对印度『施政公正』。可希腊那边没给他留下史书，王国的大小、边界与年代，今天全靠出土钱币倒推——他的双语钱币，是印度-希腊诸王里存世最多的一种。</p></section>
     
-    <section><h2>为什么译</h2><p>「智慧宫」本是对萨珊波斯图书馆称谓的直译，阿巴斯人照萨珊皇家图书馆的样子建起这套机构，最初的活儿是把波斯文书译成阿拉伯文，再保存译本。动机在当时很实际：修历法、行医、丈量土地都需要能用的文本；从拜占庭来的受迫害学者也带书东来。马蒙倾国力去译这些死外语的老书时，没人料到希腊原本会更早散佚，这些阿拉伯文反而成了后世与古典地中海世界的主要接线。</p></section>
+    <section><h2>佛典里的弥兰陀</h2><p>佛教传统里他叫『弥兰陀』。《弥兰陀王问经》记他问道于高僧那先比丘，那先答『我是谁』用的是车喻：辕、轴、轮、箱体合起来才叫车，拆开哪一件都不是车，『人』亦不过是五蕴的假名。经中还说王闻法后让位与子，入山出家，证阿罗汉。但这部经并非他生前的实录：学界多认为它最后编定于他死后数百年——是佛门把一个传说中礼佛的希腊王，写成了最会提问的信徒。</p></section>
     
-    <section><h2>后来怎样</h2><p>这层翻译后来成了希腊学术的续命线：不少希腊原本在几个世纪里失传，一部分文本只能经由阿拉伯文回译才重见天日，12世纪西班牙的译者干的正是这件反向工作。智慧宫的终局通常系在1258年，蒙古军队攻下巴格达。后世记载说城里沉入底格里斯河的书把河水染黑，这条细节存疑，但城破之后，巴格达的译者确实不再。</p></section>
+    <section><h2>身后与余波</h2><p>普鲁塔克记载，米南德死在军中，好些城市争相迎请他的遗骨分藏——那情形，很像佛家讲的八王分舍利。身后一个多世纪里，印度-希腊诸邦相继被南下的游牧部族吞并，希腊王统在中亚以南断了线，名字几乎无人记得。倒是他的钱币式样在旁遮普被继续仿铸了几十年，市面付受之间，像还在使用一个不曾死去的国王。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-10-26-sub.webp" alt="木座上的铜制浑仪与合拢的书册" width="1024" height="1024" loading="lazy">
-    <figcaption>木座上的铜制浑仪与合拢的书册</figcaption>
+    <img src="img/2026-10-27-sub.webp" alt="沙地上拆开的双轮木车，辕轴轮板分置" width="1024" height="1024" loading="lazy">
+    <figcaption>沙地上拆开的双轮木车，辕轴轮板分置</figcaption>
   </figure>
   
 
@@ -590,15 +605,15 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">所在地</span><span class="v">阿拔斯王朝巴格达</span></div>
+    <div class="f"><span class="k">在位</span><span class="v">约前160—前130年</span></div>
     
-    <div class="f"><span class="k">创建</span><span class="v">哈里发哈伦·拉希德</span></div>
+    <div class="f"><span class="k">都城</span><span class="v">撒加拉（今锡亚尔科特）</span></div>
     
-    <div class="f"><span class="k">鼎盛</span><span class="v">马蒙在位，813–833年</span></div>
+    <div class="f"><span class="k">佛典名</span><span class="v">弥兰陀王</span></div>
     
-    <div class="f"><span class="k">存续</span><span class="v">9世纪至13世纪</span></div>
+    <div class="f"><span class="k">问答对象</span><span class="v">那先比丘</span></div>
     
-    <div class="f"><span class="k">代表学者</span><span class="v">花拉子米，「代数学之父」</span></div>
+    <div class="f"><span class="k">传世文献</span><span class="v">《弥兰陀王问经》</span></div>
     
   </div>
   
@@ -607,25 +622,25 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>英文「算法」一词来自花拉子米名字的拉丁转写</li><li>有后世说法称译者按译书重量领黄金报酬，真实性存疑</li>
+    <li>他</li><li>的</li><li>都</li><li>城</li><li>撒</li><li>加</li><li>拉</li><li>，</li><li>一</li><li>般</li><li>认</li><li>为</li><li>即</li><li>今</li><li>巴</li><li>基</li><li>斯</li><li>坦</li><li>锡</li><li>亚</li><li>尔</li><li>科</li><li>特</li><li>—</li><li>—</li><li>如</li><li>今</li><li>以</li><li>缝</li><li>制</li><li>足</li><li>球</li><li>闻</li><li>名</li><li>。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>希腊典籍经由阿拉伯文回译找回的比例难以精确统计，学界估计不一</li><li>1258年是蒙古军攻陷巴格达的通行说法，学界以此系智慧宫终结也属后世定论</li><li>书籍染黑底格里斯河的说法出自事后追记，可信度存疑</li></ul>
+    <ul><li>在位与卒年通行推定约前160—前130年，诸家相差数十年</li><li>撒加拉即今锡亚尔科特为通行比定，非铁证</li><li>与那先比丘问答是否实有其事无定论，该经多被视为身后追记</li><li>斯特拉波、普鲁塔克之说皆出后人转述，难以核验</li><li>『死在军中、诸城争其遗骨』的细节仅见于普鲁塔克</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>伊斯兰黄金时代</span><span>翻译运动</span><span>巴格达</span><span>阿巴斯王朝</span><span>世界历史</span></div>
+  <div class="tags"><span>印度-希腊王国</span><span>佛教</span><span>希腊化时代</span><span>钱币</span><span>旁遮普</span></div>
   
 
   <footer>
-    <div class="r"><span>世界历史</span><span>10月26日</span></div>
+    <div class="r"><span>历史人物</span><span>10月27日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
-    <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
+    
   </footer>
 
 </div>
