@@ -236,31 +236,22 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
-.t-person{
-  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:30px 20px 24px;
+/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
+.t-geo{
+  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+  --title-font:var(--sans);
 }
-.t-person .hero{
-  border-left:3px solid #6b4a2f; padding-left:18px;
-  margin-left:-16px; margin-right:-16px;
+.t-geo .kicker{letter-spacing:.2em}
+.t-geo .hero h1{letter-spacing:.01em}
+.t-geo .hero{
+  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
 }
-.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
-.t-person .hero h1{
-  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
-}
-.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
-/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
-.t-person .facts .f{display:block;text-align:left}
-.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
-.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
+/* 分带紧贴 hero 下沿，读作同一个剖面 */
+.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
 
 @media (prefers-color-scheme:dark){
-  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
-             --hero-fg:#e8eaed; }
-  .t-person .hero{border-left-color:#8a6640}
-  .t-person .kicker{color:#c39a63}
+  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
+  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -275,10 +266,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#f7f4ef">
-<meta name="x-build" content="2026-10-27-2379d279">
-<meta name="description" content="印度-希腊国王米南德一世约前160至前130年在位，建都撒加拉；佛教典籍称他弥兰陀王，与那先比丘的问答成《弥兰陀王问经》，而其王国疆域全凭出土钱币倒推。">
-<title>问佛的希腊国王 · 历史人物</title>
+<meta name="theme-color" content="#33564a">
+<meta name="x-build" content="2026-10-28-34ac18d5">
+<meta name="description" content="扎格罗斯山脉由阿拉伯板块与欧亚板块碰撞形成，属褶皱冲断带。其下伏一层约5亿年前古海蒸发沉积的盐，塑性流动，既作岩席滑脱面形成褶皱，又拱成盐穹封存石油。">
+<title>会流动的山 · 自然地理</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -510,67 +501,59 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
-.t-person{
-  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:30px 20px 24px;
+/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
+.t-geo{
+  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+  --title-font:var(--sans);
 }
-.t-person .hero{
-  border-left:3px solid #6b4a2f; padding-left:18px;
-  margin-left:-16px; margin-right:-16px;
+.t-geo .kicker{letter-spacing:.2em}
+.t-geo .hero h1{letter-spacing:.01em}
+.t-geo .hero{
+  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
 }
-.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
-.t-person .hero h1{
-  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
-}
-.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
-/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
-.t-person .facts .f{display:block;text-align:left}
-.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
-.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
+/* 分带紧贴 hero 下沿，读作同一个剖面 */
+.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
 
 @media (prefers-color-scheme:dark){
-  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
-             --hero-fg:#e8eaed; }
-  .t-person .hero{border-left-color:#8a6640}
-  .t-person .kicker{color:#c39a63}
+  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
+  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
 }
 </style>
 </head>
-<body class="t-person">
+<body class="t-geo">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>历史人物</b> · 10月27日</div>
-    <h1>问佛的希腊国王</h1>
-    <p class="hook">希腊史书只给了他几行，佛家却为他写了一整部经</p>
+    <div class="kicker"><b>自然地理</b> · 10月28日</div>
+    <h1>会流动的山</h1>
+    <p class="hook">扎格罗斯山脉的褶皱和油田，都由底下那层古海的盐决定</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-10-27-main.webp" alt="殿堂中披斗篷者与僧人围坐，侍卫侧立灯下" width="1280" height="1280" loading="eager">
-    <figcaption>殿堂中披斗篷者与僧人围坐，侍卫侧立灯下</figcaption>
+    <img src="img/2026-10-28-main.webp" alt="平行的褶皱山脊带向远处展开，谷地有浅河和发白坡面" width="1280" height="1280" loading="eager">
+    <figcaption>平行的褶皱山脊带向远处展开，谷地有浅河和发白坡面</figcaption>
   </figure>
   
 
   <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
 
   
-
-  
-
-  
-  <div class="ruler">
-    <div class="bar">
-      <span class="cap l"></span><span class="cap r"></span>
-      <span class="pin" style="left:67%"></span>
-    </div>
-    <div class="ends"><span>约前160</span><span>约前130</span></div>
+  <div class="layers">
     
-    <div class="mk"><i></i><b>约前140</b>撒加拉问法</div>
+    <div class="ly"><span class="n">褶皱山脊</span><span class="note">碳酸盐盖层被挤成背斜与冲断席</span></div>
+    
+    <div class="ly"><span class="n">滑脱盐面</span><span class="note">霍尔木兹群岩盐，盖层沿它滑移</span></div>
+    
+    <div class="ly"><span class="n">蒸发岩系</span><span class="note">古海反复干涸留下的盐与石膏</span></div>
+    
+    <div class="ly"><span class="n">结晶基底</span><span class="note">阿拉伯板块前缘的古老硬岩</span></div>
     
   </div>
+  
+
+  
+
   
 
   
@@ -581,39 +564,60 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">「那先，你说的『那先』，是头发？是齿？还是皮肉筋骨之外的哪一样？」这样设问的国王，是公元前2世纪旁遮普的希腊王米南德一世。希腊化世界的史书只给了他零星几笔，佛教却为他写下整整一部经。</p>
+  <p class="lead">在伊朗法尔斯省的山谷里，一条灰白色固体正缓慢向下流动，表面浮着黑色碎岩条带。它不是冰河，而是从山里挤出来的岩盐。扎格罗斯山脉这条从伊朗西北延伸到霍尔木兹海峡的褶皱山链，底座不是硬岩，而是约5亿年前古海留下的盐。</p>
 
   <div class="body">
     
-    <section><h2>钱币上的王国</h2><p>亚历山大东征之后，留在兴都库什山以南的希腊人陆续建起『印度-希腊』诸小邦。前2世纪中后期，米南德一世在旁遮普坐大，建都撒加拉；斯特拉波称他降服的部族比其余希腊诸王都多，普鲁塔克也说他对印度『施政公正』。可希腊那边没给他留下史书，王国的大小、边界与年代，今天全靠出土钱币倒推——他的双语钱币，是印度-希腊诸王里存世最多的一种。</p></section>
+    <section><h2>山怎么立起来</h2><p>扎格罗斯山脉从伊朗西北部向东南弧形延伸约1600公里，直抵霍尔木兹海峡。从高空看，山脊一道道近乎平行，像被梳过的皱褶。它的成因是板块对撞：新特提斯洋的洋壳长期向伊朗之下俯冲，随后北漂的阿拉伯板块在约3000多万年前与欧亚板块相撞，洋盆消失，浅海沉积的地层被横向挤压、缩短，推成一道道背斜和冲断岩席，构成地球上最大的褶皱冲断带之一。</p></section>
     
-    <section><h2>佛典里的弥兰陀</h2><p>佛教传统里他叫『弥兰陀』。《弥兰陀王问经》记他问道于高僧那先比丘，那先答『我是谁』用的是车喻：辕、轴、轮、箱体合起来才叫车，拆开哪一件都不是车，『人』亦不过是五蕴的假名。经中还说王闻法后让位与子，入山出家，证阿罗汉。但这部经并非他生前的实录：学界多认为它最后编定于他死后数百年——是佛门把一个传说中礼佛的希腊王，写成了最会提问的信徒。</p></section>
+    <section><h2>底下垫着一层盐</h2><p>秘密埋在山的底部。约5亿年前，这片浅海反复干涸蒸发，留下厚达数百米至上千米的盐层，地层上称霍尔木兹群。岩盐在地下像受热的玻璃：普通岩石受力会断，盐受力会流。于是板块挤来的力不必把地层折断，整片沉积盖层顺着这层盐向前滑移，像地毯被推皱，褶皱和冲断就都架在盐上。山能堆这么高，靠的不是岩石硬，而是底下那层软。</p></section>
     
-    <section><h2>身后与余波</h2><p>普鲁塔克记载，米南德死在军中，好些城市争相迎请他的遗骨分藏——那情形，很像佛家讲的八王分舍利。身后一个多世纪里，印度-希腊诸邦相继被南下的游牧部族吞并，希腊王统在中亚以南断了线，名字几乎无人记得。倒是他的钱币式样在旁遮普被继续仿铸了几十年，市面付受之间，像还在使用一个不曾死去的国王。</p></section>
+    <section><h2>盐指点的油井</h2><p>盐不只是润滑脂，还当盖子。岩盐几乎不透水，地下往上跑的石油遇到它就被封住；盐被挤得拱起、刺穿上覆地层，形成盐背斜和盐穹，把含油层弯成一只只口袋。伊朗与伊拉克的主要油田，从基尔库克到胡齐斯坦一串，几乎都坐在盐核背斜上。直到今天，这条山链仍在缩短隆起，盐还在向地表爬——法尔斯山谷里的盐冰川，每年把那些黑色碎岩条带往低处再推一段。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-10-27-sub.webp" alt="沙地上拆开的双轮木车，辕轴轮板分置" width="1024" height="1024" loading="lazy">
-    <figcaption>沙地上拆开的双轮木车，辕轴轮板分置</figcaption>
+    <img src="img/2026-10-28-sub.webp" alt="山谷中流动的灰白色盐体，表面覆着深色碎岩条带" width="1024" height="1024" loading="lazy">
+    <figcaption>山谷中流动的灰白色盐体，表面覆着深色碎岩条带</figcaption>
   </figure>
   
 
+  
+  <div class="bars">
+    
+    <div class="b">
+      <div class="hd"><span class="k">山链长度</span><span class="v">约1600公里</span></div>
+      <div class="track"><div class="fill" style="width:100%"></div></div>
+    </div>
+    
+    <div class="b">
+      <div class="hd"><span class="k">盐层厚度</span><span class="v">数百至上千米</span></div>
+      <div class="track"><div class="fill" style="width:35%"></div></div>
+    </div>
+    
+    <div class="b">
+      <div class="hd"><span class="k">碰撞开始</span><span class="v">约3000多万年前</span></div>
+      <div class="track"><div class="fill" style="width:70%"></div></div>
+    </div>
+    
+  </div>
   
 
   
   <div class="facts">
     
-    <div class="f"><span class="k">在位</span><span class="v">约前160—前130年</span></div>
+    <div class="f"><span class="k">位置</span><span class="v">伊朗西南并向东南弧展，延伸至伊拉克边境，抵霍尔木兹海峡</span></div>
     
-    <div class="f"><span class="k">都城</span><span class="v">撒加拉（今锡亚尔科特）</span></div>
+    <div class="f"><span class="k">山链长度</span><span class="v">约1600公里</span></div>
     
-    <div class="f"><span class="k">佛典名</span><span class="v">弥兰陀王</span></div>
+    <div class="f"><span class="k">构造类型</span><span class="v">褶皱冲断带，变形以沿盐层滑脱为主</span></div>
     
-    <div class="f"><span class="k">问答对象</span><span class="v">那先比丘</span></div>
+    <div class="f"><span class="k">滑脱层</span><span class="v">霍尔木兹群岩盐，约5亿年前古海蒸发产物</span></div>
     
-    <div class="f"><span class="k">传世文献</span><span class="v">《弥兰陀王问经》</span></div>
+    <div class="f"><span class="k">资源</span><span class="v">伊朗与伊拉克主要油田多位于盐核背斜之上</span></div>
+    
+    <div class="f"><span class="k">活动性</span><span class="v">至今仍在缩短隆起，局部可见流动中的盐冰川</span></div>
     
   </div>
   
@@ -622,23 +626,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>他</li><li>的</li><li>都</li><li>城</li><li>撒</li><li>加</li><li>拉</li><li>，</li><li>一</li><li>般</li><li>认</li><li>为</li><li>即</li><li>今</li><li>巴</li><li>基</li><li>斯</li><li>坦</li><li>锡</li><li>亚</li><li>尔</li><li>科</li><li>特</li><li>—</li><li>—</li><li>如</li><li>今</li><li>以</li><li>缝</li><li>制</li><li>足</li><li>球</li><li>闻</li><li>名</li><li>。</li>
+    <li>扎格罗斯有活动的盐冰川，成分是岩盐不是冰，顺山谷缓慢下移。</li><li>基尔库克油田下方就有一枚刺穿地层的盐栓，钻深了会打到盐。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>在位与卒年通行推定约前160—前130年，诸家相差数十年</li><li>撒加拉即今锡亚尔科特为通行比定，非铁证</li><li>与那先比丘问答是否实有其事无定论，该经多被视为身后追记</li><li>斯特拉波、普鲁塔克之说皆出后人转述，难以核验</li><li>『死在军中、诸城争其遗骨』的细节仅见于普鲁塔克</li></ul>
+    <ul><li>阿拉伯板块与欧亚板块主碰撞的具体时间存在争议，估计从晚白垩世到古近纪不等，本篇取约3000多万年前。</li><li>霍尔木兹群盐层的年代写作约5亿年前是粗估，实际跨越震旦纪晚期到寒武纪。</li><li>盐层厚度与盐冰川流动速率随地点变化，文中为量级估计。</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>印度-希腊王国</span><span>佛教</span><span>希腊化时代</span><span>钱币</span><span>旁遮普</span></div>
+  <div class="tags"><span>褶皱冲断带</span><span>盐穹</span><span>板块碰撞</span><span>石油地质</span><span>伊朗</span></div>
   
 
   <footer>
-    <div class="r"><span>历史人物</span><span>10月27日</span></div>
+    <div class="r"><span>自然地理</span><span>10月28日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     
   </footer>
