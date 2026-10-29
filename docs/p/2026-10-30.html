@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<!--
+  每日百科推送 · 单骨架模板
+  由 render.py 渲染。7 个类目共用这一份结构，观感差异全部来自 <body class="t-*"> + themes/t-*.css。
+
+  模板语法（沿用 football-bot/render.py 的正则引擎）：
+                                      标量替换，自动 HTML 转义
+    /* base.css —— 骨架样式，7 套皮肤共用。
+   皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
+   render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
+
+:root{
+  --card:#ffffff; --fg:#141414; --dim:#5b5a57; --muted:#8a8884; --line:#e4e3de;
+  --radius:14px;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+         "Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  /* 中文衬线：安卓微信大概率没有思源宋体，兜到系统 serif 会退化但不会崩 */
+  --serif:"Songti SC","Source Han Serif SC","Noto Serif CJK SC","Songti TC","SimSun",serif;
+  --title-font:var(--sans);
+  --hero-fg:#ffffff;
+  --hero-pad:26px 20px 22px;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --card:#181b20; --fg:#e8eaed; --dim:#9aa0a8; --muted:#7d838b; --line:#282c33; }
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--fg);
+  font:16px/1.75 var(--sans); -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px 40px}
+
+/* ---------- hero ---------- */
+.hero{
+  margin:0 -16px 20px; padding:var(--hero-pad);
+  background:var(--brand); color:var(--hero-fg);
+}
+.kicker{
+  font:600 11.5px/1 var(--sans); letter-spacing:.16em;
+  opacity:.75; margin-bottom:11px;
+}
+.hero h1{
+  margin:0; font:700 25px/1.34 var(--title-font);
+  letter-spacing:-.01em; text-wrap:balance;
+}
+.hero .hook{
+  margin:9px 0 0; font-size:14.5px; line-height:1.6; opacity:.8;
+}
+
+/* ---------- 导语 / 正文 ---------- */
+.lead{
+  margin:0 0 22px; font-size:17px; line-height:1.8; font-weight:500;
+  color:var(--fg);
+}
+.body section{margin:0 0 22px}
+.body h2{
+  margin:0 0 8px; font:600 13px/1 var(--sans);
+  letter-spacing:.1em; color:var(--accent);
+}
+.body p{margin:0; color:var(--fg)}
+
+/* ---------- 签名图形 1 · 时间轴（世界历史） ---------- */
+.tl{display:flex;position:relative;margin:0 0 24px;padding-top:3px}
+.tl::before{
+  content:"";position:absolute;top:7px;left:9%;right:9%;
+  height:2px;background:var(--line);
+}
+.tl .nd{flex:1;min-width:0;text-align:center;position:relative}
+.tl .dot{
+  width:10px;height:10px;border-radius:50%;background:var(--accent);
+  margin:0 auto 10px;box-shadow:0 0 0 2px var(--paper);  /* 2px 纸色环 */
+}
+.tl .y{
+  display:block;font:600 12.5px/1.3 var(--sans);
+  font-variant-numeric:tabular-nums;color:var(--fg);
+}
+.tl .lb{display:block;font-size:11.5px;color:var(--dim);margin-top:3px;line-height:1.45}
+
+/* ---------- 签名图形 2 · 跨度尺（历史人物 / 中国历史） ---------- */
+.ruler{margin:0 0 24px}
+.ruler .bar{position:relative;height:2px;background:var(--line);border-radius:1px;margin:0 1px}
+.ruler .cap{position:absolute;top:-5px;width:2px;height:12px;background:var(--line)}
+.ruler .cap.l{left:0}.ruler .cap.r{right:0}
+.ruler .pin{
+  position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 2px var(--paper);transform:translateX(-50%);
+}
+.ruler .ends{
+  display:flex;justify-content:space-between;margin-top:11px;
+  font:600 12.5px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--dim);
+}
+/* mark 标签走正常流，不绝对定位 —— 长标签或贴边时都不会溢出 */
+.ruler .mk{
+  display:flex;align-items:center;gap:7px;margin-top:9px;
+  font-size:12.5px;color:var(--dim);
+}
+.ruler .mk i{
+  width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;font-style:normal;
+}
+.ruler .mk b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---------- 签名图形 3 · 垂直分带（自然地理） ---------- */
+.layers{margin:0 0 20px;border-radius:var(--radius);overflow:hidden}
+.layers .ly{padding:13px 16px;color:#fff}
+.layers .ly+.ly{margin-top:2px}          /* 2px 纸色缝隙分隔，不描边 */
+.layers .ly .n{display:block;font:600 14.5px/1.4 var(--sans)}
+.layers .ly .note{display:block;font-size:12.5px;opacity:.82;margin-top:2px;line-height:1.5}
+/* 单色顺序型 4 步，白字全部 ≥4.2:1（见手册 §6 色值核算） */
+.layers .ly:nth-child(1){background:#1e3b31}
+.layers .ly:nth-child(2){background:#2c5446}
+.layers .ly:nth-child(3){background:#3b6d5b}
+.layers .ly:nth-child(4){background:#4b8571}
+@media (prefers-color-scheme:dark){
+  .layers .ly:nth-child(1){background:#16302a}
+  .layers .ly:nth-child(2){background:#22453b}
+  .layers .ly:nth-child(3){background:#2f5a4c}
+  .layers .ly:nth-child(4){background:#3d6f5e}
+}
+
+/* ---------- 签名图形 4 · 对照双栏（科学史） ---------- */
+.cmp{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  margin:0 0 22px;border-radius:var(--radius);overflow:hidden;
+}
+.cmp>div{background:var(--card);padding:15px 16px}
+.cmp .lbl{
+  display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;
+  margin-bottom:8px;color:var(--muted);
+}
+.cmp .now .lbl{color:var(--accent)}
+.cmp p{margin:0;font-size:14px;line-height:1.7}
+.cmp .then p{color:var(--dim)}
+
+/* ---------- 签名图形 5 · 得失权衡（生物） ---------- */
+.tro{margin:0 0 22px;background:var(--card);border-radius:var(--radius);overflow:hidden}
+.tro .r{display:flex;gap:13px;padding:14px 16px}
+.tro .r+.r{border-top:1px solid var(--line)}
+/* 文字标签本身就是识别通道，不靠颜色单独承载 */
+.tro .k{
+  flex:none;width:2.1em;font:600 13px/1.7 var(--sans);text-align:center;
+  border-radius:5px;height:1.7em;
+}
+.tro .gain .k{background:#e4efe4;color:#2c5530}
+.tro .cost .k{background:#f0edda;color:#5c5216}
+.tro p{margin:0;font-size:14.5px;line-height:1.7}
+@media (prefers-color-scheme:dark){
+  .tro .gain .k{background:#1e2c1f;color:#8fc194}
+  .tro .cost .k{background:#2b2818;color:#c4b84a}
+}
+
+/* ---------- 签名图形 6 · 具体物件（文明与文化） ---------- */
+.artifact{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);border-left:3px solid var(--accent);
+}
+.artifact .n{display:block;font:600 16px/1.5 var(--title-font);margin-bottom:4px}
+.artifact p{margin:0;font-size:14px;line-height:1.7;color:var(--dim)}
+
+/* ---------- 数据条（自然地理 meter） ---------- */
+.bars{margin:0 0 22px;background:var(--card);border-radius:var(--radius);padding:6px 16px 14px}
+.bars .b{padding:10px 0 0}
+.bars .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+.bars .k{font-size:13px;color:var(--dim)}
+.bars .v{font:600 14px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--fg)}
+.bars .track{height:6px;border-radius:3px;background:var(--track);overflow:hidden}
+.bars .fill{height:100%;border-radius:3px;background:var(--accent)}
+
+/* ---------- facts —— 同一份标记，7 套皮肤各自重写 ---------- */
+.facts{
+  margin:0 0 22px;background:var(--card);border-radius:var(--radius);
+  padding:4px 16px 14px;
+}
+.facts .f{
+  display:flex;justify-content:space-between;gap:16px;
+  padding:11px 0;border-top:1px solid var(--line);
+}
+.facts .f:first-child{border-top:0}
+.facts .k{flex:none;font-size:13px;color:var(--dim)}
+.facts .v{
+  text-align:right;font-size:14px;font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- 冷知识 / 引文 / 存疑 / 标签 ---------- */
+.trivia{margin:0 0 22px;padding:0;list-style:none}
+.trivia li{
+  position:relative;padding:0 0 0 22px;margin:0 0 9px;
+  font-size:14.5px;line-height:1.7;color:var(--fg);
+}
+.trivia li::before{
+  content:"";position:absolute;left:6px;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+.quote{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);
+}
+.quote p{margin:0;font:italic 15.5px/1.75 var(--serif)}
+.quote .from{display:block;margin-top:8px;font-size:12.5px;color:var(--muted);font-style:normal}
+.uncertain{
+  margin:0 0 22px;padding:13px 16px;border-radius:var(--radius);
+  background:var(--card);border:1px dashed var(--line);
+}
+.uncertain .lbl{
+  display:flex;align-items:center;gap:6px;
+  font:600 11.5px/1 var(--sans);letter-spacing:.1em;color:var(--muted);margin-bottom:8px;
+}
+.uncertain ul{margin:0;padding-left:18px}
+.uncertain li{font-size:13.5px;line-height:1.7;color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 22px}
+.tags span{
+  font-size:12px;padding:3px 10px;border-radius:20px;
+  background:var(--card);color:var(--dim);border:1px solid var(--line);
+}
+
+footer{
+  margin-top:26px;padding-top:15px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--muted);line-height:1.9;
+}
+footer a{color:var(--muted)}
+footer .r{display:flex;justify-content:space-between;gap:12px}
+
+/* ---- 配图。7 套皮肤共用版式，颜色全部走已有变量 ---- */
+.hero-img,.sub-img{margin:0 0 18px;padding:0}
+.sub-img{margin:22px 0 18px}
+.hero-img img,.sub-img img{
+  display:block;width:100%;height:auto;border-radius:10px;
+  background:var(--card);border:1px solid var(--line)}
+.hero-img figcaption,.sub-img figcaption{
+  margin-top:7px;font-size:12.5px;line-height:1.6;color:var(--muted)}
+/* 图片是 AI 生成的示意画面，不是史料。这行标注是必须的，不是装饰。 */
+.hero-img figcaption::after,.sub-img figcaption::after{
+  content:" · AI 生成示意图";opacity:.75}
+@media (prefers-reduced-motion:no-preference){
+  .hero-img img,.sub-img img{transition:opacity .2s}}
+
+/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
+.t-culture{
+  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:0 0 0 0;
+}
+.t-culture .hero{text-align:center;background:var(--paper)}
+/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
+.t-culture .hero::before,
+.t-culture .hero::after{
+  content:"";display:block;height:13px;
+  background:
+    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
+    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
+  opacity:.55;
+}
+.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
+.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
+.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
+/* 2×2 卡片网格 */
+.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.t-culture .facts .f{
+  display:block;background:var(--card);border-radius:10px;
+  padding:13px 14px;border-top:0;
+}
+.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
+.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
+
+@media (prefers-color-scheme:dark){
+  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
+              --hero-fg:#e8eaed; }
+  .t-culture .hero::before,.t-culture .hero::after{
+    background:
+      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
+      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
+    opacity:.4;
+  }
+  .t-culture .hero .kicker{color:#9aa4e8}
+}
+                                不转义白名单键（仅 CSS 注入用）
+      遍历，块内直接用该项字段
+            值为 null/""/[]/{}/0/false 时整块删除
+
+  签名图形与类目的对应（由哪个 motif 字段非空自动决定，不需要判类目）：
+    timeline  世界历史   span     历史人物/中国历史   layers+bars 自然地理
+    contrast  科学史     artifact 文明与文化         tradeoff    生物
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#f5f4f9">
+<meta name="x-build" content="2026-10-30-722f19fe">
+<meta name="description" content="尼罗尺是古埃及以来的水位测井：洪水峰值停在哪道刻痕，当年就按对应税则征收，过低歉收要减，过高毁堤亦减。开罗罗达岛的水尺沿用至19世纪。">
+<title>水位决定税率 · 文明与文化</title>
+<style>/* base.css —— 骨架样式，7 套皮肤共用。
+   皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
+   render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
+
+:root{
+  --card:#ffffff; --fg:#141414; --dim:#5b5a57; --muted:#8a8884; --line:#e4e3de;
+  --radius:14px;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+         "Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  /* 中文衬线：安卓微信大概率没有思源宋体，兜到系统 serif 会退化但不会崩 */
+  --serif:"Songti SC","Source Han Serif SC","Noto Serif CJK SC","Songti TC","SimSun",serif;
+  --title-font:var(--sans);
+  --hero-fg:#ffffff;
+  --hero-pad:26px 20px 22px;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --card:#181b20; --fg:#e8eaed; --dim:#9aa0a8; --muted:#7d838b; --line:#282c33; }
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--fg);
+  font:16px/1.75 var(--sans); -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px 40px}
+
+/* ---------- hero ---------- */
+.hero{
+  margin:0 -16px 20px; padding:var(--hero-pad);
+  background:var(--brand); color:var(--hero-fg);
+}
+.kicker{
+  font:600 11.5px/1 var(--sans); letter-spacing:.16em;
+  opacity:.75; margin-bottom:11px;
+}
+.hero h1{
+  margin:0; font:700 25px/1.34 var(--title-font);
+  letter-spacing:-.01em; text-wrap:balance;
+}
+.hero .hook{
+  margin:9px 0 0; font-size:14.5px; line-height:1.6; opacity:.8;
+}
+
+/* ---------- 导语 / 正文 ---------- */
+.lead{
+  margin:0 0 22px; font-size:17px; line-height:1.8; font-weight:500;
+  color:var(--fg);
+}
+.body section{margin:0 0 22px}
+.body h2{
+  margin:0 0 8px; font:600 13px/1 var(--sans);
+  letter-spacing:.1em; color:var(--accent);
+}
+.body p{margin:0; color:var(--fg)}
+
+/* ---------- 签名图形 1 · 时间轴（世界历史） ---------- */
+.tl{display:flex;position:relative;margin:0 0 24px;padding-top:3px}
+.tl::before{
+  content:"";position:absolute;top:7px;left:9%;right:9%;
+  height:2px;background:var(--line);
+}
+.tl .nd{flex:1;min-width:0;text-align:center;position:relative}
+.tl .dot{
+  width:10px;height:10px;border-radius:50%;background:var(--accent);
+  margin:0 auto 10px;box-shadow:0 0 0 2px var(--paper);  /* 2px 纸色环 */
+}
+.tl .y{
+  display:block;font:600 12.5px/1.3 var(--sans);
+  font-variant-numeric:tabular-nums;color:var(--fg);
+}
+.tl .lb{display:block;font-size:11.5px;color:var(--dim);margin-top:3px;line-height:1.45}
+
+/* ---------- 签名图形 2 · 跨度尺（历史人物 / 中国历史） ---------- */
+.ruler{margin:0 0 24px}
+.ruler .bar{position:relative;height:2px;background:var(--line);border-radius:1px;margin:0 1px}
+.ruler .cap{position:absolute;top:-5px;width:2px;height:12px;background:var(--line)}
+.ruler .cap.l{left:0}.ruler .cap.r{right:0}
+.ruler .pin{
+  position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 2px var(--paper);transform:translateX(-50%);
+}
+.ruler .ends{
+  display:flex;justify-content:space-between;margin-top:11px;
+  font:600 12.5px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--dim);
+}
+/* mark 标签走正常流，不绝对定位 —— 长标签或贴边时都不会溢出 */
+.ruler .mk{
+  display:flex;align-items:center;gap:7px;margin-top:9px;
+  font-size:12.5px;color:var(--dim);
+}
+.ruler .mk i{
+  width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;font-style:normal;
+}
+.ruler .mk b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---------- 签名图形 3 · 垂直分带（自然地理） ---------- */
+.layers{margin:0 0 20px;border-radius:var(--radius);overflow:hidden}
+.layers .ly{padding:13px 16px;color:#fff}
+.layers .ly+.ly{margin-top:2px}          /* 2px 纸色缝隙分隔，不描边 */
+.layers .ly .n{display:block;font:600 14.5px/1.4 var(--sans)}
+.layers .ly .note{display:block;font-size:12.5px;opacity:.82;margin-top:2px;line-height:1.5}
+/* 单色顺序型 4 步，白字全部 ≥4.2:1（见手册 §6 色值核算） */
+.layers .ly:nth-child(1){background:#1e3b31}
+.layers .ly:nth-child(2){background:#2c5446}
+.layers .ly:nth-child(3){background:#3b6d5b}
+.layers .ly:nth-child(4){background:#4b8571}
+@media (prefers-color-scheme:dark){
+  .layers .ly:nth-child(1){background:#16302a}
+  .layers .ly:nth-child(2){background:#22453b}
+  .layers .ly:nth-child(3){background:#2f5a4c}
+  .layers .ly:nth-child(4){background:#3d6f5e}
+}
+
+/* ---------- 签名图形 4 · 对照双栏（科学史） ---------- */
+.cmp{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  margin:0 0 22px;border-radius:var(--radius);overflow:hidden;
+}
+.cmp>div{background:var(--card);padding:15px 16px}
+.cmp .lbl{
+  display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;
+  margin-bottom:8px;color:var(--muted);
+}
+.cmp .now .lbl{color:var(--accent)}
+.cmp p{margin:0;font-size:14px;line-height:1.7}
+.cmp .then p{color:var(--dim)}
+
+/* ---------- 签名图形 5 · 得失权衡（生物） ---------- */
+.tro{margin:0 0 22px;background:var(--card);border-radius:var(--radius);overflow:hidden}
+.tro .r{display:flex;gap:13px;padding:14px 16px}
+.tro .r+.r{border-top:1px solid var(--line)}
+/* 文字标签本身就是识别通道，不靠颜色单独承载 */
+.tro .k{
+  flex:none;width:2.1em;font:600 13px/1.7 var(--sans);text-align:center;
+  border-radius:5px;height:1.7em;
+}
+.tro .gain .k{background:#e4efe4;color:#2c5530}
+.tro .cost .k{background:#f0edda;color:#5c5216}
+.tro p{margin:0;font-size:14.5px;line-height:1.7}
+@media (prefers-color-scheme:dark){
+  .tro .gain .k{background:#1e2c1f;color:#8fc194}
+  .tro .cost .k{background:#2b2818;color:#c4b84a}
+}
+
+/* ---------- 签名图形 6 · 具体物件（文明与文化） ---------- */
+.artifact{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);border-left:3px solid var(--accent);
+}
+.artifact .n{display:block;font:600 16px/1.5 var(--title-font);margin-bottom:4px}
+.artifact p{margin:0;font-size:14px;line-height:1.7;color:var(--dim)}
+
+/* ---------- 数据条（自然地理 meter） ---------- */
+.bars{margin:0 0 22px;background:var(--card);border-radius:var(--radius);padding:6px 16px 14px}
+.bars .b{padding:10px 0 0}
+.bars .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+.bars .k{font-size:13px;color:var(--dim)}
+.bars .v{font:600 14px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--fg)}
+.bars .track{height:6px;border-radius:3px;background:var(--track);overflow:hidden}
+.bars .fill{height:100%;border-radius:3px;background:var(--accent)}
+
+/* ---------- facts —— 同一份标记，7 套皮肤各自重写 ---------- */
+.facts{
+  margin:0 0 22px;background:var(--card);border-radius:var(--radius);
+  padding:4px 16px 14px;
+}
+.facts .f{
+  display:flex;justify-content:space-between;gap:16px;
+  padding:11px 0;border-top:1px solid var(--line);
+}
+.facts .f:first-child{border-top:0}
+.facts .k{flex:none;font-size:13px;color:var(--dim)}
+.facts .v{
+  text-align:right;font-size:14px;font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- 冷知识 / 引文 / 存疑 / 标签 ---------- */
+.trivia{margin:0 0 22px;padding:0;list-style:none}
+.trivia li{
+  position:relative;padding:0 0 0 22px;margin:0 0 9px;
+  font-size:14.5px;line-height:1.7;color:var(--fg);
+}
+.trivia li::before{
+  content:"";position:absolute;left:6px;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+.quote{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);
+}
+.quote p{margin:0;font:italic 15.5px/1.75 var(--serif)}
+.quote .from{display:block;margin-top:8px;font-size:12.5px;color:var(--muted);font-style:normal}
+.uncertain{
+  margin:0 0 22px;padding:13px 16px;border-radius:var(--radius);
+  background:var(--card);border:1px dashed var(--line);
+}
+.uncertain .lbl{
+  display:flex;align-items:center;gap:6px;
+  font:600 11.5px/1 var(--sans);letter-spacing:.1em;color:var(--muted);margin-bottom:8px;
+}
+.uncertain ul{margin:0;padding-left:18px}
+.uncertain li{font-size:13.5px;line-height:1.7;color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 22px}
+.tags span{
+  font-size:12px;padding:3px 10px;border-radius:20px;
+  background:var(--card);color:var(--dim);border:1px solid var(--line);
+}
+
+footer{
+  margin-top:26px;padding-top:15px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--muted);line-height:1.9;
+}
+footer a{color:var(--muted)}
+footer .r{display:flex;justify-content:space-between;gap:12px}
+
+/* ---- 配图。7 套皮肤共用版式，颜色全部走已有变量 ---- */
+.hero-img,.sub-img{margin:0 0 18px;padding:0}
+.sub-img{margin:22px 0 18px}
+.hero-img img,.sub-img img{
+  display:block;width:100%;height:auto;border-radius:10px;
+  background:var(--card);border:1px solid var(--line)}
+.hero-img figcaption,.sub-img figcaption{
+  margin-top:7px;font-size:12.5px;line-height:1.6;color:var(--muted)}
+/* 图片是 AI 生成的示意画面，不是史料。这行标注是必须的，不是装饰。 */
+.hero-img figcaption::after,.sub-img figcaption::after{
+  content:" · AI 生成示意图";opacity:.75}
+@media (prefers-reduced-motion:no-preference){
+  .hero-img img,.sub-img img{transition:opacity .2s}}
+
+/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
+.t-culture{
+  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:0 0 0 0;
+}
+.t-culture .hero{text-align:center;background:var(--paper)}
+/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
+.t-culture .hero::before,
+.t-culture .hero::after{
+  content:"";display:block;height:13px;
+  background:
+    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
+    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
+  opacity:.55;
+}
+.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
+.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
+.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
+/* 2×2 卡片网格 */
+.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.t-culture .facts .f{
+  display:block;background:var(--card);border-radius:10px;
+  padding:13px 14px;border-top:0;
+}
+.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
+.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
+
+@media (prefers-color-scheme:dark){
+  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
+              --hero-fg:#e8eaed; }
+  .t-culture .hero::before,.t-culture .hero::after{
+    background:
+      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
+      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
+    opacity:.4;
+  }
+  .t-culture .hero .kicker{color:#9aa4e8}
+}
+</style>
+</head>
+<body class="t-culture">
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker"><b>文明与文化</b> · 10月30日</div>
+    <h1>水位决定税率</h1>
+    <p class="hook">尼罗河涨到哪道刻痕，埃及当年就按哪档收税</p>
+  </header>
+
+  
+  <figure class="hero-img">
+    <img src="../img/2026-10-30-main.webp" alt="洪水季的井台边，一人俯看浑黄井水与带刻痕的石柱" width="1280" height="1280" loading="eager">
+    <figcaption>洪水季的井台边，一人俯看浑黄井水与带刻痕的石柱</figcaption>
+  </figure>
+  
+
+  <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <div class="artifact">
+    <span class="n">罗达岛石柱水尺</span><p>开罗罗达岛一口与河水相通的深井中立着带分段刻痕的石柱，洪水峰值停在哪道痕上，当年的税率就按哪一档定。</p>
+  </div>
+  
+
+  <!-- ===== 正文 ===== -->
+
+  <p class="lead">每年夏末，开罗罗达岛一口与河水相通的石井里，水位沿井底石柱缓缓爬升。它停在哪道刻痕上，埃及当年就按哪一档征税：太低减税，太高也减税，只有落进中间那格，税吏才按满额起征。</p>
+
+  <div class="body">
+    
+    <section><h2>问河不问田</h2><p>埃及的税额不是先由官吏按田亩算出，而是先问河。洪水到达峰值时，官员到测井读数、公布当年税则：水位低于歉收线，灌不满渠、肥不到田，按差额逐级减免；涨到丰年线，满额征收；再往上淹没堤岸与村庄，照样要减。测水的设施多是与河道相通的石井或石阶，河涨多少，井里就升多少，读数当众取得。对农户来说，这一年交多少税，等于交给了那条河本身。</p></section>
+    
+    <section><h2>为什么是水</h2><p>这套办法的根子在于埃及几乎没有雨。农业全赖一年一度的洪水：六月起埃塞俄比亚高原进入雨季，河水北上漫过两岸，退水后留下一层肥泥，播种就在泥里进行。收成好坏，全看这一年淹多大、淹多久、留泥多少。税额若固定不变，歉年等于逼农民弃地逃亡；让税随水涨落，统治者保住的是纳税的人丁和来年还肯种的地。</p></section>
+    
+    <section><h2>水尺的余波</h2><p>尼罗尺因此成了极古老的公共财政凭证：它的权威不靠官府背书，而靠人人可验——井与河相通，水位做不了假。从法老时代留在岩壁上的水位记号，到希腊罗马与阿拉伯时代延续的测井石阶，这套定税传统用了几千年。1970年阿斯旺高坝蓄水，洪水从此被关进水库，税不再看水，水尺退成一处供人参观的遗迹。</p></section>
+    
+  </div>
+
+  
+  <figure class="sub-img">
+    <img src="../img/2026-10-30-sub.webp" alt="深井中央的石柱，柱身分段刻痕，井水齐柱脚" width="1024" height="1024" loading="lazy">
+    <figcaption>深井中央的石柱，柱身分段刻痕，井水齐柱脚</figcaption>
+  </figure>
+  
+
+  
+
+  
+  <div class="facts">
+    
+    <div class="f"><span class="k">测什么</span><span class="v">尼罗河年度洪水的峰值水位</span></div>
+    
+    <div class="f"><span class="k">定税逻辑</span><span class="v">过低歉收减免，落进丰歉之间满征，过高毁堤亦减</span></div>
+    
+    <div class="f"><span class="k">著名遗存</span><span class="v">开罗罗达岛测井、阿斯旺象岛石阶水尺</span></div>
+    
+    <div class="f"><span class="k">退出日常</span><span class="v">沿用至19世纪；1970年高坝蓄水后洪水消失</span></div>
+    
+  </div>
+  
+
+  
+
+  
+  <ul class="trivia">
+    <li>水</li><li>位</li><li>太</li><li>低</li><li>太</li><li>高</li><li>都</li><li>减</li><li>税</li><li>，</li><li>唯</li><li>独</li><li>落</li><li>在</li><li>中</li><li>间</li><li>那</li><li>一</li><li>格</li><li>，</li><li>税</li><li>吏</li><li>才</li><li>按</li><li>满</li><li>额</li><li>起</li><li>征</li><li>。</li>
+  </ul>
+  
+
+  
+  <div class="uncertain">
+    <span class="lbl">存疑 · 以下说法未经确证</span>
+    <ul><li>以16腕尺为丰歉分界、每差一腕尺加减税额的具体数值，各时期规定不同，本文取通行说法</li><li>罗达岛尼罗尺于861年由伊本·图伦主持修建的说法出自中世纪文献，细节各版本有出入</li><li>法老时代的水位岩刻是否已用于定税仍有争议，更早的记录多为记事性质</li></ul>
+  </div>
+  
+
+  
+  <div class="tags"><span>埃及</span><span>尼罗河</span><span>税收</span><span>度量</span><span>水利</span></div>
+  
+
+  <footer>
+    <div class="r"><span>文明与文化</span><span>10月30日</span></div>
+    <div class="r"><span>往期</span><span><a href="../archive.html">归档索引</a></span></div>
+    
+  </footer>
+
+</div>
+</body>
+</html>

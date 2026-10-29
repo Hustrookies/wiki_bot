@@ -236,28 +236,44 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
-.t-science{
-  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
-  --title-font:var(--sans);
+/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
+.t-culture{
+  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:0 0 0 0;
 }
-.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
-/* 网格必须在 brand 之前声明才叠在上层 */
-.t-science .hero{
+.t-culture .hero{text-align:center;background:var(--paper)}
+/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
+.t-culture .hero::before,
+.t-culture .hero::after{
+  content:"";display:block;height:13px;
   background:
-    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    var(--brand);
+    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
+    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
+  opacity:.55;
 }
-.t-science .facts .k{min-width:5.5em}
-.t-science .facts .v,
-.t-science .tl .y{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:13px;
+.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
+.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
+.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
+/* 2×2 卡片网格 */
+.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.t-culture .facts .f{
+  display:block;background:var(--card);border-radius:10px;
+  padding:13px 14px;border-top:0;
 }
+.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
+.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
+  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
+              --hero-fg:#e8eaed; }
+  .t-culture .hero::before,.t-culture .hero::after{
+    background:
+      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
+      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
+    opacity:.4;
+  }
+  .t-culture .hero .kicker{color:#9aa4e8}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -272,10 +288,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#1b4a7a">
-<meta name="x-build" content="2026-10-29-900abb67">
-<meta name="description" content="十世纪末巴士拉学者伊本·海赛姆著《光学书》，用暗室实验论证视觉源于外界光进入眼睛，推翻延续上千年的眼发光线说；其拉丁译本影响开普勒与牛顿，但光的传播机制他未说清。">
-<title>看见，是光进入眼睛 · 科学与技术史</title>
+<meta name="theme-color" content="#f5f4f9">
+<meta name="x-build" content="2026-10-30-722f19fe">
+<meta name="description" content="尼罗尺是古埃及以来的水位测井：洪水峰值停在哪道刻痕，当年就按对应税则征收，过低歉收要减，过高毁堤亦减。开罗罗达岛的水尺沿用至19世纪。">
+<title>水位决定税率 · 文明与文化</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -507,44 +523,60 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
-.t-science{
-  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
-  --title-font:var(--sans);
+/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
+.t-culture{
+  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:0 0 0 0;
 }
-.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
-/* 网格必须在 brand 之前声明才叠在上层 */
-.t-science .hero{
+.t-culture .hero{text-align:center;background:var(--paper)}
+/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
+.t-culture .hero::before,
+.t-culture .hero::after{
+  content:"";display:block;height:13px;
   background:
-    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    var(--brand);
+    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
+    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
+  opacity:.55;
 }
-.t-science .facts .k{min-width:5.5em}
-.t-science .facts .v,
-.t-science .tl .y{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:13px;
+.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
+.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
+.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
+/* 2×2 卡片网格 */
+.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.t-culture .facts .f{
+  display:block;background:var(--card);border-radius:10px;
+  padding:13px 14px;border-top:0;
 }
+.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
+.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
+  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
+              --hero-fg:#e8eaed; }
+  .t-culture .hero::before,.t-culture .hero::after{
+    background:
+      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
+      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
+    opacity:.4;
+  }
+  .t-culture .hero .kicker{color:#9aa4e8}
 }
 </style>
 </head>
-<body class="t-science">
+<body class="t-culture">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>科学与技术史</b> · 10月29日</div>
-    <h1>看见，是光进入眼睛</h1>
-    <p class="hook">两千年来人们以为眼睛主动发光去看世界，一间暗室改写了它</p>
+    <div class="kicker"><b>文明与文化</b> · 10月30日</div>
+    <h1>水位决定税率</h1>
+    <p class="hook">尼罗河涨到哪道刻痕，埃及当年就按哪档收税</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-10-29-main.webp" alt="一束光穿帘入室，墙上浮现倒立的窗外景象，学者背身而立" width="1280" height="1280" loading="eager">
-    <figcaption>一束光穿帘入室，墙上浮现倒立的窗外景象，学者背身而立</figcaption>
+    <img src="img/2026-10-30-main.webp" alt="洪水季的井台边，一人俯看浑黄井水与带刻痕的石柱" width="1280" height="1280" loading="eager">
+    <figcaption>洪水季的井台边，一人俯看浑黄井水与带刻痕的石柱</figcaption>
   </figure>
   
 
@@ -557,34 +589,33 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-  <div class="cmp">
-    <div class="then"><span class="lbl">当时认为</span><p>视线像手一样从眼睛伸出、触到物体才产生视觉；这贴合「看是主动的」直觉，还能解释镜面为何成像。</p></div>
-    <div class="now"><span class="lbl">实际是</span><p>物体被光照亮后，光进入眼睛成像；暗室小孔在对墙投出外界景物的倒像，证明像来自外面，不靠眼睛发光。</p></div>
+
+  
+
+  
+  <div class="artifact">
+    <span class="n">罗达岛石柱水尺</span><p>开罗罗达岛一口与河水相通的深井中立着带分段刻痕的石柱，洪水峰值停在哪道痕上，当年的税率就按哪一档定。</p>
   </div>
-  
-
-  
-
   
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">在一间拉上帘子的屋子里，墙上只留一个小孔，对墙便浮现出外面街道与树木的完整影像，而且是倒着的。伊本·海赛姆在公元1000年前后记录下这个暗室场景，并由此发问：如果真是眼睛发光去触碰世界，这幅倒立的像从何而来？</p>
+  <p class="lead">每年夏末，开罗罗达岛一口与河水相通的石井里，水位沿井底石柱缓缓爬升。它停在哪道刻痕上，埃及当年就按哪一档征税：太低减税，太高也减税，只有落进中间那格，税吏才按满额起征。</p>
 
   <div class="body">
     
-    <section><h2>视线是一只手</h2><p>古希腊的欧几里得把视线抽象成从眼睛射出的直线，公元2世纪的托勒密用它解释镜中影像：眼发出的光撞到镜面，按原路弹回，所以你能在镜里看见自己。这套说法在当时一点都不蠢——它贴合「看是主动的」的直觉：睁眼才看得见，目光扫到哪里，哪里才清晰；医学上，盖伦也主张眼睛向外分泌视觉物质。直觉、几何、医学三方互相撑腰，让「眼睛发光去触碰物体」统治了近东与欧洲上千年。</p></section>
+    <section><h2>问河不问田</h2><p>埃及的税额不是先由官吏按田亩算出，而是先问河。洪水到达峰值时，官员到测井读数、公布当年税则：水位低于歉收线，灌不满渠、肥不到田，按差额逐级减免；涨到丰年线，满额征收；再往上淹没堤岸与村庄，照样要减。测水的设施多是与河道相通的石井或石阶，河涨多少，井里就升多少，读数当众取得。对农户来说，这一年交多少税，等于交给了那条河本身。</p></section>
     
-    <section><h2>暗室与软禁</h2><p>伊本·海赛姆965年生于巴士拉，早年学工程，约公元1000年前后移居开罗。相传他曾声称能治理尼罗河泛滥，随即发觉工程并不现实，托辞精神失常，居家避祸多年。正是在这类沉寂的日子里，他写下了1011至1021年成书的《光学书》：先提出假设，再用小孔暗室、镜面和透镜逐一验证，主张假设必须由可验证的实验或数学推理支持。一些科学史家因此称他是最早的实验科学家之一。</p></section>
+    <section><h2>为什么是水</h2><p>这套办法的根子在于埃及几乎没有雨。农业全赖一年一度的洪水：六月起埃塞俄比亚高原进入雨季，河水北上漫过两岸，退水后留下一层肥泥，播种就在泥里进行。收成好坏，全看这一年淹多大、淹多久、留泥多少。税额若固定不变，歉年等于逼农民弃地逃亡；让税随水涨落，统治者保住的是纳税的人丁和来年还肯种的地。</p></section>
     
-    <section><h2>没答完的那问</h2><p>眼睛不发光，那成像是怎么发生的？《光学书》讲清了光的直线传播、反射与折射规律，讲清了透镜如何成像，却没能说清光究竟如何从物体一路抵达眼睛——这个缺口他自己没有补上。书以拉丁译本流传进欧洲，牛顿、开普勒、惠更斯、伽利略都频繁引用它；开普勒用这套框架算出视网膜上成的正是倒像。而「照相机」的英文 camera，本就取自他研究的那间暗室。</p></section>
+    <section><h2>水尺的余波</h2><p>尼罗尺因此成了极古老的公共财政凭证：它的权威不靠官府背书，而靠人人可验——井与河相通，水位做不了假。从法老时代留在岩壁上的水位记号，到希腊罗马与阿拉伯时代延续的测井石阶，这套定税传统用了几千年。1970年阿斯旺高坝蓄水，洪水从此被关进水库，税不再看水，水尺退成一处供人参观的遗迹。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-10-29-sub.webp" alt="暗箱、磨制透镜与合拢书册并置在木桌上，侧光投影" width="1024" height="1024" loading="lazy">
-    <figcaption>暗箱、磨制透镜与合拢书册并置在木桌上，侧光投影</figcaption>
+    <img src="img/2026-10-30-sub.webp" alt="深井中央的石柱，柱身分段刻痕，井水齐柱脚" width="1024" height="1024" loading="lazy">
+    <figcaption>深井中央的石柱，柱身分段刻痕，井水齐柱脚</figcaption>
   </figure>
   
 
@@ -593,13 +624,13 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">出生</span><span class="v">965年，伊拉克巴士拉</span></div>
+    <div class="f"><span class="k">测什么</span><span class="v">尼罗河年度洪水的峰值水位</span></div>
     
-    <div class="f"><span class="k">代表作</span><span class="v">《光学书》，1011至1021年写成，现存拉丁文版</span></div>
+    <div class="f"><span class="k">定税逻辑</span><span class="v">过低歉收减免，落进丰歉之间满征，过高毁堤亦减</span></div>
     
-    <div class="f"><span class="k">欧洲旧译名</span><span class="v">海桑</span></div>
+    <div class="f"><span class="k">著名遗存</span><span class="v">开罗罗达岛测井、阿斯旺象岛石阶水尺</span></div>
     
-    <div class="f"><span class="k">身后引用</span><span class="v">开普勒、伽利略、牛顿、惠更斯</span></div>
+    <div class="f"><span class="k">退出日常</span><span class="v">沿用至19世纪；1970年高坝蓄水后洪水消失</span></div>
     
   </div>
   
@@ -608,25 +639,25 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>小孔成像不需要透镜：墙上一个洞，就能还原整个世界的倒像</li><li>camera 一词源指暗室，正是《光学书》里做实验的那间屋子</li>
+    <li>水</li><li>位</li><li>太</li><li>低</li><li>太</li><li>高</li><li>都</li><li>减</li><li>税</li><li>，</li><li>唯</li><li>独</li><li>落</li><li>在</li><li>中</li><li>间</li><li>那</li><li>一</li><li>格</li><li>，</li><li>税</li><li>吏</li><li>才</li><li>按</li><li>满</li><li>额</li><li>起</li><li>征</li><li>。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>移居开罗后自称疯疾、居家避祸的轶事流传很广，出自较晚史料，细节或有后世演绎</li><li>盖伦视觉物质说与欧几里得射线说的表述在本文做了简化，未取自锚文</li><li>光的传播需要时间这一点，锚文与本文均未展开具体年代</li></ul>
+    <ul><li>以16腕尺为丰歉分界、每差一腕尺加减税额的具体数值，各时期规定不同，本文取通行说法</li><li>罗达岛尼罗尺于861年由伊本·图伦主持修建的说法出自中世纪文献，细节各版本有出入</li><li>法老时代的水位岩刻是否已用于定税仍有争议，更早的记录多为记事性质</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>光学</span><span>科学方法</span><span>视觉</span><span>伊斯兰黄金时代</span></div>
+  <div class="tags"><span>埃及</span><span>尼罗河</span><span>税收</span><span>度量</span><span>水利</span></div>
   
 
   <footer>
-    <div class="r"><span>科学与技术史</span><span>10月29日</span></div>
+    <div class="r"><span>文明与文化</span><span>10月30日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
-    <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
+    
   </footer>
 
 </div>
