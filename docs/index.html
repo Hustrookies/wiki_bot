@@ -236,44 +236,35 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
-.t-culture{
-  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:0 0 0 0;
+/* 周六 · 生物与自然 —— 田野笔记：浅底细框（无满幅色块），大行高，facts 走标签云 */
+.t-bio{
+  --paper:#f2f5ef; --brand:#f2f5ef; --accent:#6d5f18; --track:#e0e5d6;
+  --title-font:var(--sans); --hero-fg:#141414;
+  --hero-pad:20px 18px 18px;
 }
-.t-culture .hero{text-align:center;background:var(--paper)}
-/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
-.t-culture .hero::before,
-.t-culture .hero::after{
-  content:"";display:block;height:13px;
-  background:
-    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
-    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
-  opacity:.55;
+.t-bio body,.t-bio{line-height:1.85}
+.t-bio .hero{
+  background:var(--card);border:1px solid #cfd8c4;border-radius:var(--radius);
+  margin:16px 0 20px;
 }
-.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
-.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
-.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
-/* 2×2 卡片网格 */
-.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.t-culture .facts .f{
-  display:block;background:var(--card);border-radius:10px;
-  padding:13px 14px;border-top:0;
+.t-bio .kicker{color:#2c5530;opacity:1;letter-spacing:.16em}
+.t-bio .hero h1{font-size:23px;font-weight:650}
+.t-bio .hero .hook{color:var(--dim);opacity:1}
+.t-bio .lead{line-height:1.85}
+.t-bio .body p{line-height:1.85}
+/* 标签云式 facts */
+.t-bio .facts{background:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.t-bio .facts .f{
+  display:flex;gap:7px;align-items:baseline;border-top:0;padding:7px 12px;
+  background:var(--card);border-radius:8px;border:1px solid var(--line);
 }
-.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
-.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
+.t-bio .facts .v{text-align:left}
 
 @media (prefers-color-scheme:dark){
-  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
-              --hero-fg:#e8eaed; }
-  .t-culture .hero::before,.t-culture .hero::after{
-    background:
-      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
-      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
-    opacity:.4;
-  }
-  .t-culture .hero .kicker{color:#9aa4e8}
+  .t-bio{ --paper:#0e120d; --brand:#0e120d; --accent:#c4b84a; --track:#272c1e;
+          --hero-fg:#e8eaed; }
+  .t-bio .hero{border-color:#2c3a2a}
+  .t-bio .kicker{color:#8fc194}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -288,10 +279,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#f5f4f9">
-<meta name="x-build" content="2026-10-30-722f19fe">
-<meta name="description" content="尼罗尺是古埃及以来的水位测井：洪水峰值停在哪道刻痕，当年就按对应税则征收，过低歉收要减，过高毁堤亦减。开罗罗达岛的水尺沿用至19世纪。">
-<title>水位决定税率 · 文明与文化</title>
+<meta name="theme-color" content="#f2f5ef">
+<meta name="x-build" content="2026-10-31-1b02c37d">
+<meta name="description" content="多数竹子一生只开一次花，同一物种常在相距很远的地方同步结实，整片枯死；这种种子饱和策略让食种动物吃不完。印度东北部的梅竹约48年集体开花一次，种子丰收引发鼠群暴发和饥荒。">
+<title>开一次花，死一整片 · 生物与自然</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -523,60 +514,51 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
-.t-culture{
-  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:0 0 0 0;
+/* 周六 · 生物与自然 —— 田野笔记：浅底细框（无满幅色块），大行高，facts 走标签云 */
+.t-bio{
+  --paper:#f2f5ef; --brand:#f2f5ef; --accent:#6d5f18; --track:#e0e5d6;
+  --title-font:var(--sans); --hero-fg:#141414;
+  --hero-pad:20px 18px 18px;
 }
-.t-culture .hero{text-align:center;background:var(--paper)}
-/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
-.t-culture .hero::before,
-.t-culture .hero::after{
-  content:"";display:block;height:13px;
-  background:
-    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
-    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
-  opacity:.55;
+.t-bio body,.t-bio{line-height:1.85}
+.t-bio .hero{
+  background:var(--card);border:1px solid #cfd8c4;border-radius:var(--radius);
+  margin:16px 0 20px;
 }
-.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
-.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
-.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
-/* 2×2 卡片网格 */
-.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.t-culture .facts .f{
-  display:block;background:var(--card);border-radius:10px;
-  padding:13px 14px;border-top:0;
+.t-bio .kicker{color:#2c5530;opacity:1;letter-spacing:.16em}
+.t-bio .hero h1{font-size:23px;font-weight:650}
+.t-bio .hero .hook{color:var(--dim);opacity:1}
+.t-bio .lead{line-height:1.85}
+.t-bio .body p{line-height:1.85}
+/* 标签云式 facts */
+.t-bio .facts{background:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.t-bio .facts .f{
+  display:flex;gap:7px;align-items:baseline;border-top:0;padding:7px 12px;
+  background:var(--card);border-radius:8px;border:1px solid var(--line);
 }
-.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
-.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
+.t-bio .facts .v{text-align:left}
 
 @media (prefers-color-scheme:dark){
-  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
-              --hero-fg:#e8eaed; }
-  .t-culture .hero::before,.t-culture .hero::after{
-    background:
-      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
-      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
-    opacity:.4;
-  }
-  .t-culture .hero .kicker{color:#9aa4e8}
+  .t-bio{ --paper:#0e120d; --brand:#0e120d; --accent:#c4b84a; --track:#272c1e;
+          --hero-fg:#e8eaed; }
+  .t-bio .hero{border-color:#2c3a2a}
+  .t-bio .kicker{color:#8fc194}
 }
 </style>
 </head>
-<body class="t-culture">
+<body class="t-bio">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>文明与文化</b> · 10月30日</div>
-    <h1>水位决定税率</h1>
-    <p class="hook">尼罗河涨到哪道刻痕，埃及当年就按哪档收税</p>
+    <div class="kicker"><b>生物与自然</b> · 10月31日</div>
+    <h1>开一次花，死一整片</h1>
+    <p class="hook">米佐拉姆的农民按竹子的开花年排日程：那年的丰收会带来鼠灾</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-10-30-main.webp" alt="洪水季的井台边，一人俯看浑黄井水与带刻痕的石柱" width="1280" height="1280" loading="eager">
-    <figcaption>洪水季的井台边，一人俯看浑黄井水与带刻痕的石柱</figcaption>
+    <img src="img/2026-10-31-main.webp" alt="山坡连片丛生竹秆顶同时抽穗，远处几间高脚屋" width="1280" height="1280" loading="eager">
+    <figcaption>山坡连片丛生竹秆顶同时抽穗，远处几间高脚屋</figcaption>
   </figure>
   
 
@@ -591,31 +573,32 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-
-  
-  <div class="artifact">
-    <span class="n">罗达岛石柱水尺</span><p>开罗罗达岛一口与河水相通的深井中立着带分段刻痕的石柱，洪水峰值停在哪道痕上，当年的税率就按哪一档定。</p>
+  <div class="tro">
+    <div class="r gain"><span class="k">得</span><p>整个物种同时结实，种子量远超食种动物的取食能力，总有一部分躲过被吃干净的机会</p></div>
+    <div class="r cost"><span class="k">失</span><p>植株连地下茎一起枯死，几十年靠竹鞭攒下的克隆网络一次清零，之后几十年再无笋可采</p></div>
   </div>
+  
+
   
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">每年夏末，开罗罗达岛一口与河水相通的石井里，水位沿井底石柱缓缓爬升。它停在哪道刻痕上，埃及当年就按哪一档征税：太低减税，太高也减税，只有落进中间那格，税吏才按满额起征。</p>
+  <p class="lead">米佐拉姆人把一个词写进了当地历法：mautam，指竹子集体开花结籽、随后鼠群冲进粮仓的那几年。2006年前后山地再次大面积开花，次年鼠害暴发，收成落空。竹子把繁殖变成一场押上几十年的赌局，人却要替它排日程。</p>
 
   <div class="body">
     
-    <section><h2>问河不问田</h2><p>埃及的税额不是先由官吏按田亩算出，而是先问河。洪水到达峰值时，官员到测井读数、公布当年税则：水位低于歉收线，灌不满渠、肥不到田，按差额逐级减免；涨到丰年线，满额征收；再往上淹没堤岸与村庄，照样要减。测水的设施多是与河道相通的石井或石阶，河涨多少，井里就升多少，读数当众取得。对农户来说，这一年交多少税，等于交给了那条河本身。</p></section>
+    <section><h2>一片林子同时抽穗</h2><p>竹子属于禾本科，和稻、小麦同科，只是把茎长得又硬又高。它平时不开花，靠地下的竹鞭横向扩展，一整片林子可能在地下连成同一条根系。到某个时间点，同一批个体像接到通知一样同时抽穗、开花、结实，随后养分耗尽，竹秆连着地下茎一起枯死。有的种类要等六七十年甚至上百年才轮到一次繁殖，一次就把几十年攒下的储备全押上去。</p></section>
     
-    <section><h2>为什么是水</h2><p>这套办法的根子在于埃及几乎没有雨。农业全赖一年一度的洪水：六月起埃塞俄比亚高原进入雨季，河水北上漫过两岸，退水后留下一层肥泥，播种就在泥里进行。收成好坏，全看这一年淹多大、淹多久、留泥多少。税额若固定不变，歉年等于逼农民弃地逃亡；让税随水涨落，统治者保住的是纳税的人丁和来年还肯种的地。</p></section>
+    <section><h2>为什么要同时</h2><p>为什么要同时？因为零星的种子活不下来。只有几株结实时，鸟、松鼠、竹象和鼠类能把这一顿吃得干干净净。整片同时结籽，落下的竹米数量远超这些动物的取食和储藏能力，总有一部分逃过一劫，这套打法叫种子饱和，栎树和松也在用。间隔拉得越长，食种动物的种群越难专门靠竹米过活。至于分散在不同山坡的同类靠什么对上时间，学界还没有定论。</p></section>
     
-    <section><h2>水尺的余波</h2><p>尼罗尺因此成了极古老的公共财政凭证：它的权威不靠官府背书，而靠人人可验——井与河相通，水位做不了假。从法老时代留在岩壁上的水位记号，到希腊罗马与阿拉伯时代延续的测井石阶，这套定税传统用了几千年。1970年阿斯旺高坝蓄水，洪水从此被关进水库，税不再看水，水尺退成一处供人参观的遗迹。</p></section>
+    <section><h2>丰收之后是鼠灾</h2><p>米佐拉姆的经历是这套策略的账单。当地漫山的梅竹大面积开花那年，山坡上落满竹米，鼠类数量在几个月里暴涨；竹子枯死、种子吃完之后，它们转向村庄的粮仓。种子越丰收，人越挨饿，这种年成在当地叫 mautam。人们说的周期约48年一轮，但记录里的开花年份并不严格按这个间隔走。竹林死后，盖房的竹材和春天的笋同时断供，政府在那几年提前组织捕鼠和补种。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-10-30-sub.webp" alt="深井中央的石柱，柱身分段刻痕，井水齐柱脚" width="1024" height="1024" loading="lazy">
-    <figcaption>深井中央的石柱，柱身分段刻痕，井水齐柱脚</figcaption>
+    <img src="img/2026-10-31-sub.webp" alt="竹秆基部裸露的地下茎、须根与散落的竹实" width="1024" height="1024" loading="lazy">
+    <figcaption>竹秆基部裸露的地下茎、须根与散落的竹实</figcaption>
   </figure>
   
 
@@ -624,13 +607,13 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">测什么</span><span class="v">尼罗河年度洪水的峰值水位</span></div>
+    <div class="f"><span class="k">科属</span><span class="v">禾本科竹亚科，与稻、小麦同科</span></div>
     
-    <div class="f"><span class="k">定税逻辑</span><span class="v">过低歉收减免，落进丰歉之间满征，过高毁堤亦减</span></div>
+    <div class="f"><span class="k">结实方式</span><span class="v">一次大量结实后，竹秆连同地下茎一起枯死</span></div>
     
-    <div class="f"><span class="k">著名遗存</span><span class="v">开罗罗达岛测井、阿斯旺象岛石阶水尺</span></div>
+    <div class="f"><span class="k">周期</span><span class="v">梅竹常被说成约48年一轮，记录里的开花年份并不严格等距</span></div>
     
-    <div class="f"><span class="k">退出日常</span><span class="v">沿用至19世纪；1970年高坝蓄水后洪水消失</span></div>
+    <div class="f"><span class="k">对人的影响</span><span class="v">开花年种子丰收，鼠类激增后转向粮仓，形成周期性饥荒</span></div>
     
   </div>
   
@@ -639,23 +622,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>水</li><li>位</li><li>太</li><li>低</li><li>太</li><li>高</li><li>都</li><li>减</li><li>税</li><li>，</li><li>唯</li><li>独</li><li>落</li><li>在</li><li>中</li><li>间</li><li>那</li><li>一</li><li>格</li><li>，</li><li>税</li><li>吏</li><li>才</li><li>按</li><li>满</li><li>额</li><li>起</li><li>征</li><li>。</li>
+    <li>竹子是草不是树：它和稻、小麦同属禾本科，竹笋就是还没抽高的嫩茎。</li><li>竹子开花的内部时钟至今没有定论，分散在不同山坡的同类却能对上时间。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>以16腕尺为丰歉分界、每差一腕尺加减税额的具体数值，各时期规定不同，本文取通行说法</li><li>罗达岛尼罗尺于861年由伊本·图伦主持修建的说法出自中世纪文献，细节各版本有出入</li><li>法老时代的水位岩刻是否已用于定税仍有争议，更早的记录多为记事性质</li></ul>
+    <ul><li>印度东北部这种丛生竹常写作梅竹，对应学名 Melocanna baccifera，中文通用名在不同文献里不一致</li><li>约48年的开花周期是当地常见说法；文献提到的几次开花年份间隔并不等距</li><li>同一物种远距离同步开花的机制尚无定论，遗传计时器与环境触发都有支持者</li><li>开花后整株枯死的比例因种类而异，并非所有竹子集群开花后都全片死亡</li><li>mautam 一词的字面解释各资料略有出入，通常指竹子开花及其后的鼠灾年成</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>埃及</span><span>尼罗河</span><span>税收</span><span>度量</span><span>水利</span></div>
+  <div class="tags"><span>竹子</span><span>禾本科</span><span>集群开花</span><span>种子饱和</span><span>米佐拉姆</span></div>
   
 
   <footer>
-    <div class="r"><span>文明与文化</span><span>10月30日</span></div>
+    <div class="r"><span>生物与自然</span><span>10月31日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     
   </footer>
