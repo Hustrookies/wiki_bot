@@ -236,35 +236,32 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周六 · 生物与自然 —— 田野笔记：浅底细框（无满幅色块），大行高，facts 走标签云 */
-.t-bio{
-  --paper:#f2f5ef; --brand:#f2f5ef; --accent:#6d5f18; --track:#e0e5d6;
-  --title-font:var(--sans); --hero-fg:#141414;
-  --hero-pad:20px 18px 18px;
+/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
+.t-china{
+  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:28px 20px 22px;
 }
-.t-bio body,.t-bio{line-height:1.85}
-.t-bio .hero{
-  background:var(--card);border:1px solid #cfd8c4;border-radius:var(--radius);
-  margin:16px 0 20px;
+.t-china .hero{background:var(--paper)}
+/* 朱印方章式类目标签 */
+.t-china .kicker{opacity:1}
+.t-china .kicker b{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
 }
-.t-bio .kicker{color:#2c5530;opacity:1;letter-spacing:.16em}
-.t-bio .hero h1{font-size:23px;font-weight:650}
-.t-bio .hero .hook{color:var(--dim);opacity:1}
-.t-bio .lead{line-height:1.85}
-.t-bio .body p{line-height:1.85}
-/* 标签云式 facts */
-.t-bio .facts{background:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.t-bio .facts .f{
-  display:flex;gap:7px;align-items:baseline;border-top:0;padding:7px 12px;
-  background:var(--card);border-radius:8px;border:1px solid var(--line);
+.t-china .hero h1{
+  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
 }
-.t-bio .facts .v{text-align:left}
+.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
+/* 古籍感：键右对齐贴向值 */
+.t-china .facts .f{gap:20px}
+.t-china .facts .k{flex:1;text-align:right;min-width:4em}
+.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
 
 @media (prefers-color-scheme:dark){
-  .t-bio{ --paper:#0e120d; --brand:#0e120d; --accent:#c4b84a; --track:#272c1e;
-          --hero-fg:#e8eaed; }
-  .t-bio .hero{border-color:#2c3a2a}
-  .t-bio .kicker{color:#8fc194}
+  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
+            --track:#332622; --hero-fg:#e8eaed; }
+  .t-china .kicker b{background:#8c2b20;color:#fff}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -279,10 +276,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#f2f5ef">
-<meta name="x-build" content="2026-10-31-1b02c37d">
-<meta name="description" content="多数竹子一生只开一次花，同一物种常在相距很远的地方同步结实，整片枯死；这种种子饱和策略让食种动物吃不完。印度东北部的梅竹约48年集体开花一次，种子丰收引发鼠群暴发和饥荒。">
-<title>开一次花，死一整片 · 生物与自然</title>
+<meta name="theme-color" content="#faf7f0">
+<meta name="x-build" content="2026-11-01-3a5321c8">
+<meta name="description" content="安史之乱后吐蕃占河西，安西都护府与长安断绝；主将郭昕率龟兹孤军自筹军饷，仍用唐朝年号，大历元宝、建中通宝即其钱，坚守至约808年城陷。">
+<title>孤城还在用老皇帝的年号 · 中国历史</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -514,51 +511,48 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周六 · 生物与自然 —— 田野笔记：浅底细框（无满幅色块），大行高，facts 走标签云 */
-.t-bio{
-  --paper:#f2f5ef; --brand:#f2f5ef; --accent:#6d5f18; --track:#e0e5d6;
-  --title-font:var(--sans); --hero-fg:#141414;
-  --hero-pad:20px 18px 18px;
+/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
+.t-china{
+  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:28px 20px 22px;
 }
-.t-bio body,.t-bio{line-height:1.85}
-.t-bio .hero{
-  background:var(--card);border:1px solid #cfd8c4;border-radius:var(--radius);
-  margin:16px 0 20px;
+.t-china .hero{background:var(--paper)}
+/* 朱印方章式类目标签 */
+.t-china .kicker{opacity:1}
+.t-china .kicker b{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
 }
-.t-bio .kicker{color:#2c5530;opacity:1;letter-spacing:.16em}
-.t-bio .hero h1{font-size:23px;font-weight:650}
-.t-bio .hero .hook{color:var(--dim);opacity:1}
-.t-bio .lead{line-height:1.85}
-.t-bio .body p{line-height:1.85}
-/* 标签云式 facts */
-.t-bio .facts{background:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.t-bio .facts .f{
-  display:flex;gap:7px;align-items:baseline;border-top:0;padding:7px 12px;
-  background:var(--card);border-radius:8px;border:1px solid var(--line);
+.t-china .hero h1{
+  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
 }
-.t-bio .facts .v{text-align:left}
+.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
+/* 古籍感：键右对齐贴向值 */
+.t-china .facts .f{gap:20px}
+.t-china .facts .k{flex:1;text-align:right;min-width:4em}
+.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
 
 @media (prefers-color-scheme:dark){
-  .t-bio{ --paper:#0e120d; --brand:#0e120d; --accent:#c4b84a; --track:#272c1e;
-          --hero-fg:#e8eaed; }
-  .t-bio .hero{border-color:#2c3a2a}
-  .t-bio .kicker{color:#8fc194}
+  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
+            --track:#332622; --hero-fg:#e8eaed; }
+  .t-china .kicker b{background:#8c2b20;color:#fff}
 }
 </style>
 </head>
-<body class="t-bio">
+<body class="t-china">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>生物与自然</b> · 10月31日</div>
-    <h1>开一次花，死一整片</h1>
-    <p class="hook">米佐拉姆的农民按竹子的开花年排日程：那年的丰收会带来鼠灾</p>
+    <div class="kicker"><b>中国历史</b> · 11月1日</div>
+    <h1>孤城还在用老皇帝的年号</h1>
+    <p class="hook">河西被截后，龟兹城仍照长安年号新铸铜钱</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-10-31-main.webp" alt="山坡连片丛生竹秆顶同时抽穗，远处几间高脚屋" width="1280" height="1280" loading="eager">
-    <figcaption>山坡连片丛生竹秆顶同时抽穗，远处几间高脚屋</figcaption>
+    <img src="img/2026-11-01-main.webp" alt="夯土城下一队军士驱牛耕田，远处沙脊雪山" width="1280" height="1280" loading="eager">
+    <figcaption>夯土城下一队军士驱牛耕田，远处沙脊雪山</figcaption>
   </figure>
   
 
@@ -569,36 +563,42 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-
-  
-
-  
-  <div class="tro">
-    <div class="r gain"><span class="k">得</span><p>整个物种同时结实，种子量远超食种动物的取食能力，总有一部分躲过被吃干净的机会</p></div>
-    <div class="r cost"><span class="k">失</span><p>植株连地下茎一起枯死，几十年靠竹鞭攒下的克隆网络一次清零，之后几十年再无笋可采</p></div>
+  <div class="ruler">
+    <div class="bar">
+      <span class="cap l"></span><span class="cap r"></span>
+      <span class="pin" style="left:51%"></span>
+    </div>
+    <div class="ends"><span>618</span><span>907</span></div>
+    
+    <div class="mk"><i></i><b>766</b>河西隔绝，安西孤悬</div>
+    
   </div>
+  
+
+  
+
   
 
   
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">米佐拉姆人把一个词写进了当地历法：mautam，指竹子集体开花结籽、随后鼠群冲进粮仓的那几年。2006年前后山地再次大面积开花，次年鼠害暴发，收成落空。竹子把繁殖变成一场押上几十年的赌局，人却要替它排日程。</p>
+  <p class="lead">在今新疆库车一带，出土过铸着「大历元宝」四字的铜钱。大历是唐代宗的年号，它颁布时，河西走廊正被吐蕃逐州占领，离长安数千里外的安西都护府已与朝廷隔断，可那里的守军照样改元、照样铸新钱。</p>
 
   <div class="body">
     
-    <section><h2>一片林子同时抽穗</h2><p>竹子属于禾本科，和稻、小麦同科，只是把茎长得又硬又高。它平时不开花，靠地下的竹鞭横向扩展，一整片林子可能在地下连成同一条根系。到某个时间点，同一批个体像接到通知一样同时抽穗、开花、结实，随后养分耗尽，竹秆连着地下茎一起枯死。有的种类要等六七十年甚至上百年才轮到一次繁殖，一次就把几十年攒下的储备全押上去。</p></section>
+    <section><h2>河西道断</h2><p>安史之乱一起，河西、陇右的守军被陆续调回平叛，吐蕃趁势在大历年间逐州吃掉凉州等地，通往西域的路断了。自640年起驻扎龟兹的安西都护府，连同北庭，成了葱岭以西的唐军孤军：没有饷，没有兵，靠城里代理都护郭昕带人在郊外屯田自筹。768年朝廷派左金吾卫将军李宪带500名河东兵，借回纥道西进入援，此后道路被占，他本人也滞留安西，客死塞外。</p></section>
     
-    <section><h2>为什么要同时</h2><p>为什么要同时？因为零星的种子活不下来。只有几株结实时，鸟、松鼠、竹象和鼠类能把这一顿吃得干干净净。整片同时结籽，落下的竹米数量远超这些动物的取食和储藏能力，总有一部分逃过一劫，这套打法叫种子饱和，栎树和松也在用。间隔拉得越长，食种动物的种群越难专门靠竹米过活。至于分散在不同山坡的同类靠什么对上时间，学界还没有定论。</p></section>
+    <section><h2>钱上的年号</h2><p>为什么继续用一个寄不到饷银的年号？因为这支军队的名分全在「天子」二字上：西域诸部服龟兹，服的是唐家天使的旗号，将士的官爵、讨吐蕃的资格也都出自长安。铸钱一面是给自筹的军饷找 circulate 的凭据，一面也是政治宣告——钱上的年号还跟着长安改，就等于说朝廷还在。建中是780年德宗的新年号，若建中通宝确为安西所铸，说明改元消息几年后仍借回纥道送到了龟兹，朝廷也是在前后重新听到安西消息的。</p></section>
     
-    <section><h2>丰收之后是鼠灾</h2><p>米佐拉姆的经历是这套策略的账单。当地漫山的梅竹大面积开花那年，山坡上落满竹米，鼠类数量在几个月里暴涨；竹子枯死、种子吃完之后，它们转向村庄的粮仓。种子越丰收，人越挨饿，这种年成在当地叫 mautam。人们说的周期约48年一轮，但记录里的开花年份并不严格按这个间隔走。竹林死后，盖房的竹材和春天的笋同时断供，政府在那几年提前组织捕鼠和补种。</p></section>
+    <section><h2>援军再没来</h2><p>787年朝廷把郭昕由安西副使遥补为安西都护、节制诸军事，随后又加节度使之名——一兵一饷都没能发过去。约790年北庭陷落，龟兹更孤，又撑了快二十年，到约808年城破，此后唐与吐蕃的文书里再没有出现安西建制的消息。郭昕是郭子仪之侄，郭氏一门自太宗朝起四代镇守西域，他是末一代。出土的大历元宝大多薄小粗率，远不如同期内地钱工整——几十年自筹的军队，把账都记在铜里了。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-10-31-sub.webp" alt="竹秆基部裸露的地下茎、须根与散落的竹实" width="1024" height="1024" loading="lazy">
-    <figcaption>竹秆基部裸露的地下茎、须根与散落的竹实</figcaption>
+    <img src="img/2026-11-01-sub.webp" alt="粗布上几枚薄小粗糙的旧铜钱，侧光下" width="1024" height="1024" loading="lazy">
+    <figcaption>粗布上几枚薄小粗糙的旧铜钱，侧光下</figcaption>
   </figure>
   
 
@@ -607,13 +607,17 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">科属</span><span class="v">禾本科竹亚科，与稻、小麦同科</span></div>
+    <div class="f"><span class="k">治所</span><span class="v">龟兹城，今新疆库车一带</span></div>
     
-    <div class="f"><span class="k">结实方式</span><span class="v">一次大量结实后，竹秆连同地下茎一起枯死</span></div>
+    <div class="f"><span class="k">与长安断绝</span><span class="v">约766年吐蕃占河西后</span></div>
     
-    <div class="f"><span class="k">周期</span><span class="v">梅竹常被说成约48年一轮，记录里的开花年份并不严格等距</span></div>
+    <div class="f"><span class="k">遥补安西都护</span><span class="v">787年</span></div>
     
-    <div class="f"><span class="k">对人的影响</span><span class="v">开花年种子丰收，鼠类激增后转向粮仓，形成周期性饥荒</span></div>
+    <div class="f"><span class="k">城陷</span><span class="v">约808年</span></div>
+    
+    <div class="f"><span class="k">出土钱币</span><span class="v">大历元宝、建中通宝</span></div>
+    
+    <div class="f"><span class="k">主将</span><span class="v">郭昕（郭子仪侄）</span></div>
     
   </div>
   
@@ -622,23 +626,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>竹子是草不是树：它和稻、小麦同属禾本科，竹笋就是还没抽高的嫩茎。</li><li>竹子开花的内部时钟至今没有定论，分散在不同山坡的同类却能对上时间。</li>
+    <li>安</li><li>西</li><li>与</li><li>朝</li><li>廷</li><li>隔</li><li>绝</li><li>近</li><li>四</li><li>十</li><li>年</li><li>，</li><li>饷</li><li>自</li><li>筹</li><li>、</li><li>援</li><li>不</li><li>至</li><li>，</li><li>却</li><li>没</li><li>投</li><li>降</li><li>也</li><li>没</li><li>自</li><li>立</li><li>，</li><li>钱</li><li>上</li><li>照</li><li>用</li><li>长</li><li>安</li><li>年</li><li>号</li><li>。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>印度东北部这种丛生竹常写作梅竹，对应学名 Melocanna baccifera，中文通用名在不同文献里不一致</li><li>约48年的开花周期是当地常见说法；文献提到的几次开花年份间隔并不等距</li><li>同一物种远距离同步开花的机制尚无定论，遗传计时器与环境触发都有支持者</li><li>开花后整株枯死的比例因种类而异，并非所有竹子集群开花后都全片死亡</li><li>mautam 一词的字面解释各资料略有出入，通常指竹子开花及其后的鼠灾年成</li></ul>
+    <ul><li>大历元宝、建中通宝是否为安西就地所铸，还是后世仿铸，学界至今无定论</li><li>龟兹陷落年份有790年代说与约808年说等分歧</li><li>郭昕城陷后的下落史料记载不一</li><li>河西诸州陷蕃次序与隔绝完成时间诸书不一，本篇取大历中</li><li>薄小粗率系就常见出土品相而言，非逐枚鉴定结论</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>竹子</span><span>禾本科</span><span>集群开花</span><span>种子饱和</span><span>米佐拉姆</span></div>
+  <div class="tags"><span>安西都护府</span><span>唐蕃关系</span><span>龟兹</span><span>河西走廊</span><span>古代货币</span></div>
   
 
   <footer>
-    <div class="r"><span>生物与自然</span><span>10月31日</span></div>
+    <div class="r"><span>中国历史</span><span>11月1日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     
   </footer>
