@@ -236,31 +236,22 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
-.t-person{
-  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:30px 20px 24px;
+/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
+.t-geo{
+  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+  --title-font:var(--sans);
 }
-.t-person .hero{
-  border-left:3px solid #6b4a2f; padding-left:18px;
-  margin-left:-16px; margin-right:-16px;
+.t-geo .kicker{letter-spacing:.2em}
+.t-geo .hero h1{letter-spacing:.01em}
+.t-geo .hero{
+  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
 }
-.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
-.t-person .hero h1{
-  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
-}
-.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
-/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
-.t-person .facts .f{display:block;text-align:left}
-.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
-.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
+/* 分带紧贴 hero 下沿，读作同一个剖面 */
+.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
 
 @media (prefers-color-scheme:dark){
-  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
-             --hero-fg:#e8eaed; }
-  .t-person .hero{border-left-color:#8a6640}
-  .t-person .kicker{color:#c39a63}
+  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
+  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -275,10 +266,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#f7f4ef">
-<meta name="x-build" content="2026-11-03-1c6cf34f">
-<meta name="description" content="17世纪姆本杜人的恩津加·姆班迪先后统治恩东戈与马塔姆巴，与葡萄牙人周旋近四十年；1622年在罗安达谈判中让侍女跪地充当座椅，1640年前后联合荷兰人把葡军逐出内陆。">
-<title>把侍从当椅子的女王 · 历史人物</title>
+<meta name="theme-color" content="#33564a">
+<meta name="x-build" content="2026-11-04-6ab3127e">
+<meta name="description" content="刚果河是世界最深的河流，平均流量每秒约4.1万立方米、居世界第二；它注入大西洋却不建三角洲，冰川期它刨出海底峡谷，把泥沙直接送过大陆架，堆进深海的刚果扇。">
+<title>把峡谷带进大海的河 · 自然地理</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -510,67 +501,59 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
-.t-person{
-  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:30px 20px 24px;
+/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
+.t-geo{
+  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+  --title-font:var(--sans);
 }
-.t-person .hero{
-  border-left:3px solid #6b4a2f; padding-left:18px;
-  margin-left:-16px; margin-right:-16px;
+.t-geo .kicker{letter-spacing:.2em}
+.t-geo .hero h1{letter-spacing:.01em}
+.t-geo .hero{
+  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
 }
-.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
-.t-person .hero h1{
-  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
-}
-.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
-/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
-.t-person .facts .f{display:block;text-align:left}
-.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
-.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
+/* 分带紧贴 hero 下沿，读作同一个剖面 */
+.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
 
 @media (prefers-color-scheme:dark){
-  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
-             --hero-fg:#e8eaed; }
-  .t-person .hero{border-left-color:#8a6640}
-  .t-person .kicker{color:#c39a63}
+  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
+  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
 }
 </style>
 </head>
-<body class="t-person">
+<body class="t-geo">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>历史人物</b> · 11月3日</div>
-    <h1>把侍从当椅子的女王</h1>
-    <p class="hook">一场谈判里，她用一名侍女的背脊换到与总督齐平的高度</p>
+    <div class="kicker"><b>自然地理</b> · 11月4日</div>
+    <h1>把峡谷带进大海的河</h1>
+    <p class="hook">世界最深大河不建三角洲，泥沙直通深海</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-03-main.webp" alt="土屋厅堂中一名女子坐在跪地侍女背上，对面官员起身，门口进光" width="1280" height="1280" loading="eager">
-    <figcaption>土屋厅堂中一名女子坐在跪地侍女背上，对面官员起身，门口进光</figcaption>
+    <img src="img/2026-11-04-main.webp" alt="大河直注入海，河口无三角洲，深沟伸向远海" width="1280" height="1280" loading="eager">
+    <figcaption>大河直注入海，河口无三角洲，深沟伸向远海</figcaption>
   </figure>
   
 
   <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
 
   
-
-  
-
-  
-  <div class="ruler">
-    <div class="bar">
-      <span class="cap l"></span><span class="cap r"></span>
-      <span class="pin" style="left:49%"></span>
-    </div>
-    <div class="ends"><span>1583</span><span>1663</span></div>
+  <div class="layers">
     
-    <div class="mk"><i></i><b>1622</b>罗安达谈判</div>
+    <div class="ly"><span class="n">河道</span><span class="note">深逾200米的深水槽，常年奔流</span></div>
+    
+    <div class="ly"><span class="n">河口</span><span class="note">没有三角洲，河水直冲下坡</span></div>
+    
+    <div class="ly"><span class="n">海底峡谷</span><span class="note">冰期低海平面时刨开大陆架</span></div>
+    
+    <div class="ly"><span class="n">深海扇</span><span class="note">泥沙在谷底尽头摊开成扇</span></div>
     
   </div>
+  
+
+  
+
   
 
   
@@ -581,37 +564,63 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">1622年，罗安达的谈判厅里，给恩津加备的座位比葡萄牙总督矮一截——座次高低就是两国高低。她没坐自己那张，叫一名侍女跪趴在地，跨坐上去，视线与对方齐平了才开口。这场谈判换来葡萄牙对恩东戈独立地位的承认。</p>
+  <p class="lead">刚果河注入大西洋时不带三角洲。河口下游是深逾200米的水道，每秒约4.1万立方米的水不肯在浅滩停留，顺着大陆架坡直插海里，泥沙跟着一起走。这条被河刨开的口子叫海底峡谷，是刚果河的手笔。</p>
 
   <div class="body">
     
-    <section><h2>罗安达的座位</h2><p>她进罗安达城时的身份，是替兄长出使的王室成员。四年前其兄夺位，把她挤出权力中心，她退到东边的马塔姆巴另立班底；等葡军打到恩东戈腹地，王族里还能与总督对面而坐的只剩她。葡方想让她接受藩属名分，她要的是把条件写进纸面：葡军撤出、双方对等往来。会谈结束时，葡方承认恩东戈的独立地位，她受洗取名安娜·德索萨。</p></section>
+    <section><h2>河口的例外</h2><p>长江、尼罗河、密西西比河，大河几乎都会在河口堆出三角洲，把泥沙变成新陆地，海岸线年年向海里推。刚果河是个例外：它平均流量每秒约4.1万立方米，仅次于亚马逊河，世界第二；河口却没有滩涂，深槽直接通向大洋。泥沙不在岸边落脚，而是被整条河运出了海。要理解这套操作，得把时间拨回冰期。</p></section>
     
-    <section><h2>为什么是椅子</h2><p>她懂两边的规矩：恩东戈的王权靠位次与献礼顺序成立，谁低一头谁就是属国；葡萄牙人的权威则写在文书和教名里。于是她把那张矮凳换成一把由自己人身体撑起的椅子，既不掀桌，也不认低。欧洲档案后来称她“野蛮女王”，而她谈判的先决条件始终是：把每一句承诺写成对等文本。受洗同理，几年后她又把这套教名礼敬丢开，1640年前后转而与新教的荷兰人结盟；信仰在她手里一直是可用的外交筹码。</p></section>
+    <section><h2>冰期刨开</h2><p>冰川期里大量海水被锁进冰盖，全球海平面明显下降，刚果河的入海口退到大陆架边缘，河水顺着坡往下落，坡度陡增，水流变成一把锄头，把窄而陡的西非大陆架刨出一条深沟，这就是刚果海底峡谷。非洲西侧是被动大陆边缘，大陆架本就狭窄，没有宽阔浅滩给泥沙落脚，河才能一竿子捅到坡底。冰消后海平面上升，海水灌回峡谷下段，把它淹成一条穿海而过的管道。</p></section>
     
-    <section><h2>四十年之后</h2><p>1624年她继位，1626年葡军再压过来，她干脆退回马塔姆巴练兵，把邻近部族捆成一条反葡阵线，建成安哥拉东部最强的政权。1640年前后她与荷兰人联手，迫使葡军退出恩东戈等内陆地区；荷兰人败走后她接着独力打，直到葡方在1654年签下和平协定。她1663年去世，在位近四十年。1911年，葡萄牙人把她的遗骨运回里斯本陈列，直到2002年才归还安哥拉重新下葬。</p></section>
+    <section><h2>深海为仓</h2><p>这条管道并没有退休。刚果河流域横跨赤道南北，是世界上唯一两次跨过赤道的河流，南岸下雨时北岸在旱季，雨季互相接力的结果，是流量常年在每秒2.3万到7.5万立方米之间摆动而不断流，峡谷几乎全年都有货要运。泥沙沿谷底以浊流的形式被送进深水区，在峡谷尽头摊开，堆成面积抵得上一座中型国家的刚果深海扇。这条河没给自己挣出一寸陆地，全堆进了海底。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-03-sub.webp" alt="木几上的卷起纸卷、铜环与串珠项饰，深色土墙背景" width="1024" height="1024" loading="lazy">
-    <figcaption>木几上的卷起纸卷、铜环与串珠项饰，深色土墙背景</figcaption>
+    <img src="img/2026-11-04-sub.webp" alt="陡立谷壁与谷底浊流，末端扇状沉积堆" width="1024" height="1024" loading="lazy">
+    <figcaption>陡立谷壁与谷底浊流，末端扇状沉积堆</figcaption>
   </figure>
   
 
+  
+  <div class="bars">
+    
+    <div class="b">
+      <div class="hd"><span class="k">河流深度</span><span class="v">230米，世界第一</span></div>
+      <div class="track"><div class="fill" style="width:100%"></div></div>
+    </div>
+    
+    <div class="b">
+      <div class="hd"><span class="k">平均流量</span><span class="v">每秒约4.1万立方米</span></div>
+      <div class="track"><div class="fill" style="width:20%"></div></div>
+    </div>
+    
+    <div class="b">
+      <div class="hd"><span class="k">全长</span><span class="v">4640公里</span></div>
+      <div class="track"><div class="fill" style="width:70%"></div></div>
+    </div>
+    
+    <div class="b">
+      <div class="hd"><span class="k">流域面积</span><span class="v">约401万平方公里</span></div>
+      <div class="track"><div class="fill" style="width:58%"></div></div>
+    </div>
+    
+  </div>
   
 
   
   <div class="facts">
     
-    <div class="f"><span class="k">在位</span><span class="v">恩东戈1624—1663年，马塔姆巴1631—1663年</span></div>
+    <div class="f"><span class="k">最深河段</span><span class="v">约230米，世界最深河流</span></div>
     
-    <div class="f"><span class="k">关键一年</span><span class="v">1622年，罗安达谈判</span></div>
+    <div class="f"><span class="k">全长</span><span class="v">4640公里（以谦比西河为源头），非洲第二</span></div>
     
-    <div class="f"><span class="k">翻盘一手</span><span class="v">1640年前后借荷、葡矛盾联荷驱葡</span></div>
+    <div class="f"><span class="k">平均流量</span><span class="v">约每秒4.1万立方米，世界第二</span></div>
     
-    <div class="f"><span class="k">终局</span><span class="v">1654年葡方签订和平协定</span></div>
+    <div class="f"><span class="k">流域面积</span><span class="v">约401万平方公里，仅次于亚马逊河</span></div>
+    
+    <div class="f"><span class="k">跨赤道</span><span class="v">两次，全球唯一</span></div>
     
   </div>
   
@@ -620,23 +629,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>她受洗时顺手用了葡萄牙总督的姓，签名成了“安娜·德索萨”</li><li>跪成椅子的那名侍女没留下名字，传下来的只有一个动作</li>
+    <li>刚果河河口没有三角洲，几乎全部泥沙都顺海底峡谷运进深海，堆成刚果扇。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>侍女跪地当椅一事主要出自安哥拉口头传统与后世转述，1622年会谈的葡方记录是否写到这一细节并不确定</li><li>她生年约1583年属后人推算，无同时期确证</li><li>联荷年份：材料作1640年，通说为1641年荷军夺取罗安达前后，1642年签订商业与军事协议</li><li>她放弃基督教信仰的具体时间与原因、以及是否再度受洗，史料说法不一</li><li>1622年会谈条款的内容多依她留存的书信复原，学界对葡方究竟承认到什么程度有分歧</li><li>遗骨1911年被移往里斯本、2002年归还安哥拉重葬，年份出自二手记述</li></ul>
+    <ul><li>资料中最深河段一说220米、一说230米，本文取230米</li><li>刚果扇与海底峡谷的具体面积、长度没有通行数字，本文只用定性说法</li><li>河口峡谷的切割细节超出本条资料范围，依据的是海底地貌的一般认识</li><li>峡谷在冰期低水位时的下切次数与节奏，学界仍在修订</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>安哥拉</span><span>姆本杜人</span><span>殖民抗争</span><span>外交史</span><span>17世纪</span></div>
+  <div class="tags"><span>自然地理</span><span>河流</span><span>海底峡谷</span><span>沉积物</span><span>非洲</span></div>
   
 
   <footer>
-    <div class="r"><span>历史人物</span><span>11月3日</span></div>
+    <div class="r"><span>自然地理</span><span>11月4日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
   </footer>
