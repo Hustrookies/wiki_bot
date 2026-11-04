@@ -236,22 +236,28 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
-.t-geo{
-  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
+.t-science{
+  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
   --title-font:var(--sans);
 }
-.t-geo .kicker{letter-spacing:.2em}
-.t-geo .hero h1{letter-spacing:.01em}
-.t-geo .hero{
-  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
+.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
+/* 网格必须在 brand 之前声明才叠在上层 */
+.t-science .hero{
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    var(--brand);
 }
-/* 分带紧贴 hero 下沿，读作同一个剖面 */
-.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
+.t-science .facts .k{min-width:5.5em}
+.t-science .facts .v,
+.t-science .tl .y{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13px;
+}
 
 @media (prefers-color-scheme:dark){
-  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
-  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
+  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -266,10 +272,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#33564a">
-<meta name="x-build" content="2026-11-04-6ab3127e">
-<meta name="description" content="刚果河是世界最深的河流，平均流量每秒约4.1万立方米、居世界第二；它注入大西洋却不建三角洲，冰川期它刨出海底峡谷，把泥沙直接送过大陆架，堆进深海的刚果扇。">
-<title>把峡谷带进大海的河 · 自然地理</title>
+<meta name="theme-color" content="#1b4a7a">
+<meta name="x-build" content="2026-11-05-877121cb">
+<meta name="description" content="1900年前后乌干达维多利亚湖畔昏睡病大流行，病因候选有酗酒、疟疾与营养不良；1903年布鲁斯确认病原体是布氏锥虫、由采采蝇传播，科赫则坚持体质与营养为主因。">
+<title>凶手不是酒精 · 科学与技术史</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -501,61 +507,60 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
-.t-geo{
-  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
+.t-science{
+  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
   --title-font:var(--sans);
 }
-.t-geo .kicker{letter-spacing:.2em}
-.t-geo .hero h1{letter-spacing:.01em}
-.t-geo .hero{
-  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
+.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
+/* 网格必须在 brand 之前声明才叠在上层 */
+.t-science .hero{
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    var(--brand);
 }
-/* 分带紧贴 hero 下沿，读作同一个剖面 */
-.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
+.t-science .facts .k{min-width:5.5em}
+.t-science .facts .v,
+.t-science .tl .y{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13px;
+}
 
 @media (prefers-color-scheme:dark){
-  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
-  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
+  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
 }
 </style>
 </head>
-<body class="t-geo">
+<body class="t-science">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>自然地理</b> · 11月4日</div>
-    <h1>把峡谷带进大海的河</h1>
-    <p class="hook">世界最深大河不建三角洲，泥沙直通深海</p>
+    <div class="kicker"><b>科学与技术史</b> · 11月5日</div>
+    <h1>凶手不是酒精</h1>
+    <p class="hook">乌干达沿湖万人昏睡而死，科赫盯着酒壶，布鲁斯盯着苍蝇</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-04-main.webp" alt="大河直注入海，河口无三角洲，深沟伸向远海" width="1280" height="1280" loading="eager">
-    <figcaption>大河直注入海，河口无三角洲，深沟伸向远海</figcaption>
+    <img src="img/2026-11-05-main.webp" alt="湖畔实验棚里，一人背身俯向黄铜显微镜，桌上有捕虫网和玻璃瓶" width="1280" height="1280" loading="eager">
+    <figcaption>湖畔实验棚里，一人背身俯向黄铜显微镜，桌上有捕虫网和玻璃瓶</figcaption>
   </figure>
   
 
   <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
 
   
-  <div class="layers">
-    
-    <div class="ly"><span class="n">河道</span><span class="note">深逾200米的深水槽，常年奔流</span></div>
-    
-    <div class="ly"><span class="n">河口</span><span class="note">没有三角洲，河水直冲下坡</span></div>
-    
-    <div class="ly"><span class="n">海底峡谷</span><span class="note">冰期低海平面时刨开大陆架</span></div>
-    
-    <div class="ly"><span class="n">深海扇</span><span class="note">泥沙在谷底尽头摊开成扇</span></div>
-    
+
+  
+
+  
+
+  
+  <div class="cmp">
+    <div class="then"><span class="lbl">当时认为</span><p>大流行之初，权威们认定昏睡病是酗酒、疟疾与饥饿叠加拖垮身体的结果；科赫1904年到东非后，仍把采采蝇看作无害的背景。</p></div>
+    <div class="now"><span class="lbl">实际是</span><p>实际是布氏锥虫寄生引起的感染，只经采采蝇叮咬传播；营养与酒精改变的是一个人的体质，不会让没被咬过的人发病。</p></div>
   </div>
-  
-
-  
-
-  
-
   
 
   
@@ -564,63 +569,41 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">刚果河注入大西洋时不带三角洲。河口下游是深逾200米的水道，每秒约4.1万立方米的水不肯在浅滩停留，顺着大陆架坡直插海里，泥沙跟着一起走。这条被河刨开的口子叫海底峡谷，是刚果河的手笔。</p>
+  <p class="lead">1900年前后，今乌干达维多利亚湖西岸的村子接连出现怪病：有人白天昏睡叫不醒，有人夜里整夜失眠、手不受控地发抖，一个村子接一个村子倒下，死者以万计。而当时医学界争的是凶手到底是谁——酒精、疟疾，还是饥饿。</p>
 
   <div class="body">
     
-    <section><h2>河口的例外</h2><p>长江、尼罗河、密西西比河，大河几乎都会在河口堆出三角洲，把泥沙变成新陆地，海岸线年年向海里推。刚果河是个例外：它平均流量每秒约4.1万立方米，仅次于亚马逊河，世界第二；河口却没有滩涂，深槽直接通向大洋。泥沙不在岸边落脚，而是被整条河运出了海。要理解这套操作，得把时间拨回冰期。</p></section>
+    <section><h2>四个嫌疑人</h2><p>这种病后来叫昏睡病：被咬后一两周先发热、头痛、皮肤发痒，数月后日夜颠倒、动作失调、越睡越深，最终昏睡而死。病程慢，几个月才倒下一个，看不出传染。于是官员把祸水指向进口烧酒，医生点名疟疾、饥饿与梅毒。理由也实在：病人多是贫困农夫，酗酒和消瘦随处可见，一个被酒精拖垮的身体倒下，不需要第二种解释。</p></section>
     
-    <section><h2>冰期刨开</h2><p>冰川期里大量海水被锁进冰盖，全球海平面明显下降，刚果河的入海口退到大陆架边缘，河水顺着坡往下落，坡度陡增，水流变成一把锄头，把窄而陡的西非大陆架刨出一条深沟，这就是刚果海底峡谷。非洲西侧是被动大陆边缘，大陆架本就狭窄，没有宽阔浅滩给泥沙落脚，河才能一竿子捅到坡底。冰消后海平面上升，海水灌回峡谷下段，把它淹成一条穿海而过的管道。</p></section>
+    <section><h2>苍蝇与猴子</h2><p>1902年前后，在乌干达的意大利医生卡斯泰拉尼已在病人脑脊液里看到锥虫。1903年，英国医生布鲁斯把叮过病人的采采蝇喂给健康猴子，猴子随后发病，血里查出锥虫；他的乌干达助手纳布伊西塔也让同样的蝇咬了自己，数月后病死。可这条证据链在当时并不硬：早期病人血里虫极少，镜检常一无所获；而发现结核杆菌的科赫1904年到东非后，公开主张主因是营养与体质。</p></section>
     
-    <section><h2>深海为仓</h2><p>这条管道并没有退休。刚果河流域横跨赤道南北，是世界上唯一两次跨过赤道的河流，南岸下雨时北岸在旱季，雨季互相接力的结果，是流量常年在每秒2.3万到7.5万立方米之间摆动而不断流，峡谷几乎全年都有货要运。泥沙沿谷底以浊流的形式被送进深水区，在峡谷尽头摊开，堆成面积抵得上一座中型国家的刚果深海扇。这条河没给自己挣出一寸陆地，全堆进了海底。</p></section>
+    <section><h2>结论被拿去用</h2><p>媒介说最终赢了，殖民当局却把它翻成另一套做法：采采蝇住在林地与河岸，那就先把人搬走。乌干达沿湖先后划出“采采蝇带”，村庄被强制迁空，弃耕的田长回灌木，口粮更紧，反倒加重了科赫说的那个诱因。如今防这病靠的不再是搬家，而是给危险人群做血液筛查，赶在神经症状出现前用药：第一期用苏拉明或喷他脒，虫进了神经系统就得换二氟甲基鸟氨酸。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-04-sub.webp" alt="陡立谷壁与谷底浊流，末端扇状沉积堆" width="1024" height="1024" loading="lazy">
-    <figcaption>陡立谷壁与谷底浊流，末端扇状沉积堆</figcaption>
+    <img src="img/2026-11-05-sub.webp" alt="旧式黄铜显微镜压着血膜，旁边是捕虫网和装着蝇的玻璃瓶" width="1024" height="1024" loading="lazy">
+    <figcaption>旧式黄铜显微镜压着血膜，旁边是捕虫网和装着蝇的玻璃瓶</figcaption>
   </figure>
   
 
-  
-  <div class="bars">
-    
-    <div class="b">
-      <div class="hd"><span class="k">河流深度</span><span class="v">230米，世界第一</span></div>
-      <div class="track"><div class="fill" style="width:100%"></div></div>
-    </div>
-    
-    <div class="b">
-      <div class="hd"><span class="k">平均流量</span><span class="v">每秒约4.1万立方米</span></div>
-      <div class="track"><div class="fill" style="width:20%"></div></div>
-    </div>
-    
-    <div class="b">
-      <div class="hd"><span class="k">全长</span><span class="v">4640公里</span></div>
-      <div class="track"><div class="fill" style="width:70%"></div></div>
-    </div>
-    
-    <div class="b">
-      <div class="hd"><span class="k">流域面积</span><span class="v">约401万平方公里</span></div>
-      <div class="track"><div class="fill" style="width:58%"></div></div>
-    </div>
-    
-  </div>
   
 
   
   <div class="facts">
     
-    <div class="f"><span class="k">最深河段</span><span class="v">约230米，世界最深河流</span></div>
+    <div class="f"><span class="k">病原体</span><span class="v">布氏锥虫，冈比亚型占报告病例约98%</span></div>
     
-    <div class="f"><span class="k">全长</span><span class="v">4640公里（以谦比西河为源头），非洲第二</span></div>
+    <div class="f"><span class="k">传播方式</span><span class="v">采采蝇（舌蝇）叮咬</span></div>
     
-    <div class="f"><span class="k">平均流量</span><span class="v">约每秒4.1万立方米，世界第二</span></div>
+    <div class="f"><span class="k">媒介结论</span><span class="v">1903年由布鲁斯委员会确认</span></div>
     
-    <div class="f"><span class="k">流域面积</span><span class="v">约401万平方公里，仅次于亚马逊河</span></div>
+    <div class="f"><span class="k">流行区</span><span class="v">撒哈拉以南36国，约7,000万人有感染风险</span></div>
     
-    <div class="f"><span class="k">跨赤道</span><span class="v">两次，全球唯一</span></div>
+    <div class="f"><span class="k">死亡人数</span><span class="v">2010年约9,000例，1990年约34,000例</span></div>
+    
+    <div class="f"><span class="k">分期用药</span><span class="v">一期喷他脒或苏拉明，二期二氟甲基鸟氨酸</span></div>
     
   </div>
   
@@ -629,23 +612,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>刚果河河口没有三角洲，几乎全部泥沙都顺海底峡谷运进深海，堆成刚果扇。</li>
+    <li>昏睡病晚期常用的美拉胂醇是含砷化合物，对两种锥虫都有效，只因副作用太烈才留作最后选择。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>资料中最深河段一说220米、一说230米，本文取230米</li><li>刚果扇与海底峡谷的具体面积、长度没有通行数字，本文只用定性说法</li><li>河口峡谷的切割细节超出本条资料范围，依据的是海底地貌的一般认识</li><li>峡谷在冰期低水位时的下切次数与节奏，学界仍在修订</li></ul>
+    <ul><li>沿湖死亡人数各史料口径不一，本篇只写“以万计”，未给具体数字</li><li>卡斯泰拉尼在脑脊液中发现锥虫的年份（1902或1903）及优先权归属仍有争议</li><li>纳布伊西塔的姓名拼写、被叮与死亡的具体日期，各史料出入较大</li><li>梅毒是否被列为当时的主流病因候选，本篇依据二手叙述</li><li>布鲁斯委员会用蝇感染猴的只数、批次未取精确数字，故不写</li><li>本期 material 是现代流行病学条目，与选题的1900年前后史实不属同一层面，仅取其病原、媒介、症状与用药部分</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>自然地理</span><span>河流</span><span>海底峡谷</span><span>沉积物</span><span>非洲</span></div>
+  <div class="tags"><span>昏睡病</span><span>虫媒传播</span><span>疾病史</span><span>殖民卫生政策</span><span>非洲</span></div>
   
 
   <footer>
-    <div class="r"><span>自然地理</span><span>11月4日</span></div>
+    <div class="r"><span>科学与技术史</span><span>11月5日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
   </footer>
