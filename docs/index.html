@@ -236,28 +236,44 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
-.t-science{
-  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
-  --title-font:var(--sans);
+/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
+.t-culture{
+  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:0 0 0 0;
 }
-.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
-/* 网格必须在 brand 之前声明才叠在上层 */
-.t-science .hero{
+.t-culture .hero{text-align:center;background:var(--paper)}
+/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
+.t-culture .hero::before,
+.t-culture .hero::after{
+  content:"";display:block;height:13px;
   background:
-    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    var(--brand);
+    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
+    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
+  opacity:.55;
 }
-.t-science .facts .k{min-width:5.5em}
-.t-science .facts .v,
-.t-science .tl .y{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:13px;
+.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
+.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
+.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
+/* 2×2 卡片网格 */
+.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.t-culture .facts .f{
+  display:block;background:var(--card);border-radius:10px;
+  padding:13px 14px;border-top:0;
 }
+.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
+.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
+  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
+              --hero-fg:#e8eaed; }
+  .t-culture .hero::before,.t-culture .hero::after{
+    background:
+      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
+      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
+    opacity:.4;
+  }
+  .t-culture .hero .kicker{color:#9aa4e8}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -272,10 +288,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#1b4a7a">
-<meta name="x-build" content="2026-11-05-877121cb">
-<meta name="description" content="1900年前后乌干达维多利亚湖畔昏睡病大流行，病因候选有酗酒、疟疾与营养不良；1903年布鲁斯确认病原体是布氏锥虫、由采采蝇传播，科赫则坚持体质与营养为主因。">
-<title>凶手不是酒精 · 科学与技术史</title>
+<meta name="theme-color" content="#f5f4f9">
+<meta name="x-build" content="2026-11-06-715ddbbc">
+<meta name="description" content="西非商道城市廷巴克图累积的中世纪伊斯兰手稿。2012年武装分子占城烧书，图书管理员和居民把数十万份写本装进铁皮箱，用驴车与独木舟分批运出城，藏进亲属家中，大部分存留至今。">
+<title>搬走一座图书馆 · 文明与文化</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -507,44 +523,60 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
-.t-science{
-  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
-  --title-font:var(--sans);
+/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
+.t-culture{
+  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:0 0 0 0;
 }
-.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
-/* 网格必须在 brand 之前声明才叠在上层 */
-.t-science .hero{
+.t-culture .hero{text-align:center;background:var(--paper)}
+/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
+.t-culture .hero::before,
+.t-culture .hero::after{
+  content:"";display:block;height:13px;
   background:
-    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    var(--brand);
+    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
+    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
+  opacity:.55;
 }
-.t-science .facts .k{min-width:5.5em}
-.t-science .facts .v,
-.t-science .tl .y{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:13px;
+.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
+.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
+.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
+/* 2×2 卡片网格 */
+.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.t-culture .facts .f{
+  display:block;background:var(--card);border-radius:10px;
+  padding:13px 14px;border-top:0;
 }
+.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
+.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
+  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
+              --hero-fg:#e8eaed; }
+  .t-culture .hero::before,.t-culture .hero::after{
+    background:
+      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
+      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
+    opacity:.4;
+  }
+  .t-culture .hero .kicker{color:#9aa4e8}
 }
 </style>
 </head>
-<body class="t-science">
+<body class="t-culture">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>科学与技术史</b> · 11月5日</div>
-    <h1>凶手不是酒精</h1>
-    <p class="hook">乌干达沿湖万人昏睡而死，科赫盯着酒壶，布鲁斯盯着苍蝇</p>
+    <div class="kicker"><b>文明与文化</b> · 11月6日</div>
+    <h1>搬走一座图书馆</h1>
+    <p class="hook">数十万份中世纪手稿，靠驴车和铁皮箱抢在纵火者前偷运出城</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-05-main.webp" alt="湖畔实验棚里，一人背身俯向黄铜显微镜，桌上有捕虫网和玻璃瓶" width="1280" height="1280" loading="eager">
-    <figcaption>湖畔实验棚里，一人背身俯向黄铜显微镜，桌上有捕虫网和玻璃瓶</figcaption>
+    <img src="img/2026-11-06-main.webp" alt="夜色河滩上的木箱货堆与驴群，远处人影抬箱" width="1280" height="1280" loading="eager">
+    <figcaption>夜色河滩上的木箱货堆与驴群，远处人影抬箱</figcaption>
   </figure>
   
 
@@ -557,34 +589,33 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-  <div class="cmp">
-    <div class="then"><span class="lbl">当时认为</span><p>大流行之初，权威们认定昏睡病是酗酒、疟疾与饥饿叠加拖垮身体的结果；科赫1904年到东非后，仍把采采蝇看作无害的背景。</p></div>
-    <div class="now"><span class="lbl">实际是</span><p>实际是布氏锥虫寄生引起的感染，只经采采蝇叮咬传播；营养与酒精改变的是一个人的体质，不会让没被咬过的人发病。</p></div>
+
+  
+
+  
+  <div class="artifact">
+    <span class="n">铁皮箱</span><p>起眼的铁皮箱和木箱——手稿分装进去，藏进厨房与卧室，运书的车混在逃难者的行李里。</p>
   </div>
-  
-
-  
-
   
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">1900年前后，今乌干达维多利亚湖西岸的村子接连出现怪病：有人白天昏睡叫不醒，有人夜里整夜失眠、手不受控地发抖，一个村子接一个村子倒下，死者以万计。而当时医学界争的是凶手到底是谁——酒精、疟疾，还是饥饿。</p>
+  <p class="lead">2012年，武装分子占领了马里北部的廷巴克图，把矛头对准了城里的书。而图书馆在他们进城之前就开始清空——居民把数十万份中世纪手稿装进铁皮箱和木箱，混在逃难行李里，用驴车、独木舟分批运出城，藏进亲友家中。</p>
 
   <div class="body">
     
-    <section><h2>四个嫌疑人</h2><p>这种病后来叫昏睡病：被咬后一两周先发热、头痛、皮肤发痒，数月后日夜颠倒、动作失调、越睡越深，最终昏睡而死。病程慢，几个月才倒下一个，看不出传染。于是官员把祸水指向进口烧酒，医生点名疟疾、饥饿与梅毒。理由也实在：病人多是贫困农夫，酗酒和消瘦随处可见，一个被酒精拖垮的身体倒下，不需要第二种解释。</p></section>
+    <section><h2>沙海之交</h2><p>廷巴克图坐在撒哈拉沙漠南缘，沙漠商道在这里接上尼日尔河。约14到16世纪，马里和桑海两个王朝治下，城里的桑科雷清真寺吸引各地学者赶来讲学。神学、法律、天文、医学、诗抄的手稿像货物一样在商道上买卖，私家庭院里代代传下书楼，几个世纪攒出数十万份的存量，是撒哈拉以南非洲最大的一片书写记忆。</p></section>
     
-    <section><h2>苍蝇与猴子</h2><p>1902年前后，在乌干达的意大利医生卡斯泰拉尼已在病人脑脊液里看到锥虫。1903年，英国医生布鲁斯把叮过病人的采采蝇喂给健康猴子，猴子随后发病，血里查出锥虫；他的乌干达助手纳布伊西塔也让同样的蝇咬了自己，数月后病死。可这条证据链在当时并不硬：早期病人血里虫极少，镜检常一无所获；而发现结核杆菌的科赫1904年到东非后，公开主张主因是营养与体质。</p></section>
+    <section><h2>火来之前</h2><p>2012年初，占领这座城的武装分子先炸掉了城外的圣徒陵墓，随后开始烧书。图书管理员的判断很冷酷：书集中放在一处，等于替纵火者把目标标好。于是几座图书馆被拆成上千个小包——铁皮箱、木箱、裹毡的捆子——塞进亲戚家、院落和卧室。入侵者烧得掉知道位置的馆藏，却不知道哪一家的水缸后头藏着哪一捆。</p></section>
     
-    <section><h2>结论被拿去用</h2><p>媒介说最终赢了，殖民当局却把它翻成另一套做法：采采蝇住在林地与河岸，那就先把人搬走。乌干达沿湖先后划出“采采蝇带”，村庄被强制迁空，弃耕的田长回灌木，口粮更紧，反倒加重了科赫说的那个诱因。如今防这病靠的不再是搬家，而是给危险人群做血液筛查，赶在神经症状出现前用药：第一期用苏拉明或喷他脒，虫进了神经系统就得换二氟甲基鸟氨酸。</p></section>
+    <section><h2>书的逃亡</h2><p>此后几个月，手稿沿着商道和尼日尔河一点点挪出城，最远的一批到了南部城市巴马科。2013年初武装分子被赶走，城里的图书馆已经空了，数千份没来得及运出的写本被烧掉。存下的绝大部分在巴马科寄放多年，逐批做除霉、编目和数字化，一部分后来送回廷巴克图，继续走当年靠驴和船走完的那段路。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-05-sub.webp" alt="旧式黄铜显微镜压着血膜，旁边是捕虫网和装着蝇的玻璃瓶" width="1024" height="1024" loading="lazy">
-    <figcaption>旧式黄铜显微镜压着血膜，旁边是捕虫网和装着蝇的玻璃瓶</figcaption>
+    <img src="img/2026-11-06-sub.webp" alt="土墙边一排铁皮箱，敞口箱里是裹布书捆" width="1024" height="1024" loading="lazy">
+    <figcaption>土墙边一排铁皮箱，敞口箱里是裹布书捆</figcaption>
   </figure>
   
 
@@ -593,17 +624,13 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">病原体</span><span class="v">布氏锥虫，冈比亚型占报告病例约98%</span></div>
+    <div class="f"><span class="k">地理位置</span><span class="v">撒哈拉沙漠南缘，尼日尔河北岸</span></div>
     
-    <div class="f"><span class="k">传播方式</span><span class="v">采采蝇（舌蝇）叮咬</span></div>
+    <div class="f"><span class="k">聚书高峰</span><span class="v">约14至16世纪，马里与桑海王朝时期</span></div>
     
-    <div class="f"><span class="k">媒介结论</span><span class="v">1903年由布鲁斯委员会确认</span></div>
+    <div class="f"><span class="k">手稿数量</span><span class="v">常称数十万份，各家口径不一</span></div>
     
-    <div class="f"><span class="k">流行区</span><span class="v">撒哈拉以南36国，约7,000万人有感染风险</span></div>
-    
-    <div class="f"><span class="k">死亡人数</span><span class="v">2010年约9,000例，1990年约34,000例</span></div>
-    
-    <div class="f"><span class="k">分期用药</span><span class="v">一期喷他脒或苏拉明，二期二氟甲基鸟氨酸</span></div>
+    <div class="f"><span class="k">2012年损失</span><span class="v">城内数千份写本遭焚毁或损毁</span></div>
     
   </div>
   
@@ -612,25 +639,25 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>昏睡病晚期常用的美拉胂醇是含砷化合物，对两种锥虫都有效，只因副作用太烈才留作最后选择。</li>
+    <li>救</li><li>下</li><li>这</li><li>批</li><li>手</li><li>稿</li><li>的</li><li>不</li><li>是</li><li>保</li><li>险</li><li>柜</li><li>，</li><li>而</li><li>是</li><li>数</li><li>百</li><li>户</li><li>分</li><li>散</li><li>的</li><li>人</li><li>家</li><li>：</li><li>藏</li><li>处</li><li>越</li><li>多</li><li>，</li><li>越</li><li>烧</li><li>不</li><li>完</li><li>。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>沿湖死亡人数各史料口径不一，本篇只写“以万计”，未给具体数字</li><li>卡斯泰拉尼在脑脊液中发现锥虫的年份（1902或1903）及优先权归属仍有争议</li><li>纳布伊西塔的姓名拼写、被叮与死亡的具体日期，各史料出入较大</li><li>梅毒是否被列为当时的主流病因候选，本篇依据二手叙述</li><li>布鲁斯委员会用蝇感染猴的只数、批次未取精确数字，故不写</li><li>本期 material 是现代流行病学条目，与选题的1900年前后史实不属同一层面，仅取其病原、媒介、症状与用药部分</li></ul>
+    <ul><li>2012年遭焚毁的手稿数量，报道多在数千份量级，具体数字口径不一</li><li>手稿总存量说法分歧较大，本文取「数十万」这一常见量级</li><li>2012年占领廷巴克图并毁书的组织构成复杂，本文未点名</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>昏睡病</span><span>虫媒传播</span><span>疾病史</span><span>殖民卫生政策</span><span>非洲</span></div>
+  <div class="tags"><span>廷巴克图</span><span>手稿</span><span>马里</span><span>图书馆</span><span>文化保存</span></div>
   
 
   <footer>
-    <div class="r"><span>科学与技术史</span><span>11月5日</span></div>
+    <div class="r"><span>文明与文化</span><span>11月6日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
-    <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
+    
   </footer>
 
 </div>
