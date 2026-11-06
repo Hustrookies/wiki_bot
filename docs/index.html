@@ -236,44 +236,35 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
-.t-culture{
-  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:0 0 0 0;
+/* 周六 · 生物与自然 —— 田野笔记：浅底细框（无满幅色块），大行高，facts 走标签云 */
+.t-bio{
+  --paper:#f2f5ef; --brand:#f2f5ef; --accent:#6d5f18; --track:#e0e5d6;
+  --title-font:var(--sans); --hero-fg:#141414;
+  --hero-pad:20px 18px 18px;
 }
-.t-culture .hero{text-align:center;background:var(--paper)}
-/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
-.t-culture .hero::before,
-.t-culture .hero::after{
-  content:"";display:block;height:13px;
-  background:
-    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
-    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
-  opacity:.55;
+.t-bio body,.t-bio{line-height:1.85}
+.t-bio .hero{
+  background:var(--card);border:1px solid #cfd8c4;border-radius:var(--radius);
+  margin:16px 0 20px;
 }
-.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
-.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
-.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
-/* 2×2 卡片网格 */
-.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.t-culture .facts .f{
-  display:block;background:var(--card);border-radius:10px;
-  padding:13px 14px;border-top:0;
+.t-bio .kicker{color:#2c5530;opacity:1;letter-spacing:.16em}
+.t-bio .hero h1{font-size:23px;font-weight:650}
+.t-bio .hero .hook{color:var(--dim);opacity:1}
+.t-bio .lead{line-height:1.85}
+.t-bio .body p{line-height:1.85}
+/* 标签云式 facts */
+.t-bio .facts{background:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.t-bio .facts .f{
+  display:flex;gap:7px;align-items:baseline;border-top:0;padding:7px 12px;
+  background:var(--card);border-radius:8px;border:1px solid var(--line);
 }
-.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
-.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
+.t-bio .facts .v{text-align:left}
 
 @media (prefers-color-scheme:dark){
-  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
-              --hero-fg:#e8eaed; }
-  .t-culture .hero::before,.t-culture .hero::after{
-    background:
-      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
-      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
-    opacity:.4;
-  }
-  .t-culture .hero .kicker{color:#9aa4e8}
+  .t-bio{ --paper:#0e120d; --brand:#0e120d; --accent:#c4b84a; --track:#272c1e;
+          --hero-fg:#e8eaed; }
+  .t-bio .hero{border-color:#2c3a2a}
+  .t-bio .kicker{color:#8fc194}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -288,10 +279,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#f5f4f9">
-<meta name="x-build" content="2026-11-06-715ddbbc">
-<meta name="description" content="西非商道城市廷巴克图累积的中世纪伊斯兰手稿。2012年武装分子占城烧书，图书管理员和居民把数十万份写本装进铁皮箱，用驴车与独木舟分批运出城，藏进亲属家中，大部分存留至今。">
-<title>搬走一座图书馆 · 文明与文化</title>
+<meta name="theme-color" content="#f2f5ef">
+<meta name="x-build" content="2026-11-07-f2df27c2">
+<meta name="description" content="猴面包树用松软可膨胀的树干在雨季储水，靠储备撑过非洲稀树草原长达半年的旱季，果实与树皮是荒年口粮；代价是这种木质长不成高硬躯干，几百年的个体可被风雷掀翻，倒下后多就地腐烂。">
+<title>树干里修成的水缸 · 生物与自然</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -523,60 +514,51 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
-.t-culture{
-  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:0 0 0 0;
+/* 周六 · 生物与自然 —— 田野笔记：浅底细框（无满幅色块），大行高，facts 走标签云 */
+.t-bio{
+  --paper:#f2f5ef; --brand:#f2f5ef; --accent:#6d5f18; --track:#e0e5d6;
+  --title-font:var(--sans); --hero-fg:#141414;
+  --hero-pad:20px 18px 18px;
 }
-.t-culture .hero{text-align:center;background:var(--paper)}
-/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
-.t-culture .hero::before,
-.t-culture .hero::after{
-  content:"";display:block;height:13px;
-  background:
-    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
-    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
-  opacity:.55;
+.t-bio body,.t-bio{line-height:1.85}
+.t-bio .hero{
+  background:var(--card);border:1px solid #cfd8c4;border-radius:var(--radius);
+  margin:16px 0 20px;
 }
-.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
-.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
-.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
-/* 2×2 卡片网格 */
-.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.t-culture .facts .f{
-  display:block;background:var(--card);border-radius:10px;
-  padding:13px 14px;border-top:0;
+.t-bio .kicker{color:#2c5530;opacity:1;letter-spacing:.16em}
+.t-bio .hero h1{font-size:23px;font-weight:650}
+.t-bio .hero .hook{color:var(--dim);opacity:1}
+.t-bio .lead{line-height:1.85}
+.t-bio .body p{line-height:1.85}
+/* 标签云式 facts */
+.t-bio .facts{background:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.t-bio .facts .f{
+  display:flex;gap:7px;align-items:baseline;border-top:0;padding:7px 12px;
+  background:var(--card);border-radius:8px;border:1px solid var(--line);
 }
-.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
-.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
+.t-bio .facts .v{text-align:left}
 
 @media (prefers-color-scheme:dark){
-  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
-              --hero-fg:#e8eaed; }
-  .t-culture .hero::before,.t-culture .hero::after{
-    background:
-      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
-      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
-    opacity:.4;
-  }
-  .t-culture .hero .kicker{color:#9aa4e8}
+  .t-bio{ --paper:#0e120d; --brand:#0e120d; --accent:#c4b84a; --track:#272c1e;
+          --hero-fg:#e8eaed; }
+  .t-bio .hero{border-color:#2c3a2a}
+  .t-bio .kicker{color:#8fc194}
 }
 </style>
 </head>
-<body class="t-culture">
+<body class="t-bio">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>文明与文化</b> · 11月6日</div>
-    <h1>搬走一座图书馆</h1>
-    <p class="hook">数十万份中世纪手稿，靠驴车和铁皮箱抢在纵火者前偷运出城</p>
+    <div class="kicker"><b>生物与自然</b> · 11月7日</div>
+    <h1>树干里修成的水缸</h1>
+    <p class="hook">它把木头泡成海绵，用柔软换旱季的活路</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-06-main.webp" alt="夜色河滩上的木箱货堆与驴群，远处人影抬箱" width="1280" height="1280" loading="eager">
-    <figcaption>夜色河滩上的木箱货堆与驴群，远处人影抬箱</figcaption>
+    <img src="img/2026-11-07-main.webp" alt="枯黄草原上一棵粗干猴面包树，枝头新绿，远处金合欢" width="1280" height="1280" loading="eager">
+    <figcaption>枯黄草原上一棵粗干猴面包树，枝头新绿，远处金合欢</figcaption>
   </figure>
   
 
@@ -591,31 +573,32 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-
-  
-  <div class="artifact">
-    <span class="n">铁皮箱</span><p>起眼的铁皮箱和木箱——手稿分装进去，藏进厨房与卧室，运书的车混在逃难者的行李里。</p>
+  <div class="tro">
+    <div class="r gain"><span class="k">得</span><p>雨季把雨水吸进树干存住，旱季照常保叶、开花、结果，果实与树皮顺带成了荒年口粮。</p></div>
+    <div class="r cost"><span class="k">失</span><p>含水松软撑不起高硬躯干，只能长粗；风与雷暴可掀翻几百年的个体，倒下后多半就地腐烂。</p></div>
   </div>
+  
+
   
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">2012年，武装分子占领了马里北部的廷巴克图，把矛头对准了城里的书。而图书馆在他们进城之前就开始清空——居民把数十万份中世纪手稿装进铁皮箱和木箱，混在逃难行李里，用驴车、独木舟分批运出城，藏进亲友家中。</p>
+  <p class="lead">非洲稀树草原的旱季里，草黄了，大多数树落光叶子，一棵猴面包树的枝顶却还能发新绿。它不是侥幸躲过了旱季，而是从树干里预存的雨水中一点点取水——靠一整个胖桶状的身躯，把日子撑到下一个雨季。</p>
 
   <div class="body">
     
-    <section><h2>沙海之交</h2><p>廷巴克图坐在撒哈拉沙漠南缘，沙漠商道在这里接上尼日尔河。约14到16世纪，马里和桑海两个王朝治下，城里的桑科雷清真寺吸引各地学者赶来讲学。神学、法律、天文、医学、诗抄的手稿像货物一样在商道上买卖，私家庭院里代代传下书楼，几个世纪攒出数十万份的存量，是撒哈拉以南非洲最大的一片书写记忆。</p></section>
+    <section><h2>雨季囤水</h2><p>猴面包树的树干不是结实的木头，而是疏松、能吸水的储水组织。雨季来临，它把雨水大量吸进树干，树围随之微微膨胀，同一棵树在一年里的粗细分明有变化。单株到底能存多少水，文献估计差异很大，从数百升到上万升都有，但共识是它的木材密度远低于普通乔木。旱季能持续半年以上，别的树落叶蜷缩、收紧代谢，它照常从这份储备里调水，维持枝叶，甚至开花。</p></section>
     
-    <section><h2>火来之前</h2><p>2012年初，占领这座城的武装分子先炸掉了城外的圣徒陵墓，随后开始烧书。图书管理员的判断很冷酷：书集中放在一处，等于替纵火者把目标标好。于是几座图书馆被拆成上千个小包——铁皮箱、木箱、裹毡的捆子——塞进亲戚家、院落和卧室。入侵者烧得掉知道位置的馆藏，却不知道哪一家的水缸后头藏着哪一捆。</p></section>
+    <section><h2>长粗的代价</h2><p>这份便利写进了木头的物理性质：含水又松软的木质部，撑不起橡木那样高而硬的主干。猴面包树因此走了另一条路——用长高换长粗，靠一整个桶身存水。代价也跟着来：粗壮而中空的躯干，加上不算深广的根系，稀树草原上的大风和雷暴能把几百年的个体整株掀翻。它的树皮薄、隔热有限，一场贴着地面烧的草原火，同样能杀死一棵上了年纪的树。</p></section>
     
-    <section><h2>书的逃亡</h2><p>此后几个月，手稿沿着商道和尼日尔河一点点挪出城，最远的一批到了南部城市巴马科。2013年初武装分子被赶走，城里的图书馆已经空了，数千份没来得及运出的写本被烧掉。存下的绝大部分在巴马科寄放多年，逐批做除霉、编目和数字化，一部分后来送回廷巴克图，继续走当年靠驴和船走完的那段路。</p></section>
+    <section><h2>倒下之后</h2><p>本世纪头二十年的实地清点发现，非洲现存最大的十几株猴面包树中，有九株整株或部分倒下，地下水位变化被当作嫌疑之一，但还没有公认结论。它活着时养活很多东西：果实晒成酸粉留作荒年口粮，树皮剥出纤维搓绳，树洞里积的水是旱季行路人的应急水源。倒下的一株不会立成枯桩——湿软的躯干烧不起来，几年之内就地塌腐，把攒了一辈子的水还给沙土。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-06-sub.webp" alt="土墙边一排铁皮箱，敞口箱里是裹布书捆" width="1024" height="1024" loading="lazy">
-    <figcaption>土墙边一排铁皮箱，敞口箱里是裹布书捆</figcaption>
+    <img src="img/2026-11-07-sub.webp" alt="倒地的猴面包树树干，灰褐树皮，断口木质松软" width="1024" height="1024" loading="lazy">
+    <figcaption>倒地的猴面包树树干，灰褐树皮，断口木质松软</figcaption>
   </figure>
   
 
@@ -624,13 +607,15 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">地理位置</span><span class="v">撒哈拉沙漠南缘，尼日尔河北岸</span></div>
+    <div class="f"><span class="k">属与种</span><span class="v">猴面包属约8种，其中6种特有于马达加斯加</span></div>
     
-    <div class="f"><span class="k">聚书高峰</span><span class="v">约14至16世纪，马里与桑海王朝时期</span></div>
+    <div class="f"><span class="k">常见种</span><span class="v">Adansonia digitata，分布于非洲稀树草原</span></div>
     
-    <div class="f"><span class="k">手稿数量</span><span class="v">常称数十万份，各家口径不一</span></div>
+    <div class="f"><span class="k">树干</span><span class="v">桶状，粗者胸径可达数米</span></div>
     
-    <div class="f"><span class="k">2012年损失</span><span class="v">城内数千份写本遭焚毁或损毁</span></div>
+    <div class="f"><span class="k">花期</span><span class="v">旱季开白花，主要由蝙蝠传粉</span></div>
+    
+    <div class="f"><span class="k">用途</span><span class="v">果肉晒干制酸粉，树皮纤维可搓绳</span></div>
     
   </div>
   
@@ -639,23 +624,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>救</li><li>下</li><li>这</li><li>批</li><li>手</li><li>稿</li><li>的</li><li>不</li><li>是</li><li>保</li><li>险</li><li>柜</li><li>，</li><li>而</li><li>是</li><li>数</li><li>百</li><li>户</li><li>分</li><li>散</li><li>的</li><li>人</li><li>家</li><li>：</li><li>藏</li><li>处</li><li>越</li><li>多</li><li>，</li><li>越</li><li>烧</li><li>不</li><li>完</li><li>。</li>
+    <li>猴面包树木材没有清晰的年轮，最大个体「上千岁」的年龄要靠放射性碳定年校准。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>2012年遭焚毁的手稿数量，报道多在数千份量级，具体数字口径不一</li><li>手稿总存量说法分歧较大，本文取「数十万」这一常见量级</li><li>2012年占领廷巴克图并毁书的组织构成复杂，本文未点名</li></ul>
+    <ul><li>单株储水量从数百升到上万升说法不一，无公认数值</li><li>巨型个体近年大量倒伏的原因尚无定论，本文只述现象</li><li>旱季是否保住叶子因种与个体而异，不少非洲大陆个体旱季落叶</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>廷巴克图</span><span>手稿</span><span>马里</span><span>图书馆</span><span>文化保存</span></div>
+  <div class="tags"><span>旱生适应</span><span>储水策略</span><span>生存权衡</span><span>非洲稀树草原</span></div>
   
 
   <footer>
-    <div class="r"><span>文明与文化</span><span>11月6日</span></div>
+    <div class="r"><span>生物与自然</span><span>11月7日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     
   </footer>
