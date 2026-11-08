@@ -236,32 +236,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
-.t-china{
-  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:28px 20px 22px;
+/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
+.t-event{
+  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
+  --title-font:var(--sans);
 }
-.t-china .hero{background:var(--paper)}
-/* 朱印方章式类目标签 */
-.t-china .kicker{opacity:1}
-.t-china .kicker b{
-  display:inline-block;background:var(--accent);color:#fff;
-  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
+.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
+.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
+.t-event .hero{
+  background:
+    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
+    var(--brand);
 }
-.t-china .hero h1{
-  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
-}
-.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
-/* 古籍感：键右对齐贴向值 */
-.t-china .facts .f{gap:20px}
-.t-china .facts .k{flex:1;text-align:right;min-width:4em}
-.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
+/* 表格式 facts：键左值右、细分隔线、等宽数字 */
+.t-event .facts .k{min-width:5.5em}
 
 @media (prefers-color-scheme:dark){
-  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
-            --track:#332622; --hero-fg:#e8eaed; }
-  .t-china .kicker b{background:#8c2b20;color:#fff}
+  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -276,10 +267,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#faf7f0">
-<meta name="x-build" content="2026-11-08-0b59fd88">
-<meta name="description" content="1904年起，英属德兰士瓦兰德金矿（今南非约翰内斯堡）成批输入中国契约劳工，补足布尔战争后的矿井缺工。华工工资低、逃亡与死伤频发，在白人矿工施压下被自治政府逐步清退。">
-<title>兰德金矿的契约华工 · 中国历史</title>
+<meta name="theme-color" content="#1f3352">
+<meta name="x-build" content="2026-11-09-500771ae">
+<meta name="description" content="1791至1804年，法属圣多明各奴隶由杜桑·卢维杜尔与德萨林领导，击退拿破仑三万远征军，建立海地。1825年法国以承认独立为条件索取1.5亿金法郎赔偿，后减为9000万，海地还至20世纪中叶。">
+<title>海地革命的百年账单 · 世界历史</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -511,48 +502,39 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
-.t-china{
-  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:28px 20px 22px;
+/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
+.t-event{
+  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
+  --title-font:var(--sans);
 }
-.t-china .hero{background:var(--paper)}
-/* 朱印方章式类目标签 */
-.t-china .kicker{opacity:1}
-.t-china .kicker b{
-  display:inline-block;background:var(--accent);color:#fff;
-  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
+.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
+.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
+.t-event .hero{
+  background:
+    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
+    var(--brand);
 }
-.t-china .hero h1{
-  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
-}
-.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
-/* 古籍感：键右对齐贴向值 */
-.t-china .facts .f{gap:20px}
-.t-china .facts .k{flex:1;text-align:right;min-width:4em}
-.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
+/* 表格式 facts：键左值右、细分隔线、等宽数字 */
+.t-event .facts .k{min-width:5.5em}
 
 @media (prefers-color-scheme:dark){
-  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
-            --track:#332622; --hero-fg:#e8eaed; }
-  .t-china .kicker b{background:#8c2b20;color:#fff}
+  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
 }
 </style>
 </head>
-<body class="t-china">
+<body class="t-event">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>中国历史</b> · 11月8日</div>
-    <h1>兰德金矿的契约华工</h1>
-    <p class="hook">矿主把他们运来压工资，白人矿工把他们赶出去</p>
+    <div class="kicker"><b>世界历史</b> · 11月9日</div>
+    <h1>海地革命的百年账单</h1>
+    <p class="hook">唯一成功的奴隶起义建国，独立却从1.5亿法郎赔款开始。</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-08-main.webp" alt="土路上挑矿筐的人影，远处是井架与矿渣堆" width="1280" height="1280" loading="eager">
-    <figcaption>土路上挑矿筐的人影，远处是井架与矿渣堆</figcaption>
+    <img src="img/2026-11-09-main.webp" alt="海湾停着战舰，岸上士兵列队，远处居民背影观望" width="1280" height="1280" loading="eager">
+    <figcaption>海湾停着战舰，岸上士兵列队，远处居民背影观望</figcaption>
   </figure>
   
 
@@ -561,18 +543,21 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-
-  
-  <div class="ruler">
-    <div class="bar">
-      <span class="cap l"></span><span class="cap r"></span>
-      <span class="pin" style="left:96%"></span>
-    </div>
-    <div class="ends"><span>1644</span><span>1912</span></div>
+  <div class="tl">
     
-    <div class="mk"><i></i><b>1904</b>契约华工入兰德金矿</div>
+    <div class="nd"><div class="dot"></div><span class="y">1791</span><span class="lb">圣多明各奴隶大起义</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1802</span><span class="lb">法军远征诱捕杜桑</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1804</span><span class="lb">海地发表独立宣言</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1825</span><span class="lb">法国以承认换赔款</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1915</span><span class="lb">美军登陆接管海关</span></div>
     
   </div>
+  
+
   
 
   
@@ -583,22 +568,22 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">1904年，第一批契约华工从非洲东岸的港口转乘火车，抵达今南非约翰内斯堡郊外的兰德金矿区。他们多半来自中国北方农村，签下三四年一份的合同，工资远低于白人矿工，住在围起来的工棚里，不得自由外出。</p>
+  <p class="lead">1825年，法国舰队驶抵海地锚地，目的不是重新征服，而是收账：以承认独立为条件，前宗主国向这个黑人共和国索取1.5亿金法郎，作为种植园主失去奴隶与土地的财产赔偿。二十多年前，正是这些种植园里的奴隶，击败了拿破仑派来的三万人远征军。</p>
 
   <div class="body">
     
-    <section><h2>矿井缺人</h2><p>布尔战争（1899—1902）打完，兰德金矿区最缺的不是资本，是人。矿脉埋得深、岩石硬，井下活重又危险；白人矿工靠着技术岗位和工会把工钱顶得很高，合同一到就离矿，本地非洲劳工又被极低的报酬推走。殖民当局与矿主定下的办法是从中国招人：中介在山东、直隶一带签三四年期的契约，把人从天津装上船运到南非。</p></section>
+    <section><h2>奴隶打赢了</h2><p>1791年，法属圣多明各的种植园奴隶起义，杜桑·卢维杜尔把松散的队伍整编成军，1794到1798年间先后击退入侵的西班牙与法国军队，1801年将全岛纳入自治。1802年，拿破仑派妹夫勒克莱尔率三万人远征，诱捕了杜桑；德萨林接手战局，法军深陷疫病与游击战，被迫撤出。1804年1月，《海地独立宣言》发表。</p></section>
     
-    <section><h2>工棚里的账</h2><p>华工的工资只是白人矿工的一小部分，矿方还把工棚、口粮、工具、医药记在账上，从工钱里扣，合同期满能带走的不多。人不许自由走：住区被围起来，出门要带矿方发的凭证，跑掉被抓回来要挨罚，也有人挨打。深井里塌方、肺病和矽肺带走了不少人。矿主把这些问题说成华工抽鸦片、不自律，1904年前后德兰士瓦收紧鸦片管制，禁烟成了整顿这批劳工的抓手。</p></section>
+    <section><h2>承认的价码</h2><p>战场之外，法国握着另一样东西：列强承认的钥匙。1825年，查理十世颁布敕令，承认海地独立的前提，是向法国种植园主支付1.5亿金法郎的财产损失——说白了，是给被解放的奴隶和荒废的种植园定价。海地担心拒绝后法国再次动武，也怕继续被封锁，签了字。为了凑齐首期款，它向法国银行借款，本金之上又叠利息，一份赔款滚成了跨世纪的债务。</p></section>
     
-    <section><h2>被赶走之后</h2><p>1907年德兰士瓦自治，布尔老将博塔出任总理。他要看白人矿工的脸色，工会这几年喊的口号就是把华工赶出去；史末资推动亚洲人注册法，华人、印度裔都得按手印登记，持证才能入境。契约到期不续签，人被成批送回中国，1910年前后输入基本停止。1906年9月的约翰内斯堡集会上，印度律师甘地宣誓抵抗这套注册法——非暴力抵抗这个词，头一回被用出来是在南非。</p></section>
+    <section><h2>后来的账单</h2><p>这笔债几乎掏空了新国家的预算，独立初期海地财政收入的大半要用于赔款和利息，修路办学长期缺钱。列强也在回避这个榜样：美国直到1862年才承认海地独立，顾虑主要来自国内的奴隶制。债主最终追到门口——1915年美军登陆海地，接管了这个国家的海关。1825年开出的账单，一直还到20世纪中叶。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-08-sub.webp" alt="井下木支架上的油灯、短柄镐与湿碎石地面" width="1024" height="1024" loading="lazy">
-    <figcaption>井下木支架上的油灯、短柄镐与湿碎石地面</figcaption>
+    <img src="img/2026-11-09-sub.webp" alt="桌上的断镣铐、几枚金币和一卷缠紧的旧册子" width="1024" height="1024" loading="lazy">
+    <figcaption>桌上的断镣铐、几枚金币和一卷缠紧的旧册子</figcaption>
   </figure>
   
 
@@ -607,15 +592,15 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">输入时间</span><span class="v">1904年起，1910年前后基本停止</span></div>
+    <div class="f"><span class="k">革命起止</span><span class="v">1791—1804年</span></div>
     
-    <div class="f"><span class="k">来源地</span><span class="v">山东、直隶等中国北方省份</span></div>
+    <div class="f"><span class="k">独立宣言</span><span class="v">1804年1月</span></div>
     
-    <div class="f"><span class="k">合同</span><span class="v">约3年，期满原则上遣返</span></div>
+    <div class="f"><span class="k">1802年法国远征军</span><span class="v">约3万人，由勒克莱尔率领</span></div>
     
-    <div class="f"><span class="k">矿区</span><span class="v">兰德金矿，今约翰内斯堡一带</span></div>
+    <div class="f"><span class="k">1825年法国索赔</span><span class="v">1.5亿金法郎，后减为9000万</span></div>
     
-    <div class="f"><span class="k">清退</span><span class="v">1907年德兰士瓦自治后停止续签、成批遣返</span></div>
+    <div class="f"><span class="k">还债终点</span><span class="v">20世纪中叶</span></div>
     
   </div>
   
@@ -624,25 +609,25 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>1906年英国大选时，契约华工被反对派斥为「中国奴隶」，成了竞选议题。</li><li>把华工运来的正是最想要廉价矿工的矿主，赶走他们的理由是保护白人劳工。</li>
+    <li>1816年玻利瓦尔流亡海地，获得的援助附带一个条件：在他解放的土地上废除奴隶制。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>本题无 material 锚文，全部依据通史常识撰写，具体数字与年代宜再核。</li><li>契约华工总数各说不一：常见估计为1904至1910年间约6万人，选题材料称「数千」，可能只指首批规模。</li><li>首批抵达的确切月份与登陆港口（一说东非贝拉、洛伦索-马贵斯一带）未逐条核实。</li><li>华工与白人矿工工资的倍数、井下死亡与患病人数，文献口径差异很大。</li><li>封闭工棚与出入凭证的施行年份；亚洲人注册法有1906年提案、1907年与1908年生效诸说。</li><li>甘地率众宣誓的集会日期（通说1906年9月）与「非暴力抵抗」用语的确切起点。</li></ul>
+    <ul><li>赔款减为9000万，通行的说法系1838年重新谈判确定，材料未给出年份，正文只写后减为9000万。</li><li>法军远征军的死亡人数与疫病占比各资料口径不一，正文只写深陷疫病与游击战。</li><li>赔款占海地财政收入的具体倍数各说不一，正文只写大半。</li><li>1915年美军介入海地的直接动因有护债、战略、内乱等多种解释。</li><li>美国长期不承认海地独立的原因以国内奴隶制政治为主流说法，亦有其他解读。</li><li>最后一笔赔款付清的年份常写作1947，材料无法核实，正文只写到20世纪中叶。</li><li>杜桑·卢维杜尔的译名另有图森·路维杜尔（材料所用），本文取大陆通行译名。</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>清末海外华人</span><span>契约劳工</span><span>南非</span><span>约翰内斯堡</span><span>劳工史</span></div>
+  <div class="tags"><span>海地革命</span><span>废奴</span><span>殖民主义</span><span>赔款</span><span>加勒比</span></div>
   
 
   <footer>
-    <div class="r"><span>中国历史</span><span>11月8日</span></div>
+    <div class="r"><span>世界历史</span><span>11月9日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
-    
+    <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
   </footer>
 
 </div>
