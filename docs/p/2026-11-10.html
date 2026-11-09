@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<!--
+  每日百科推送 · 单骨架模板
+  由 render.py 渲染。7 个类目共用这一份结构，观感差异全部来自 <body class="t-*"> + themes/t-*.css。
+
+  模板语法（沿用 football-bot/render.py 的正则引擎）：
+                                      标量替换，自动 HTML 转义
+    /* base.css —— 骨架样式，7 套皮肤共用。
+   皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
+   render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
+
+:root{
+  --card:#ffffff; --fg:#141414; --dim:#5b5a57; --muted:#8a8884; --line:#e4e3de;
+  --radius:14px;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+         "Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  /* 中文衬线：安卓微信大概率没有思源宋体，兜到系统 serif 会退化但不会崩 */
+  --serif:"Songti SC","Source Han Serif SC","Noto Serif CJK SC","Songti TC","SimSun",serif;
+  --title-font:var(--sans);
+  --hero-fg:#ffffff;
+  --hero-pad:26px 20px 22px;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --card:#181b20; --fg:#e8eaed; --dim:#9aa0a8; --muted:#7d838b; --line:#282c33; }
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--fg);
+  font:16px/1.75 var(--sans); -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px 40px}
+
+/* ---------- hero ---------- */
+.hero{
+  margin:0 -16px 20px; padding:var(--hero-pad);
+  background:var(--brand); color:var(--hero-fg);
+}
+.kicker{
+  font:600 11.5px/1 var(--sans); letter-spacing:.16em;
+  opacity:.75; margin-bottom:11px;
+}
+.hero h1{
+  margin:0; font:700 25px/1.34 var(--title-font);
+  letter-spacing:-.01em; text-wrap:balance;
+}
+.hero .hook{
+  margin:9px 0 0; font-size:14.5px; line-height:1.6; opacity:.8;
+}
+
+/* ---------- 导语 / 正文 ---------- */
+.lead{
+  margin:0 0 22px; font-size:17px; line-height:1.8; font-weight:500;
+  color:var(--fg);
+}
+.body section{margin:0 0 22px}
+.body h2{
+  margin:0 0 8px; font:600 13px/1 var(--sans);
+  letter-spacing:.1em; color:var(--accent);
+}
+.body p{margin:0; color:var(--fg)}
+
+/* ---------- 签名图形 1 · 时间轴（世界历史） ---------- */
+.tl{display:flex;position:relative;margin:0 0 24px;padding-top:3px}
+.tl::before{
+  content:"";position:absolute;top:7px;left:9%;right:9%;
+  height:2px;background:var(--line);
+}
+.tl .nd{flex:1;min-width:0;text-align:center;position:relative}
+.tl .dot{
+  width:10px;height:10px;border-radius:50%;background:var(--accent);
+  margin:0 auto 10px;box-shadow:0 0 0 2px var(--paper);  /* 2px 纸色环 */
+}
+.tl .y{
+  display:block;font:600 12.5px/1.3 var(--sans);
+  font-variant-numeric:tabular-nums;color:var(--fg);
+}
+.tl .lb{display:block;font-size:11.5px;color:var(--dim);margin-top:3px;line-height:1.45}
+
+/* ---------- 签名图形 2 · 跨度尺（历史人物 / 中国历史） ---------- */
+.ruler{margin:0 0 24px}
+.ruler .bar{position:relative;height:2px;background:var(--line);border-radius:1px;margin:0 1px}
+.ruler .cap{position:absolute;top:-5px;width:2px;height:12px;background:var(--line)}
+.ruler .cap.l{left:0}.ruler .cap.r{right:0}
+.ruler .pin{
+  position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 2px var(--paper);transform:translateX(-50%);
+}
+.ruler .ends{
+  display:flex;justify-content:space-between;margin-top:11px;
+  font:600 12.5px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--dim);
+}
+/* mark 标签走正常流，不绝对定位 —— 长标签或贴边时都不会溢出 */
+.ruler .mk{
+  display:flex;align-items:center;gap:7px;margin-top:9px;
+  font-size:12.5px;color:var(--dim);
+}
+.ruler .mk i{
+  width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;font-style:normal;
+}
+.ruler .mk b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---------- 签名图形 3 · 垂直分带（自然地理） ---------- */
+.layers{margin:0 0 20px;border-radius:var(--radius);overflow:hidden}
+.layers .ly{padding:13px 16px;color:#fff}
+.layers .ly+.ly{margin-top:2px}          /* 2px 纸色缝隙分隔，不描边 */
+.layers .ly .n{display:block;font:600 14.5px/1.4 var(--sans)}
+.layers .ly .note{display:block;font-size:12.5px;opacity:.82;margin-top:2px;line-height:1.5}
+/* 单色顺序型 4 步，白字全部 ≥4.2:1（见手册 §6 色值核算） */
+.layers .ly:nth-child(1){background:#1e3b31}
+.layers .ly:nth-child(2){background:#2c5446}
+.layers .ly:nth-child(3){background:#3b6d5b}
+.layers .ly:nth-child(4){background:#4b8571}
+@media (prefers-color-scheme:dark){
+  .layers .ly:nth-child(1){background:#16302a}
+  .layers .ly:nth-child(2){background:#22453b}
+  .layers .ly:nth-child(3){background:#2f5a4c}
+  .layers .ly:nth-child(4){background:#3d6f5e}
+}
+
+/* ---------- 签名图形 4 · 对照双栏（科学史） ---------- */
+.cmp{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  margin:0 0 22px;border-radius:var(--radius);overflow:hidden;
+}
+.cmp>div{background:var(--card);padding:15px 16px}
+.cmp .lbl{
+  display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;
+  margin-bottom:8px;color:var(--muted);
+}
+.cmp .now .lbl{color:var(--accent)}
+.cmp p{margin:0;font-size:14px;line-height:1.7}
+.cmp .then p{color:var(--dim)}
+
+/* ---------- 签名图形 5 · 得失权衡（生物） ---------- */
+.tro{margin:0 0 22px;background:var(--card);border-radius:var(--radius);overflow:hidden}
+.tro .r{display:flex;gap:13px;padding:14px 16px}
+.tro .r+.r{border-top:1px solid var(--line)}
+/* 文字标签本身就是识别通道，不靠颜色单独承载 */
+.tro .k{
+  flex:none;width:2.1em;font:600 13px/1.7 var(--sans);text-align:center;
+  border-radius:5px;height:1.7em;
+}
+.tro .gain .k{background:#e4efe4;color:#2c5530}
+.tro .cost .k{background:#f0edda;color:#5c5216}
+.tro p{margin:0;font-size:14.5px;line-height:1.7}
+@media (prefers-color-scheme:dark){
+  .tro .gain .k{background:#1e2c1f;color:#8fc194}
+  .tro .cost .k{background:#2b2818;color:#c4b84a}
+}
+
+/* ---------- 签名图形 6 · 具体物件（文明与文化） ---------- */
+.artifact{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);border-left:3px solid var(--accent);
+}
+.artifact .n{display:block;font:600 16px/1.5 var(--title-font);margin-bottom:4px}
+.artifact p{margin:0;font-size:14px;line-height:1.7;color:var(--dim)}
+
+/* ---------- 数据条（自然地理 meter） ---------- */
+.bars{margin:0 0 22px;background:var(--card);border-radius:var(--radius);padding:6px 16px 14px}
+.bars .b{padding:10px 0 0}
+.bars .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+.bars .k{font-size:13px;color:var(--dim)}
+.bars .v{font:600 14px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--fg)}
+.bars .track{height:6px;border-radius:3px;background:var(--track);overflow:hidden}
+.bars .fill{height:100%;border-radius:3px;background:var(--accent)}
+
+/* ---------- facts —— 同一份标记，7 套皮肤各自重写 ---------- */
+.facts{
+  margin:0 0 22px;background:var(--card);border-radius:var(--radius);
+  padding:4px 16px 14px;
+}
+.facts .f{
+  display:flex;justify-content:space-between;gap:16px;
+  padding:11px 0;border-top:1px solid var(--line);
+}
+.facts .f:first-child{border-top:0}
+.facts .k{flex:none;font-size:13px;color:var(--dim)}
+.facts .v{
+  text-align:right;font-size:14px;font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- 冷知识 / 引文 / 存疑 / 标签 ---------- */
+.trivia{margin:0 0 22px;padding:0;list-style:none}
+.trivia li{
+  position:relative;padding:0 0 0 22px;margin:0 0 9px;
+  font-size:14.5px;line-height:1.7;color:var(--fg);
+}
+.trivia li::before{
+  content:"";position:absolute;left:6px;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+.quote{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);
+}
+.quote p{margin:0;font:italic 15.5px/1.75 var(--serif)}
+.quote .from{display:block;margin-top:8px;font-size:12.5px;color:var(--muted);font-style:normal}
+.uncertain{
+  margin:0 0 22px;padding:13px 16px;border-radius:var(--radius);
+  background:var(--card);border:1px dashed var(--line);
+}
+.uncertain .lbl{
+  display:flex;align-items:center;gap:6px;
+  font:600 11.5px/1 var(--sans);letter-spacing:.1em;color:var(--muted);margin-bottom:8px;
+}
+.uncertain ul{margin:0;padding-left:18px}
+.uncertain li{font-size:13.5px;line-height:1.7;color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 22px}
+.tags span{
+  font-size:12px;padding:3px 10px;border-radius:20px;
+  background:var(--card);color:var(--dim);border:1px solid var(--line);
+}
+
+footer{
+  margin-top:26px;padding-top:15px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--muted);line-height:1.9;
+}
+footer a{color:var(--muted)}
+footer .r{display:flex;justify-content:space-between;gap:12px}
+
+/* ---- 配图。7 套皮肤共用版式，颜色全部走已有变量 ---- */
+.hero-img,.sub-img{margin:0 0 18px;padding:0}
+.sub-img{margin:22px 0 18px}
+.hero-img img,.sub-img img{
+  display:block;width:100%;height:auto;border-radius:10px;
+  background:var(--card);border:1px solid var(--line)}
+.hero-img figcaption,.sub-img figcaption{
+  margin-top:7px;font-size:12.5px;line-height:1.6;color:var(--muted)}
+/* 图片是 AI 生成的示意画面，不是史料。这行标注是必须的，不是装饰。 */
+.hero-img figcaption::after,.sub-img figcaption::after{
+  content:" · AI 生成示意图";opacity:.75}
+@media (prefers-reduced-motion:no-preference){
+  .hero-img img,.sub-img img{transition:opacity .2s}}
+
+/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
+.t-person{
+  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:30px 20px 24px;
+}
+.t-person .hero{
+  border-left:3px solid #6b4a2f; padding-left:18px;
+  margin-left:-16px; margin-right:-16px;
+}
+.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
+.t-person .hero h1{
+  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
+}
+.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
+/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
+.t-person .facts .f{display:block;text-align:left}
+.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
+.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
+
+@media (prefers-color-scheme:dark){
+  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
+             --hero-fg:#e8eaed; }
+  .t-person .hero{border-left-color:#8a6640}
+  .t-person .kicker{color:#c39a63}
+}
+                                不转义白名单键（仅 CSS 注入用）
+      遍历，块内直接用该项字段
+            值为 null/""/[]/{}/0/false 时整块删除
+
+  签名图形与类目的对应（由哪个 motif 字段非空自动决定，不需要判类目）：
+    timeline  世界历史   span     历史人物/中国历史   layers+bars 自然地理
+    contrast  科学史     artifact 文明与文化         tradeoff    生物
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#f7f4ef">
+<meta name="x-build" content="2026-11-10-db52f2e5">
+<meta name="description" content="新西班牙修女索尔·胡安娜通拉丁语与纳瓦特尔语；1691年她批评神父讲道的私信被主教擅自刊印，遭教会施压，1694年变卖藏书与乐器济贫，1695年在鼠疫中护理同伴时死于墨西哥城。">
+<title>卖书求知的修女 · 历史人物</title>
+<style>/* base.css —— 骨架样式，7 套皮肤共用。
+   皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
+   render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
+
+:root{
+  --card:#ffffff; --fg:#141414; --dim:#5b5a57; --muted:#8a8884; --line:#e4e3de;
+  --radius:14px;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+         "Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  /* 中文衬线：安卓微信大概率没有思源宋体，兜到系统 serif 会退化但不会崩 */
+  --serif:"Songti SC","Source Han Serif SC","Noto Serif CJK SC","Songti TC","SimSun",serif;
+  --title-font:var(--sans);
+  --hero-fg:#ffffff;
+  --hero-pad:26px 20px 22px;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --card:#181b20; --fg:#e8eaed; --dim:#9aa0a8; --muted:#7d838b; --line:#282c33; }
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--fg);
+  font:16px/1.75 var(--sans); -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px 40px}
+
+/* ---------- hero ---------- */
+.hero{
+  margin:0 -16px 20px; padding:var(--hero-pad);
+  background:var(--brand); color:var(--hero-fg);
+}
+.kicker{
+  font:600 11.5px/1 var(--sans); letter-spacing:.16em;
+  opacity:.75; margin-bottom:11px;
+}
+.hero h1{
+  margin:0; font:700 25px/1.34 var(--title-font);
+  letter-spacing:-.01em; text-wrap:balance;
+}
+.hero .hook{
+  margin:9px 0 0; font-size:14.5px; line-height:1.6; opacity:.8;
+}
+
+/* ---------- 导语 / 正文 ---------- */
+.lead{
+  margin:0 0 22px; font-size:17px; line-height:1.8; font-weight:500;
+  color:var(--fg);
+}
+.body section{margin:0 0 22px}
+.body h2{
+  margin:0 0 8px; font:600 13px/1 var(--sans);
+  letter-spacing:.1em; color:var(--accent);
+}
+.body p{margin:0; color:var(--fg)}
+
+/* ---------- 签名图形 1 · 时间轴（世界历史） ---------- */
+.tl{display:flex;position:relative;margin:0 0 24px;padding-top:3px}
+.tl::before{
+  content:"";position:absolute;top:7px;left:9%;right:9%;
+  height:2px;background:var(--line);
+}
+.tl .nd{flex:1;min-width:0;text-align:center;position:relative}
+.tl .dot{
+  width:10px;height:10px;border-radius:50%;background:var(--accent);
+  margin:0 auto 10px;box-shadow:0 0 0 2px var(--paper);  /* 2px 纸色环 */
+}
+.tl .y{
+  display:block;font:600 12.5px/1.3 var(--sans);
+  font-variant-numeric:tabular-nums;color:var(--fg);
+}
+.tl .lb{display:block;font-size:11.5px;color:var(--dim);margin-top:3px;line-height:1.45}
+
+/* ---------- 签名图形 2 · 跨度尺（历史人物 / 中国历史） ---------- */
+.ruler{margin:0 0 24px}
+.ruler .bar{position:relative;height:2px;background:var(--line);border-radius:1px;margin:0 1px}
+.ruler .cap{position:absolute;top:-5px;width:2px;height:12px;background:var(--line)}
+.ruler .cap.l{left:0}.ruler .cap.r{right:0}
+.ruler .pin{
+  position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 2px var(--paper);transform:translateX(-50%);
+}
+.ruler .ends{
+  display:flex;justify-content:space-between;margin-top:11px;
+  font:600 12.5px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--dim);
+}
+/* mark 标签走正常流，不绝对定位 —— 长标签或贴边时都不会溢出 */
+.ruler .mk{
+  display:flex;align-items:center;gap:7px;margin-top:9px;
+  font-size:12.5px;color:var(--dim);
+}
+.ruler .mk i{
+  width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;font-style:normal;
+}
+.ruler .mk b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---------- 签名图形 3 · 垂直分带（自然地理） ---------- */
+.layers{margin:0 0 20px;border-radius:var(--radius);overflow:hidden}
+.layers .ly{padding:13px 16px;color:#fff}
+.layers .ly+.ly{margin-top:2px}          /* 2px 纸色缝隙分隔，不描边 */
+.layers .ly .n{display:block;font:600 14.5px/1.4 var(--sans)}
+.layers .ly .note{display:block;font-size:12.5px;opacity:.82;margin-top:2px;line-height:1.5}
+/* 单色顺序型 4 步，白字全部 ≥4.2:1（见手册 §6 色值核算） */
+.layers .ly:nth-child(1){background:#1e3b31}
+.layers .ly:nth-child(2){background:#2c5446}
+.layers .ly:nth-child(3){background:#3b6d5b}
+.layers .ly:nth-child(4){background:#4b8571}
+@media (prefers-color-scheme:dark){
+  .layers .ly:nth-child(1){background:#16302a}
+  .layers .ly:nth-child(2){background:#22453b}
+  .layers .ly:nth-child(3){background:#2f5a4c}
+  .layers .ly:nth-child(4){background:#3d6f5e}
+}
+
+/* ---------- 签名图形 4 · 对照双栏（科学史） ---------- */
+.cmp{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  margin:0 0 22px;border-radius:var(--radius);overflow:hidden;
+}
+.cmp>div{background:var(--card);padding:15px 16px}
+.cmp .lbl{
+  display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;
+  margin-bottom:8px;color:var(--muted);
+}
+.cmp .now .lbl{color:var(--accent)}
+.cmp p{margin:0;font-size:14px;line-height:1.7}
+.cmp .then p{color:var(--dim)}
+
+/* ---------- 签名图形 5 · 得失权衡（生物） ---------- */
+.tro{margin:0 0 22px;background:var(--card);border-radius:var(--radius);overflow:hidden}
+.tro .r{display:flex;gap:13px;padding:14px 16px}
+.tro .r+.r{border-top:1px solid var(--line)}
+/* 文字标签本身就是识别通道，不靠颜色单独承载 */
+.tro .k{
+  flex:none;width:2.1em;font:600 13px/1.7 var(--sans);text-align:center;
+  border-radius:5px;height:1.7em;
+}
+.tro .gain .k{background:#e4efe4;color:#2c5530}
+.tro .cost .k{background:#f0edda;color:#5c5216}
+.tro p{margin:0;font-size:14.5px;line-height:1.7}
+@media (prefers-color-scheme:dark){
+  .tro .gain .k{background:#1e2c1f;color:#8fc194}
+  .tro .cost .k{background:#2b2818;color:#c4b84a}
+}
+
+/* ---------- 签名图形 6 · 具体物件（文明与文化） ---------- */
+.artifact{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);border-left:3px solid var(--accent);
+}
+.artifact .n{display:block;font:600 16px/1.5 var(--title-font);margin-bottom:4px}
+.artifact p{margin:0;font-size:14px;line-height:1.7;color:var(--dim)}
+
+/* ---------- 数据条（自然地理 meter） ---------- */
+.bars{margin:0 0 22px;background:var(--card);border-radius:var(--radius);padding:6px 16px 14px}
+.bars .b{padding:10px 0 0}
+.bars .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+.bars .k{font-size:13px;color:var(--dim)}
+.bars .v{font:600 14px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--fg)}
+.bars .track{height:6px;border-radius:3px;background:var(--track);overflow:hidden}
+.bars .fill{height:100%;border-radius:3px;background:var(--accent)}
+
+/* ---------- facts —— 同一份标记，7 套皮肤各自重写 ---------- */
+.facts{
+  margin:0 0 22px;background:var(--card);border-radius:var(--radius);
+  padding:4px 16px 14px;
+}
+.facts .f{
+  display:flex;justify-content:space-between;gap:16px;
+  padding:11px 0;border-top:1px solid var(--line);
+}
+.facts .f:first-child{border-top:0}
+.facts .k{flex:none;font-size:13px;color:var(--dim)}
+.facts .v{
+  text-align:right;font-size:14px;font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- 冷知识 / 引文 / 存疑 / 标签 ---------- */
+.trivia{margin:0 0 22px;padding:0;list-style:none}
+.trivia li{
+  position:relative;padding:0 0 0 22px;margin:0 0 9px;
+  font-size:14.5px;line-height:1.7;color:var(--fg);
+}
+.trivia li::before{
+  content:"";position:absolute;left:6px;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+.quote{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);
+}
+.quote p{margin:0;font:italic 15.5px/1.75 var(--serif)}
+.quote .from{display:block;margin-top:8px;font-size:12.5px;color:var(--muted);font-style:normal}
+.uncertain{
+  margin:0 0 22px;padding:13px 16px;border-radius:var(--radius);
+  background:var(--card);border:1px dashed var(--line);
+}
+.uncertain .lbl{
+  display:flex;align-items:center;gap:6px;
+  font:600 11.5px/1 var(--sans);letter-spacing:.1em;color:var(--muted);margin-bottom:8px;
+}
+.uncertain ul{margin:0;padding-left:18px}
+.uncertain li{font-size:13.5px;line-height:1.7;color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 22px}
+.tags span{
+  font-size:12px;padding:3px 10px;border-radius:20px;
+  background:var(--card);color:var(--dim);border:1px solid var(--line);
+}
+
+footer{
+  margin-top:26px;padding-top:15px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--muted);line-height:1.9;
+}
+footer a{color:var(--muted)}
+footer .r{display:flex;justify-content:space-between;gap:12px}
+
+/* ---- 配图。7 套皮肤共用版式，颜色全部走已有变量 ---- */
+.hero-img,.sub-img{margin:0 0 18px;padding:0}
+.sub-img{margin:22px 0 18px}
+.hero-img img,.sub-img img{
+  display:block;width:100%;height:auto;border-radius:10px;
+  background:var(--card);border:1px solid var(--line)}
+.hero-img figcaption,.sub-img figcaption{
+  margin-top:7px;font-size:12.5px;line-height:1.6;color:var(--muted)}
+/* 图片是 AI 生成的示意画面，不是史料。这行标注是必须的，不是装饰。 */
+.hero-img figcaption::after,.sub-img figcaption::after{
+  content:" · AI 生成示意图";opacity:.75}
+@media (prefers-reduced-motion:no-preference){
+  .hero-img img,.sub-img img{transition:opacity .2s}}
+
+/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
+.t-person{
+  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:30px 20px 24px;
+}
+.t-person .hero{
+  border-left:3px solid #6b4a2f; padding-left:18px;
+  margin-left:-16px; margin-right:-16px;
+}
+.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
+.t-person .hero h1{
+  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
+}
+.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
+/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
+.t-person .facts .f{display:block;text-align:left}
+.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
+.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
+
+@media (prefers-color-scheme:dark){
+  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
+             --hero-fg:#e8eaed; }
+  .t-person .hero{border-left-color:#8a6640}
+  .t-person .kicker{color:#c39a63}
+}
+</style>
+</head>
+<body class="t-person">
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker"><b>历史人物</b> · 11月10日</div>
+    <h1>卖书求知的修女</h1>
+    <p class="hook">她自陈进修道院不为虔诚，只为不去嫁人、好读书</p>
+  </header>
+
+  
+  <figure class="hero-img">
+    <img src="../img/2026-11-10-main.webp" alt="修道院厅堂里捆扎搬运的成摞书籍，木书架腾空" width="1280" height="1280" loading="eager">
+    <figcaption>修道院厅堂里捆扎搬运的成摞书籍，木书架腾空</figcaption>
+  </figure>
+  
+
+  <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
+
+  
+
+  
+
+  
+  <div class="ruler">
+    <div class="bar">
+      <span class="cap l"></span><span class="cap r"></span>
+      <span class="pin" style="left:96%"></span>
+    </div>
+    <div class="ends"><span>1648</span><span>1695</span></div>
+    
+    <div class="mk"><i></i><b>1694</b>变卖藏书与乐器</div>
+    
+  </div>
+  
+
+  
+
+  
+
+  
+
+  <!-- ===== 正文 ===== -->
+
+  <p class="lead">1694年，墨西哥城一所修道院里，成捆的书从一名修女的房间搬出去变卖。那是她幼年在祖父留下的书架旁自学、又用半生攒下的藏书，连同乐器一起换成钱，全部捐给了穷人。她叫索尔·胡安娜，是新西班牙最有名的学者。</p>
+
+  <div class="body">
+    
+    <section><h2>私信被印出来</h2><p>胡安娜十几岁就因哲学辩难在墨西哥城出名。1680年代她与耶稣会神父安东尼奥起了冲突，写下对后者一篇著名讲道的神学批评。1691年，普埃布拉主教曼努埃尔未经她允许把这封信付印公开，神学界于是得以轮番批评一个女人竟敢评判男人的布道。她随后写长信回击，主张女人同样有读书和做神学判断的资格。这封信替她赢回名声，也把她彻底推到讲坛的对立面。</p></section>
+    
+    <section><h2>为了不去嫁人</h2><p>她为什么偏偏是一名修女？答案她自己写下来过：1667年进修道院不为虔诚，只是因为在新西班牙，一个不愿嫁人的女孩想保住读书的余裕，几乎只剩当修女这一条路。她自幼是神童，在祖父留下的书架旁自学，通拉丁语，会用纳瓦特尔语写作，十几岁就因哲学研究有名。修道院给了她房间、藏书和名声，她的会客室一度是新西班牙的半个文坛。但学问作为摆设可以被容忍，作为判断就不行了。</p></section>
+    
+    <section><h2>卖书之后</h2><p>1694年，她在内外压力下把藏书与乐器变卖，所得全数捐给穷人，自己称之为补赎而非惩罚。一个以书为命的人，靠亲手清空书架让争论落幕。翌年鼠疫流行，她在照料染病的同伴修女时被传染，死在墨西哥城。身后名声却一路走高：人称第十缪斯、美洲凤凰；1982年奥克塔维奥·帕斯为她写传记，1990年改编成电影，定下了宗教迫害下女性主义烈士这套形象，沿用至今。</p></section>
+    
+  </div>
+
+  
+  <figure class="sub-img">
+    <img src="../img/2026-11-10-sub.webp" alt="墙脚两摞合拢的书与一架琴，黄昏侧光静物" width="1024" height="1024" loading="lazy">
+    <figcaption>墙脚两摞合拢的书与一架琴，黄昏侧光静物</figcaption>
+  </figure>
+  
+
+  
+
+  
+  <div class="facts">
+    
+    <div class="f"><span class="k">称号</span><span class="v">第十缪斯、美洲凤凰</span></div>
+    
+    <div class="f"><span class="k">入院</span><span class="v">1667年加入女修道院</span></div>
+    
+    <div class="f"><span class="k">藏书</span><span class="v">多为继承自祖父，靠自学成才</span></div>
+    
+    <div class="f"><span class="k">风波</span><span class="v">1691年私信被普埃布拉主教擅自刊印</span></div>
+    
+    <div class="f"><span class="k">变卖</span><span class="v">1694年售藏书与乐器济贫</span></div>
+    
+    <div class="f"><span class="k">去世</span><span class="v">1695年护理病员时染鼠疫</span></div>
+    
+  </div>
+  
+
+  
+  <blockquote class="quote">
+    <p>如果亚里士多德写过厨房，他的书里就不会有哲学，而只会有烹饪。<span class="from">—— 索尔·胡安娜《答索尔·菲洛特亚书》（1691）</span></p>
+  </blockquote>
+  
+
+  
+  <ul class="trivia">
+    <li>她幼年扮成男孩去旁听哥哥的功课，此事是她自己在回信里写的，并非后人演绎。</li>
+  </ul>
+  
+
+  
+  <div class="uncertain">
+    <span class="lbl">存疑 · 以下说法未经确证</span>
+    <ul><li>生年通行作1648年，另有1651年等说法</li><li>材料记私信刊印于1691年，亦有史家系于1690年</li><li>材料称安东尼奥为其告解神父，与常见传记记载不合，本文只写作耶稣会神父</li><li>卖书后是否被强制停止写作，以及迫害烈士这一形象本身，近年均有学者重估</li></ul>
+  </div>
+  
+
+  
+  <div class="tags"><span>索尔·胡安娜</span><span>新西班牙</span><span>墨西哥文学</span><span>巴洛克</span><span>女性与知识</span></div>
+  
+
+  <footer>
+    <div class="r"><span>历史人物</span><span>11月10日</span></div>
+    <div class="r"><span>往期</span><span><a href="../archive.html">归档索引</a></span></div>
+    <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
+  </footer>
+
+</div>
+</body>
+</html>
