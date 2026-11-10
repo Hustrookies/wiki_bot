@@ -236,31 +236,22 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
-.t-person{
-  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:30px 20px 24px;
+/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
+.t-geo{
+  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+  --title-font:var(--sans);
 }
-.t-person .hero{
-  border-left:3px solid #6b4a2f; padding-left:18px;
-  margin-left:-16px; margin-right:-16px;
+.t-geo .kicker{letter-spacing:.2em}
+.t-geo .hero h1{letter-spacing:.01em}
+.t-geo .hero{
+  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
 }
-.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
-.t-person .hero h1{
-  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
-}
-.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
-/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
-.t-person .facts .f{display:block;text-align:left}
-.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
-.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
+/* 分带紧贴 hero 下沿，读作同一个剖面 */
+.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
 
 @media (prefers-color-scheme:dark){
-  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
-             --hero-fg:#e8eaed; }
-  .t-person .hero{border-left-color:#8a6640}
-  .t-person .kicker{color:#c39a63}
+  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
+  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -275,10 +266,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#f7f4ef">
-<meta name="x-build" content="2026-11-10-db52f2e5">
-<meta name="description" content="新西班牙修女索尔·胡安娜通拉丁语与纳瓦特尔语；1691年她批评神父讲道的私信被主教擅自刊印，遭教会施压，1694年变卖藏书与乐器济贫，1695年在鼠疫中护理同伴时死于墨西哥城。">
-<title>卖书求知的修女 · 历史人物</title>
+<meta name="theme-color" content="#33564a">
+<meta name="x-build" content="2026-11-11-4d558ffd">
+<meta name="description" content="玻利维亚普纳高原的乌尤尼盐沼，是约4万年前明钦湖在安第斯山间封闭盆地中蒸发殆尽后裸露出的湖底，面积10582平方公里，壳下卤水富藏锂，至今产岩盐与石膏。">
+<title>史前湖留下的盐壳 · 自然地理</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -510,67 +501,59 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
-.t-person{
-  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:30px 20px 24px;
+/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
+.t-geo{
+  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+  --title-font:var(--sans);
 }
-.t-person .hero{
-  border-left:3px solid #6b4a2f; padding-left:18px;
-  margin-left:-16px; margin-right:-16px;
+.t-geo .kicker{letter-spacing:.2em}
+.t-geo .hero h1{letter-spacing:.01em}
+.t-geo .hero{
+  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
 }
-.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
-.t-person .hero h1{
-  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
-}
-.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
-/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
-.t-person .facts .f{display:block;text-align:left}
-.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
-.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
+/* 分带紧贴 hero 下沿，读作同一个剖面 */
+.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
 
 @media (prefers-color-scheme:dark){
-  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
-             --hero-fg:#e8eaed; }
-  .t-person .hero{border-left-color:#8a6640}
-  .t-person .kicker{color:#c39a63}
+  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
+  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
 }
 </style>
 </head>
-<body class="t-person">
+<body class="t-geo">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>历史人物</b> · 11月10日</div>
-    <h1>卖书求知的修女</h1>
-    <p class="hook">她自陈进修道院不为虔诚，只为不去嫁人、好读书</p>
+    <div class="kicker"><b>自然地理</b> · 11月11日</div>
+    <h1>史前湖留下的盐壳</h1>
+    <p class="hook">世界最大盐沼是一具死湖的湖底，壳下泡着锂</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-10-main.webp" alt="修道院厅堂里捆扎搬运的成摞书籍，木书架腾空" width="1280" height="1280" loading="eager">
-    <figcaption>修道院厅堂里捆扎搬运的成摞书籍，木书架腾空</figcaption>
+    <img src="img/2026-11-11-main.webp" alt="白色盐壳平原上的干裂纹与远山投影" width="1280" height="1280" loading="eager">
+    <figcaption>白色盐壳平原上的干裂纹与远山投影</figcaption>
   </figure>
   
 
   <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
 
   
-
-  
-
-  
-  <div class="ruler">
-    <div class="bar">
-      <span class="cap l"></span><span class="cap r"></span>
-      <span class="pin" style="left:96%"></span>
-    </div>
-    <div class="ends"><span>1648</span><span>1695</span></div>
+  <div class="layers">
     
-    <div class="mk"><i></i><b>1694</b>变卖藏书与乐器</div>
+    <div class="ly"><span class="n">薄水期</span><span class="note">雨季覆一层浅水，旱季干退</span></div>
+    
+    <div class="ly"><span class="n">硬盐壳</span><span class="note">岩盐与石膏结晶交叠成硬盖</span></div>
+    
+    <div class="ly"><span class="n">卤水层</span><span class="note">盐粒间隙的饱和卤水，富锂</span></div>
+    
+    <div class="ly"><span class="n">古湖沉积</span><span class="note">明钦湖退缩期的湖相堆积</span></div>
     
   </div>
+  
+
+  
+
   
 
   
@@ -581,70 +564,83 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">1694年，墨西哥城一所修道院里，成捆的书从一名修女的房间搬出去变卖。那是她幼年在祖父留下的书架旁自学、又用半生攒下的藏书，连同乐器一起换成钱，全部捐给了穷人。她叫索尔·胡安娜，是新西班牙最有名的学者。</p>
+  <p class="lead">10582平方公里的纯白硬壳，东西长约250公里，横在玻利维亚普纳高原约3700米的海拔上。这不是雪，也不是沙漠，而是一个名叫明钦湖的史前巨湖干涸后裸露出来的湖底：水走光了，盐留下来，铺成世界最大的盐沼。</p>
 
   <div class="body">
     
-    <section><h2>私信被印出来</h2><p>胡安娜十几岁就因哲学辩难在墨西哥城出名。1680年代她与耶稣会神父安东尼奥起了冲突，写下对后者一篇著名讲道的神学批评。1691年，普埃布拉主教曼努埃尔未经她允许把这封信付印公开，神学界于是得以轮番批评一个女人竟敢评判男人的布道。她随后写长信回击，主张女人同样有读书和做神学判断的资格。这封信替她赢回名声，也把她彻底推到讲坛的对立面。</p></section>
+    <section><h2>从海里围出的湖</h2><p>安第斯山脉是条年轻山链，在剧烈的板块活动中从海底隆起。隆起过程在山间围出一个个积水盆地，有些最初装的是海水。乌尤尼一带约在4万年前是明钦湖的水面，范围比今天的盐沼更大。气候转干、补给减少后，巨湖开始退缩，最后分裂成几块：普波湖、乌鲁乌鲁湖两处咸水水面，以及乌尤尼与科伊帕萨两片盐沼。</p></section>
     
-    <section><h2>为了不去嫁人</h2><p>她为什么偏偏是一名修女？答案她自己写下来过：1667年进修道院不为虔诚，只是因为在新西班牙，一个不愿嫁人的女孩想保住读书的余裕，几乎只剩当修女这一条路。她自幼是神童，在祖父留下的书架旁自学，通拉丁语，会用纳瓦特尔语写作，十几岁就因哲学研究有名。修道院给了她房间、藏书和名声，她的会客室一度是新西班牙的半个文坛。但学问作为摆设可以被容忍，作为判断就不行了。</p></section>
+    <section><h2>没有出口的账</h2><p>普纳高原是内流区，河流只流进、不流出，盆地里没有一条河通往海洋。这里的蒸发量常年压过降水量，水变成蒸汽离开，盐分却没有任何出路，只能一层层沉回湖底。溶解度低的先结晶，岩盐与石膏各归其位，硬壳逐年加厚。与其说盐沼是长出来的，不如说它是盆地给一湖湖水记了数万年的账。</p></section>
     
-    <section><h2>卖书之后</h2><p>1694年，她在内外压力下把藏书与乐器变卖，所得全数捐给穷人，自己称之为补赎而非惩罚。一个以书为命的人，靠亲手清空书架让争论落幕。翌年鼠疫流行，她在照料染病的同伴修女时被传染，死在墨西哥城。身后名声却一路走高：人称第十缪斯、美洲凤凰；1982年奥克塔维奥·帕斯为她写传记，1990年改编成电影，定下了宗教迫害下女性主义烈士这套形象，沿用至今。</p></section>
+    <section><h2>壳下的未来</h2><p>硬壳之下是浸透盐粒的饱和卤水，锂就藏在这层水里——电动车电池的原料，接在一个早已死去的湖的残液上。盐沼至今仍盛产岩盐与石膏；每年7到10月旱季，壳面大片干硬，车辆可以直接横越，湖心的鱼岛上长着仙人掌，是赶路人的歇脚处。雨季覆上一层薄水时，整片盐壳变成天空的镜面，游客从全球赶来。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-10-sub.webp" alt="墙脚两摞合拢的书与一架琴，黄昏侧光静物" width="1024" height="1024" loading="lazy">
-    <figcaption>墙脚两摞合拢的书与一架琴，黄昏侧光静物</figcaption>
+    <img src="img/2026-11-11-sub.webp" alt="带石膏夹层结晶的盐壳断面与仙人掌丘" width="1024" height="1024" loading="lazy">
+    <figcaption>带石膏夹层结晶的盐壳断面与仙人掌丘</figcaption>
   </figure>
   
 
   
-
-  
-  <div class="facts">
+  <div class="bars">
     
-    <div class="f"><span class="k">称号</span><span class="v">第十缪斯、美洲凤凰</span></div>
+    <div class="b">
+      <div class="hd"><span class="k">东西长</span><span class="v">约250公里</span></div>
+      <div class="track"><div class="fill" style="width:100%"></div></div>
+    </div>
     
-    <div class="f"><span class="k">入院</span><span class="v">1667年加入女修道院</span></div>
+    <div class="b">
+      <div class="hd"><span class="k">南北宽</span><span class="v">约100公里</span></div>
+      <div class="track"><div class="fill" style="width:40%"></div></div>
+    </div>
     
-    <div class="f"><span class="k">藏书</span><span class="v">多为继承自祖父，靠自学成才</span></div>
-    
-    <div class="f"><span class="k">风波</span><span class="v">1691年私信被普埃布拉主教擅自刊印</span></div>
-    
-    <div class="f"><span class="k">变卖</span><span class="v">1694年售藏书与乐器济贫</span></div>
-    
-    <div class="f"><span class="k">去世</span><span class="v">1695年护理病员时染鼠疫</span></div>
+    <div class="b">
+      <div class="hd"><span class="k">湖面海拔</span><span class="v">约3700米</span></div>
+      <div class="track"><div class="fill" style="width:74%"></div></div>
+    </div>
     
   </div>
   
 
   
-  <blockquote class="quote">
-    <p>如果亚里士多德写过厨房，他的书里就不会有哲学，而只会有烹饪。<span class="from">—— 索尔·胡安娜《答索尔·菲洛特亚书》（1691）</span></p>
-  </blockquote>
+  <div class="facts">
+    
+    <div class="f"><span class="k">位置</span><span class="v">玻利维亚西南部普纳高原，海拔约3700米</span></div>
+    
+    <div class="f"><span class="k">规模</span><span class="v">东西约250公里、南北约100公里，面积10582平方公里</span></div>
+    
+    <div class="f"><span class="k">前身</span><span class="v">约4万年前的史前巨湖明钦湖</span></div>
+    
+    <div class="f"><span class="k">产物</span><span class="v">岩盐、石膏，壳下富锂卤水</span></div>
+    
+    <div class="f"><span class="k">同族</span><span class="v">普波湖、乌鲁乌鲁湖、科伊帕萨盐沼同源分裂</span></div>
+    
+  </div>
+  
+
   
 
   
   <ul class="trivia">
-    <li>她幼年扮成男孩去旁听哥哥的功课，此事是她自己在回信里写的，并非后人演绎。</li>
+    <li>普波湖不是乌尤尼的邻居，是它的兄弟：同一片湖面退缩后分给两边的遗产</li><li>看着像深渊的盐壳旱季大片干硬，汽车能直接开过去</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>生年通行作1648年，另有1651年等说法</li><li>材料记私信刊印于1691年，亦有史家系于1690年</li><li>材料称安东尼奥为其告解神父，与常见传记记载不合，本文只写作耶稣会神父</li><li>卖书后是否被强制停止写作，以及迫害烈士这一形象本身，近年均有学者重估</li></ul>
+    <ul><li>明钦湖（Lake Minchin）的中文译名不统一，材料作「明清湖」</li><li>壳下卤水层的结构与厚度，各来源数字出入较大</li><li>盐沼锂资源的确切储量与可采比例尚无定论</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>索尔·胡安娜</span><span>新西班牙</span><span>墨西哥文学</span><span>巴洛克</span><span>女性与知识</span></div>
+  <div class="tags"><span>盐沼</span><span>蒸发岩</span><span>安第斯</span><span>普纳高原</span><span>锂</span></div>
   
 
   <footer>
-    <div class="r"><span>历史人物</span><span>11月10日</span></div>
+    <div class="r"><span>自然地理</span><span>11月11日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
   </footer>
