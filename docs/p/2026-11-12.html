@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<!--
+  每日百科推送 · 单骨架模板
+  由 render.py 渲染。7 个类目共用这一份结构，观感差异全部来自 <body class="t-*"> + themes/t-*.css。
+
+  模板语法（沿用 football-bot/render.py 的正则引擎）：
+                                      标量替换，自动 HTML 转义
+    /* base.css —— 骨架样式，7 套皮肤共用。
+   皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
+   render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
+
+:root{
+  --card:#ffffff; --fg:#141414; --dim:#5b5a57; --muted:#8a8884; --line:#e4e3de;
+  --radius:14px;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+         "Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  /* 中文衬线：安卓微信大概率没有思源宋体，兜到系统 serif 会退化但不会崩 */
+  --serif:"Songti SC","Source Han Serif SC","Noto Serif CJK SC","Songti TC","SimSun",serif;
+  --title-font:var(--sans);
+  --hero-fg:#ffffff;
+  --hero-pad:26px 20px 22px;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --card:#181b20; --fg:#e8eaed; --dim:#9aa0a8; --muted:#7d838b; --line:#282c33; }
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--fg);
+  font:16px/1.75 var(--sans); -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px 40px}
+
+/* ---------- hero ---------- */
+.hero{
+  margin:0 -16px 20px; padding:var(--hero-pad);
+  background:var(--brand); color:var(--hero-fg);
+}
+.kicker{
+  font:600 11.5px/1 var(--sans); letter-spacing:.16em;
+  opacity:.75; margin-bottom:11px;
+}
+.hero h1{
+  margin:0; font:700 25px/1.34 var(--title-font);
+  letter-spacing:-.01em; text-wrap:balance;
+}
+.hero .hook{
+  margin:9px 0 0; font-size:14.5px; line-height:1.6; opacity:.8;
+}
+
+/* ---------- 导语 / 正文 ---------- */
+.lead{
+  margin:0 0 22px; font-size:17px; line-height:1.8; font-weight:500;
+  color:var(--fg);
+}
+.body section{margin:0 0 22px}
+.body h2{
+  margin:0 0 8px; font:600 13px/1 var(--sans);
+  letter-spacing:.1em; color:var(--accent);
+}
+.body p{margin:0; color:var(--fg)}
+
+/* ---------- 签名图形 1 · 时间轴（世界历史） ---------- */
+.tl{display:flex;position:relative;margin:0 0 24px;padding-top:3px}
+.tl::before{
+  content:"";position:absolute;top:7px;left:9%;right:9%;
+  height:2px;background:var(--line);
+}
+.tl .nd{flex:1;min-width:0;text-align:center;position:relative}
+.tl .dot{
+  width:10px;height:10px;border-radius:50%;background:var(--accent);
+  margin:0 auto 10px;box-shadow:0 0 0 2px var(--paper);  /* 2px 纸色环 */
+}
+.tl .y{
+  display:block;font:600 12.5px/1.3 var(--sans);
+  font-variant-numeric:tabular-nums;color:var(--fg);
+}
+.tl .lb{display:block;font-size:11.5px;color:var(--dim);margin-top:3px;line-height:1.45}
+
+/* ---------- 签名图形 2 · 跨度尺（历史人物 / 中国历史） ---------- */
+.ruler{margin:0 0 24px}
+.ruler .bar{position:relative;height:2px;background:var(--line);border-radius:1px;margin:0 1px}
+.ruler .cap{position:absolute;top:-5px;width:2px;height:12px;background:var(--line)}
+.ruler .cap.l{left:0}.ruler .cap.r{right:0}
+.ruler .pin{
+  position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 2px var(--paper);transform:translateX(-50%);
+}
+.ruler .ends{
+  display:flex;justify-content:space-between;margin-top:11px;
+  font:600 12.5px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--dim);
+}
+/* mark 标签走正常流，不绝对定位 —— 长标签或贴边时都不会溢出 */
+.ruler .mk{
+  display:flex;align-items:center;gap:7px;margin-top:9px;
+  font-size:12.5px;color:var(--dim);
+}
+.ruler .mk i{
+  width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;font-style:normal;
+}
+.ruler .mk b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---------- 签名图形 3 · 垂直分带（自然地理） ---------- */
+.layers{margin:0 0 20px;border-radius:var(--radius);overflow:hidden}
+.layers .ly{padding:13px 16px;color:#fff}
+.layers .ly+.ly{margin-top:2px}          /* 2px 纸色缝隙分隔，不描边 */
+.layers .ly .n{display:block;font:600 14.5px/1.4 var(--sans)}
+.layers .ly .note{display:block;font-size:12.5px;opacity:.82;margin-top:2px;line-height:1.5}
+/* 单色顺序型 4 步，白字全部 ≥4.2:1（见手册 §6 色值核算） */
+.layers .ly:nth-child(1){background:#1e3b31}
+.layers .ly:nth-child(2){background:#2c5446}
+.layers .ly:nth-child(3){background:#3b6d5b}
+.layers .ly:nth-child(4){background:#4b8571}
+@media (prefers-color-scheme:dark){
+  .layers .ly:nth-child(1){background:#16302a}
+  .layers .ly:nth-child(2){background:#22453b}
+  .layers .ly:nth-child(3){background:#2f5a4c}
+  .layers .ly:nth-child(4){background:#3d6f5e}
+}
+
+/* ---------- 签名图形 4 · 对照双栏（科学史） ---------- */
+.cmp{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  margin:0 0 22px;border-radius:var(--radius);overflow:hidden;
+}
+.cmp>div{background:var(--card);padding:15px 16px}
+.cmp .lbl{
+  display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;
+  margin-bottom:8px;color:var(--muted);
+}
+.cmp .now .lbl{color:var(--accent)}
+.cmp p{margin:0;font-size:14px;line-height:1.7}
+.cmp .then p{color:var(--dim)}
+
+/* ---------- 签名图形 5 · 得失权衡（生物） ---------- */
+.tro{margin:0 0 22px;background:var(--card);border-radius:var(--radius);overflow:hidden}
+.tro .r{display:flex;gap:13px;padding:14px 16px}
+.tro .r+.r{border-top:1px solid var(--line)}
+/* 文字标签本身就是识别通道，不靠颜色单独承载 */
+.tro .k{
+  flex:none;width:2.1em;font:600 13px/1.7 var(--sans);text-align:center;
+  border-radius:5px;height:1.7em;
+}
+.tro .gain .k{background:#e4efe4;color:#2c5530}
+.tro .cost .k{background:#f0edda;color:#5c5216}
+.tro p{margin:0;font-size:14.5px;line-height:1.7}
+@media (prefers-color-scheme:dark){
+  .tro .gain .k{background:#1e2c1f;color:#8fc194}
+  .tro .cost .k{background:#2b2818;color:#c4b84a}
+}
+
+/* ---------- 签名图形 6 · 具体物件（文明与文化） ---------- */
+.artifact{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);border-left:3px solid var(--accent);
+}
+.artifact .n{display:block;font:600 16px/1.5 var(--title-font);margin-bottom:4px}
+.artifact p{margin:0;font-size:14px;line-height:1.7;color:var(--dim)}
+
+/* ---------- 数据条（自然地理 meter） ---------- */
+.bars{margin:0 0 22px;background:var(--card);border-radius:var(--radius);padding:6px 16px 14px}
+.bars .b{padding:10px 0 0}
+.bars .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+.bars .k{font-size:13px;color:var(--dim)}
+.bars .v{font:600 14px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--fg)}
+.bars .track{height:6px;border-radius:3px;background:var(--track);overflow:hidden}
+.bars .fill{height:100%;border-radius:3px;background:var(--accent)}
+
+/* ---------- facts —— 同一份标记，7 套皮肤各自重写 ---------- */
+.facts{
+  margin:0 0 22px;background:var(--card);border-radius:var(--radius);
+  padding:4px 16px 14px;
+}
+.facts .f{
+  display:flex;justify-content:space-between;gap:16px;
+  padding:11px 0;border-top:1px solid var(--line);
+}
+.facts .f:first-child{border-top:0}
+.facts .k{flex:none;font-size:13px;color:var(--dim)}
+.facts .v{
+  text-align:right;font-size:14px;font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- 冷知识 / 引文 / 存疑 / 标签 ---------- */
+.trivia{margin:0 0 22px;padding:0;list-style:none}
+.trivia li{
+  position:relative;padding:0 0 0 22px;margin:0 0 9px;
+  font-size:14.5px;line-height:1.7;color:var(--fg);
+}
+.trivia li::before{
+  content:"";position:absolute;left:6px;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+.quote{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);
+}
+.quote p{margin:0;font:italic 15.5px/1.75 var(--serif)}
+.quote .from{display:block;margin-top:8px;font-size:12.5px;color:var(--muted);font-style:normal}
+.uncertain{
+  margin:0 0 22px;padding:13px 16px;border-radius:var(--radius);
+  background:var(--card);border:1px dashed var(--line);
+}
+.uncertain .lbl{
+  display:flex;align-items:center;gap:6px;
+  font:600 11.5px/1 var(--sans);letter-spacing:.1em;color:var(--muted);margin-bottom:8px;
+}
+.uncertain ul{margin:0;padding-left:18px}
+.uncertain li{font-size:13.5px;line-height:1.7;color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 22px}
+.tags span{
+  font-size:12px;padding:3px 10px;border-radius:20px;
+  background:var(--card);color:var(--dim);border:1px solid var(--line);
+}
+
+footer{
+  margin-top:26px;padding-top:15px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--muted);line-height:1.9;
+}
+footer a{color:var(--muted)}
+footer .r{display:flex;justify-content:space-between;gap:12px}
+
+/* ---- 配图。7 套皮肤共用版式，颜色全部走已有变量 ---- */
+.hero-img,.sub-img{margin:0 0 18px;padding:0}
+.sub-img{margin:22px 0 18px}
+.hero-img img,.sub-img img{
+  display:block;width:100%;height:auto;border-radius:10px;
+  background:var(--card);border:1px solid var(--line)}
+.hero-img figcaption,.sub-img figcaption{
+  margin-top:7px;font-size:12.5px;line-height:1.6;color:var(--muted)}
+/* 图片是 AI 生成的示意画面，不是史料。这行标注是必须的，不是装饰。 */
+.hero-img figcaption::after,.sub-img figcaption::after{
+  content:" · AI 生成示意图";opacity:.75}
+@media (prefers-reduced-motion:no-preference){
+  .hero-img img,.sub-img img{transition:opacity .2s}}
+
+/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
+.t-science{
+  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
+  --title-font:var(--sans);
+}
+.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
+/* 网格必须在 brand 之前声明才叠在上层 */
+.t-science .hero{
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    var(--brand);
+}
+.t-science .facts .k{min-width:5.5em}
+.t-science .facts .v,
+.t-science .tl .y{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13px;
+}
+
+@media (prefers-color-scheme:dark){
+  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
+}
+                                不转义白名单键（仅 CSS 注入用）
+      遍历，块内直接用该项字段
+            值为 null/""/[]/{}/0/false 时整块删除
+
+  签名图形与类目的对应（由哪个 motif 字段非空自动决定，不需要判类目）：
+    timeline  世界历史   span     历史人物/中国历史   layers+bars 自然地理
+    contrast  科学史     artifact 文明与文化         tradeoff    生物
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#1b4a7a">
+<meta name="x-build" content="2026-11-12-a3da505d">
+<meta name="description" content="1928年弗莱明在伦敦记录青霉菌抑制葡萄球菌的抑菌圈，论文沉寂近十年；1938年起牛津的柴恩与弗洛里团队将其提纯，美国团队改用玉米浆培养液量产，青霉素成为第一种抗生素。">
+<title>青霉素：发现不等于成药 · 科学与技术史</title>
+<style>/* base.css —— 骨架样式，7 套皮肤共用。
+   皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
+   render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
+
+:root{
+  --card:#ffffff; --fg:#141414; --dim:#5b5a57; --muted:#8a8884; --line:#e4e3de;
+  --radius:14px;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+         "Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  /* 中文衬线：安卓微信大概率没有思源宋体，兜到系统 serif 会退化但不会崩 */
+  --serif:"Songti SC","Source Han Serif SC","Noto Serif CJK SC","Songti TC","SimSun",serif;
+  --title-font:var(--sans);
+  --hero-fg:#ffffff;
+  --hero-pad:26px 20px 22px;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --card:#181b20; --fg:#e8eaed; --dim:#9aa0a8; --muted:#7d838b; --line:#282c33; }
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--fg);
+  font:16px/1.75 var(--sans); -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px 40px}
+
+/* ---------- hero ---------- */
+.hero{
+  margin:0 -16px 20px; padding:var(--hero-pad);
+  background:var(--brand); color:var(--hero-fg);
+}
+.kicker{
+  font:600 11.5px/1 var(--sans); letter-spacing:.16em;
+  opacity:.75; margin-bottom:11px;
+}
+.hero h1{
+  margin:0; font:700 25px/1.34 var(--title-font);
+  letter-spacing:-.01em; text-wrap:balance;
+}
+.hero .hook{
+  margin:9px 0 0; font-size:14.5px; line-height:1.6; opacity:.8;
+}
+
+/* ---------- 导语 / 正文 ---------- */
+.lead{
+  margin:0 0 22px; font-size:17px; line-height:1.8; font-weight:500;
+  color:var(--fg);
+}
+.body section{margin:0 0 22px}
+.body h2{
+  margin:0 0 8px; font:600 13px/1 var(--sans);
+  letter-spacing:.1em; color:var(--accent);
+}
+.body p{margin:0; color:var(--fg)}
+
+/* ---------- 签名图形 1 · 时间轴（世界历史） ---------- */
+.tl{display:flex;position:relative;margin:0 0 24px;padding-top:3px}
+.tl::before{
+  content:"";position:absolute;top:7px;left:9%;right:9%;
+  height:2px;background:var(--line);
+}
+.tl .nd{flex:1;min-width:0;text-align:center;position:relative}
+.tl .dot{
+  width:10px;height:10px;border-radius:50%;background:var(--accent);
+  margin:0 auto 10px;box-shadow:0 0 0 2px var(--paper);  /* 2px 纸色环 */
+}
+.tl .y{
+  display:block;font:600 12.5px/1.3 var(--sans);
+  font-variant-numeric:tabular-nums;color:var(--fg);
+}
+.tl .lb{display:block;font-size:11.5px;color:var(--dim);margin-top:3px;line-height:1.45}
+
+/* ---------- 签名图形 2 · 跨度尺（历史人物 / 中国历史） ---------- */
+.ruler{margin:0 0 24px}
+.ruler .bar{position:relative;height:2px;background:var(--line);border-radius:1px;margin:0 1px}
+.ruler .cap{position:absolute;top:-5px;width:2px;height:12px;background:var(--line)}
+.ruler .cap.l{left:0}.ruler .cap.r{right:0}
+.ruler .pin{
+  position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 2px var(--paper);transform:translateX(-50%);
+}
+.ruler .ends{
+  display:flex;justify-content:space-between;margin-top:11px;
+  font:600 12.5px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--dim);
+}
+/* mark 标签走正常流，不绝对定位 —— 长标签或贴边时都不会溢出 */
+.ruler .mk{
+  display:flex;align-items:center;gap:7px;margin-top:9px;
+  font-size:12.5px;color:var(--dim);
+}
+.ruler .mk i{
+  width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;font-style:normal;
+}
+.ruler .mk b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---------- 签名图形 3 · 垂直分带（自然地理） ---------- */
+.layers{margin:0 0 20px;border-radius:var(--radius);overflow:hidden}
+.layers .ly{padding:13px 16px;color:#fff}
+.layers .ly+.ly{margin-top:2px}          /* 2px 纸色缝隙分隔，不描边 */
+.layers .ly .n{display:block;font:600 14.5px/1.4 var(--sans)}
+.layers .ly .note{display:block;font-size:12.5px;opacity:.82;margin-top:2px;line-height:1.5}
+/* 单色顺序型 4 步，白字全部 ≥4.2:1（见手册 §6 色值核算） */
+.layers .ly:nth-child(1){background:#1e3b31}
+.layers .ly:nth-child(2){background:#2c5446}
+.layers .ly:nth-child(3){background:#3b6d5b}
+.layers .ly:nth-child(4){background:#4b8571}
+@media (prefers-color-scheme:dark){
+  .layers .ly:nth-child(1){background:#16302a}
+  .layers .ly:nth-child(2){background:#22453b}
+  .layers .ly:nth-child(3){background:#2f5a4c}
+  .layers .ly:nth-child(4){background:#3d6f5e}
+}
+
+/* ---------- 签名图形 4 · 对照双栏（科学史） ---------- */
+.cmp{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  margin:0 0 22px;border-radius:var(--radius);overflow:hidden;
+}
+.cmp>div{background:var(--card);padding:15px 16px}
+.cmp .lbl{
+  display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;
+  margin-bottom:8px;color:var(--muted);
+}
+.cmp .now .lbl{color:var(--accent)}
+.cmp p{margin:0;font-size:14px;line-height:1.7}
+.cmp .then p{color:var(--dim)}
+
+/* ---------- 签名图形 5 · 得失权衡（生物） ---------- */
+.tro{margin:0 0 22px;background:var(--card);border-radius:var(--radius);overflow:hidden}
+.tro .r{display:flex;gap:13px;padding:14px 16px}
+.tro .r+.r{border-top:1px solid var(--line)}
+/* 文字标签本身就是识别通道，不靠颜色单独承载 */
+.tro .k{
+  flex:none;width:2.1em;font:600 13px/1.7 var(--sans);text-align:center;
+  border-radius:5px;height:1.7em;
+}
+.tro .gain .k{background:#e4efe4;color:#2c5530}
+.tro .cost .k{background:#f0edda;color:#5c5216}
+.tro p{margin:0;font-size:14.5px;line-height:1.7}
+@media (prefers-color-scheme:dark){
+  .tro .gain .k{background:#1e2c1f;color:#8fc194}
+  .tro .cost .k{background:#2b2818;color:#c4b84a}
+}
+
+/* ---------- 签名图形 6 · 具体物件（文明与文化） ---------- */
+.artifact{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);border-left:3px solid var(--accent);
+}
+.artifact .n{display:block;font:600 16px/1.5 var(--title-font);margin-bottom:4px}
+.artifact p{margin:0;font-size:14px;line-height:1.7;color:var(--dim)}
+
+/* ---------- 数据条（自然地理 meter） ---------- */
+.bars{margin:0 0 22px;background:var(--card);border-radius:var(--radius);padding:6px 16px 14px}
+.bars .b{padding:10px 0 0}
+.bars .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+.bars .k{font-size:13px;color:var(--dim)}
+.bars .v{font:600 14px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--fg)}
+.bars .track{height:6px;border-radius:3px;background:var(--track);overflow:hidden}
+.bars .fill{height:100%;border-radius:3px;background:var(--accent)}
+
+/* ---------- facts —— 同一份标记，7 套皮肤各自重写 ---------- */
+.facts{
+  margin:0 0 22px;background:var(--card);border-radius:var(--radius);
+  padding:4px 16px 14px;
+}
+.facts .f{
+  display:flex;justify-content:space-between;gap:16px;
+  padding:11px 0;border-top:1px solid var(--line);
+}
+.facts .f:first-child{border-top:0}
+.facts .k{flex:none;font-size:13px;color:var(--dim)}
+.facts .v{
+  text-align:right;font-size:14px;font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- 冷知识 / 引文 / 存疑 / 标签 ---------- */
+.trivia{margin:0 0 22px;padding:0;list-style:none}
+.trivia li{
+  position:relative;padding:0 0 0 22px;margin:0 0 9px;
+  font-size:14.5px;line-height:1.7;color:var(--fg);
+}
+.trivia li::before{
+  content:"";position:absolute;left:6px;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+.quote{
+  margin:0 0 22px;padding:16px 18px;background:var(--card);
+  border-radius:var(--radius);
+}
+.quote p{margin:0;font:italic 15.5px/1.75 var(--serif)}
+.quote .from{display:block;margin-top:8px;font-size:12.5px;color:var(--muted);font-style:normal}
+.uncertain{
+  margin:0 0 22px;padding:13px 16px;border-radius:var(--radius);
+  background:var(--card);border:1px dashed var(--line);
+}
+.uncertain .lbl{
+  display:flex;align-items:center;gap:6px;
+  font:600 11.5px/1 var(--sans);letter-spacing:.1em;color:var(--muted);margin-bottom:8px;
+}
+.uncertain ul{margin:0;padding-left:18px}
+.uncertain li{font-size:13.5px;line-height:1.7;color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 22px}
+.tags span{
+  font-size:12px;padding:3px 10px;border-radius:20px;
+  background:var(--card);color:var(--dim);border:1px solid var(--line);
+}
+
+footer{
+  margin-top:26px;padding-top:15px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--muted);line-height:1.9;
+}
+footer a{color:var(--muted)}
+footer .r{display:flex;justify-content:space-between;gap:12px}
+
+/* ---- 配图。7 套皮肤共用版式，颜色全部走已有变量 ---- */
+.hero-img,.sub-img{margin:0 0 18px;padding:0}
+.sub-img{margin:22px 0 18px}
+.hero-img img,.sub-img img{
+  display:block;width:100%;height:auto;border-radius:10px;
+  background:var(--card);border:1px solid var(--line)}
+.hero-img figcaption,.sub-img figcaption{
+  margin-top:7px;font-size:12.5px;line-height:1.6;color:var(--muted)}
+/* 图片是 AI 生成的示意画面，不是史料。这行标注是必须的，不是装饰。 */
+.hero-img figcaption::after,.sub-img figcaption::after{
+  content:" · AI 生成示意图";opacity:.75}
+@media (prefers-reduced-motion:no-preference){
+  .hero-img img,.sub-img img{transition:opacity .2s}}
+
+/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
+.t-science{
+  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
+  --title-font:var(--sans);
+}
+.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
+/* 网格必须在 brand 之前声明才叠在上层 */
+.t-science .hero{
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    var(--brand);
+}
+.t-science .facts .k{min-width:5.5em}
+.t-science .facts .v,
+.t-science .tl .y{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13px;
+}
+
+@media (prefers-color-scheme:dark){
+  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
+}
+</style>
+</head>
+<body class="t-science">
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker"><b>科学与技术史</b> · 11月12日</div>
+    <h1>青霉素：发现不等于成药</h1>
+    <p class="hook">它1928年就杀死了培养皿里的细菌，却等了十几年才进人体</p>
+  </header>
+
+  
+  <figure class="hero-img">
+    <img src="../img/2026-11-12-main.webp" alt="实验台上一叠培养皿，一只长了蓝绿霉斑并带一圈透明抑菌带" width="1280" height="1280" loading="eager">
+    <figcaption>实验台上一叠培养皿，一只长了蓝绿霉斑并带一圈透明抑菌带</figcaption>
+  </figure>
+  
+
+  <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
+
+  
+
+  
+
+  
+
+  
+  <div class="cmp">
+    <div class="then"><span class="lbl">当时认为</span><p>当时流行一种判断：能杀菌的东西必然也伤人——彼时的消毒药水确实如此，杀菌与伤人是同一件事；霉菌分泌物因此只算实验意外，没人指望它成药。</p></div>
+    <div class="now"><span class="lbl">实际是</span><p>实际是，青霉素打断的是细菌细胞壁的合成，人体细胞根本没有细胞壁，所以它能杀菌却几乎不伤人；当年卡住它的从来不是原理，是提纯和产量。</p></div>
+  </div>
+  
+
+  
+
+  
+
+  <!-- ===== 正文 ===== -->
+
+  <p class="lead">1928年，伦敦大学圣玛丽医学院，细菌学教授弗莱明外出回来，发现节前没收拾的一摞葡萄球菌培养皿里，有一只长出了蓝绿色的霉。更怪的是，霉斑周围一整圈细菌不见了，留下一片干净的透明。他把这个现象记录下来，此后近十年无人推进。</p>
+
+  <div class="body">
+    
+    <section><h2>抑菌圈被记下</h2><p>弗莱明没有立刻宣称找到新药。他先确认那朵霉属于青霉菌属，再确认是它渗进培养基的物质让葡萄球菌等细菌停止生长，留下干净的圈。1929年他写成论文，笔调克制，只把它当成一种可能温和的抗菌剂来讨论，没有预言它能注射进人体。论文几乎没激起回响——同行不是不信，而是看不出怎么把一摊霉变成能用的药。</p></section>
+    
+    <section><h2>卡在提纯和产量</h2><p>转折来自一批生物化学出身的人。1938年，牛津大学的柴恩、弗洛里和希特利团队把弗莱明的论文重新翻出来，把问题从「有没有抑菌物」换成「能不能提纯、定量、批量做成针剂」。瓶颈很实在：弗莱明实验室一个月产出的青霉素只够治疗一个病人，最后提纯出的还是青霉素F，而非今天仍在用的G和V。拦住药进人体的不是原理，是量。</p></section>
+    
+    <section><h2>量产与漏掉的人</h2><p>量产的答案在大西洋对岸。美国研究团队设计出玉米浆培养液大量培养青霉菌，把每毫升活性从4单位提升到40单位，赶上二战初期救治伤兵的需求。因为青霉素是一种半抗原、可能引发严重过敏，它直到今天每次使用前仍须做皮内测试。1945年诺贝尔生理学或医学奖授予弗莱明、柴恩和弗洛里；这个奖一项最多给三人，团队里的希特利不在名单上，他活到2004年。</p></section>
+    
+  </div>
+
+  
+  <figure class="sub-img">
+    <img src="../img/2026-11-12-sub.webp" alt="旧玻璃冷凝装置与一列小瓶瓷碟，侧光下的实验器物" width="1024" height="1024" loading="lazy">
+    <figcaption>旧玻璃冷凝装置与一列小瓶瓷碟，侧光下的实验器物</figcaption>
+  </figure>
+  
+
+  
+
+  
+  <div class="facts">
+    
+    <div class="f"><span class="k">起点</span><span class="v">1928年，伦敦圣玛丽医学院，青霉菌污染葡萄球菌培养皿，霉斑周围出现抑菌圈</span></div>
+    
+    <div class="f"><span class="k">沉寂</span><span class="v">论文发表后近十年未推进到药物</span></div>
+    
+    <div class="f"><span class="k">重启</span><span class="v">1938年，牛津大学柴恩、弗洛里、希特利团队负责提纯</span></div>
+    
+    <div class="f"><span class="k">量产</span><span class="v">美国团队用玉米浆培养液，把每毫升活性从4单位提到40单位</span></div>
+    
+    <div class="f"><span class="k">机理</span><span class="v">干扰细菌细胞壁合成，在细菌繁殖期起杀菌作用</span></div>
+    
+    <div class="f"><span class="k">用药</span><span class="v">青霉素为半抗原，每次使用前须做皮内测试防过敏</span></div>
+    
+    <div class="f"><span class="k">获奖</span><span class="v">1945年诺贝尔生理学或医学奖授予弗莱明、柴恩、弗洛里</span></div>
+    
+  </div>
+  
+
+  
+
+  
+  <ul class="trivia">
+    <li>最早发现和提纯的其实是青霉素F，今天常用的是青霉素G和V。</li><li>弗莱明实验室一个月生产的青霉素，只够治疗一个病人。</li>
+  </ul>
+  
+
+  
+  <div class="uncertain">
+    <span class="lbl">存疑 · 以下说法未经确证</span>
+    <ul><li>「外出度假回来、未洗的培养皿」这一叙事细节经过后人加工，发现的具体过程有争议，本文按通行的1928年表述</li><li>「论文无人跟进」是大略说法，其间仍有零星研究引用，只是没人把它推进成药物</li></ul>
+  </div>
+  
+
+  
+  <div class="tags"><span>抗生素</span><span>科学史</span><span>制药</span><span>微生物学</span></div>
+  
+
+  <footer>
+    <div class="r"><span>科学与技术史</span><span>11月12日</span></div>
+    <div class="r"><span>往期</span><span><a href="../archive.html">归档索引</a></span></div>
+    <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -236,22 +236,28 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
-.t-geo{
-  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
+.t-science{
+  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
   --title-font:var(--sans);
 }
-.t-geo .kicker{letter-spacing:.2em}
-.t-geo .hero h1{letter-spacing:.01em}
-.t-geo .hero{
-  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
+.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
+/* 网格必须在 brand 之前声明才叠在上层 */
+.t-science .hero{
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    var(--brand);
 }
-/* 分带紧贴 hero 下沿，读作同一个剖面 */
-.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
+.t-science .facts .k{min-width:5.5em}
+.t-science .facts .v,
+.t-science .tl .y{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13px;
+}
 
 @media (prefers-color-scheme:dark){
-  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
-  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
+  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -266,10 +272,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#33564a">
-<meta name="x-build" content="2026-11-11-4d558ffd">
-<meta name="description" content="玻利维亚普纳高原的乌尤尼盐沼，是约4万年前明钦湖在安第斯山间封闭盆地中蒸发殆尽后裸露出的湖底，面积10582平方公里，壳下卤水富藏锂，至今产岩盐与石膏。">
-<title>史前湖留下的盐壳 · 自然地理</title>
+<meta name="theme-color" content="#1b4a7a">
+<meta name="x-build" content="2026-11-12-a3da505d">
+<meta name="description" content="1928年弗莱明在伦敦记录青霉菌抑制葡萄球菌的抑菌圈，论文沉寂近十年；1938年起牛津的柴恩与弗洛里团队将其提纯，美国团队改用玉米浆培养液量产，青霉素成为第一种抗生素。">
+<title>青霉素：发现不等于成药 · 科学与技术史</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -501,61 +507,60 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
-.t-geo{
-  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
+.t-science{
+  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
   --title-font:var(--sans);
 }
-.t-geo .kicker{letter-spacing:.2em}
-.t-geo .hero h1{letter-spacing:.01em}
-.t-geo .hero{
-  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
+.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
+/* 网格必须在 brand 之前声明才叠在上层 */
+.t-science .hero{
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    var(--brand);
 }
-/* 分带紧贴 hero 下沿，读作同一个剖面 */
-.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
+.t-science .facts .k{min-width:5.5em}
+.t-science .facts .v,
+.t-science .tl .y{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13px;
+}
 
 @media (prefers-color-scheme:dark){
-  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
-  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
+  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
 }
 </style>
 </head>
-<body class="t-geo">
+<body class="t-science">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>自然地理</b> · 11月11日</div>
-    <h1>史前湖留下的盐壳</h1>
-    <p class="hook">世界最大盐沼是一具死湖的湖底，壳下泡着锂</p>
+    <div class="kicker"><b>科学与技术史</b> · 11月12日</div>
+    <h1>青霉素：发现不等于成药</h1>
+    <p class="hook">它1928年就杀死了培养皿里的细菌，却等了十几年才进人体</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-11-main.webp" alt="白色盐壳平原上的干裂纹与远山投影" width="1280" height="1280" loading="eager">
-    <figcaption>白色盐壳平原上的干裂纹与远山投影</figcaption>
+    <img src="img/2026-11-12-main.webp" alt="实验台上一叠培养皿，一只长了蓝绿霉斑并带一圈透明抑菌带" width="1280" height="1280" loading="eager">
+    <figcaption>实验台上一叠培养皿，一只长了蓝绿霉斑并带一圈透明抑菌带</figcaption>
   </figure>
   
 
   <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
 
   
-  <div class="layers">
-    
-    <div class="ly"><span class="n">薄水期</span><span class="note">雨季覆一层浅水，旱季干退</span></div>
-    
-    <div class="ly"><span class="n">硬盐壳</span><span class="note">岩盐与石膏结晶交叠成硬盖</span></div>
-    
-    <div class="ly"><span class="n">卤水层</span><span class="note">盐粒间隙的饱和卤水，富锂</span></div>
-    
-    <div class="ly"><span class="n">古湖沉积</span><span class="note">明钦湖退缩期的湖相堆积</span></div>
-    
+
+  
+
+  
+
+  
+  <div class="cmp">
+    <div class="then"><span class="lbl">当时认为</span><p>当时流行一种判断：能杀菌的东西必然也伤人——彼时的消毒药水确实如此，杀菌与伤人是同一件事；霉菌分泌物因此只算实验意外，没人指望它成药。</p></div>
+    <div class="now"><span class="lbl">实际是</span><p>实际是，青霉素打断的是细菌细胞壁的合成，人体细胞根本没有细胞壁，所以它能杀菌却几乎不伤人；当年卡住它的从来不是原理，是提纯和产量。</p></div>
   </div>
-  
-
-  
-
-  
-
   
 
   
@@ -564,58 +569,43 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">10582平方公里的纯白硬壳，东西长约250公里，横在玻利维亚普纳高原约3700米的海拔上。这不是雪，也不是沙漠，而是一个名叫明钦湖的史前巨湖干涸后裸露出来的湖底：水走光了，盐留下来，铺成世界最大的盐沼。</p>
+  <p class="lead">1928年，伦敦大学圣玛丽医学院，细菌学教授弗莱明外出回来，发现节前没收拾的一摞葡萄球菌培养皿里，有一只长出了蓝绿色的霉。更怪的是，霉斑周围一整圈细菌不见了，留下一片干净的透明。他把这个现象记录下来，此后近十年无人推进。</p>
 
   <div class="body">
     
-    <section><h2>从海里围出的湖</h2><p>安第斯山脉是条年轻山链，在剧烈的板块活动中从海底隆起。隆起过程在山间围出一个个积水盆地，有些最初装的是海水。乌尤尼一带约在4万年前是明钦湖的水面，范围比今天的盐沼更大。气候转干、补给减少后，巨湖开始退缩，最后分裂成几块：普波湖、乌鲁乌鲁湖两处咸水水面，以及乌尤尼与科伊帕萨两片盐沼。</p></section>
+    <section><h2>抑菌圈被记下</h2><p>弗莱明没有立刻宣称找到新药。他先确认那朵霉属于青霉菌属，再确认是它渗进培养基的物质让葡萄球菌等细菌停止生长，留下干净的圈。1929年他写成论文，笔调克制，只把它当成一种可能温和的抗菌剂来讨论，没有预言它能注射进人体。论文几乎没激起回响——同行不是不信，而是看不出怎么把一摊霉变成能用的药。</p></section>
     
-    <section><h2>没有出口的账</h2><p>普纳高原是内流区，河流只流进、不流出，盆地里没有一条河通往海洋。这里的蒸发量常年压过降水量，水变成蒸汽离开，盐分却没有任何出路，只能一层层沉回湖底。溶解度低的先结晶，岩盐与石膏各归其位，硬壳逐年加厚。与其说盐沼是长出来的，不如说它是盆地给一湖湖水记了数万年的账。</p></section>
+    <section><h2>卡在提纯和产量</h2><p>转折来自一批生物化学出身的人。1938年，牛津大学的柴恩、弗洛里和希特利团队把弗莱明的论文重新翻出来，把问题从「有没有抑菌物」换成「能不能提纯、定量、批量做成针剂」。瓶颈很实在：弗莱明实验室一个月产出的青霉素只够治疗一个病人，最后提纯出的还是青霉素F，而非今天仍在用的G和V。拦住药进人体的不是原理，是量。</p></section>
     
-    <section><h2>壳下的未来</h2><p>硬壳之下是浸透盐粒的饱和卤水，锂就藏在这层水里——电动车电池的原料，接在一个早已死去的湖的残液上。盐沼至今仍盛产岩盐与石膏；每年7到10月旱季，壳面大片干硬，车辆可以直接横越，湖心的鱼岛上长着仙人掌，是赶路人的歇脚处。雨季覆上一层薄水时，整片盐壳变成天空的镜面，游客从全球赶来。</p></section>
+    <section><h2>量产与漏掉的人</h2><p>量产的答案在大西洋对岸。美国研究团队设计出玉米浆培养液大量培养青霉菌，把每毫升活性从4单位提升到40单位，赶上二战初期救治伤兵的需求。因为青霉素是一种半抗原、可能引发严重过敏，它直到今天每次使用前仍须做皮内测试。1945年诺贝尔生理学或医学奖授予弗莱明、柴恩和弗洛里；这个奖一项最多给三人，团队里的希特利不在名单上，他活到2004年。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-11-sub.webp" alt="带石膏夹层结晶的盐壳断面与仙人掌丘" width="1024" height="1024" loading="lazy">
-    <figcaption>带石膏夹层结晶的盐壳断面与仙人掌丘</figcaption>
+    <img src="img/2026-11-12-sub.webp" alt="旧玻璃冷凝装置与一列小瓶瓷碟，侧光下的实验器物" width="1024" height="1024" loading="lazy">
+    <figcaption>旧玻璃冷凝装置与一列小瓶瓷碟，侧光下的实验器物</figcaption>
   </figure>
   
 
-  
-  <div class="bars">
-    
-    <div class="b">
-      <div class="hd"><span class="k">东西长</span><span class="v">约250公里</span></div>
-      <div class="track"><div class="fill" style="width:100%"></div></div>
-    </div>
-    
-    <div class="b">
-      <div class="hd"><span class="k">南北宽</span><span class="v">约100公里</span></div>
-      <div class="track"><div class="fill" style="width:40%"></div></div>
-    </div>
-    
-    <div class="b">
-      <div class="hd"><span class="k">湖面海拔</span><span class="v">约3700米</span></div>
-      <div class="track"><div class="fill" style="width:74%"></div></div>
-    </div>
-    
-  </div>
   
 
   
   <div class="facts">
     
-    <div class="f"><span class="k">位置</span><span class="v">玻利维亚西南部普纳高原，海拔约3700米</span></div>
+    <div class="f"><span class="k">起点</span><span class="v">1928年，伦敦圣玛丽医学院，青霉菌污染葡萄球菌培养皿，霉斑周围出现抑菌圈</span></div>
     
-    <div class="f"><span class="k">规模</span><span class="v">东西约250公里、南北约100公里，面积10582平方公里</span></div>
+    <div class="f"><span class="k">沉寂</span><span class="v">论文发表后近十年未推进到药物</span></div>
     
-    <div class="f"><span class="k">前身</span><span class="v">约4万年前的史前巨湖明钦湖</span></div>
+    <div class="f"><span class="k">重启</span><span class="v">1938年，牛津大学柴恩、弗洛里、希特利团队负责提纯</span></div>
     
-    <div class="f"><span class="k">产物</span><span class="v">岩盐、石膏，壳下富锂卤水</span></div>
+    <div class="f"><span class="k">量产</span><span class="v">美国团队用玉米浆培养液，把每毫升活性从4单位提到40单位</span></div>
     
-    <div class="f"><span class="k">同族</span><span class="v">普波湖、乌鲁乌鲁湖、科伊帕萨盐沼同源分裂</span></div>
+    <div class="f"><span class="k">机理</span><span class="v">干扰细菌细胞壁合成，在细菌繁殖期起杀菌作用</span></div>
+    
+    <div class="f"><span class="k">用药</span><span class="v">青霉素为半抗原，每次使用前须做皮内测试防过敏</span></div>
+    
+    <div class="f"><span class="k">获奖</span><span class="v">1945年诺贝尔生理学或医学奖授予弗莱明、柴恩、弗洛里</span></div>
     
   </div>
   
@@ -624,23 +614,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>普波湖不是乌尤尼的邻居，是它的兄弟：同一片湖面退缩后分给两边的遗产</li><li>看着像深渊的盐壳旱季大片干硬，汽车能直接开过去</li>
+    <li>最早发现和提纯的其实是青霉素F，今天常用的是青霉素G和V。</li><li>弗莱明实验室一个月生产的青霉素，只够治疗一个病人。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>明钦湖（Lake Minchin）的中文译名不统一，材料作「明清湖」</li><li>壳下卤水层的结构与厚度，各来源数字出入较大</li><li>盐沼锂资源的确切储量与可采比例尚无定论</li></ul>
+    <ul><li>「外出度假回来、未洗的培养皿」这一叙事细节经过后人加工，发现的具体过程有争议，本文按通行的1928年表述</li><li>「论文无人跟进」是大略说法，其间仍有零星研究引用，只是没人把它推进成药物</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>盐沼</span><span>蒸发岩</span><span>安第斯</span><span>普纳高原</span><span>锂</span></div>
+  <div class="tags"><span>抗生素</span><span>科学史</span><span>制药</span><span>微生物学</span></div>
   
 
   <footer>
-    <div class="r"><span>自然地理</span><span>11月11日</span></div>
+    <div class="r"><span>科学与技术史</span><span>11月12日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
   </footer>
