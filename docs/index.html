@@ -236,28 +236,44 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
-.t-science{
-  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
-  --title-font:var(--sans);
+/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
+.t-culture{
+  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:0 0 0 0;
 }
-.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
-/* 网格必须在 brand 之前声明才叠在上层 */
-.t-science .hero{
+.t-culture .hero{text-align:center;background:var(--paper)}
+/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
+.t-culture .hero::before,
+.t-culture .hero::after{
+  content:"";display:block;height:13px;
   background:
-    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    var(--brand);
+    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
+    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
+  opacity:.55;
 }
-.t-science .facts .k{min-width:5.5em}
-.t-science .facts .v,
-.t-science .tl .y{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:13px;
+.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
+.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
+.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
+/* 2×2 卡片网格 */
+.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.t-culture .facts .f{
+  display:block;background:var(--card);border-radius:10px;
+  padding:13px 14px;border-top:0;
 }
+.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
+.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
+  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
+              --hero-fg:#e8eaed; }
+  .t-culture .hero::before,.t-culture .hero::after{
+    background:
+      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
+      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
+    opacity:.4;
+  }
+  .t-culture .hero .kicker{color:#9aa4e8}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -272,10 +288,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#1b4a7a">
-<meta name="x-build" content="2026-11-12-a3da505d">
-<meta name="description" content="1928年弗莱明在伦敦记录青霉菌抑制葡萄球菌的抑菌圈，论文沉寂近十年；1938年起牛津的柴恩与弗洛里团队将其提纯，美国团队改用玉米浆培养液量产，青霉素成为第一种抗生素。">
-<title>青霉素：发现不等于成药 · 科学与技术史</title>
+<meta name="theme-color" content="#f5f4f9">
+<meta name="x-build" content="2026-11-13-c0a84647">
+<meta name="description" content="玛雅和阿兹特克的可可豆按粒充当小额货币，又是饮品原料；西班牙人接管后发现炒旧豆、蜡填壳等伪作，遂逐粒检验，最终随小额铜币退出流通。">
+<title>喝的东西也是钱 · 文明与文化</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -507,44 +523,60 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
-.t-science{
-  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
-  --title-font:var(--sans);
+/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
+.t-culture{
+  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:0 0 0 0;
 }
-.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
-/* 网格必须在 brand 之前声明才叠在上层 */
-.t-science .hero{
+.t-culture .hero{text-align:center;background:var(--paper)}
+/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
+.t-culture .hero::before,
+.t-culture .hero::after{
+  content:"";display:block;height:13px;
   background:
-    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
-    var(--brand);
+    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
+    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
+  opacity:.55;
 }
-.t-science .facts .k{min-width:5.5em}
-.t-science .facts .v,
-.t-science .tl .y{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  font-size:13px;
+.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
+.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
+.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
+/* 2×2 卡片网格 */
+.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.t-culture .facts .f{
+  display:block;background:var(--card);border-radius:10px;
+  padding:13px 14px;border-top:0;
 }
+.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
+.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
+  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
+              --hero-fg:#e8eaed; }
+  .t-culture .hero::before,.t-culture .hero::after{
+    background:
+      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
+      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
+    opacity:.4;
+  }
+  .t-culture .hero .kicker{color:#9aa4e8}
 }
 </style>
 </head>
-<body class="t-science">
+<body class="t-culture">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>科学与技术史</b> · 11月12日</div>
-    <h1>青霉素：发现不等于成药</h1>
-    <p class="hook">它1928年就杀死了培养皿里的细菌，却等了十几年才进人体</p>
+    <div class="kicker"><b>文明与文化</b> · 11月13日</div>
+    <h1>喝的东西也是钱</h1>
+    <p class="hook">阿兹特克的市集上，钱按粒数、长在树上、能造假、也能喝掉。</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-12-main.webp" alt="实验台上一叠培养皿，一只长了蓝绿霉斑并带一圈透明抑菌带" width="1280" height="1280" loading="eager">
-    <figcaption>实验台上一叠培养皿，一只长了蓝绿霉斑并带一圈透明抑菌带</figcaption>
+    <img src="img/2026-11-13-main.webp" alt="茅草市集摊上倾倒出的可可豆正被按粒清点" width="1280" height="1280" loading="eager">
+    <figcaption>茅草市集摊上倾倒出的可可豆正被按粒清点</figcaption>
   </figure>
   
 
@@ -557,34 +589,33 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-  <div class="cmp">
-    <div class="then"><span class="lbl">当时认为</span><p>当时流行一种判断：能杀菌的东西必然也伤人——彼时的消毒药水确实如此，杀菌与伤人是同一件事；霉菌分泌物因此只算实验意外，没人指望它成药。</p></div>
-    <div class="now"><span class="lbl">实际是</span><p>实际是，青霉素打断的是细菌细胞壁的合成，人体细胞根本没有细胞壁，所以它能杀菌却几乎不伤人；当年卡住它的从来不是原理，是提纯和产量。</p></div>
+
+  
+
+  
+  <div class="artifact">
+    <span class="n">蜡填可可豆壳</span><p>有种植者炒旧豆翻新、往空壳填蜡冒充饱满新豆，收钱前不得不逐粒验看</p>
   </div>
-  
-
-  
-
   
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">1928年，伦敦大学圣玛丽医学院，细菌学教授弗莱明外出回来，发现节前没收拾的一摞葡萄球菌培养皿里，有一只长出了蓝绿色的霉。更怪的是，霉斑周围一整圈细菌不见了，留下一片干净的透明。他把这个现象记录下来，此后近十年无人推进。</p>
+  <p class="lead">西班牙人到来前的特诺奇蒂特兰市集上，1粒可可豆能换1只番茄，1只小兔要几十粒；交易按粒数，豆放久了会生霉发芽，人们就把它磨开冲一杯巧克力先喝掉。这些钱不是谁铸的，是树上长的。</p>
 
   <div class="body">
     
-    <section><h2>抑菌圈被记下</h2><p>弗莱明没有立刻宣称找到新药。他先确认那朵霉属于青霉菌属，再确认是它渗进培养基的物质让葡萄球菌等细菌停止生长，留下干净的圈。1929年他写成论文，笔调克制，只把它当成一种可能温和的抗菌剂来讨论，没有预言它能注射进人体。论文几乎没激起回响——同行不是不信，而是看不出怎么把一摊霉变成能用的药。</p></section>
+    <section><h2>能喝的钱</h2><p>中美洲文明不用金属币，可可豆就是这里的小额通货。玛雅人和阿兹特克人按粒给商品定价、按粒收贡税，大宗交易用棉布等贵重物，零星差额拿豆找齐。但豆子同时是食物：果荚成熟后取出种子，发酵、焙烤、研磨，兑水加辣椒打出泡沫，是上层社会常用的饮品。钱和饮料不是两样东西，是同一件东西的两种状态——花不掉的部分，最后多半进了肚子。</p></section>
     
-    <section><h2>卡在提纯和产量</h2><p>转折来自一批生物化学出身的人。1938年，牛津大学的柴恩、弗洛里和希特利团队把弗莱明的论文重新翻出来，把问题从「有没有抑菌物」换成「能不能提纯、定量、批量做成针剂」。瓶颈很实在：弗莱明实验室一个月产出的青霉素只够治疗一个病人，最后提纯出的还是青霉素F，而非今天仍在用的G和V。拦住药进人体的不是原理，是量。</p></section>
+    <section><h2>造不出假币</h2><p>可可树只长在赤道南北约20度以内的暖湿低地，阿兹特克核心区的墨西哥谷地海拔两千米以上，一种树也种不活。也就是说，这种钱没法在自己家里生产，只能靠贸易和贡赋从塔巴斯科一带的沿海产地收进来，供给天然被 geography 锁死。产量也有限：每个果荚大约只出20到25粒，每年两次成熟，10到12月主收获季，新一批钱才成批进市。稀缺性是地理给的，不用任何机构管理发行。</p></section>
     
-    <section><h2>量产与漏掉的人</h2><p>量产的答案在大西洋对岸。美国研究团队设计出玉米浆培养液大量培养青霉菌，把每毫升活性从4单位提升到40单位，赶上二战初期救治伤兵的需求。因为青霉素是一种半抗原、可能引发严重过敏，它直到今天每次使用前仍须做皮内测试。1945年诺贝尔生理学或医学奖授予弗莱明、柴恩和弗洛里；这个奖一项最多给三人，团队里的希特利不在名单上，他活到2004年。</p></section>
+    <section><h2>造假与验豆</h2><p>西班牙人接手这套货币后，很快发现问题：有种植者把干裂的陈豆重新炒一遍，冒充饱满新豆，甚至往空壳里填蜡凑分量。伪冒的对象是豆子本身，检验于是成了交易的一环——收豆前要看、要捏，殖民当局也安排人逐粒把关。随着殖民者铸行小额铜币，豆币逐步退出流通，彻底变回货物。只有「巧克力」这个词跟着豆子去了欧洲，至今留在几十种语言里。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-12-sub.webp" alt="旧玻璃冷凝装置与一列小瓶瓷碟，侧光下的实验器物" width="1024" height="1024" loading="lazy">
-    <figcaption>旧玻璃冷凝装置与一列小瓶瓷碟，侧光下的实验器物</figcaption>
+    <img src="img/2026-11-13-sub.webp" alt="几粒可可豆与剖开的空壳和一小团蜡并排摆放" width="1024" height="1024" loading="lazy">
+    <figcaption>几粒可可豆与剖开的空壳和一小团蜡并排摆放</figcaption>
   </figure>
   
 
@@ -593,19 +624,13 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">起点</span><span class="v">1928年，伦敦圣玛丽医学院，青霉菌污染葡萄球菌培养皿，霉斑周围出现抑菌圈</span></div>
+    <div class="f"><span class="k">每果产豆</span><span class="v">约20到25粒</span></div>
     
-    <div class="f"><span class="k">沉寂</span><span class="v">论文发表后近十年未推进到药物</span></div>
+    <div class="f"><span class="k">收获节奏</span><span class="v">每年成熟两次，主要收获期10到12月</span></div>
     
-    <div class="f"><span class="k">重启</span><span class="v">1938年，牛津大学柴恩、弗洛里、希特利团队负责提纯</span></div>
+    <div class="f"><span class="k">货币角色</span><span class="v">玛雅与阿兹特克的小额通货，按粒计价</span></div>
     
-    <div class="f"><span class="k">量产</span><span class="v">美国团队用玉米浆培养液，把每毫升活性从4单位提到40单位</span></div>
-    
-    <div class="f"><span class="k">机理</span><span class="v">干扰细菌细胞壁合成，在细菌繁殖期起杀菌作用</span></div>
-    
-    <div class="f"><span class="k">用药</span><span class="v">青霉素为半抗原，每次使用前须做皮内测试防过敏</span></div>
-    
-    <div class="f"><span class="k">获奖</span><span class="v">1945年诺贝尔生理学或医学奖授予弗莱明、柴恩、弗洛里</span></div>
+    <div class="f"><span class="k">常见伪作</span><span class="v">炒干旧豆翻新、蜡填空壳充重</span></div>
     
   </div>
   
@@ -614,23 +639,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>最早发现和提纯的其实是青霉素F，今天常用的是青霉素G和V。</li><li>弗莱明实验室一个月生产的青霉素，只够治疗一个病人。</li>
+    <li>可</li><li>可</li><li>豆</li><li>本</li><li>质</li><li>是</li><li>种</li><li>子</li><li>，</li><li>受</li><li>潮</li><li>会</li><li>生</li><li>霉</li><li>发</li><li>芽</li><li>—</li><li>—</li><li>这</li><li>是</li><li>自</li><li>带</li><li>保</li><li>质</li><li>期</li><li>的</li><li>钱</li><li>，</li><li>放</li><li>不</li><li>住</li><li>的</li><li>最</li><li>好</li><li>去</li><li>处</li><li>是</li><li>喝</li><li>掉</li><li>。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>「外出度假回来、未洗的培养皿」这一叙事细节经过后人加工，发现的具体过程有争议，本文按通行的1928年表述</li><li>「论文无人跟进」是大略说法，其间仍有零星研究引用，只是没人把它推进成药物</li></ul>
+    <ul><li>豆与商品的比价（1粒换番茄、小兔几十粒）出自西班牙早期记录，各地各时浮动</li><li>殖民当局逐粒检验可可豆的具体机构与办法，记载不一</li><li>小额铜币的引入与遏制豆币伪冒之间的因果关系，属后人追述</li><li>陈豆翻新、蜡填壳的流行程度没有可靠统计</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>抗生素</span><span>科学史</span><span>制药</span><span>微生物学</span></div>
+  <div class="tags"><span>中美洲</span><span>货币史</span><span>巧克力</span><span>阿兹特克</span><span>殖民时代</span></div>
   
 
   <footer>
-    <div class="r"><span>科学与技术史</span><span>11月12日</span></div>
+    <div class="r"><span>文明与文化</span><span>11月13日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
   </footer>
