@@ -236,35 +236,32 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周六 · 生物与自然 —— 田野笔记：浅底细框（无满幅色块），大行高，facts 走标签云 */
-.t-bio{
-  --paper:#f2f5ef; --brand:#f2f5ef; --accent:#6d5f18; --track:#e0e5d6;
-  --title-font:var(--sans); --hero-fg:#141414;
-  --hero-pad:20px 18px 18px;
+/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
+.t-china{
+  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:28px 20px 22px;
 }
-.t-bio body,.t-bio{line-height:1.85}
-.t-bio .hero{
-  background:var(--card);border:1px solid #cfd8c4;border-radius:var(--radius);
-  margin:16px 0 20px;
+.t-china .hero{background:var(--paper)}
+/* 朱印方章式类目标签 */
+.t-china .kicker{opacity:1}
+.t-china .kicker b{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
 }
-.t-bio .kicker{color:#2c5530;opacity:1;letter-spacing:.16em}
-.t-bio .hero h1{font-size:23px;font-weight:650}
-.t-bio .hero .hook{color:var(--dim);opacity:1}
-.t-bio .lead{line-height:1.85}
-.t-bio .body p{line-height:1.85}
-/* 标签云式 facts */
-.t-bio .facts{background:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.t-bio .facts .f{
-  display:flex;gap:7px;align-items:baseline;border-top:0;padding:7px 12px;
-  background:var(--card);border-radius:8px;border:1px solid var(--line);
+.t-china .hero h1{
+  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
 }
-.t-bio .facts .v{text-align:left}
+.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
+/* 古籍感：键右对齐贴向值 */
+.t-china .facts .f{gap:20px}
+.t-china .facts .k{flex:1;text-align:right;min-width:4em}
+.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
 
 @media (prefers-color-scheme:dark){
-  .t-bio{ --paper:#0e120d; --brand:#0e120d; --accent:#c4b84a; --track:#272c1e;
-          --hero-fg:#e8eaed; }
-  .t-bio .hero{border-color:#2c3a2a}
-  .t-bio .kicker{color:#8fc194}
+  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
+            --track:#332622; --hero-fg:#e8eaed; }
+  .t-china .kicker b{background:#8c2b20;color:#fff}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -279,10 +276,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#f2f5ef">
-<meta name="x-build" content="2026-11-14-3e0b1e36">
-<meta name="description" content="蜂鸟靠翅膀每秒扇动十余次悬停取食，能量只够撑几小时，入夜后进入蛰伏：心率从上千降到几十，体温跟着环境下跌。这套求生术不容出错，寒流过久的冬夜常有个体再也醒不过来。">
-<title>每晚死一次的小鸟 · 生物与自然</title>
+<meta name="theme-color" content="#faf7f0">
+<meta name="x-build" content="2026-11-15-0a3dd24b">
+<meta name="description" content="1881至1885年，约1.7万名华工修建加拿大太平洋铁路最险峻路段，1883年曾罢工要求同酬；铁路合龙后加拿大转而对华人征收人头税，2006年联邦议会正式致歉。">
+<title>铁路修完就向修路人收人头税 · 中国历史</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -514,51 +511,48 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周六 · 生物与自然 —— 田野笔记：浅底细框（无满幅色块），大行高，facts 走标签云 */
-.t-bio{
-  --paper:#f2f5ef; --brand:#f2f5ef; --accent:#6d5f18; --track:#e0e5d6;
-  --title-font:var(--sans); --hero-fg:#141414;
-  --hero-pad:20px 18px 18px;
+/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
+.t-china{
+  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:28px 20px 22px;
 }
-.t-bio body,.t-bio{line-height:1.85}
-.t-bio .hero{
-  background:var(--card);border:1px solid #cfd8c4;border-radius:var(--radius);
-  margin:16px 0 20px;
+.t-china .hero{background:var(--paper)}
+/* 朱印方章式类目标签 */
+.t-china .kicker{opacity:1}
+.t-china .kicker b{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
 }
-.t-bio .kicker{color:#2c5530;opacity:1;letter-spacing:.16em}
-.t-bio .hero h1{font-size:23px;font-weight:650}
-.t-bio .hero .hook{color:var(--dim);opacity:1}
-.t-bio .lead{line-height:1.85}
-.t-bio .body p{line-height:1.85}
-/* 标签云式 facts */
-.t-bio .facts{background:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.t-bio .facts .f{
-  display:flex;gap:7px;align-items:baseline;border-top:0;padding:7px 12px;
-  background:var(--card);border-radius:8px;border:1px solid var(--line);
+.t-china .hero h1{
+  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
 }
-.t-bio .facts .v{text-align:left}
+.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
+/* 古籍感：键右对齐贴向值 */
+.t-china .facts .f{gap:20px}
+.t-china .facts .k{flex:1;text-align:right;min-width:4em}
+.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
 
 @media (prefers-color-scheme:dark){
-  .t-bio{ --paper:#0e120d; --brand:#0e120d; --accent:#c4b84a; --track:#272c1e;
-          --hero-fg:#e8eaed; }
-  .t-bio .hero{border-color:#2c3a2a}
-  .t-bio .kicker{color:#8fc194}
+  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
+            --track:#332622; --hero-fg:#e8eaed; }
+  .t-china .kicker b{background:#8c2b20;color:#fff}
 }
 </style>
 </head>
-<body class="t-bio">
+<body class="t-china">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>生物与自然</b> · 11月14日</div>
-    <h1>每晚死一次的小鸟</h1>
-    <p class="hook">心率上千的蜂鸟，靠每晚把身体降到接近停机来活过一夜</p>
+    <div class="kicker"><b>中国历史</b> · 11月15日</div>
+    <h1>铁路修完就向修路人收人头税</h1>
+    <p class="hook">华工铺通加拿大首条横贯铁路，六十年后他们才有投票权</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-14-main.webp" alt="暮色中一只小鸟僵停在细枝上，头埋进羽毛" width="1280" height="1280" loading="eager">
-    <figcaption>暮色中一只小鸟僵停在细枝上，头埋进羽毛</figcaption>
+    <img src="img/2026-11-15-main.webp" alt="陡壁上吊篮凿岩的筑路人群像，崖下是河水" width="1280" height="1280" loading="eager">
+    <figcaption>陡壁上吊篮凿岩的筑路人群像，崖下是河水</figcaption>
   </figure>
   
 
@@ -569,36 +563,42 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-
-  
-
-  
-  <div class="tro">
-    <div class="r gain"><span class="k">得</span><p>悬停取食让它独占其他鸟够不到的花，代价是每秒十余次的翅膀消耗，逼它每晚把身体降到接近停机。</p></div>
-    <div class="r cost"><span class="k">失</span><p>体温跌过头就再也没力气把自己暖回来；寒流连着几夜、花又不开时，省电模式直接变成死亡陷阱。</p></div>
+  <div class="ruler">
+    <div class="bar">
+      <span class="cap l"></span><span class="cap r"></span>
+      <span class="pin" style="left:4%"></span>
+    </div>
+    <div class="ends"><span>1881</span><span>2006</span></div>
+    
+    <div class="mk"><i></i><b>1885</b>铁路合龙，人头税开征</div>
+    
   </div>
+  
+
+  
+
   
 
   
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">日落后一小时，一只蜂鸟停进细枝，翅膀收住不动，身体开始变凉。它的心跳从每分钟上千次滑向几十次，体温跟着空气一路下跌，呼吸浅得几乎看不见。对多数鸟而言这是死亡的过程，对蜂鸟来说，这是每晚必须按一次的开关。</p>
+  <p class="lead">1883年7月的一个早晨，菲沙河峡谷的华工把钢钎插进岩缝，没有再拔出来——两千人的工地同时安静下来。两年后铁路合龙，他们被成批解雇；紧接着，一个专门冲着他们设立的税种上线了。</p>
 
   <div class="body">
     
-    <section><h2>一直烧着</h2><p>蜂鸟面对的是持续的燃烧。它悬停时翅膀每秒扇动十余次，肩关节把前肢拧成一个近乎自由的转轴，上下两个冲程都产生升力，因此能停在空中、倒退、垂直上升——这套飞法别的鸟没有，代价是燃料。它的主食花蜜接近纯糖水，糖分烧得快，体内糖原储备只够撑几个小时；日落后若不进食，体温维持系统会在夜里被掏空。</p></section>
+    <section><h2>峡谷停工</h2><p>1883年7月，不列颠哥伦比亚的菲沙河峡谷和塞尔扣克山脉，两千名华工几乎同时停工。他们每天工资约1元，食宿还要从中扣；白人干同样的活拿1元5角，包吃住。资方起初拒绝让步，工程在山里两头停摆。数周后，资方同意小幅加薪、承诺不追究带头者，工人才回到崖壁上。同酬没有完全争到，但停工证明了一件事：这条铁路离不开华工。</p></section>
     
-    <section><h2>每晚降一次温</h2><p>蛰伏是它给自己装的开关。入夜后蜂鸟主动松开体温调节，任身体凉下来：心率从每分钟上千次滑到几十次，呼吸变慢，体温跟着环境一路下跌，代谢压到白天的几分之一。省下的这些能量，刚好够填上一夜不进食的缺口。天快亮时它再靠颤抖产热把自己暖回来，过程可能持续几十分钟，这期间几乎飞不起来。这不是冬眠——多数蜂鸟无论住在冷地还是热带，几乎每晚都走一遍这套程序。</p></section>
+    <section><h2>低价的由来</h2><p>华工不是凑巧出现在这里。不列颠哥伦比亚1871年加入联邦，换来的条件就是十年内修通一条通往太平洋的铁路；承包商按完成的英里数计价，每一分工钱都直接算进成本。白人劳工不愿接峡谷爆破这类高危活，资方便从1881年起把加州金矿和旧铁路工地上的华工成批引来，最多时同时有六七千人在山道上。工资差不是能力差，是合同把便宜本身当成了利润来源。</p></section>
     
-    <section><h2>醒不过来的夜</h2><p>问题在于这条缝很窄。体温跌得太低，肌肉就抖不出足够热量把自己拉回来；一旦寒流连着几夜不退，白天又找不到开花的食物，夜里只能继续往下走。北美观鸟和环志者常提到，寒潮过后的清晨能捡到僵在枝头的蜂鸟，身体还软着，像睡着了。安第斯山的高海拔种类把同样的策略用得更长，在食物短缺的月份里反复进入间歇性蛰伏，把代谢压到最低，等花重新开放。</p></section>
+    <section><h2>合龙之后</h2><p>1885年11月7日，克雷格拉基钉下最后一颗道钉，铁路全线贯通。华工在数周内被成批解雇，多数回了加州，少数留在温哥华的华人街区讨生活。同年，加拿大出台《华人移民法》，每名入境华人须缴50加元人头税；1923年税额涨到500加元，华人入境几乎归零。投票权1947年才放开。2006年5月23日联邦议会正式致歉，当年崖壁上的人还剩下几个，已经没人说得清了。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-14-sub.webp" alt="展开的窄长鸟翼旁放着一朵长筒形的花" width="1024" height="1024" loading="lazy">
-    <figcaption>展开的窄长鸟翼旁放着一朵长筒形的花</figcaption>
+    <img src="img/2026-11-15-sub.webp" alt="岩壁炮眼旁的钢钎、铁楔与旧帆布包" width="1024" height="1024" loading="lazy">
+    <figcaption>岩壁炮眼旁的钢钎、铁楔与旧帆布包</figcaption>
   </figure>
   
 
@@ -607,13 +607,15 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">翅膀扇动</span><span class="v">每秒十余次</span></div>
+    <div class="f"><span class="k">铁路工期</span><span class="v">1881—1885年</span></div>
     
-    <div class="f"><span class="k">蛰伏时心率</span><span class="v">从每分钟上千次降至几十次</span></div>
+    <div class="f"><span class="k">华工人数</span><span class="v">约1.5万—1.7万人</span></div>
     
-    <div class="f"><span class="k">状态名称</span><span class="v">蛰伏（torpor）</span></div>
+    <div class="f"><span class="k">人头税</span><span class="v">1885年50加元，1923年涨至500加元</span></div>
     
-    <div class="f"><span class="k">蛋白质来源</span><span class="v">花蜜之外捕食小型昆虫</span></div>
+    <div class="f"><span class="k">投票权</span><span class="v">1947年（联邦）</span></div>
+    
+    <div class="f"><span class="k">正式致歉</span><span class="v">2006年5月23日</span></div>
     
   </div>
   
@@ -622,25 +624,25 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>夜间蛰伏对蜂鸟不是应急手段，而是日常程序：热带的蜂鸟也几乎每晚「死」一次。</li>
+    <li>加拿大官方只记下600余名筑路华工的死亡，民间说法是每英里路轨下都躺着一人。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>蜂鸟的心率与体温数值随体型、种类和环境差异很大，本文只按量级描述。</li><li>蛰伏时体温可跌到接近环境温度，个别高海拔记录更低，其下限学界仍有讨论。</li><li>寒潮后清晨死亡个体的比例缺乏系统统计，多来自环志者与观鸟者的观察记录。</li><li>扇翅频率按选题给定的量级写作「每秒十余次」，实际随体型变化，小型种类更快。</li></ul>
+    <ul><li>罢工时间通常记载为1883年夏（选题材料作1885年，本文取前者），此后是否另有停工各说不一</li><li>罢工人数各说介于两千至三千之间，复工条款与加薪数额记载不一</li><li>华工总数约1.5万至1.7万，巅峰同时在场人数无定说</li><li>死亡人数官方记录600余人，民间估计达千人以上，坟茔多无标记</li><li>总承包商Onderdonk的中文通行译名不确定，正文未具其名</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>蜂鸟</span><span>动物生理</span><span>能量代谢</span><span>生存权衡</span><span>美洲</span></div>
+  <div class="tags"><span>华工</span><span>铁路</span><span>人头税</span><span>移民史</span><span>加拿大</span></div>
   
 
   <footer>
-    <div class="r"><span>生物与自然</span><span>11月14日</span></div>
+    <div class="r"><span>中国历史</span><span>11月15日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
-    
+    <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
   </footer>
 
 </div>
