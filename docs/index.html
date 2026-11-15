@@ -236,32 +236,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
-.t-china{
-  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:28px 20px 22px;
+/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
+.t-event{
+  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
+  --title-font:var(--sans);
 }
-.t-china .hero{background:var(--paper)}
-/* 朱印方章式类目标签 */
-.t-china .kicker{opacity:1}
-.t-china .kicker b{
-  display:inline-block;background:var(--accent);color:#fff;
-  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
+.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
+.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
+.t-event .hero{
+  background:
+    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
+    var(--brand);
 }
-.t-china .hero h1{
-  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
-}
-.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
-/* 古籍感：键右对齐贴向值 */
-.t-china .facts .f{gap:20px}
-.t-china .facts .k{flex:1;text-align:right;min-width:4em}
-.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
+/* 表格式 facts：键左值右、细分隔线、等宽数字 */
+.t-event .facts .k{min-width:5.5em}
 
 @media (prefers-color-scheme:dark){
-  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
-            --track:#332622; --hero-fg:#e8eaed; }
-  .t-china .kicker b{background:#8c2b20;color:#fff}
+  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -276,10 +267,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#faf7f0">
-<meta name="x-build" content="2026-11-15-0a3dd24b">
-<meta name="description" content="1881至1885年，约1.7万名华工修建加拿大太平洋铁路最险峻路段，1883年曾罢工要求同酬；铁路合龙后加拿大转而对华人征收人头税，2006年联邦议会正式致歉。">
-<title>铁路修完就向修路人收人头税 · 中国历史</title>
+<meta name="theme-color" content="#1f3352">
+<meta name="x-build" content="2026-11-16-34996d36">
+<meta name="description" content="1845年富兰克林率129人乘幽冥号与恐惧号寻找西北航道，全队覆没。因带了三年补给，皇家海军的救援迟迟未发；一块铅牌与因纽特人口述后来拼出这堂19世纪北极搜救的第一课。">
+<title>一支装备最好的队伍全死了 · 世界历史</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -511,48 +502,39 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
-.t-china{
-  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:28px 20px 22px;
+/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
+.t-event{
+  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
+  --title-font:var(--sans);
 }
-.t-china .hero{background:var(--paper)}
-/* 朱印方章式类目标签 */
-.t-china .kicker{opacity:1}
-.t-china .kicker b{
-  display:inline-block;background:var(--accent);color:#fff;
-  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
+.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
+.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
+.t-event .hero{
+  background:
+    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
+    var(--brand);
 }
-.t-china .hero h1{
-  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
-}
-.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
-/* 古籍感：键右对齐贴向值 */
-.t-china .facts .f{gap:20px}
-.t-china .facts .k{flex:1;text-align:right;min-width:4em}
-.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
+/* 表格式 facts：键左值右、细分隔线、等宽数字 */
+.t-event .facts .k{min-width:5.5em}
 
 @media (prefers-color-scheme:dark){
-  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
-            --track:#332622; --hero-fg:#e8eaed; }
-  .t-china .kicker b{background:#8c2b20;color:#fff}
+  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
 }
 </style>
 </head>
-<body class="t-china">
+<body class="t-event">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>中国历史</b> · 11月15日</div>
-    <h1>铁路修完就向修路人收人头税</h1>
-    <p class="hook">华工铺通加拿大首条横贯铁路，六十年后他们才有投票权</p>
+    <div class="kicker"><b>世界历史</b> · 11月16日</div>
+    <h1>一支装备最好的队伍全死了</h1>
+    <p class="hook">船上三年的口粮，把救援拖晚了三年</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-15-main.webp" alt="陡壁上吊篮凿岩的筑路人群像，崖下是河水" width="1280" height="1280" loading="eager">
-    <figcaption>陡壁上吊篮凿岩的筑路人群像，崖下是河水</figcaption>
+    <img src="img/2026-11-16-main.webp" alt="浮冰间被困的两艘帆船与冰面上的人影" width="1280" height="1280" loading="eager">
+    <figcaption>浮冰间被困的两艘帆船与冰面上的人影</figcaption>
   </figure>
   
 
@@ -561,18 +543,19 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-
-  
-  <div class="ruler">
-    <div class="bar">
-      <span class="cap l"></span><span class="cap r"></span>
-      <span class="pin" style="left:4%"></span>
-    </div>
-    <div class="ends"><span>1881</span><span>2006</span></div>
+  <div class="tl">
     
-    <div class="mk"><i></i><b>1885</b>铁路合龙，人头税开征</div>
+    <div class="nd"><div class="dot"></div><span class="y">1845</span><span class="lb">129人两船启航</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1845</span><span class="lb">巴芬湾最后目击</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1848</span><span class="lb">铅牌刻下最后命令</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">2016</span><span class="lb">船体现身海底</span></div>
     
   </div>
+  
+
   
 
   
@@ -583,22 +566,22 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">1883年7月的一个早晨，菲沙河峡谷的华工把钢钎插进岩缝，没有再拔出来——两千人的工地同时安静下来。两年后铁路合龙，他们被成批解雇；紧接着，一个专门冲着他们设立的税种上线了。</p>
+  <p class="lead">1845年7月，一艘捕鲸船在巴芬湾北部撞见两艘英国军舰，那是所有人最后一次见到这129个活人。这支当时装备最考究的北极船队出发去找西北航道，随后无声无息；它的结局，要靠一块铅牌和因纽特人的口述一点点拼回来。</p>
 
   <div class="body">
     
-    <section><h2>峡谷停工</h2><p>1883年7月，不列颠哥伦比亚的菲沙河峡谷和塞尔扣克山脉，两千名华工几乎同时停工。他们每天工资约1元，食宿还要从中扣；白人干同样的活拿1元5角，包吃住。资方起初拒绝让步，工程在山里两头停摆。数周后，资方同意小幅加薪、承诺不追究带头者，工人才回到崖壁上。同酬没有完全争到，但停工证明了一件事：这条铁路离不开华工。</p></section>
+    <section><h2>出发与诀别</h2><p>1845年5月19日，幽冥号与恐惧号载着133名官兵离开英国，主将是封爵的北极老手富兰克林，恐惧号船长是克罗兹。在格陵兰西岸的迪斯科湾，补给船卸下物资，又带走随船人员寄回家乡的最后信件和5名生病的水手，船上留下129人。两船带着够吃三年的补给、书本和当时最好的装备，驶向北美北极群岛间的航道。7月28日捕鲸船与它们在巴芬湾北部相遇，此后下落不明。</p></section>
     
-    <section><h2>低价的由来</h2><p>华工不是凑巧出现在这里。不列颠哥伦比亚1871年加入联邦，换来的条件就是十年内修通一条通往太平洋的铁路；承包商按完成的英里数计价，每一分工钱都直接算进成本。白人劳工不愿接峡谷爆破这类高危活，资方便从1881年起把加州金矿和旧铁路工地上的华工成批引来，最多时同时有六七千人在山道上。工资差不是能力差，是合同把便宜本身当成了利润来源。</p></section>
+    <section><h2>口粮拖住了救援</h2><p>两年没有任何消息，富兰克林夫人催海军部派人去找，官员们的盘算却是：船上带着三年的给养，还不至于出事。搜索队因此在次年才成行，海军部悬赏两万英镑。装备太充足，反倒成了推迟救援的理由。而冰中实际发生的是：到1848年4月，两船早已被冰困死弃掉，一块安放在王威廉岛石堆里的铅牌刻下最后命令，幸存者一百余人拖着救生艇向西南徒步撤退。</p></section>
     
-    <section><h2>合龙之后</h2><p>1885年11月7日，克雷格拉基钉下最后一颗道钉，铁路全线贯通。华工在数周内被成批解雇，多数回了加州，少数留在温哥华的华人街区讨生活。同年，加拿大出台《华人移民法》，每名入境华人须缴50加元人头税；1923年税额涨到500加元，华人入境几乎归零。投票权1947年才放开。2006年5月23日联邦议会正式致歉，当年崖壁上的人还剩下几个，已经没人说得清了。</p></section>
+    <section><h2>真相从哪来</h2><p>此后十几年，十几支搜索船队反复扫过北极群岛，拼出结局最完整的证据却不出自搜救者自己的眼睛：因纽特人早在冰上见到过撤退者的营地与遗骸，把这支队伍如何饥饿、如何走到尽头编进了口述，随铅牌一起送回英国。铅牌加原住民口供，成了北极搜救的第一课——进冰要留书面记录，问路要问住在冰边的人。船体直到2016年才在海底被找到；最早回过英国的，反而是出发之初病退的那5个人。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-15-sub.webp" alt="岩壁炮眼旁的钢钎、铁楔与旧帆布包" width="1024" height="1024" loading="lazy">
-    <figcaption>岩壁炮眼旁的钢钎、铁楔与旧帆布包</figcaption>
+    <img src="img/2026-11-16-sub.webp" alt="铜怀表、羊毛手套与卷起的册子" width="1024" height="1024" loading="lazy">
+    <figcaption>铜怀表、羊毛手套与卷起的册子</figcaption>
   </figure>
   
 
@@ -607,15 +590,17 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">铁路工期</span><span class="v">1881—1885年</span></div>
+    <div class="f"><span class="k">出发</span><span class="v">1845年5月19日，133人两船</span></div>
     
-    <div class="f"><span class="k">华工人数</span><span class="v">约1.5万—1.7万人</span></div>
+    <div class="f"><span class="k">实际随行</span><span class="v">129人，5名病员随补给船返回</span></div>
     
-    <div class="f"><span class="k">人头税</span><span class="v">1885年50加元，1923年涨至500加元</span></div>
+    <div class="f"><span class="k">最后目击</span><span class="v">1845年7月28日，巴芬湾北部</span></div>
     
-    <div class="f"><span class="k">投票权</span><span class="v">1947年（联邦）</span></div>
+    <div class="f"><span class="k">给养</span><span class="v">按三年储备</span></div>
     
-    <div class="f"><span class="k">正式致歉</span><span class="v">2006年5月23日</span></div>
+    <div class="f"><span class="k">搜救悬赏</span><span class="v">两万英镑</span></div>
+    
+    <div class="f"><span class="k">结局</span><span class="v">无一生还</span></div>
     
   </div>
   
@@ -624,23 +609,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>加拿大官方只记下600余名筑路华工的死亡，民间说法是每英里路轨下都躺着一人。</li>
+    <li>领队富兰克林此前的陆上探险就饿死了20人中的11人，生还者煮过皮靴充饥。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>罢工时间通常记载为1883年夏（选题材料作1885年，本文取前者），此后是否另有停工各说不一</li><li>罢工人数各说介于两千至三千之间，复工条款与加薪数额记载不一</li><li>华工总数约1.5万至1.7万，巅峰同时在场人数无定说</li><li>死亡人数官方记录600余人，民间估计达千人以上，坟茔多无标记</li><li>总承包商Onderdonk的中文通行译名不确定，正文未具其名</li></ul>
+    <ul><li>材料未列补给品类，选题所称「罐头、图书馆」按题面表述带过，未展开</li><li>铅牌放置于1848年4月、地点为王威廉岛，超出所给材料，按通行记载写入</li><li>搜索队派出时间系按材料「次年」推计；幽冥号与恐惧号先后海底发现，题面只给了2016年</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>华工</span><span>铁路</span><span>人头税</span><span>移民史</span><span>加拿大</span></div>
+  <div class="tags"><span>北极探险</span><span>西北航道</span><span>英国皇家海军</span><span>搜救史</span></div>
   
 
   <footer>
-    <div class="r"><span>中国历史</span><span>11月15日</span></div>
+    <div class="r"><span>世界历史</span><span>11月16日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
   </footer>
