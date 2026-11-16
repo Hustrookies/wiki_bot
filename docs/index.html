@@ -236,23 +236,31 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
-.t-event{
-  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
-  --title-font:var(--sans);
+/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
+.t-person{
+  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:30px 20px 24px;
 }
-.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
-.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
-.t-event .hero{
-  background:
-    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
-    var(--brand);
+.t-person .hero{
+  border-left:3px solid #6b4a2f; padding-left:18px;
+  margin-left:-16px; margin-right:-16px;
 }
-/* 表格式 facts：键左值右、细分隔线、等宽数字 */
-.t-event .facts .k{min-width:5.5em}
+.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
+.t-person .hero h1{
+  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
+}
+.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
+/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
+.t-person .facts .f{display:block;text-align:left}
+.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
+.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
+  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
+             --hero-fg:#e8eaed; }
+  .t-person .hero{border-left-color:#8a6640}
+  .t-person .kicker{color:#c39a63}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -267,10 +275,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#1f3352">
-<meta name="x-build" content="2026-11-16-34996d36">
-<meta name="description" content="1845年富兰克林率129人乘幽冥号与恐惧号寻找西北航道，全队覆没。因带了三年补给，皇家海军的救援迟迟未发；一块铅牌与因纽特人口述后来拼出这堂19世纪北极搜救的第一课。">
-<title>一支装备最好的队伍全死了 · 世界历史</title>
+<meta name="theme-color" content="#f7f4ef">
+<meta name="x-build" content="2026-11-17-2d2cb16b">
+<meta name="description" content="唐代求法僧义净671年从广州搭波斯商船出海，在室利佛逝学梵语半年后入印度、就学那烂陀寺，往返二十五年。所著《南海寄归内法传》是今人复原室利佛逝早期史最重要的汉文材料之一。">
+<title>义净：渡海求法 · 历史人物</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -502,39 +510,47 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
-.t-event{
-  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
-  --title-font:var(--sans);
+/* 周二 · 历史人物 —— 传记留白：左侧竖线、衬线大名字、facts 竖排名片 */
+.t-person{
+  --paper:#f7f4ef; --brand:#f7f4ef; --accent:#9a6b1f; --track:#e6dcc8;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:30px 20px 24px;
 }
-.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
-.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
-.t-event .hero{
-  background:
-    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
-    var(--brand);
+.t-person .hero{
+  border-left:3px solid #6b4a2f; padding-left:18px;
+  margin-left:-16px; margin-right:-16px;
 }
-/* 表格式 facts：键左值右、细分隔线、等宽数字 */
-.t-event .facts .k{min-width:5.5em}
+.t-person .kicker{color:#6b4a2f;opacity:1;letter-spacing:.18em}
+.t-person .hero h1{
+  font-size:30px;letter-spacing:.06em;font-weight:600;line-height:1.3;
+}
+.t-person .hero .hook{color:var(--dim);opacity:1;margin-top:11px}
+/* 名片式 facts：键在上小字，值在下大字，纵向堆叠 */
+.t-person .facts .f{display:block;text-align:left}
+.t-person .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:3px}
+.t-person .facts .v{display:block;text-align:left;font-size:15.5px;font-family:var(--serif)}
 
 @media (prefers-color-scheme:dark){
-  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
+  .t-person{ --paper:#14120f; --brand:#14120f; --accent:#d0a04a; --track:#37301f;
+             --hero-fg:#e8eaed; }
+  .t-person .hero{border-left-color:#8a6640}
+  .t-person .kicker{color:#c39a63}
 }
 </style>
 </head>
-<body class="t-event">
+<body class="t-person">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>世界历史</b> · 11月16日</div>
-    <h1>一支装备最好的队伍全死了</h1>
-    <p class="hook">船上三年的口粮，把救援拖晚了三年</p>
+    <div class="kicker"><b>历史人物</b> · 11月17日</div>
+    <h1>义净：渡海求法</h1>
+    <p class="hook">玄奘穿沙漠，义净下南海，去同一个目的地的两条路</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-16-main.webp" alt="浮冰间被困的两艘帆船与冰面上的人影" width="1280" height="1280" loading="eager">
-    <figcaption>浮冰间被困的两艘帆船与冰面上的人影</figcaption>
+    <img src="img/2026-11-17-main.webp" alt="古港大船停泊，僧人携行囊登船，晨雾笼水" width="1280" height="1280" loading="eager">
+    <figcaption>古港大船停泊，僧人携行囊登船，晨雾笼水</figcaption>
   </figure>
   
 
@@ -543,19 +559,18 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-  <div class="tl">
+
+  
+  <div class="ruler">
+    <div class="bar">
+      <span class="cap l"></span><span class="cap r"></span>
+      <span class="pin" style="left:48%"></span>
+    </div>
+    <div class="ends"><span>635</span><span>710</span></div>
     
-    <div class="nd"><div class="dot"></div><span class="y">1845</span><span class="lb">129人两船启航</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">1845</span><span class="lb">巴芬湾最后目击</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">1848</span><span class="lb">铅牌刻下最后命令</span></div>
-    
-    <div class="nd"><div class="dot"></div><span class="y">2016</span><span class="lb">船体现身海底</span></div>
+    <div class="mk"><i></i><b>671</b>自广州乘船出海</div>
     
   </div>
-  
-
   
 
   
@@ -566,22 +581,22 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">1845年7月，一艘捕鲸船在巴芬湾北部撞见两艘英国军舰，那是所有人最后一次见到这129个活人。这支当时装备最考究的北极船队出发去找西北航道，随后无声无息；它的结局，要靠一块铅牌和因纽特人的口述一点点拼回来。</p>
+  <p class="lead">咸亨二年（671年）的秋天，三十七岁的义净登上波斯商人的货船，从广州出海。目的地是天竺，他没走玄奘走过的陆路，选了另一条海路。此后二十五年，他的足迹铺过南洋与印度。</p>
 
   <div class="body">
     
-    <section><h2>出发与诀别</h2><p>1845年5月19日，幽冥号与恐惧号载着133名官兵离开英国，主将是封爵的北极老手富兰克林，恐惧号船长是克罗兹。在格陵兰西岸的迪斯科湾，补给船卸下物资，又带走随船人员寄回家乡的最后信件和5名生病的水手，船上留下129人。两船带着够吃三年的补给、书本和当时最好的装备，驶向北美北极群岛间的航道。7月28日捕鲸船与它们在巴芬湾北部相遇，此后下落不明。</p></section>
+    <section><h2>广州上船</h2><p>咸亨二年（671年）秋，义净在扬州遇到要去岭南赴任的冯孝诠，便随他南下，在冯氏家族资助下登上波斯商人的货船，从广州出洋。船先停在室利佛逝——占据今印尼苏门答腊的王国，他留下方言未通的海岛，学梵语六个月；到673年二月，在室利佛逝王的帮助下于印度靠岸，进入那烂陀寺受学。等他重回唐境，前后走了二十五年。</p></section>
     
-    <section><h2>口粮拖住了救援</h2><p>两年没有任何消息，富兰克林夫人催海军部派人去找，官员们的盘算却是：船上带着三年的给养，还不至于出事。搜索队因此在次年才成行，海军部悬赏两万英镑。装备太充足，反倒成了推迟救援的理由。而冰中实际发生的是：到1848年4月，两船早已被冰困死弃掉，一块安放在王威廉岛石堆里的铅牌刻下最后命令，幸存者一百余人拖着救生艇向西南徒步撤退。</p></section>
+    <section><h2>迟到的志愿</h2><p>这是一次迟到了二十多年的心愿。645年玄奘回到长安轰动佛教界时，义净还在齐州的土窟寺里；他十五岁听闻这些求法故事立下西行之志，人却没有立刻动身：二十一岁受具足戒，此后五年专心学律藏，又从洛阳到长安遍学各派论典，近四十岁才成行。路线他也不抄玄奘的：西域陆路远险，而南海航线上波斯商船往来不绝，随船而行，食宿都有依托。</p></section>
     
-    <section><h2>真相从哪来</h2><p>此后十几年，十几支搜索船队反复扫过北极群岛，拼出结局最完整的证据却不出自搜救者自己的眼睛：因纽特人早在冰上见到过撤退者的营地与遗骸，把这支队伍如何饥饿、如何走到尽头编进了口述，随铅牌一起送回英国。铅牌加原住民口供，成了北极搜救的第一课——进冰要留书面记录，问路要问住在冰边的人。船体直到2016年才在海底被找到；最早回过英国的，反而是出发之初病退的那5个人。</p></section>
+    <section><h2>被盖住的人</h2><p>回国后，义净专心翻译律部。让他在身后重新被读到的，反而是行程笔记《南海寄归内法传》：书中细记室利佛逝等南海各国的政教与僧团日常。今天复原7世纪海洋强国室利佛逝的早期史，它仍是最重要的汉文材料之一。名气上他始终隔着玄奘一层。有记载的是，他在印度遇到的故人弟子，恰是玄奘的门人大乘灯——走陆路那位的名声，先一步传到了印度。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-16-sub.webp" alt="铜怀表、羊毛手套与卷起的册子" width="1024" height="1024" loading="lazy">
-    <figcaption>铜怀表、羊毛手套与卷起的册子</figcaption>
+    <img src="img/2026-11-17-sub.webp" alt="贝叶经与合拢的卷轴并放在木案上" width="1024" height="1024" loading="lazy">
+    <figcaption>贝叶经与合拢的卷轴并放在木案上</figcaption>
   </figure>
   
 
@@ -590,17 +605,13 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">出发</span><span class="v">1845年5月19日，133人两船</span></div>
+    <div class="f"><span class="k">生卒</span><span class="v">635年生于齐州山茌（今济南长清），710年去世</span></div>
     
-    <div class="f"><span class="k">实际随行</span><span class="v">129人，5名病员随补给船返回</span></div>
+    <div class="f"><span class="k">出发</span><span class="v">671年秋，随冯孝诠南下，在广州搭波斯商船</span></div>
     
-    <div class="f"><span class="k">最后目击</span><span class="v">1845年7月28日，巴芬湾北部</span></div>
+    <div class="f"><span class="k">中途</span><span class="v">在室利佛逝停留六个月学习梵语</span></div>
     
-    <div class="f"><span class="k">给养</span><span class="v">按三年储备</span></div>
-    
-    <div class="f"><span class="k">搜救悬赏</span><span class="v">两万英镑</span></div>
-    
-    <div class="f"><span class="k">结局</span><span class="v">无一生还</span></div>
+    <div class="f"><span class="k">到印</span><span class="v">673年二月在室利佛逝王协助下抵达印度</span></div>
     
   </div>
   
@@ -609,23 +620,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>领队富兰克林此前的陆上探险就饿死了20人中的11人，生还者煮过皮靴充饥。</li>
+    <li>复</li><li>原</li><li>东</li><li>南</li><li>亚</li><li>早</li><li>期</li><li>海</li><li>洋</li><li>强</li><li>国</li><li>室</li><li>利</li><li>佛</li><li>逝</li><li>，</li><li>最</li><li>依</li><li>赖</li><li>的</li><li>汉</li><li>文</li><li>材</li><li>料</li><li>之</li><li>一</li><li>，</li><li>出</li><li>自</li><li>名</li><li>气</li><li>远</li><li>不</li><li>如</li><li>玄</li><li>奘</li><li>的</li><li>义</li><li>净</li><li>。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>材料未列补给品类，选题所称「罐头、图书馆」按题面表述带过，未展开</li><li>铅牌放置于1848年4月、地点为王威廉岛，超出所给材料，按通行记载写入</li><li>搜索队派出时间系按材料「次年」推计；幽冥号与恐惧号先后海底发现，题面只给了2016年</li></ul>
+    <ul><li>在那烂陀寺受学与“往返二十五年”取自选题按语，本次锚材（截断）未直接记载</li><li>锚材称多摩梨帝国在南印度，通行看法认为其地在今印度东部孟加拉一带，正文只写“于印度靠岸”</li><li>卒年710年为通行说法，锚材未载</li><li>义净先习大乘诸论、后专弘律部的转向动因，史料无定说</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>北极探险</span><span>西北航道</span><span>英国皇家海军</span><span>搜救史</span></div>
+  <div class="tags"><span>唐朝</span><span>求法僧</span><span>海上丝绸之路</span><span>室利佛逝</span><span>佛教</span></div>
   
 
   <footer>
-    <div class="r"><span>世界历史</span><span>11月16日</span></div>
+    <div class="r"><span>历史人物</span><span>11月17日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
   </footer>
