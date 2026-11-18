@@ -236,22 +236,28 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
-.t-geo{
-  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
+.t-science{
+  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
   --title-font:var(--sans);
 }
-.t-geo .kicker{letter-spacing:.2em}
-.t-geo .hero h1{letter-spacing:.01em}
-.t-geo .hero{
-  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
+.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
+/* 网格必须在 brand 之前声明才叠在上层 */
+.t-science .hero{
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    var(--brand);
 }
-/* 分带紧贴 hero 下沿，读作同一个剖面 */
-.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
+.t-science .facts .k{min-width:5.5em}
+.t-science .facts .v,
+.t-science .tl .y{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13px;
+}
 
 @media (prefers-color-scheme:dark){
-  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
-  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
+  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -266,10 +272,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#33564a">
-<meta name="x-build" content="2026-11-18-32aeaf65">
-<meta name="description" content="冰岛与格陵兰之间的丹麦海峡海底，北欧海域最冷最密的冷水越过山脊、沿陡坡下坠近两千米，形成世界流量最大的溢流瀑布，它构成温盐环流深层水的源头之一。">
-<title>看不见的最大瀑布 · 自然地理</title>
+<meta name="theme-color" content="#1b4a7a">
+<meta name="x-build" content="2026-11-19-4f23bf48">
+<meta name="description" content="18世纪英国议会悬赏解决海上经度问题。木匠哈里森在与月距法的长期角力中做出H1至H4四代航海钟，H4在两个多月航程中只慢数秒，最终证明走时的钟胜过天上的星。">
+<title>一个木匠解决的经度难题 · 科学与技术史</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -501,61 +507,60 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周三 · 自然地理 —— 分层色带直接当 hero，宽字距无衬线，facts 走数据条 */
-.t-geo{
-  --paper:#f2f4f2; --brand:#33564a; --accent:#8a6d3b; --track:#dfe6e1;
+/* 周四 · 科学与技术史 —— 蓝图纸：细网格 hero，等宽点缀，facts 等宽表格 */
+.t-science{
+  --paper:#eef1f5; --brand:#1b4a7a; --accent:#1b4a7a; --track:#d6dfe9;
   --title-font:var(--sans);
 }
-.t-geo .kicker{letter-spacing:.2em}
-.t-geo .hero h1{letter-spacing:.01em}
-.t-geo .hero{
-  background:linear-gradient(168deg,#4b8571 0%,#33564a 55%,#1e3b31 100%);
+.t-science .kicker{letter-spacing:.2em;text-transform:uppercase}
+/* 网格必须在 brand 之前声明才叠在上层 */
+.t-science .hero{
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 22px),
+    var(--brand);
 }
-/* 分带紧贴 hero 下沿，读作同一个剖面 */
-.t-geo .layers{margin-top:-20px;border-top-left-radius:0;border-top-right-radius:0}
+.t-science .facts .k{min-width:5.5em}
+.t-science .facts .v,
+.t-science .tl .y{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13px;
+}
 
 @media (prefers-color-scheme:dark){
-  .t-geo{ --paper:#0d1211; --brand:#1e3b31; --accent:#a8b878; --track:#26332c; }
-  .t-geo .hero{background:linear-gradient(168deg,#3d6f5e 0%,#22453b 55%,#16302a 100%)}
+  .t-science{ --paper:#0b0f14; --brand:#13314f; --accent:#3987e5; --track:#1e2a36; }
 }
 </style>
 </head>
-<body class="t-geo">
+<body class="t-science">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>自然地理</b> · 11月18日</div>
-    <h1>看不见的最大瀑布</h1>
-    <p class="hook">世界流量最大的瀑布不在陆地，藏在冰岛与格陵兰之间的海底</p>
+    <div class="kicker"><b>科学与技术史</b> · 11月19日</div>
+    <h1>一个木匠解决的经度难题</h1>
+    <p class="hook">别人抬头测月亮，他把格林尼治装进怀表</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-18-main.webp" alt="幽蓝海水中一道海下山脊，冷流沿陡坡坠向深海盆" width="1280" height="1280" loading="eager">
-    <figcaption>幽蓝海水中一道海下山脊，冷流沿陡坡坠向深海盆</figcaption>
+    <img src="img/2026-11-19-main.webp" alt="作坊工作台上摆满齿轮工具，中间立着一只大怀表" width="1280" height="1280" loading="eager">
+    <figcaption>作坊工作台上摆满齿轮工具，中间立着一只大怀表</figcaption>
   </figure>
   
 
   <!-- ===== 签名图形（按类目二选一，其余字段为空自动消失） ===== -->
 
   
-  <div class="layers">
-    
-    <div class="ly"><span class="n">表层寒流</span><span class="note">东格陵兰寒流携冰山沿海峡南下</span></div>
-    
-    <div class="ly"><span class="n">大西洋暖层</span><span class="note">较温较咸的大西洋水在脊线以北折返</span></div>
-    
-    <div class="ly"><span class="n">溢流冷层</span><span class="note">密度最大的近冰点冷水漫过山脊</span></div>
-    
-    <div class="ly"><span class="n">深海盆</span><span class="note">坠入约三千米洋底，汇成深层水主体</span></div>
-    
+
+  
+
+  
+
+  
+  <div class="cmp">
+    <div class="then"><span class="lbl">当时认为</span><p>十八世纪初的人认为，海上求经度只能问天：测月亮与恒星的夹角，查天文表推出格林尼治时间。揣一只钟出海被视为不可能，船会晃，冷热会变，准会毁掉它的走时。</p></div>
+    <div class="now"><span class="lbl">实际是</span><p>其实月距观测要看云层脸色、要算几个钟头，普通水手做不来。靠得住的反而是走时不变的钟：H4航海两个多月只误差几秒，时差乘以十五度就是经度差。</p></div>
   </div>
-  
-
-  
-
-  
-
   
 
   
@@ -564,56 +569,37 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">格陵兰与冰岛之间，丹麦海峡长480公里，最窄处也有290公里。海峡底下藏着另一股水流：贴着斜坡，每秒约300万立方米的冰冷水从山脊坠向近三千米深的洋底，规模超过任何陆地瀑布。</p>
+  <p class="lead">1730年，一个约克郡木匠揣着自己做的钟走进伦敦，去争英国议会悬赏的两万英镑：谁能海上准确测出经度，钱就归谁。委员会本以为这钱要发给观测月亮的天文学家，他押的却是另一条路——带一只不慢的钟出海，把格林尼治揣在身上。</p>
 
   <div class="body">
     
-    <section><h2>冷水从哪里来</h2><p>瀑布的水不是从天上掉下来的，而是从北边的格陵兰海攒出来的。冬季海面结冰时，盐分被排回未冻的海水里，剩下的水又冷又咸、密度增大，一路沉到海底，年复一年堆积，水位越抬越高，终于漫过横在海峡中约600米深的山脊线。这条河就此成型：温度接近冰点，贴着海床向东南铺开。</p></section>
+    <section><h2>四代样机</h2><p>哈里森的第一台航海钟H1有小圆桌那么大：两只相连的铜轮对向旋转，抵消船的摇晃，轴承用自润的热带硬木，不抹油。H2、H3一代一代改良，1759年他突然交出H4——十三厘米见方的大怀表，高频率摆轮让它走得又稳又静。他又等了两年，才敢让它出海。</p></section>
     
-    <section><h2>为什么贴着坡走</h2><p>漫过山脊后，它并不像陆地瀑布那样悬在半空，而是贴着陡坡翻滚下坠，一路把周围海水卷进来，越流越宽、越流越多，平均每秒约300万立方米。决定下坠的不是落差而是密度：这股水比它路过的每一层海水都重。反直觉的是，它其实比周围的大西洋水更冷也更淡——通常淡水更轻，但低温攒出的密度，足够赢回盐分上的亏损。</p></section>
+    <section><h2>委员会偏心</h2><p>委员会对月距法的偏爱并非故意使绊。在18世纪中叶，天上已是人类已知最准的钟：月亮每小时在星空跑出自身直径的距离，只要把月与亮星的位置列成长表，船上读一个角就能反推格林尼治时间——理论上不依赖任何手艺。何况经度法案本身留了口子：奖金可由两套方案分享，天文学家的表总拿大头。</p></section>
     
-    <section><h2>接上全球环流</h2><p>坠到近三千米的深海盆后，这股水调头向南，成为北大西洋深层水的主体，接下温盐环流的下半程：表层暖水北上放热、变冷、下沉，几百年后在印度洋和南大洋翻回海面。海洋学家在脊线附近常年布着潜标，记录溢流的流量与温度，因为它的强弱被当作大西洋环流是否减速的前哨。而在瀑布正上方，东格陵兰寒流照旧把冰山一颗颗带向南方。</p></section>
+    <section><h2>钟表胜出</h2><p>1761年末去牙买加的试航让争论结束了大半：H4颠簸两个多月只慢了几秒；月距法仍要无云的夜和几个钟头的计算，连天文学家自己做完都要揉眼。可委员会一再拖延，哈里森靠王室过问、议会特别裁决才拿走大部分奖金，1776年他去世时，两万英镑的头奖始终没按法案原文发还。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-18-sub.webp" alt="一根分层的海底沉积岩芯，泥层里夹着几颗深色砾石" width="1024" height="1024" loading="lazy">
-    <figcaption>一根分层的海底沉积岩芯，泥层里夹着几颗深色砾石</figcaption>
+    <img src="img/2026-11-19-sub.webp" alt="绒布上合盖的镀金大怀表，齿状表冠" width="1024" height="1024" loading="lazy">
+    <figcaption>绒布上合盖的镀金大怀表，齿状表冠</figcaption>
   </figure>
   
 
-  
-  <div class="bars">
-    
-    <div class="b">
-      <div class="hd"><span class="k">丹麦海峡溢流</span><span class="v">约300万立方米/秒</span></div>
-      <div class="track"><div class="fill" style="width:100%"></div></div>
-    </div>
-    
-    <div class="b">
-      <div class="hd"><span class="k">亚马逊河入海</span><span class="v">约20万立方米/秒</span></div>
-      <div class="track"><div class="fill" style="width:7%"></div></div>
-    </div>
-    
-    <div class="b">
-      <div class="hd"><span class="k">维多利亚瀑布汛期</span><span class="v">数千立方米/秒</span></div>
-      <div class="track"><div class="fill" style="width:2%"></div></div>
-    </div>
-    
-  </div>
   
 
   
   <div class="facts">
     
-    <div class="f"><span class="k">海峡规模</span><span class="v">长480公里，最窄处约290公里，连接北冰洋与大西洋</span></div>
+    <div class="f"><span class="k">经度法案</span><span class="v">1714年英国议会颁布，头奖两万英镑</span></div>
     
-    <div class="f"><span class="k">溢流流量</span><span class="v">平均约300万立方米/秒，超过亚马逊河入海流量十余倍</span></div>
+    <div class="f"><span class="k">时差换经度</span><span class="v">1小时时差合15度经度，4分钟合1度</span></div>
     
-    <div class="f"><span class="k">垂直落差</span><span class="v">从约600米深的脊线坠向近3000米的深海盆</span></div>
+    <div class="f"><span class="k">四代航海钟</span><span class="v">H1至H4，从1730年代做到1760年代</span></div>
     
-    <div class="f"><span class="k">溢流温度</span><span class="v">接近冰点，约0摄氏度上下</span></div>
+    <div class="f"><span class="k">对手方案</span><span class="v">月距法：测月亮与恒星夹角，查天文表推格林尼治时间</span></div>
     
   </div>
   
@@ -622,25 +608,25 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>托着这条瀑布的不是高度差，而是密度：溢流更冷更淡，却比周围海水重。</li><li>溢流不是悬空水帘，而是贴着斜坡的湍流，一路卷吸周围海水，流量越滚越大。</li>
+    <li>哈里森早年做的钟大量使用绿橡木等木件：这个改写航海计时史的人，本行是木匠。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>溢流的落差、脊线深度与流量，各文献口径不一，本文取常见估值</li><li>世界最大瀑布的说法取决于如何定义瀑布：它是贴底湍流，不是悬空水帘</li><li>溢流的长期变化趋势尚无定论，牵动大西洋环流是否减弱之争</li></ul>
+    <ul><li>H4首次牙买加航行的精确误差秒数各史料口径不一，本文笼统写作「只慢几秒」</li><li>哈里森经多轮议会裁决实际拿到的金额构成，各史料说法有出入</li><li>他1730年赴伦敦寻求支持一说通行，但过程细节记载很少</li><li>H1的具体尺寸与重量各史料记载不一，本文不作精确数字</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>温盐环流</span><span>北大西洋</span><span>海底密度流</span><span>冰岛</span><span>格陵兰</span></div>
+  <div class="tags"><span>经度问题</span><span>航海钟</span><span>计时史</span><span>航海导航</span></div>
   
 
   <footer>
-    <div class="r"><span>自然地理</span><span>11月18日</span></div>
+    <div class="r"><span>科学与技术史</span><span>11月19日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
-    <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
+    
   </footer>
 
 </div>
