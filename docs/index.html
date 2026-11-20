@@ -236,44 +236,35 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
-.t-culture{
-  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:0 0 0 0;
+/* 周六 · 生物与自然 —— 田野笔记：浅底细框（无满幅色块），大行高，facts 走标签云 */
+.t-bio{
+  --paper:#f2f5ef; --brand:#f2f5ef; --accent:#6d5f18; --track:#e0e5d6;
+  --title-font:var(--sans); --hero-fg:#141414;
+  --hero-pad:20px 18px 18px;
 }
-.t-culture .hero{text-align:center;background:var(--paper)}
-/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
-.t-culture .hero::before,
-.t-culture .hero::after{
-  content:"";display:block;height:13px;
-  background:
-    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
-    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
-  opacity:.55;
+.t-bio body,.t-bio{line-height:1.85}
+.t-bio .hero{
+  background:var(--card);border:1px solid #cfd8c4;border-radius:var(--radius);
+  margin:16px 0 20px;
 }
-.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
-.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
-.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
-/* 2×2 卡片网格 */
-.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.t-culture .facts .f{
-  display:block;background:var(--card);border-radius:10px;
-  padding:13px 14px;border-top:0;
+.t-bio .kicker{color:#2c5530;opacity:1;letter-spacing:.16em}
+.t-bio .hero h1{font-size:23px;font-weight:650}
+.t-bio .hero .hook{color:var(--dim);opacity:1}
+.t-bio .lead{line-height:1.85}
+.t-bio .body p{line-height:1.85}
+/* 标签云式 facts */
+.t-bio .facts{background:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.t-bio .facts .f{
+  display:flex;gap:7px;align-items:baseline;border-top:0;padding:7px 12px;
+  background:var(--card);border-radius:8px;border:1px solid var(--line);
 }
-.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
-.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
+.t-bio .facts .v{text-align:left}
 
 @media (prefers-color-scheme:dark){
-  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
-              --hero-fg:#e8eaed; }
-  .t-culture .hero::before,.t-culture .hero::after{
-    background:
-      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
-      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
-    opacity:.4;
-  }
-  .t-culture .hero .kicker{color:#9aa4e8}
+  .t-bio{ --paper:#0e120d; --brand:#0e120d; --accent:#c4b84a; --track:#272c1e;
+          --hero-fg:#e8eaed; }
+  .t-bio .hero{border-color:#2c3a2a}
+  .t-bio .kicker{color:#8fc194}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -288,10 +279,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#f5f4f9">
-<meta name="x-build" content="2026-11-20-b61d5ec9">
-<meta name="description" content="因纽特猎人用雪砖砌成的穹顶居所，因纽特语中意为「房屋」；雪里的空气孔隔热，体温让内壁微融再冻结成冰壳；户外零下45度时，室内仅靠体温可维持在零下7度至16度之间。">
-<title>越住越暖的屋子 · 文明与文化</title>
+<meta name="theme-color" content="#f2f5ef">
+<meta name="x-build" content="2026-11-21-6c484a42">
+<meta name="description" content="北极弓头鲸把能量押在长期存活而非快速繁殖上：夏季冰缘滤食、冬季靠冰下通气缝过冬，性成熟需数十年、每胎通常一头，换来两百年级别的寿命，代价是被捕鲸压到低位后恢复极慢。">
+<title>把寿命押在慢上 · 生物与自然</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -523,60 +514,51 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周五 · 文明与文化 —— 纹样带夹居中标题，衬线，facts 走 2×2 卡片网格 */
-.t-culture{
-  --paper:#f5f4f9; --brand:#f5f4f9; --accent:#c0392b; --track:#ddd9e6;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:0 0 0 0;
+/* 周六 · 生物与自然 —— 田野笔记：浅底细框（无满幅色块），大行高，facts 走标签云 */
+.t-bio{
+  --paper:#f2f5ef; --brand:#f2f5ef; --accent:#6d5f18; --track:#e0e5d6;
+  --title-font:var(--sans); --hero-fg:#141414;
+  --hero-pad:20px 18px 18px;
 }
-.t-culture .hero{text-align:center;background:var(--paper)}
-/* CSS 几何纹样：只用 45° 与其 135° 镜像，避免读成网格线 */
-.t-culture .hero::before,
-.t-culture .hero::after{
-  content:"";display:block;height:13px;
-  background:
-    repeating-linear-gradient(45deg,#2d3a7c 0 2px,transparent 2px 9px),
-    repeating-linear-gradient(-45deg,#2d3a7c 0 2px,transparent 2px 9px);
-  opacity:.55;
+.t-bio body,.t-bio{line-height:1.85}
+.t-bio .hero{
+  background:var(--card);border:1px solid #cfd8c4;border-radius:var(--radius);
+  margin:16px 0 20px;
 }
-.t-culture .hero .kicker{margin:22px 0 10px;color:#2d3a7c;opacity:1;letter-spacing:.22em}
-.t-culture .hero h1{font-size:27px;letter-spacing:.05em;font-weight:600;padding:0 20px}
-.t-culture .hero .hook{color:var(--dim);opacity:1;margin:10px 0 24px;padding:0 20px}
-/* 2×2 卡片网格 */
-.t-culture .facts{background:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.t-culture .facts .f{
-  display:block;background:var(--card);border-radius:10px;
-  padding:13px 14px;border-top:0;
+.t-bio .kicker{color:#2c5530;opacity:1;letter-spacing:.16em}
+.t-bio .hero h1{font-size:23px;font-weight:650}
+.t-bio .hero .hook{color:var(--dim);opacity:1}
+.t-bio .lead{line-height:1.85}
+.t-bio .body p{line-height:1.85}
+/* 标签云式 facts */
+.t-bio .facts{background:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.t-bio .facts .f{
+  display:flex;gap:7px;align-items:baseline;border-top:0;padding:7px 12px;
+  background:var(--card);border-radius:8px;border:1px solid var(--line);
 }
-.t-culture .facts .k{display:block;font-size:11.5px;letter-spacing:.08em;margin-bottom:4px}
-.t-culture .facts .v{display:block;text-align:left;font-size:15px;font-family:var(--serif)}
+.t-bio .facts .v{text-align:left}
 
 @media (prefers-color-scheme:dark){
-  .t-culture{ --paper:#0f0f16; --brand:#0f0f16; --accent:#e0685a; --track:#2a2635;
-              --hero-fg:#e8eaed; }
-  .t-culture .hero::before,.t-culture .hero::after{
-    background:
-      repeating-linear-gradient(45deg,#8f9ae0 0 2px,transparent 2px 9px),
-      repeating-linear-gradient(-45deg,#8f9ae0 0 2px,transparent 2px 9px);
-    opacity:.4;
-  }
-  .t-culture .hero .kicker{color:#9aa4e8}
+  .t-bio{ --paper:#0e120d; --brand:#0e120d; --accent:#c4b84a; --track:#272c1e;
+          --hero-fg:#e8eaed; }
+  .t-bio .hero{border-color:#2c3a2a}
+  .t-bio .kicker{color:#8fc194}
 }
 </style>
 </head>
-<body class="t-culture">
+<body class="t-bio">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>文明与文化</b> · 11月20日</div>
-    <h1>越住越暖的屋子</h1>
-    <p class="hook">因纽特语里它就叫「房屋」：雪锁住温度，体温养出冰壳</p>
+    <div class="kicker"><b>生物与自然</b> · 11月21日</div>
+    <h1>把寿命押在慢上</h1>
+    <p class="hook">北极弓头鲸用几十年才成熟的慢，换两百年级别的长</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-20-main.webp" alt="雪砖穹顶小屋立于冰原，一人蹲伏在洞口" width="1280" height="1280" loading="eager">
-    <figcaption>雪砖穹顶小屋立于冰原，一人蹲伏在洞口</figcaption>
+    <img src="img/2026-11-21-main.webp" alt="无背鳍的鲸在浮冰边缘游动，远处是白亮冰原" width="1280" height="1280" loading="eager">
+    <figcaption>无背鳍的鲸在浮冰边缘游动，远处是白亮冰原</figcaption>
   </figure>
   
 
@@ -591,31 +573,32 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-
-  
-  <div class="artifact">
-    <span class="n">iglu（因纽特语「房屋」）</span><p>这个词的本义就是「房屋」，不是「雪屋」。对猎人而言，雪砖穹顶不是某种特色建筑，只是拿来住的房子。</p>
+  <div class="tro">
+    <div class="r gain"><span class="k">得</span><p>把配额投给身体维修与长年存活，换来两百年级别的寿命和多次繁殖机会</p></div>
+    <div class="r cost"><span class="k">失</span><p>繁殖率被压到极低，种群一旦被打掉就补不回来，恢复要以世纪计</p></div>
   </div>
+  
+
   
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">零下45度的极夜里，猎人跪地切下最后一块楔形雪砖，顶心石一合，这座没有钉子和梁柱的房子就立起来了。最妙的事还没开始：人和灯住进去之后，内壁会慢慢长出一层冰，房子越住越瓷实。</p>
+  <p class="lead">一头成年弓头鲸的鲸脂厚达40至50厘米。它是须鲸里唯一终生留在北极浮冰区的种类：夏季追着冰缘的浮游动物爆发整天滤食，冬季海面封冻就退到冰层下面，靠天然的和它自己顶开的通气缝呼吸。日子过得极慢，换来的是两百年级别的寿命。</p>
 
   <div class="body">
     
-    <section><h2>砌砖与封顶</h2><p>冬季无树的北极海岸，最理想的墙料是被风压实的老雪。猎人顺着雪的层理切出厚雪板，再改切成上窄下宽的楔形雪砖。砌筑直接从地面开始：砖一圈圈向内倾斜、螺旋上升，穹顶随高度自行收拢，最后从顶部塞进一块合龙砖，无需任何模板。墙成之后，把室内的雪挖出、堆到外墙外侧，让保温层更厚。气温和雪层受压的程度，决定雪砖能不能用，不是每场雪都砌得起房子。</p></section>
+    <section><h2>冰缘的饭点</h2><p>弓头鲸没有背鳍，吻部硬而厚，能在浮冰下顶开一条可用的通道，也能在薄冰处把头探出水面换气。北极的夏天很短，海冰边缘的浮游动物只在几个月里集中爆发，它便沿着那条冰缘整天张合下颌，主要滤食桡足类和北极磷虾。等到海面封冻、冰缘散去，食物几乎归零，它退到冰层下面，把游动和代谢都压到很低的水平。</p></section>
     
-    <section><h2>空气里的暖</h2><p>雪屋的暖不是雪给的，是空气给的：雪砖内密布细小气孔，静止空气导热极差，外面的冷进不来，里面的暖出不去。住人之后，体温和油灯火苗让内壁微量熔化，融水渗进气孔再冻结，给雪砖裹上一层致密透明的冰壳，整间屋子的气密与强度都靠这层住出来的冰维持。门口往下挖一条短地道，既挡狂风，开门时也少跑热量；顶部比最高点略低处留一个通风口排烟。</p></section>
+    <section><h2>为什么押慢</h2><p>这套节奏不是惰性，而是被环境算出来的押法。一年能到手的能量取决于短短几个月的冰缘，幼鲸成活又受冰情摆布，进化给出的解法不是多生，而是活得久：性成熟要等上十余年甚至更久，每胎通常一头，幼鲸跟着母鲸走完整年，两次生育之间隔数年，省下的配额投在身体维修上。在低温、捕食者寡的海域，成年个体每年死亡的概率极低，多活一年就多一次繁殖机会。</p></section>
     
-    <section><h2>住所之一</h2><p>雪屋主要是冬季狩猎期间的临时住所，把「雪屋」和「因纽特人」直接画等号其实夸张了：它主要关联加拿大中部北极区和格陵兰图勒一带。其他许多因纽特人用鲸骨和兽皮搭房体，雪只作为保温料堆在外层——道理很朴素，并非每处海岸都有硬得能切砖砌穹顶的雪，就地取材罢了。后来定居的房屋普及，砌雪的手艺从日常生活退入野外狩猎的储备技能。</p></section>
+    <section><h2>猎船走后</h2><p>太平洋与白令海峡一带的弓头鲸在19世纪被商业捕鲸压得很低，猎船退出半个多世纪后数量仍在缓慢爬坡，一年一胎、数十岁才成熟的物种补不回一个世纪砍掉的份额。阿拉斯加北部一支种群的现状存在分歧：有评估认为它已回到捕鲸前的规模并据此把它移出保护名录，也有研究者说那个基线本就估得偏低。当地一些因纽特村落仍按配额捕猎，老猎人估算年龄的土办法之一，是看下颌须板的颜色。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-20-sub.webp" alt="切开的雪块与楔形雪砖，雪地插着一把刀" width="1024" height="1024" loading="lazy">
-    <figcaption>切开的雪块与楔形雪砖，雪地插着一把刀</figcaption>
+    <img src="img/2026-11-21-sub.webp" alt="冰孔下露出的乳白色鲸须板，周围是碎冰" width="1024" height="1024" loading="lazy">
+    <figcaption>冰孔下露出的乳白色鲸须板，周围是碎冰</figcaption>
   </figure>
   
 
@@ -624,15 +607,15 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">名称</span><span class="v">iglu（ᐃᒡᓗ），因纽特语意为「房屋」</span></div>
+    <div class="f"><span class="k">栖息</span><span class="v">北极与亚极地浮冰区，终生不离开海冰</span></div>
     
-    <div class="f"><span class="k">室外温度</span><span class="v">可低至零下45摄氏度</span></div>
+    <div class="f"><span class="k">体型</span><span class="v">成年体长约14至18米，无背鳍</span></div>
     
-    <div class="f"><span class="k">室内温度</span><span class="v">仅靠体温约在零下7至16摄氏度之间</span></div>
+    <div class="f"><span class="k">越冬</span><span class="v">靠冰层下的通气缝呼吸，鲸脂厚约40至50厘米</span></div>
     
-    <div class="f"><span class="k">隔热来源</span><span class="v">雪砖内的密闭空气孔</span></div>
+    <div class="f"><span class="k">繁殖</span><span class="v">每胎1头，妊娠期逾一年，性成熟需十余年以上</span></div>
     
-    <div class="f"><span class="k">通风口</span><span class="v">开在比穹顶最高点略低处</span></div>
+    <div class="f"><span class="k">寿命</span><span class="v">眼球晶体测年给出百岁以上，最老个体估计超过200年</span></div>
     
   </div>
   
@@ -641,25 +624,25 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>iglu 的本义只是「房屋」，不是「雪屋」；雪砖穹顶是翻译带出来的特殊想象。</li><li>没人住的雪屋反而经用：没有体温融化内壁、结成冰壳，穹顶就少了一层硬壳。</li>
+    <li>科学家测它的年龄靠猎获个体的眼球晶状体：晶体蛋白的消旋速率像一枚长在眼里的时钟。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>「冰壳显著提高穹顶强度与气密性、雪屋越住越瓷实」是流传甚广的解释，缺少定量验证。</li><li>室内零下7至16摄氏度这一区间按来源表述为「仅靠身体温度」，实际应与人数、屋体大小和是否用灯有关。</li><li>「鲸骨与兽皮建房」出自维基摘要的粗译，具体骨架材料与地区归属待核。</li></ul>
+    <ul><li>最老个体超过200岁的数字来自眼球晶体氨基酸测年，样本量很小，绝对数值学界仍有保留</li><li>捕鲸前各支种群的基础数量估计分歧较大，这直接决定它如今算不算已经恢复</li><li>性成熟年龄在不同种群间差异大，十余岁与二十余岁的估计并存</li><li>夏季高峰期单日摄食量有以吨计的估算，但来自少数研究，个体差异大</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>因纽特人</span><span>北极</span><span>居所</span><span>生存技术</span><span>文明与文化</span></div>
+  <div class="tags"><span>弓头鲸</span><span>北极</span><span>生活史权衡</span><span>长寿</span><span>捕鲸</span></div>
   
 
   <footer>
-    <div class="r"><span>文明与文化</span><span>11月20日</span></div>
+    <div class="r"><span>生物与自然</span><span>11月21日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
-    <div class="r"><span>事实校对</span><span>维基百科摘要</span></div>
+    
   </footer>
 
 </div>
