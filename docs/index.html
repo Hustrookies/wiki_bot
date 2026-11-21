@@ -236,35 +236,32 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周六 · 生物与自然 —— 田野笔记：浅底细框（无满幅色块），大行高，facts 走标签云 */
-.t-bio{
-  --paper:#f2f5ef; --brand:#f2f5ef; --accent:#6d5f18; --track:#e0e5d6;
-  --title-font:var(--sans); --hero-fg:#141414;
-  --hero-pad:20px 18px 18px;
+/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
+.t-china{
+  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:28px 20px 22px;
 }
-.t-bio body,.t-bio{line-height:1.85}
-.t-bio .hero{
-  background:var(--card);border:1px solid #cfd8c4;border-radius:var(--radius);
-  margin:16px 0 20px;
+.t-china .hero{background:var(--paper)}
+/* 朱印方章式类目标签 */
+.t-china .kicker{opacity:1}
+.t-china .kicker b{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
 }
-.t-bio .kicker{color:#2c5530;opacity:1;letter-spacing:.16em}
-.t-bio .hero h1{font-size:23px;font-weight:650}
-.t-bio .hero .hook{color:var(--dim);opacity:1}
-.t-bio .lead{line-height:1.85}
-.t-bio .body p{line-height:1.85}
-/* 标签云式 facts */
-.t-bio .facts{background:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.t-bio .facts .f{
-  display:flex;gap:7px;align-items:baseline;border-top:0;padding:7px 12px;
-  background:var(--card);border-radius:8px;border:1px solid var(--line);
+.t-china .hero h1{
+  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
 }
-.t-bio .facts .v{text-align:left}
+.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
+/* 古籍感：键右对齐贴向值 */
+.t-china .facts .f{gap:20px}
+.t-china .facts .k{flex:1;text-align:right;min-width:4em}
+.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
 
 @media (prefers-color-scheme:dark){
-  .t-bio{ --paper:#0e120d; --brand:#0e120d; --accent:#c4b84a; --track:#272c1e;
-          --hero-fg:#e8eaed; }
-  .t-bio .hero{border-color:#2c3a2a}
-  .t-bio .kicker{color:#8fc194}
+  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
+            --track:#332622; --hero-fg:#e8eaed; }
+  .t-china .kicker b{background:#8c2b20;color:#fff}
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -279,10 +276,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#f2f5ef">
-<meta name="x-build" content="2026-11-21-6c484a42">
-<meta name="description" content="北极弓头鲸把能量押在长期存活而非快速繁殖上：夏季冰缘滤食、冬季靠冰下通气缝过冬，性成熟需数十年、每胎通常一头，换来两百年级别的寿命，代价是被捕鲸压到低位后恢复极慢。">
-<title>把寿命押在慢上 · 生物与自然</title>
+<meta name="theme-color" content="#faf7f0">
+<meta name="x-build" content="2026-11-22-a14a7c6b">
+<meta name="description" content="1955年新加坡华人社会捐款创办的南洋大学，以华文教学、低学费立身，长期未获政府经常性拨款；1980年被并入新设的南洋理工大学，东南亚民间华文高等教育就此终结。">
+<title>一所被合并掉的华文大学 · 中国历史</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -514,51 +511,48 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周六 · 生物与自然 —— 田野笔记：浅底细框（无满幅色块），大行高，facts 走标签云 */
-.t-bio{
-  --paper:#f2f5ef; --brand:#f2f5ef; --accent:#6d5f18; --track:#e0e5d6;
-  --title-font:var(--sans); --hero-fg:#141414;
-  --hero-pad:20px 18px 18px;
+/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
+.t-china{
+  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
+  --title-font:var(--serif); --hero-fg:#141414;
+  --hero-pad:28px 20px 22px;
 }
-.t-bio body,.t-bio{line-height:1.85}
-.t-bio .hero{
-  background:var(--card);border:1px solid #cfd8c4;border-radius:var(--radius);
-  margin:16px 0 20px;
+.t-china .hero{background:var(--paper)}
+/* 朱印方章式类目标签 */
+.t-china .kicker{opacity:1}
+.t-china .kicker b{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
 }
-.t-bio .kicker{color:#2c5530;opacity:1;letter-spacing:.16em}
-.t-bio .hero h1{font-size:23px;font-weight:650}
-.t-bio .hero .hook{color:var(--dim);opacity:1}
-.t-bio .lead{line-height:1.85}
-.t-bio .body p{line-height:1.85}
-/* 标签云式 facts */
-.t-bio .facts{background:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.t-bio .facts .f{
-  display:flex;gap:7px;align-items:baseline;border-top:0;padding:7px 12px;
-  background:var(--card);border-radius:8px;border:1px solid var(--line);
+.t-china .hero h1{
+  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
 }
-.t-bio .facts .v{text-align:left}
+.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
+/* 古籍感：键右对齐贴向值 */
+.t-china .facts .f{gap:20px}
+.t-china .facts .k{flex:1;text-align:right;min-width:4em}
+.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
 
 @media (prefers-color-scheme:dark){
-  .t-bio{ --paper:#0e120d; --brand:#0e120d; --accent:#c4b84a; --track:#272c1e;
-          --hero-fg:#e8eaed; }
-  .t-bio .hero{border-color:#2c3a2a}
-  .t-bio .kicker{color:#8fc194}
+  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
+            --track:#332622; --hero-fg:#e8eaed; }
+  .t-china .kicker b{background:#8c2b20;color:#fff}
 }
 </style>
 </head>
-<body class="t-bio">
+<body class="t-china">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>生物与自然</b> · 11月21日</div>
-    <h1>把寿命押在慢上</h1>
-    <p class="hook">北极弓头鲸用几十年才成熟的慢，换两百年级别的长</p>
+    <div class="kicker"><b>中国历史</b> · 11月22日</div>
+    <h1>一所被合并掉的华文大学</h1>
+    <p class="hook">华人社会捐款建起的华文大学，二十五年后被拨款与合并案收掉。</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-21-main.webp" alt="无背鳍的鲸在浮冰边缘游动，远处是白亮冰原" width="1280" height="1280" loading="eager">
-    <figcaption>无背鳍的鲸在浮冰边缘游动，远处是白亮冰原</figcaption>
+    <img src="img/2026-11-22-main.webp" alt="骑楼长街上，小贩与车夫排队往木箱投钱" width="1280" height="1280" loading="eager">
+    <figcaption>骑楼长街上，小贩与车夫排队往木箱投钱</figcaption>
   </figure>
   
 
@@ -569,36 +563,42 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-
-  
-
-  
-  <div class="tro">
-    <div class="r gain"><span class="k">得</span><p>把配额投给身体维修与长年存活，换来两百年级别的寿命和多次繁殖机会</p></div>
-    <div class="r cost"><span class="k">失</span><p>繁殖率被压到极低，种群一旦被打掉就补不回来，恢复要以世纪计</p></div>
+  <div class="ruler">
+    <div class="bar">
+      <span class="cap l"></span><span class="cap r"></span>
+      <span class="pin" style="left:96%"></span>
+    </div>
+    <div class="ends"><span>1955</span><span>1980</span></div>
+    
+    <div class="mk"><i></i><b>1980</b>政府决定并掉南洋大学</div>
+    
   </div>
+  
+
+  
+
   
 
   
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">一头成年弓头鲸的鲸脂厚达40至50厘米。它是须鲸里唯一终生留在北极浮冰区的种类：夏季追着冰缘的浮游动物爆发整天滤食，冬季海面封冻就退到冰层下面，靠天然的和它自己顶开的通气缝呼吸。日子过得极慢，换来的是两百年级别的寿命。</p>
+  <p class="lead">1956年3月开学时，南洋大学连自己的永久校舍都还没有，第一批课是在借来的中学教室里上的。它的创办款来自此前两年新加坡街头一张张筹款桌——小贩、车夫与侨团会馆一起凑钱，只为让华文中学毕业生有条升学路。</p>
 
   <div class="body">
     
-    <section><h2>冰缘的饭点</h2><p>弓头鲸没有背鳍，吻部硬而厚，能在浮冰下顶开一条可用的通道，也能在薄冰处把头探出水面换气。北极的夏天很短，海冰边缘的浮游动物只在几个月里集中爆发，它便沿着那条冰缘整天张合下颌，主要滤食桡足类和北极磷虾。等到海面封冻、冰缘散去，食物几乎归零，它退到冰层下面，把游动和代谢都压到很低的水平。</p></section>
+    <section><h2>街头凑钱建校</h2><p>1953年，橡胶商人、中华总商会主席陈六使提出兴办一所华文教学的大学，商会当场带头认捐。此后两年，筹款桌摆进小贩中心、庙会和码头，三轮车夫把一天的车资放进木箱，义安公司等地缘侨团成批捐输。1955年南洋大学正式创办，1956年借中学的校舍开学，学费压到劳工子弟读得起——华文中学毕业生第一次有了能读的大学。</p></section>
     
-    <section><h2>为什么押慢</h2><p>这套节奏不是惰性，而是被环境算出来的押法。一年能到手的能量取决于短短几个月的冰缘，幼鲸成活又受冰情摆布，进化给出的解法不是多生，而是活得久：性成熟要等上十余年甚至更久，每胎通常一头，幼鲸跟着母鲸走完整年，两次生育之间隔数年，省下的配额投在身体维修上。在低温、捕食者寡的海域，成年个体每年死亡的概率极低，多活一年就多一次繁殖机会。</p></section>
+    <section><h2>拨款的杠杆</h2><p>1959年新加坡自治，人民行动党把英文定为行政与就业语言，升学的公共资源整体流向英文源流：奖学金、公费生名额和教职编制都给了新加坡大学。南洋大学长期拿不到政府经常性拨款，全靠社团续捐和学费维持；当局又以「华文教育没有出路」和校园左翼学生风潮为由拒绝输血。1978年前后，撑不住的校董会同意主要课程改用英文——为华文而建的大学，先交出了自己的语言。</p></section>
     
-    <section><h2>猎船走后</h2><p>太平洋与白令海峡一带的弓头鲸在19世纪被商业捕鲸压得很低，猎船退出半个多世纪后数量仍在缓慢爬坡，一年一胎、数十岁才成熟的物种补不回一个世纪砍掉的份额。阿拉斯加北部一支种群的现状存在分歧：有评估认为它已回到捕鲸前的规模并据此把它移出保护名录，也有研究者说那个基线本就估得偏低。当地一些因纽特村落仍按配额捕猎，老猎人估算年龄的土办法之一，是看下颌须板的颜色。</p></section>
+    <section><h2>一纸合并案</h2><p>1980年，政府决定不再以大学规格资助南洋大学，其建制并入新筹设的南洋理工学院，次年以「南洋理工大学」名义收编。这时已没人能替它说话：首倡者陈六使1972年去世，出殡时全城华人涌上街头相送，那已是它最后一次动员整座华人社会。末届学生转入新校上课，武吉知马的校园换了归属，只有当年自建的南洋礼堂至今仍立在原址上被使用。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-21-sub.webp" alt="冰孔下露出的乳白色鲸须板，周围是碎冰" width="1024" height="1024" loading="lazy">
-    <figcaption>冰孔下露出的乳白色鲸须板，周围是碎冰</figcaption>
+    <img src="img/2026-11-22-sub.webp" alt="空礼堂里成排木长椅与高窗天光" width="1024" height="1024" loading="lazy">
+    <figcaption>空礼堂里成排木长椅与高窗天光</figcaption>
   </figure>
   
 
@@ -607,15 +607,15 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">栖息</span><span class="v">北极与亚极地浮冰区，终生不离开海冰</span></div>
+    <div class="f"><span class="k">创办</span><span class="v">1955年，新加坡</span></div>
     
-    <div class="f"><span class="k">体型</span><span class="v">成年体长约14至18米，无背鳍</span></div>
+    <div class="f"><span class="k">首倡者</span><span class="v">陈六使</span></div>
     
-    <div class="f"><span class="k">越冬</span><span class="v">靠冰层下的通气缝呼吸，鲸脂厚约40至50厘米</span></div>
+    <div class="f"><span class="k">教学语言</span><span class="v">华文，后期改英文</span></div>
     
-    <div class="f"><span class="k">繁殖</span><span class="v">每胎1头，妊娠期逾一年，性成熟需十余年以上</span></div>
+    <div class="f"><span class="k">停办</span><span class="v">1980年</span></div>
     
-    <div class="f"><span class="k">寿命</span><span class="v">眼球晶体测年给出百岁以上，最老个体估计超过200年</span></div>
+    <div class="f"><span class="k">归宿</span><span class="v">并入南洋理工大学</span></div>
     
   </div>
   
@@ -624,23 +624,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>科学家测它的年龄靠猎获个体的眼球晶状体：晶体蛋白的消旋速率像一枚长在眼里的时钟。</li>
+    <li>接收南洋大学的南洋理工大学1981年才成立，比这所大学小了二十多年。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>最老个体超过200岁的数字来自眼球晶体氨基酸测年，样本量很小，绝对数值学界仍有保留</li><li>捕鲸前各支种群的基础数量估计分歧较大，这直接决定它如今算不算已经恢复</li><li>性成熟年龄在不同种群间差异大，十余岁与二十余岁的估计并存</li><li>夏季高峰期单日摄食量有以吨计的估算，但来自少数研究，个体差异大</li></ul>
+    <ul><li>开学时间通说为1956年3月，具体日期未核</li><li>南洋大学与政府拨款的关系各说不一，本文按未获经常性拨款处理</li><li>主要课程改英文授课的通说年份（约1978年）未核</li><li>1980年为停办并入的决定之年，南洋理工大学正式成立于1981年，两说常被混用</li><li>义安公司捐助的具体形式与数额未核</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>弓头鲸</span><span>北极</span><span>生活史权衡</span><span>长寿</span><span>捕鲸</span></div>
+  <div class="tags"><span>新加坡</span><span>华文教育</span><span>高等教育史</span><span>陈六使</span><span>大学合并</span></div>
   
 
   <footer>
-    <div class="r"><span>生物与自然</span><span>11月21日</span></div>
+    <div class="r"><span>中国历史</span><span>11月22日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     
   </footer>
