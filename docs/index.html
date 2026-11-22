@@ -236,32 +236,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
-.t-china{
-  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:28px 20px 22px;
+/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
+.t-event{
+  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
+  --title-font:var(--sans);
 }
-.t-china .hero{background:var(--paper)}
-/* 朱印方章式类目标签 */
-.t-china .kicker{opacity:1}
-.t-china .kicker b{
-  display:inline-block;background:var(--accent);color:#fff;
-  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
+.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
+.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
+.t-event .hero{
+  background:
+    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
+    var(--brand);
 }
-.t-china .hero h1{
-  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
-}
-.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
-/* 古籍感：键右对齐贴向值 */
-.t-china .facts .f{gap:20px}
-.t-china .facts .k{flex:1;text-align:right;min-width:4em}
-.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
+/* 表格式 facts：键左值右、细分隔线、等宽数字 */
+.t-event .facts .k{min-width:5.5em}
 
 @media (prefers-color-scheme:dark){
-  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
-            --track:#332622; --hero-fg:#e8eaed; }
-  .t-china .kicker b{background:#8c2b20;color:#fff}
+  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
 }
                                 不转义白名单键（仅 CSS 注入用）
       遍历，块内直接用该项字段
@@ -276,10 +267,10 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#faf7f0">
-<meta name="x-build" content="2026-11-22-a14a7c6b">
-<meta name="description" content="1955年新加坡华人社会捐款创办的南洋大学，以华文教学、低学费立身，长期未获政府经常性拨款；1980年被并入新设的南洋理工大学，东南亚民间华文高等教育就此终结。">
-<title>一所被合并掉的华文大学 · 中国历史</title>
+<meta name="theme-color" content="#1f3352">
+<meta name="x-build" content="2026-11-23-0ba5a808">
+<meta name="description" content="1755年诸圣节里斯本大地震与随后的海啸、大火毁城，死亡以万计；庞巴尔侯爵以集权方式统筹重建，墙内植入木构架；伏尔泰则写诗并作《老实人》抨击莱布尼茨的神义论，哲学乐观主义由此失势。">
+<title>里斯本的地震震碎了乐观主义 · 世界历史</title>
 <style>/* base.css —— 骨架样式，7 套皮肤共用。
    皮肤只覆盖变量和少数选择器（见 themes/t-*.css）。
    render.py 把 base.css + t-<slug>.css 内联进每页 <style>，不外链。 */
@@ -511,48 +502,39 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 @media (prefers-reduced-motion:no-preference){
   .hero-img img,.sub-img img{transition:opacity .2s}}
 
-/* 周日 · 中国历史 —— 古籍：宣纸米白底、朱印类目章、衬线大字、facts 右对齐竖排 */
-.t-china{
-  --paper:#faf7f0; --brand:#faf7f0; --accent:#b23a2c; --track:#ebe0d2;
-  --title-font:var(--serif); --hero-fg:#141414;
-  --hero-pad:28px 20px 22px;
+/* 周一 · 世界历史 —— 报纸头版：满幅墨蓝，无衬线紧字距，facts 走等宽表格 */
+.t-event{
+  --paper:#f1f3f6; --brand:#1f3352; --accent:#a4442e; --track:#e0d5d1;
+  --title-font:var(--sans);
 }
-.t-china .hero{background:var(--paper)}
-/* 朱印方章式类目标签 */
-.t-china .kicker{opacity:1}
-.t-china .kicker b{
-  display:inline-block;background:var(--accent);color:#fff;
-  padding:4px 9px;border-radius:2px;letter-spacing:.18em;font-weight:600;
+.t-event .hero h1{letter-spacing:-.02em;font-weight:700}
+.t-event .kicker{letter-spacing:.2em;text-transform:uppercase}
+.t-event .hero{
+  background:
+    radial-gradient(120% 80% at 84% -14%,rgba(255,255,255,.13),transparent 62%),
+    var(--brand);
 }
-.t-china .hero h1{
-  font-size:31px;letter-spacing:.1em;font-weight:600;line-height:1.35;margin-top:14px;
-}
-.t-china .hero .hook{color:var(--dim);opacity:1;margin-top:12px;letter-spacing:.02em}
-/* 古籍感：键右对齐贴向值 */
-.t-china .facts .f{gap:20px}
-.t-china .facts .k{flex:1;text-align:right;min-width:4em}
-.t-china .facts .v{flex:none;min-width:9em;text-align:left;font-family:var(--serif);font-size:15.5px}
+/* 表格式 facts：键左值右、细分隔线、等宽数字 */
+.t-event .facts .k{min-width:5.5em}
 
 @media (prefers-color-scheme:dark){
-  .t-china{ --paper:#14100e; --brand:#14100e; --accent:#e07a68;
-            --track:#332622; --hero-fg:#e8eaed; }
-  .t-china .kicker b{background:#8c2b20;color:#fff}
+  .t-event{ --paper:#0d1016; --brand:#16233a; --accent:#e08163; --track:#3a2a26; }
 }
 </style>
 </head>
-<body class="t-china">
+<body class="t-event">
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker"><b>中国历史</b> · 11月22日</div>
-    <h1>一所被合并掉的华文大学</h1>
-    <p class="hook">华人社会捐款建起的华文大学，二十五年后被拨款与合并案收掉。</p>
+    <div class="kicker"><b>世界历史</b> · 11月23日</div>
+    <h1>里斯本的地震震碎了乐观主义</h1>
+    <p class="hook">一场地震，让「最好的可能世界」当场失去说服力</p>
   </header>
 
   
   <figure class="hero-img">
-    <img src="img/2026-11-22-main.webp" alt="骑楼长街上，小贩与车夫排队往木箱投钱" width="1280" height="1280" loading="eager">
-    <figcaption>骑楼长街上，小贩与车夫排队往木箱投钱</figcaption>
+    <img src="img/2026-11-23-main.webp" alt="起火坍塌的港口城市，海浪压向挤满人的广场" width="1280" height="1280" loading="eager">
+    <figcaption>起火坍塌的港口城市，海浪压向挤满人的广场</figcaption>
   </figure>
   
 
@@ -561,18 +543,21 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
 
   
-
-  
-  <div class="ruler">
-    <div class="bar">
-      <span class="cap l"></span><span class="cap r"></span>
-      <span class="pin" style="left:96%"></span>
-    </div>
-    <div class="ends"><span>1955</span><span>1980</span></div>
+  <div class="tl">
     
-    <div class="mk"><i></i><b>1980</b>政府决定并掉南洋大学</div>
+    <div class="nd"><div class="dot"></div><span class="y">1755</span><span class="lb">诸圣节大地震毁里斯本</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1756</span><span class="lb">伏尔泰发表里斯本长诗</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1758</span><span class="lb">行刺未遂庞巴尔集权</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1759</span><span class="lb">《老实人》讽刺乐观主义</span></div>
+    
+    <div class="nd"><div class="dot"></div><span class="y">1777</span><span class="lb">庞巴尔被解职</span></div>
     
   </div>
+  
+
   
 
   
@@ -583,22 +568,22 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   <!-- ===== 正文 ===== -->
 
-  <p class="lead">1956年3月开学时，南洋大学连自己的永久校舍都还没有，第一批课是在借来的中学教室里上的。它的创办款来自此前两年新加坡街头一张张筹款桌——小贩、车夫与侨团会馆一起凑钱，只为让华文中学毕业生有条升学路。</p>
+  <p class="lead">1755年11月1日，诸圣节，里斯本的教堂钟照常敲响。上午地面开始摇晃，石质穹顶裂开砸下，埋了满堂礼拜的人。跑出的人聚到海边广场，眼看海水向远处退去，一堵水墙随后压岸。大火烧了五天，这座帝国首都几乎被抹平。</p>
 
   <div class="body">
     
-    <section><h2>街头凑钱建校</h2><p>1953年，橡胶商人、中华总商会主席陈六使提出兴办一所华文教学的大学，商会当场带头认捐。此后两年，筹款桌摆进小贩中心、庙会和码头，三轮车夫把一天的车资放进木箱，义安公司等地缘侨团成批捐输。1955年南洋大学正式创办，1956年借中学的校舍开学，学费压到劳工子弟读得起——华文中学毕业生第一次有了能读的大学。</p></section>
+    <section><h2>塌下来的那天</h2><p>现代研究估计震级在8.5上下，晃动持续数分钟，连英格兰和北非都有震感。里斯本民居多为石砌，塌下来时，跑出来的人聚到河边广场，随后海啸扑进港口；先退的海水让船只搁浅，浪头回来后连船带人一起吞掉。震倒的祭坛蜡烛引燃大火，烧了约五天。从巴西掠回黄金堆出这座城的帝国，一天之内丢了首都。</p></section>
     
-    <section><h2>拨款的杠杆</h2><p>1959年新加坡自治，人民行动党把英文定为行政与就业语言，升学的公共资源整体流向英文源流：奖学金、公费生名额和教职编制都给了新加坡大学。南洋大学长期拿不到政府经常性拨款，全靠社团续捐和学费维持；当局又以「华文教育没有出路」和校园左翼学生风潮为由拒绝输血。1978年前后，撑不住的校董会同意主要课程改用英文——为华文而建的大学，先交出了自己的语言。</p></section>
+    <section><h2>重建一座城</h2><p>王室因提前郊游露营幸免于难，若泽一世此后不肯再睡在石屋顶下，一度在城外帐篷里理政。大臣庞巴尔接手：他派军队开进废墟维持秩序，处决抢掠者，旧贵族和市议会在这场危机里失了话语权。重建完全由他统筹，新街按直线铺设，房屋按标准层高统一建造，砖石墙里嵌入木制构架，一套被称为「庞巴尔笼」的抗震房屋就此定型。</p></section>
     
-    <section><h2>一纸合并案</h2><p>1980年，政府决定不再以大学规格资助南洋大学，其建制并入新筹设的南洋理工学院，次年以「南洋理工大学」名义收编。这时已没人能替它说话：首倡者陈六使1972年去世，出殡时全城华人涌上街头相送，那已是它最后一次动员整座华人社会。末届学生转入新校上课，武吉知马的校园换了归属，只有当年自建的南洋礼堂至今仍立在原址上被使用。</p></section>
+    <section><h2>碎掉的信念</h2><p>最难重建的是一种信念。此前一个世纪，哲学家论证过这是最好的可能世界，恶只是整体秩序的必要部分，莱布尼茨把这套说法叫作神义论。可里斯本偏在建了礼拜的日子塌下去，埋的是去做礼拜的人。伏尔泰1756年写长诗抨击这一点，又在《老实人》里把这种乐观画成庞格罗斯博士：被绞、被解剖、遭船难，仍坚持凡事皆善。今天下城区的街道依旧笔直，废墟上那座没顶的修道院一直没有补回屋顶。</p></section>
     
   </div>
 
   
   <figure class="sub-img">
-    <img src="img/2026-11-22-sub.webp" alt="空礼堂里成排木长椅与高窗天光" width="1024" height="1024" loading="lazy">
-    <figcaption>空礼堂里成排木长椅与高窗天光</figcaption>
+    <img src="img/2026-11-23-sub.webp" alt="露出格状木构架的砖墙断面，地上堆着木料" width="1024" height="1024" loading="lazy">
+    <figcaption>露出格状木构架的砖墙断面，地上堆着木料</figcaption>
   </figure>
   
 
@@ -607,15 +592,17 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
   
   <div class="facts">
     
-    <div class="f"><span class="k">创办</span><span class="v">1955年，新加坡</span></div>
+    <div class="f"><span class="k">日期</span><span class="v">1755年11月1日（诸圣节）</span></div>
     
-    <div class="f"><span class="k">首倡者</span><span class="v">陈六使</span></div>
+    <div class="f"><span class="k">估计震级</span><span class="v">现代回溯约8.5</span></div>
     
-    <div class="f"><span class="k">教学语言</span><span class="v">华文，后期改英文</span></div>
+    <div class="f"><span class="k">次生灾害</span><span class="v">海啸，以及持续约五天的大火</span></div>
     
-    <div class="f"><span class="k">停办</span><span class="v">1980年</span></div>
+    <div class="f"><span class="k">死亡规模</span><span class="v">常见估计数万至十万余，数字有争议</span></div>
     
-    <div class="f"><span class="k">归宿</span><span class="v">并入南洋理工大学</span></div>
+    <div class="f"><span class="k">重建主持</span><span class="v">庞巴尔侯爵</span></div>
+    
+    <div class="f"><span class="k">抗震做法</span><span class="v">墙内木构架，通称「庞巴尔笼」</span></div>
     
   </div>
   
@@ -624,23 +611,23 @@ footer .r{display:flex;justify-content:space-between;gap:12px}
 
   
   <ul class="trivia">
-    <li>接收南洋大学的南洋理工大学1981年才成立，比这所大学小了二十多年。</li>
+    <li>卢梭反驳伏尔泰：人死得多，是因为里斯本把房子盖到了五六层。</li>
   </ul>
   
 
   
   <div class="uncertain">
     <span class="lbl">存疑 · 以下说法未经确证</span>
-    <ul><li>开学时间通说为1956年3月，具体日期未核</li><li>南洋大学与政府拨款的关系各说不一，本文按未获经常性拨款处理</li><li>主要课程改英文授课的通说年份（约1978年）未核</li><li>1980年为停办并入的决定之年，南洋理工大学正式成立于1981年，两说常被混用</li><li>义安公司捐助的具体形式与数额未核</li></ul>
+    <ul><li>震级与持续时间为现代回溯估计，当时无仪器记录</li><li>大火由祭坛蜡烛倾倒引燃并烧五天，系传统说法</li><li>死亡人数从数万到十万以上均有引用，学界无定论</li><li>庞巴尔处决抢掠者的情节广为流传，细节各书记载不一</li></ul>
   </div>
   
 
   
-  <div class="tags"><span>新加坡</span><span>华文教育</span><span>高等教育史</span><span>陈六使</span><span>大学合并</span></div>
+  <div class="tags"><span>葡萄牙</span><span>地震</span><span>启蒙运动</span><span>伏尔泰</span><span>城市重建</span></div>
   
 
   <footer>
-    <div class="r"><span>中国历史</span><span>11月22日</span></div>
+    <div class="r"><span>世界历史</span><span>11月23日</span></div>
     <div class="r"><span>往期</span><span><a href="archive.html">归档索引</a></span></div>
     
   </footer>
